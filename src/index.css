@@ -17,6 +17,7 @@ body{
   --color-gray-800: #27272a;
   --color-typography-700: #3f3f46;
   --color-border-1: #d5d7da;
+  --color-red-600:#D92D20
 }
 .input-box-shadow {
   box-shadow: 0px 1px 2px 0px rgba(10, 13, 18, 0.05);
@@ -29,13 +30,13 @@ body{
   background: linear-gradient(180deg, #fff 0%, #ebffec 100%);
 }
 .input {
-  @apply py-2.5 px-3.5 block w-full border border-border-1 bg-white focus:border-primary focus:outline-none rounded-lg sm:text-sm focus:ring-primary disabled:opacity-50 disabled:pointer-events-none;
+  @apply py-2.5 px-3.5 block w-full focus:outline-2 outline outline-border-1 bg-white focus:outline-primary rounded-lg sm:text-sm focus:ring-primary disabled:opacity-50 disabled:pointer-events-none;
 }
 .input-label {
   @apply block text-sm font-medium mb-2 text-gray-800;
 }
 .primary-btn {
-  @apply py-3 px-6 w-full text-center font-semibold rounded-lg border border-transparent bg-primary text-white focus:outline-none disabled:opacity-50 disabled:pointer-events-none cursor-pointer disabled:bg-primary/30;
+  @apply py-2.5 px-6 w-full text-center font-semibold rounded-lg border border-transparent bg-primary text-white focus:outline-none disabled:opacity-50 disabled:pointer-events-none cursor-pointer disabled:bg-primary/30;
 }
 .link-text {
   @apply text-primary font-bold hover:underline text-sm cursor-pointer;
