@@ -1,7 +1,7 @@
 {
-  "name": "web",
+  "name": "yeshfine-web",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.1.1",
     "@tailwindcss/forms": "^0.5.10",
     "@tailwindcss/vite": "^4.1.10",
     "@tanstack/react-query": "^5.81.2",
@@ -19,8 +20,12 @@
     "react": "^19.1.0",
     "react-alice-carousel": "^2.9.1",
     "react-dom": "^19.1.0",
+    "react-hook-form": "^7.58.1",
     "react-phone-input-2": "^2.15.1",
-    "tailwindcss": "^4.1.10"
+    "react-toastify": "^11.0.5",
+    "tailwindcss": "^4.1.10",
+    "yup": "^1.6.1",
+    "zustand": "^5.0.5"
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",
