@@ -11,7 +11,7 @@ interface AuthStore {
 	isLoggedIn: () => void;
 }
 
-const useAuthStore = create<AuthStore>((set, get) => ({
+const useAuthStore = create<AuthStore>((set) => ({
 	token: null,
 	refreshToken: null,
 	isAuthenticated: false,

@@ -1,16 +1,16 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { createFileRoute, Link } from '@tanstack/react-router';
+import { Fragment, useState } from 'react';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
+import { toast } from 'react-toastify';
+import { useSignupMutation } from '../../../apis/auth';
 import logo from '../../../assets/logo.svg';
 import { AuthCard } from '../../../components/common/cards/AuthCard';
-import { responseStatus, Role } from '../../../interfaces/enums';
-import { signupSchema } from '../../../validations';
 import type { SignupInput } from '../../../interfaces';
-import { useSignupMutation } from '../../../apis/auth';
-import { toast } from 'react-toastify';
-import { Fragment, useState } from 'react';
+import { Role } from '../../../interfaces/enums';
+import { signupSchema } from '../../../validations';
 
 const signupInitialValues: SignupInput = {
 	name: '',
@@ -39,11 +39,11 @@ function RouteComponent() {
 	const { mutateAsync: signup } = useSignupMutation();
 	const onSubmit: SubmitHandler<SignupInput> = (values) => {
 		signup(values, {
-			onSuccess: (data) => {
-				if (data?.status === responseStatus.Success) {
-					toast.success(data?.message || 'Success');
+			onSuccess: () => {
+				// if (data?.status === responseStatus.Success) {
+					toast.success('OTP sent successfully');
 					setShowOtpScreen(true);
-				}
+				// }
 			},
 		});
 	};
