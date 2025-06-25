@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200..800&display=swap');
+@import 'tailwindcss';
+
+/* Preline UI */
+/* @import './node_modules/preline/variants.css'; */
+
+body{
+  margin:0;
+  box-sizing: border-box;
+}
+@theme {
+  --font-display: 'Plus Jakarta Sans', 'sans-serif';
+  --color-primary: #4caf50;
+  --color-primary-light: #edf7ee;
+  --color-gray-100: #D5D7D;
+  --color-gray-500: #71717a;
+  --color-gray-800: #27272a;
+  --color-typography-700: #3f3f46;
+  --color-border-1: #d5d7da;
+}
+.input-box-shadow {
+  box-shadow: 0px 1px 2px 0px rgba(10, 13, 18, 0.05);
+}
+.card-box-shadow {
+  box-shadow: 0px 0px 2px 0px rgba(23, 26, 31, 0.2),
+    0px 0px 1px 0px rgba(23, 26, 31, 0.18);
+}
+.card-gradient {
+  background: linear-gradient(180deg, #fff 0%, #ebffec 100%);
+}
+.input {
+  @apply py-2.5 px-3.5 block w-full border border-border-1 bg-white focus:border-primary focus:outline-none rounded-lg sm:text-sm focus:ring-primary disabled:opacity-50 disabled:pointer-events-none;
+}
+.input-label {
+  @apply block text-sm font-medium mb-2 text-gray-800;
+}
+.primary-btn {
+  @apply py-3 px-6 w-full text-center font-semibold rounded-lg border border-transparent bg-primary text-white focus:outline-none disabled:opacity-50 disabled:pointer-events-none cursor-pointer disabled:bg-primary/30;
+}
+.link-text {
+  @apply text-primary font-bold hover:underline text-sm cursor-pointer;
+}
