@@ -2,42 +2,60 @@
 @import 'tailwindcss';
 
 /* Preline UI */
-/* @import './node_modules/preline/variants.css'; */
+@import 'preline/variants.css';
+@source "../node_modules/preline/dist/*.js";
 
-body{
-  margin:0;
-  box-sizing: border-box;
+/* Plugins */
+@plugin "@tailwindcss/forms";
+body {
+	margin: 0;
+	box-sizing: border-box;
 }
 @theme {
-  --font-display: 'Plus Jakarta Sans', 'sans-serif';
-  --color-primary: #4caf50;
-  --color-primary-light: #edf7ee;
-  --color-gray-100: #D5D7D;
-  --color-gray-500: #71717a;
-  --color-gray-800: #27272a;
-  --color-typography-700: #3f3f46;
-  --color-border-1: #d5d7da;
-  --color-red-600:#D92D20
+	--font-display: 'Plus Jakarta Sans', 'sans-serif';
+
+	/* green primary */
+	--color-primary-light: #edf7ee;
+	--color-primary-light-hover: #e4f3e5;
+	--color-primary-light-active: #c8e6c9;
+	--color-primary: #4caf50;
+	--color-primary-hover: #449e48;
+	--color-primary-active: #3d8c40;
+	--color-primary-dark: #39833c;
+	--color-primary-dark-hover: #2e6930;
+	--color-primary-dark-active: #224f24;
+	--color-darker: #1b3d1c;
+
+	/* typography */
+	--color-typography-800: #27272a;
+	--color-typography-700: #3f3f46;
+	--color-typography-600: #52525b;
+	--color-typography-500: #71717a;
+	--color-typography-400: #a1a1aa;
+	--color-typography-300: #d4d4d8;
+
+	--color-border-1: #d5d7da;
 }
 .input-box-shadow {
-  box-shadow: 0px 1px 2px 0px rgba(10, 13, 18, 0.05);
+	box-shadow: 0px 1px 2px 0px rgba(10, 13, 18, 0.05);
 }
 .card-box-shadow {
-  box-shadow: 0px 0px 2px 0px rgba(23, 26, 31, 0.2),
-    0px 0px 1px 0px rgba(23, 26, 31, 0.18);
+	box-shadow:
+		0px 0px 2px 0px rgba(23, 26, 31, 0.2),
+		0px 0px 1px 0px rgba(23, 26, 31, 0.18);
 }
 .card-gradient {
-  background: linear-gradient(180deg, #fff 0%, #ebffec 100%);
+	background: linear-gradient(180deg, #fff 0%, #ebffec 100%);
 }
 .input {
-  @apply py-2.5 px-3.5 block w-full focus:outline-2 outline outline-border-1 bg-white focus:outline-primary rounded-lg sm:text-sm focus:ring-primary disabled:opacity-50 disabled:pointer-events-none;
+	@apply py-2.5 px-3.5 block w-full focus:outline-2 border-none outline outline-border-1 bg-white focus:outline-primary rounded-lg sm:text-sm focus:ring-primary disabled:opacity-50 disabled:pointer-events-none;
 }
 .input-label {
-  @apply block text-sm font-medium mb-2 text-gray-800;
+	@apply block text-sm font-medium mb-2 text-typography-800;
 }
 .primary-btn {
-  @apply py-2.5 px-6 w-full text-center font-semibold rounded-lg border border-transparent bg-primary text-white focus:outline-none disabled:opacity-50 disabled:pointer-events-none cursor-pointer disabled:bg-primary/30;
+	@apply py-2.5 px-6 text-center font-semibold rounded-lg focus:bg-primary-active border border-transparent hover:bg-primary-hover bg-primary text-white focus:outline-none disabled:opacity-50 disabled:pointer-events-none cursor-pointer disabled:bg-primary/70;
 }
 .link-text {
-  @apply text-primary font-bold hover:underline text-sm cursor-pointer;
+	@apply text-primary font-bold hover:underline text-sm cursor-pointer disabled:opacity-50 disabled:pointer-events-none disabled:text-primary/70;
 }

@@ -7,7 +7,6 @@ export type CurrentUserType = {
 	dob: string;
 };
 
-
 // Input types
 export type LoginInput = {
 	phone: string;
@@ -21,4 +20,8 @@ export type SignupInput = {
 	dob: string;
 	confirm_password: string;
 	role?: Role;
+};
+export type OTPInput = {
+	phone: string;
+	otp: string;
 };
