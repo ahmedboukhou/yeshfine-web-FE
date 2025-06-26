@@ -6,7 +6,7 @@ interface AuthStore {
 	refreshToken: string | null;
 	isAuthenticated: boolean;
 
-	setToken: (token: string, refreshToken: string) => void;
+	loginUser: (token: string, refreshToken: string) => void;
 	logout: () => void;
 	isLoggedIn: () => void;
 }
@@ -16,7 +16,7 @@ const useAuthStore = create<AuthStore>((set) => ({
 	refreshToken: null,
 	isAuthenticated: false,
 
-	setToken: (token: string, refreshToken: string) => {
+	loginUser: (token, refreshToken) => {
 		localStorage.setItem('token', token);
 		localStorage.setItem('refresh_token', refreshToken);
 
@@ -30,7 +30,8 @@ const useAuthStore = create<AuthStore>((set) => ({
 	logout: () => {
 		const { clearCurrentUser } = useCurrentUserStore.getState();
 		clearCurrentUser();
-
+		localStorage.removeItem('token');
+		localStorage.removeItem('refresh_token');
 		set({
 			token: null,
 			refreshToken: null,
@@ -50,7 +51,7 @@ const useAuthStore = create<AuthStore>((set) => ({
 			});
 		}
 	},
-  	// refreshAccessToken: async () => {
+	// refreshAccessToken: async () => {
 	// 	const { refreshPromise } = get();
 
 	// 	if (refreshPromise) {

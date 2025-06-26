@@ -1,11 +1,11 @@
-import { createFileRoute, Link } from '@tanstack/react-router';
-import PhoneInput from 'react-phone-input-2';
-import 'react-phone-input-2/lib/style.css';
-import logo from '../../../assets/logo.svg';
-import { AuthCard } from '../../../components/common/cards/AuthCard';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm, type SubmitHandler } from 'react-hook-form';
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css'
+import { Link } from 'react-router';
 import { BackIcon } from '../../../assets/icons';
+import logo from '../../../assets/logo.svg';
+import { AuthCard } from '../../../components/common/cards/AuthCard';
 import { forgotPasswordSchema } from '../../../validations';
 
 type ForgotPasswordInput = {
@@ -14,7 +14,7 @@ type ForgotPasswordInput = {
 
 const forgotPasswordInitialValues: ForgotPasswordInput = { phone: '' };
 
-function RouteComponent() {
+export const ForgotPassword = () => {
 	const {
 		register,
 		handleSubmit,
@@ -37,7 +37,7 @@ function RouteComponent() {
 					<img src={logo} alt="yeshfine-logo" className=" mb-9" />
 					<div className="flex flex-col gap-3 text-center mb-12">
 						<h3 className="tex-2xl font-bold">Forgot Password?</h3>
-						<p className="text-gray-500">No worries, we’ll send you reset instructions.</p>
+						<p className="text-typography-500">No worries, we’ll send you reset instructions.</p>
 					</div>
 
 					<div className="w-full flex flex-col gap-5">
@@ -50,13 +50,15 @@ function RouteComponent() {
 								{...register('phone')}
 								onChange={(value) => setValue('phone', value)}
 								buttonClass={`${errors.phone ? '` !border-red-600' : ''} !py-5 !rounded-l-lg `}
-								inputClass={`${errors.phone ? '` !border-red-600' : ''} !py-5 !w-full !input-box-shadow !rounded-lg`}
+								inputClass={`${
+									errors.phone ? '` !border-red-600' : ''
+								} !py-5 !w-full !input-box-shadow !rounded-lg`}
 							/>
 							{errors.phone && <p className="text-red-600 text-sm mt-1">{errors.phone.message}</p>}
 						</div>
 					</div>
 				</div>
-				<button type="submit" className="my-8 primary-btn">
+				<button type="submit" className="my-8 primary-btn w-full">
 					Next
 				</button>
 			</form>
@@ -67,8 +69,4 @@ function RouteComponent() {
 			</Link>
 		</AuthCard>
 	);
-}
-
-export const Route = createFileRoute('/_unauthenticated/_auth/forgot-password')({
-	component: RouteComponent,
-});
+};

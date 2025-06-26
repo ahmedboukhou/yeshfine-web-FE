@@ -9,7 +9,6 @@ interface CurrentUserStore {
 	clearCurrentUser: () => void;
 }
 
-// 3. Create the store with type safety
 export const useCurrentUserStore = create<CurrentUserStore>()(
 	persist(
 		(set) => ({
@@ -18,7 +17,7 @@ export const useCurrentUserStore = create<CurrentUserStore>()(
 			clearCurrentUser: () => set({ currentUser: null }),
 		}),
 		{
-			name: 'current-user', // localStorage key
+			name: 'current-user',
 		}
 	)
 );
