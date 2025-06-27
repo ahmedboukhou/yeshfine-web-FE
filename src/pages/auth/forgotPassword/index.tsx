@@ -1,7 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import PhoneInput from 'react-phone-input-2';
-import 'react-phone-input-2/lib/style.css'
+import 'react-phone-input-2/lib/style.css';
 import { Link } from 'react-router';
 import { BackIcon } from '../../../assets/icons';
 import logo from '../../../assets/logo.svg';
@@ -46,13 +46,16 @@ export const ForgotPassword = () => {
 								Phone Number
 							</label>
 							<PhoneInput
+								country="us"
 								value={phone}
 								{...register('phone')}
 								onChange={(value) => setValue('phone', value)}
-								buttonClass={`${errors.phone ? '` !border-red-600' : ''} !py-5 !rounded-l-lg `}
+								buttonClass={`${errors.phone ? '!border-red-600' : ''} !py-1 !rounded-l-lg`}
 								inputClass={`${
-									errors.phone ? '` !border-red-600' : ''
-								} !py-5 !w-full !input-box-shadow !rounded-lg`}
+									errors.phone
+										? '`!focus:border-none !border-red-600 focus:ring-red-600 focus:ring-1'
+										: 'focus:ring-primary focus:ring-2 !focus:border-none'
+								} !py-5 !w-full !input-box-shadow !input !rounded-lg`}
 							/>
 							{errors.phone && <p className="text-red-600 text-sm mt-1">{errors.phone.message}</p>}
 						</div>
