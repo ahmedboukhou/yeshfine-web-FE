@@ -55,7 +55,7 @@ export const Signup = () => {
 				<div>
 					<img src={logo} alt="yeshfine-logo" className="mb-9" />
 				</div>
-				<h3 className="tex-2xl font-bold">
+				<h3 className="text-2xl font-bold">
 					{showOtpScreen ? 'We’ve just sent you a code' : 'Create an account'}
 				</h3>
 				<p className="text-typography-500">

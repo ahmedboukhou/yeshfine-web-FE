@@ -36,7 +36,7 @@ export const ForgotPassword = () => {
 				<div className="flex flex-col items-center">
 					<img src={logo} alt="yeshfine-logo" className=" mb-9" />
 					<div className="flex flex-col gap-3 text-center mb-12">
-						<h3 className="tex-2xl font-bold">Forgot Password?</h3>
+						<h3 className="text-2xl font-bold">Forgot Password?</h3>
 						<p className="text-typography-500">No worries, we’ll send you reset instructions.</p>
 					</div>
 

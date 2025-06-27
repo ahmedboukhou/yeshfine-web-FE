@@ -50,7 +50,7 @@ export const Login = () => {
 				<div className="flex flex-col items-center">
 					<img src={logo} alt="yeshfine-logo" className=" mb-9" />
 					<div className="flex flex-col gap-3 text-center mb-12">
-						<h3 className="tex-2xl font-bold">Log in to your account</h3>
+						<h3 className="text-2xl font-bold">Log in to your account</h3>
 						<p className="text-typography-500">Welcome back! Please enter your details.</p>
 					</div>
 
