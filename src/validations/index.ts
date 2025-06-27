@@ -43,20 +43,22 @@ const requiredString = (
 };
 
 const phoneValidation = requiredString('Phone number', {
-	min: 10,
-	max: 16,
+	min: 4,
+});
+const passwordValidation = requiredString('Password', {
 	regex: numberRegex,
-	regexMessage: 'Phone number must contain only digits',
+	min: 6,
+	max: 8,
+	regexMessage: 'Password should contain only numeric characters',
+	minMessage: 'Password must contain 6-8 numeric characters',
+	maxMessage: 'Password must contain 6-8 numeric characters',
 });
 
 // * Schemas
 
 export const loginSchema = yup.object({
 	phone: phoneValidation,
-	password: requiredString('Password', {
-		regex: numberRegex,
-		regexMessage: 'Phone number must contain only digits',
-	}),
+	password: passwordValidation,
 });
 
 export const forgotPasswordSchema = yup.object({
@@ -65,17 +67,12 @@ export const forgotPasswordSchema = yup.object({
 
 export const signupSchema = yup.object({
 	phone: phoneValidation,
-	password: requiredString('Password', {
-		regex: numberRegex,
-		min: 6,
-		max: 8,
-		regexMessage: 'Password must contain 6-8 numeric characters',
-	}),
+	password: passwordValidation,
 	confirm_password: yup
 		.string()
 		.required('Confirm password is required')
 		.oneOf([yup.ref('password')], 'Passwords must match'),
-		
+
 	dob: requiredString('Date of Birth'),
 	name: requiredString('Name', {
 		min: 2,

@@ -1,15 +1,16 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm, type SubmitHandler } from 'react-hook-form';
+import PhoneInput from 'react-phone-input-2';
 import { Link } from 'react-router';
-import logo from '../../assets/logo.svg';
 import { useLoginMutation } from '../../apis/auth';
+import { SIGNUP_ROUTE } from '../../appRoutes';
+import logo from '../../assets/logo.svg';
 import { AuthCard } from '../../components/common/cards/AuthCard';
 import type { LoginInput } from '../../interfaces';
 import { responseStatus } from '../../interfaces/enums';
 import useAuthStore from '../../store/auth';
 import { useCurrentUserStore } from '../../store/user';
 import { loginSchema } from '../../validations';
-import { SIGNUP_ROUTE } from '../../appRoutes';
 
 const loginInitialValues: LoginInput = { phone: '', password: '' };
 
@@ -17,6 +18,8 @@ export const Login = () => {
 	const {
 		register,
 		handleSubmit,
+		setValue,
+		watch,
 		formState: { errors },
 	} = useForm<LoginInput>({
 		resolver: yupResolver(loginSchema),
@@ -26,6 +29,7 @@ export const Login = () => {
 	const { loginUser } = useAuthStore((state) => state);
 	const { setCurrentUser } = useCurrentUserStore((state) => state);
 
+	const phone = watch('phone');
 	const { mutateAsync: login, isPending } = useLoginMutation();
 
 	const onSubmit: SubmitHandler<LoginInput> = async (values) => {
@@ -55,12 +59,17 @@ export const Login = () => {
 							<label htmlFor="phone" className="input-label">
 								Phone Number
 							</label>
-							<input
-								type="text"
-								id="phone"
-								className={`${errors.phone ? '!outline-red-600' : ''} input input-box-shadow`}
+							<PhoneInput
+								country="us"
+								value={phone}
 								{...register('phone')}
-								placeholder="Enter"
+								onChange={(value) => setValue('phone', value)}
+								buttonClass={`${errors.phone ? '!border-red-600' : ''} !py-1 !rounded-l-lg`}
+								inputClass={`${
+									errors.phone
+										? '`!focus:border-none !border-red-600 focus:ring-red-600 focus:ring-1'
+										: 'focus:ring-primary focus:ring-2 !focus:border-none'
+								} !py-5 !w-full !input-box-shadow !input !rounded-lg`}
 							/>
 							{errors.phone && <p className="text-red-600 text-sm mt-1">{errors.phone.message}</p>}
 						</div>

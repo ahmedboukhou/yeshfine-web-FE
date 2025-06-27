@@ -2,11 +2,11 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Fragment, useState } from 'react';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import PhoneInput from 'react-phone-input-2';
-import 'react-phone-input-2/lib/style.css'
+import 'react-phone-input-2/lib/style.css';
 import { Link } from 'react-router';
-import logo from '../../../assets/logo.svg';
 import { useSignupMutation } from '../../../apis/auth';
 import { LOGIN_ROUTE } from '../../../appRoutes';
+import logo from '../../../assets/logo.svg';
 import { AuthCard } from '../../../components/common/cards/AuthCard';
 import type { SignupInput } from '../../../interfaces';
 import { Role } from '../../../interfaces/enums';
@@ -95,6 +95,7 @@ export const Signup = () => {
 										className={`${errors.dob ? '!outline-red-600' : ''} input input-box-shadow`}
 										{...register('dob')}
 										placeholder="Enter"
+										max={new Date().toISOString().split('T')[0]} //restrict to select future date
 									/>
 									{errors.dob && <p className="text-red-600 text-sm mt-1">{errors.dob.message}</p>}
 								</div>
@@ -104,14 +105,16 @@ export const Signup = () => {
 										Phone Number
 									</label>
 									<PhoneInput
-										country={'us'}
+										country="us"
 										value={phone}
 										{...register('phone')}
 										onChange={(value) => setValue('phone', value)}
-										buttonClass={`${errors.phone ? '` !border-red-600' : ''} !py-5 !rounded-l-lg`}
+										buttonClass={`${errors.phone ? '!border-red-600' : ''} !py-1 !rounded-l-lg`}
 										inputClass={`${
-											errors.phone ? '` !border-red-600' : ''
-										} !py-5 !w-full !input-box-shadow !rounded-lg`}
+											errors.phone
+												? '`!focus:border-none !border-red-600 focus:ring-red-600 focus:ring-1'
+												: 'focus:ring-primary focus:ring-2 !focus:border-none'
+										} !py-5 !w-full !input-box-shadow !input !rounded-lg`}
 									/>
 									{errors.phone && (
 										<p className="text-red-600 text-sm mt-1">{errors.phone.message}</p>
