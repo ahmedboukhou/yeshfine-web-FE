@@ -1,7 +1,18 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { apiClient } from '../../lib/api';
-import type { LoginInput, OTPInput, SignupInput } from '../../interfaces';
+import type {
+	ForgotPasswordInput,
+	LoginInput,
+	OTPInput,
+	ResetPasswordInput,
+	SignupInput,
+} from '../../interfaces/formInputTypes';
 import { toast } from 'react-toastify';
+import type {
+	CommonApiResponse,
+	ForgotPasswordResponse,
+	LoginResponse,
+} from '../../interfaces/responseTypes';
 
 export function useLoginMutation() {
 	return useMutation({
@@ -10,21 +21,44 @@ export function useLoginMutation() {
 	});
 }
 export function useSignupMutation() {
-	return useMutation({
-		mutationFn: (values: SignupInput) => apiClient.post(`auth/signup`, values),
+	return useMutation<
+		LoginResponse,
+		CommonApiResponse,
+		SignupInput
+	>({
+		mutationFn: (values ) => apiClient.post(`auth/signup`, values),
 		onError: ({ message }) => toast.error(message || 'Something went wrong'),
 	});
 }
 
 export function useVerifyOTPMutation() {
-	return useMutation({
-		mutationFn: (values: OTPInput) => apiClient.post(`auth/verify-otp`, values),
+	return useMutation<
+		LoginResponse,
+		CommonApiResponse,
+		OTPInput
+	>({
+		mutationFn: (values) => apiClient.post(`auth/verify-otp`, values),
 		onError: ({ message }) => toast.error(message || 'Something went wrong'),
 	});
 }
-export function useResendOTPMutation() {
-	return useMutation({
-		mutationFn: (values: { phone: string }) => apiClient.post(`auth/resendOtp`, values),
+export function useResendOTPQuery({ phone }: { phone: string }) {
+	return useQuery({
+		queryKey: ['resend-otp', phone],
+		queryFn: () => apiClient.get(`auth/resend-otp`, { phone }),
+		enabled: false,
+	});
+}
+
+export function useForgotPasswordMutation() {
+	return useMutation<ForgotPasswordResponse, CommonApiResponse, ForgotPasswordInput>({
+		mutationFn: (values) => apiClient.post(`auth/forgot-password`, values),
+		onError: ({ message }) => toast.error(message || 'Something went wrong'),
+	});
+}
+
+export function useResetPasswordMutation() {
+	return useMutation<ForgotPasswordResponse, CommonApiResponse, ResetPasswordInput>({
+		mutationFn: (values) => apiClient.post(`auth/reset-password`, values),
 		onError: ({ message }) => toast.error(message || 'Something went wrong'),
 	});
 }

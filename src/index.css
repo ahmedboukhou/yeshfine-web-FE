@@ -40,9 +40,7 @@ body {
 	box-shadow: 0px 1px 2px 0px rgba(10, 13, 18, 0.05);
 }
 .card-box-shadow {
-	box-shadow:
-		0px 0px 2px 0px rgba(23, 26, 31, 0.2),
-		0px 0px 1px 0px rgba(23, 26, 31, 0.18);
+	box-shadow: 0px 0px 2px 0px rgba(23, 26, 31, 0.2), 0px 0px 1px 0px rgba(23, 26, 31, 0.18);
 }
 .card-gradient {
 	background: linear-gradient(180deg, #fff 0%, #ebffec 100%);
@@ -58,4 +56,7 @@ body {
 }
 .link-text {
 	@apply text-primary font-bold hover:underline text-sm cursor-pointer disabled:opacity-50 disabled:pointer-events-none disabled:text-primary/70;
+}
+.link-text-secondary {
+	@apply text-typography-700 text-sm font-semibold;
 }

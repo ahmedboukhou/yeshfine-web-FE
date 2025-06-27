@@ -8,7 +8,7 @@ import { useSignupMutation } from '../../../apis/auth';
 import { LOGIN_ROUTE } from '../../../appRoutes';
 import logo from '../../../assets/logo.svg';
 import { AuthCard } from '../../../components/common/cards/AuthCard';
-import type { SignupInput } from '../../../interfaces';
+import type { SignupInput } from '../../../interfaces/formInputTypes';
 import { Role } from '../../../interfaces/enums';
 import { maskPhoneNumber } from '../../../lib/helpers';
 import { signupSchema } from '../../../validations';
@@ -41,17 +41,15 @@ export const Signup = () => {
 	const { mutateAsync: signup, isPending } = useSignupMutation();
 	const onSubmit: SubmitHandler<SignupInput> = (values) => {
 		signup(values, {
-			onSuccess: () => {
-				// if (data?.status === responseStatus.Success) {
+			onSuccess() {
 				setShowOtpScreen(true);
-				// }
 			},
 		});
 	};
 
 	return (
 		<AuthCard>
-			<div className="flex justify-center text-center items-center flex-col gap- mb-12">
+			<div className="flex justify-center text-center items-center flex-col gap-3 mb-12">
 				<div>
 					<img src={logo} alt="yeshfine-logo" className="mb-9" />
 				</div>
