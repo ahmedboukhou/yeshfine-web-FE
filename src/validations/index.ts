@@ -81,3 +81,11 @@ export const signupSchema = yup.object({
 		regexMessage: 'Name should only contain alphabets',
 	}),
 });
+
+export const resetPasswordSchema = yup.object({
+	newPassword: passwordValidation,
+	confirm_password: yup
+		.string()
+		.required('Confirm password is required')
+		.oneOf([yup.ref('newPassword')], 'Passwords must match'),
+});

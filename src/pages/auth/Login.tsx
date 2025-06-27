@@ -6,7 +6,7 @@ import { useLoginMutation } from '../../apis/auth';
 import { SIGNUP_ROUTE } from '../../appRoutes';
 import logo from '../../assets/logo.svg';
 import { AuthCard } from '../../components/common/cards/AuthCard';
-import type { LoginInput } from '../../interfaces';
+import type { LoginInput } from '../../interfaces/formInputTypes';
 import { responseStatus } from '../../interfaces/enums';
 import useAuthStore from '../../store/auth';
 import { useCurrentUserStore } from '../../store/user';

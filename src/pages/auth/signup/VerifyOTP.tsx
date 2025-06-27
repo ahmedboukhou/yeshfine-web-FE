@@ -1,16 +1,27 @@
 import { useEffect, useState, type KeyboardEvent } from 'react';
 import { toast } from 'react-toastify';
-import { useResendOTPMutation, useVerifyOTPMutation } from '../../../apis/auth';
+import { useResendOTPQuery, useVerifyOTPMutation } from '../../../apis/auth';
 import { responseStatus } from '../../../interfaces/enums';
 import useAuthStore from '../../../store/auth';
 import { useCurrentUserStore } from '../../../store/user';
 
-export function VerifyOTP({ phone }: { phone: string }) {
+export function VerifyOTP({
+	phone,
+	isForgotPassword = false,
+	setShowCreatePasswordForm,
+}: {
+	phone: string;
+	isForgotPassword?: boolean;
+	setShowCreatePasswordForm?: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
 	const [otp, setOtp] = useState(''.padEnd(6, '')); // String of 6 chars
 	const [seconds, setSeconds] = useState(60);
 
+	// APIs for signup flow
 	const { mutateAsync: verifyOtp, isPending } = useVerifyOTPMutation();
-	const { mutateAsync: resendOtp, isPending: loadingResendOtp } = useResendOTPMutation();
+	const { refetch: resendOtp, isLoading: loadingResendOtp } = useResendOTPQuery({ phone });
+
+	// APIs for reset password flow
 
 	const { loginUser } = useAuthStore((state) => state);
 	const { setCurrentUser } = useCurrentUserStore((state) => state);
@@ -49,31 +60,41 @@ export function VerifyOTP({ phone }: { phone: string }) {
 				setSeconds((prev) => prev - 1);
 			}, 1000);
 
-			return () => clearInterval(interval); // Cleanup on unmount
+			return () => {
+				setSeconds(60);
+				clearInterval(interval);
+			}; // Cleanup on unmount
 		}
 	}, [seconds]);
 
-	const handleVerifyOTP = async () => {
-		try {
-			const response = (await verifyOtp({ phone, otp })) as any;
-			if (response?.status === responseStatus.Success) {
-				setCurrentUser(response?.user);
-				loginUser(response?.token, 'none');
-			}
-		} catch (error) {
-			console.log(error);
-		}
-	};
-	const handleResendOTP = () => {
-		resendOtp(
-			{ phone },
+	const handleVerifyOTP = () => {
+		verifyOtp(
+			{ phone, otp },
 			{
-				onSuccess: () => {
-					toast.success('OTP Resent Successfully');
-					setSeconds(60);
+				onSuccess: ({ status, token, user }) => {
+					if (status === responseStatus.Success) {
+						if (isForgotPassword && setShowCreatePasswordForm) {
+							setShowCreatePasswordForm(true);
+						} else {
+							setCurrentUser(user);
+							loginUser(token, 'none');
+						}
+					}
 				},
 			}
 		);
+	};
+
+	const handleResendOTP = async () => {
+		try {
+			const response = (await resendOtp()) as any;
+			if (response?.status === responseStatus.Success) {
+				setSeconds(60);
+				toast.success('OTP Resent Successfully');
+			}
+		} catch (error) {
+			console.log('Something Went Wrong');
+		}
 	};
 
 	return (
@@ -113,11 +134,11 @@ export function VerifyOTP({ phone }: { phone: string }) {
 			<p className="text-sm text-center">
 				Didn't get a text?{' '}
 				<button
-					disabled={seconds > 1 || loadingResendOtp}
 					className="link-text"
+					disabled={seconds > 2 || loadingResendOtp}
 					onClick={handleResendOTP}
 				>
-					Send again
+					{loadingResendOtp ? 'Sending' : 'Send again'}
 				</button>
 			</p>
 		</div>
