@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { apiClient } from '../../lib/api';
+import { toast } from 'react-toastify';
 import type {
 	ForgotPasswordInput,
 	LoginInput,
@@ -7,36 +7,28 @@ import type {
 	ResetPasswordInput,
 	SignupInput,
 } from '../../interfaces/formInputTypes';
-import { toast } from 'react-toastify';
 import type {
 	CommonApiResponse,
 	ForgotPasswordResponse,
 	LoginResponse,
 } from '../../interfaces/responseTypes';
+import { apiClient } from '../../lib/api';
 
 export function useLoginMutation() {
-	return useMutation({
-		mutationFn: (values: LoginInput) => apiClient.post(`auth/login`, values),
+	return useMutation<LoginResponse, CommonApiResponse, LoginInput>({
+		mutationFn: (values) => apiClient.post(`auth/login`, values),
 		onError: ({ message }) => toast.error(message || 'Something went wrong'),
 	});
 }
 export function useSignupMutation() {
-	return useMutation<
-		LoginResponse,
-		CommonApiResponse,
-		SignupInput
-	>({
-		mutationFn: (values ) => apiClient.post(`auth/signup`, values),
+	return useMutation<LoginResponse, CommonApiResponse, SignupInput>({
+		mutationFn: (values) => apiClient.post(`auth/signup`, values),
 		onError: ({ message }) => toast.error(message || 'Something went wrong'),
 	});
 }
 
 export function useVerifyOTPMutation() {
-	return useMutation<
-		LoginResponse,
-		CommonApiResponse,
-		OTPInput
-	>({
+	return useMutation<LoginResponse, CommonApiResponse, OTPInput>({
 		mutationFn: (values) => apiClient.post(`auth/verify-otp`, values),
 		onError: ({ message }) => toast.error(message || 'Something went wrong'),
 	});

@@ -33,7 +33,7 @@ export const PhoneNumberInput: React.FC<PhoneNumberInputProps> = ({
 				country="us"
 				value={value}
 				{...register}
-				onChange={onChange}
+				onChange={(phone) => onChange(phone.startsWith('+') ? phone : `+${phone}`)}
 				buttonClass={`${error ? '!border-red-600' : ''} !py-1 !rounded-l-lg`}
 				inputClass={`!py-5 !w-full !input-box-shadow !input !rounded-lg ${
 					error

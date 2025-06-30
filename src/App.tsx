@@ -30,25 +30,27 @@ export const App = () => {
 		initPreline();
 	}, [location.pathname]);
 
-	useAuthStore.getState().isLoggedIn();
-	
+	useAuthStore.getState().checkLoggedIn();
+
 	return (
-		<QueryClientProvider client={queryClient}>
-			<AppRoutes />
-			<ToastContainer
-				position="top-right"
-				autoClose={3000}
-				limit={4}
-				hideProgressBar={false}
-				newestOnTop={false}
-				closeOnClick
-				rtl={false}
-				pauseOnFocusLoss
-				draggable={false}
-				pauseOnHover
-				theme="light"
-				transition={Slide}
-			/>
-		</QueryClientProvider>
+		<main className="font-display">
+			<QueryClientProvider client={queryClient}>
+				<AppRoutes />
+				<ToastContainer
+					position="top-right"
+					autoClose={3000}
+					limit={4}
+					hideProgressBar={false}
+					newestOnTop={false}
+					closeOnClick
+					rtl={false}
+					pauseOnFocusLoss
+					draggable={false}
+					pauseOnHover
+					theme="light"
+					transition={Slide}
+				/>
+			</QueryClientProvider>
+		</main>
 	);
 };

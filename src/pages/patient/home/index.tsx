@@ -1,3 +1,3 @@
-export const PatientDashboard = () => {
+export const PatientHome = () => {
 	return <div>PatientDashboard</div>;
 };
