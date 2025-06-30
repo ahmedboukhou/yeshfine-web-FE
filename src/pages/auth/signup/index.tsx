@@ -1,30 +1,30 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Fragment, useState } from 'react';
 import { useForm, type SubmitHandler } from 'react-hook-form';
-import PhoneInput from 'react-phone-input-2';
-import 'react-phone-input-2/lib/style.css';
 import { Link } from 'react-router';
 import { useSignupMutation } from '../../../apis/auth';
 import { LOGIN_ROUTE } from '../../../appRoutes';
-import logo from '../../../assets/logo.svg';
-import { AuthCard } from '../../../components/common/cards/AuthCard';
-import type { SignupInput } from '../../../interfaces/formInputTypes';
+import { AuthCard, AuthCardHeading } from '../../../components/common/cards/AuthCard';
+import { InputField } from '../../../components/common/inputs/InputField';
+import { PhoneNumberInput } from '../../../components/common/inputs/PhoneInput';
 import { Role } from '../../../interfaces/enums';
-import { maskPhoneNumber } from '../../../lib/helpers';
+import type { SignupInput } from '../../../interfaces/formInputTypes';
 import { signupSchema } from '../../../validations';
 import { VerifyOTP } from './VerifyOTP';
+import { TickIcon } from '../../../assets/icons';
 
-const signupInitialValues: SignupInput = {
+const defaultValues: SignupInput = {
 	name: '',
 	phone: '',
 	password: '',
-	role: Role.Patient,
 	confirm_password: '',
+	role: Role.Patient,
 	dob: '',
 };
 
 export const Signup = () => {
-	const [showOtpScreen, setShowOtpScreen] = useState(false);
+	const [step, setStep] = useState<'role' | 'form' | 'otp'>('role');
+	const [role, setRole] = useState<Role>(Role.Patient);
 
 	const {
 		register,
@@ -35,129 +35,113 @@ export const Signup = () => {
 	} = useForm<SignupInput>({
 		resolver: yupResolver(signupSchema),
 		mode: 'all',
-		defaultValues: signupInitialValues,
+		defaultValues,
 	});
+
 	const phone = watch('phone');
 	const { mutateAsync: signup, isPending } = useSignupMutation();
+
 	const onSubmit: SubmitHandler<SignupInput> = (values) => {
-		signup(values, {
-			onSuccess() {
-				setShowOtpScreen(true);
-			},
-		});
+		signup(
+			{ ...values, role },
+			{
+				onSuccess: () => setStep('otp'),
+			}
+		);
 	};
+
+	if (step === 'otp')
+		return (
+			<AuthCard>
+				<VerifyOTP phone={phone} />
+			</AuthCard>
+		);
 
 	return (
 		<AuthCard>
-			<div className="flex justify-center text-center items-center flex-col gap-3 mb-12">
+			<AuthCardHeading
+				heading={step === 'role' ? 'Select account type' : 'Create an account'}
+				subHeading={
+					step === 'role'
+						? 'Welcome! Please select your account type.'
+						: 'Enter your personal details to continue'
+				}
+			/>
+
+			{step === 'role' ? (
 				<div>
-					<img src={logo} alt="yeshfine-logo" className="mb-9" />
+					<div className="grid sm:grid-cols-2 gap-4">
+						{Object.values(Role).map((item) => (
+							<div
+								key={item}
+								onClick={() => setRole(item)}
+								className={`p-6 rounded-lg border cursor-pointer capitalize text-center relative ${
+									role === item
+										? 'text-primary font-bold border-primary bg-primary-light-hover'
+										: 'bg-white border-gray-300 text-typography-600 font-medium'
+								}`}
+							>
+								{role === item && (
+									<div className="absolute top-2 left-2">
+										<TickIcon />
+									</div>
+								)}
+								{item}
+							</div>
+						))}
+					</div>
+					<button className="mt-8 primary-btn w-full" onClick={() => setStep('form')}>
+						Next
+					</button>
 				</div>
-				<h3 className="text-2xl font-bold">
-					{showOtpScreen ? 'We’ve just sent you a code' : 'Create an account'}
-				</h3>
-				<p className="text-typography-500">
-					{showOtpScreen
-						? `We have sent a OTP code to (${phone && maskPhoneNumber(phone)})`
-						: 'Welcome! Please enter your details.'}
-				</p>
-			</div>
-			{showOtpScreen ? (
-				<VerifyOTP phone={phone} />
 			) : (
 				<Fragment>
 					<form onSubmit={handleSubmit(onSubmit)}>
-						<div className="flex flex-col items-center">
-							<div className="w-full flex flex-col gap-5">
-								<div>
-									<label htmlFor="name" className="input-label">
-										Name
-									</label>
-									<input
-										id="name"
-										className={`${errors.name ? '!outline-red-600' : ''} input input-box-shadow`}
-										{...register('name')}
-										placeholder="Enter"
-									/>
-									{errors.name && (
-										<p className="text-red-600 text-sm mt-1">{errors.name.message}</p>
-									)}
-								</div>
-								<div>
-									<label htmlFor="dob" className="input-label">
-										Date of Birth
-									</label>
-									<input
-										type="date"
-										id="dob"
-										className={`${errors.dob ? '!outline-red-600' : ''} input input-box-shadow`}
-										{...register('dob')}
-										placeholder="Enter"
-										max={new Date().toISOString().split('T')[0]} //restrict to select future date
-									/>
-									{errors.dob && <p className="text-red-600 text-sm mt-1">{errors.dob.message}</p>}
-								</div>
+						<div className="flex flex-col gap-5">
+							<InputField
+								label="Full Name"
+								id="name"
+								type="text"
+								register={register('name')}
+								error={errors.name}
+							/>
 
-								<div>
-									<label htmlFor="phone" className="input-label">
-										Phone Number
-									</label>
-									<PhoneInput
-										country="us"
-										value={phone}
-										{...register('phone')}
-										onChange={(value) => setValue('phone', value)}
-										buttonClass={`${errors.phone ? '!border-red-600' : ''} !py-1 !rounded-l-lg`}
-										inputClass={`${
-											errors.phone
-												? '`!focus:border-none !border-red-600 focus:ring-red-600 focus:ring-1'
-												: 'focus:ring-primary focus:ring-2 !focus:border-none'
-										} !py-5 !w-full !input-box-shadow !input !rounded-lg`}
-									/>
-									{errors.phone && (
-										<p className="text-red-600 text-sm mt-1">{errors.phone.message}</p>
-									)}
-								</div>
-								<div>
-									<label htmlFor="password" className="input-label">
-										Password
-									</label>
-									<input
-										type="password"
-										id="password"
-										{...register('password')}
-										className={`${
-											errors.password ? '!outline-red-600' : ''
-										} input input-box-shadow`}
-										placeholder="Enter"
-									/>
-									{errors.password && (
-										<p className="text-red-600 text-sm mt-1">{errors.password.message}</p>
-									)}
-								</div>
-								<div>
-									<label htmlFor="confirm_password" className="input-label">
-										Confirm Password
-									</label>
-									<input
-										type="password"
-										id="confirm_password"
-										{...register('confirm_password')}
-										className={`${
-											errors.confirm_password ? '!outline-red-600' : ''
-										} input input-box-shadow`}
-										placeholder="Enter"
-									/>
-									{errors.confirm_password && (
-										<p className="text-red-600 text-sm mt-1">{errors.confirm_password.message}</p>
-									)}
-								</div>
-							</div>
+							<InputField
+								label="Date of Birth"
+								id="dob"
+								type="date"
+								register={register('dob')}
+								error={errors.dob}
+							/>
+
+							<PhoneNumberInput
+								value={phone}
+								onChange={(value) => setValue('phone', value)}
+								register={register('phone')}
+								error={errors.phone}
+							/>
+
+							<InputField
+								label="Password"
+								id="password"
+								type="password"
+								register={register('password')}
+								error={errors.password}
+							/>
+
+							<InputField
+								label="Confirm Password"
+								id="confirm_password"
+								type="password"
+								register={register('confirm_password')}
+								error={errors.confirm_password}
+							/>
 						</div>
-						<button className="my-8 primary-btn w-full" disabled={isPending}>
+						<button type="submit" className="my-8 primary-btn w-full" disabled={isPending}>
 							Sign Up
 						</button>
 					</form>
+
 					<p className="text-sm text-center">
 						Already have an account?{' '}
 						<Link to={LOGIN_ROUTE} className="link-text">
