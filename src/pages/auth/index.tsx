@@ -48,7 +48,7 @@ const items = slides.map((slide, index) => (
 
 export const AuthLayout = () => {
 	return (
-		<main className="grid grid-cols-2 h-screen bg-primary-light font-display">
+		<main className="grid grid-cols-2 h-screen bg-primary-light">
 			<div className="hidden lg:block relative">
 				<AliceCarousel
 					items={items}

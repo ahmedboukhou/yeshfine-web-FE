@@ -60,3 +60,6 @@ body {
 .link-text-secondary {
 	@apply text-typography-700 text-sm font-semibold;
 }
+.wrapper-container{
+	@apply container mx-auto px-4 sm:px-6 lg:px-10;
+}

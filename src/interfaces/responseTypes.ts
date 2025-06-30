@@ -18,4 +18,5 @@ export type ForgotPasswordResponse =CommonApiResponse & {
 export type LoginResponse = CommonApiResponse & {
 	user: CurrentUserType;
 	token: string;
+	isOtpVerified?: boolean;
 };

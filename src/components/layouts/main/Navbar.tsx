@@ -1,0 +1,88 @@
+import { Link, useLocation } from 'react-router';
+import {
+	APPOINTMENTS_ROUTE,
+	DOCTORS_ROUTE,
+	HOME_ROUTE,
+	LABS_ROUTE,
+	PHARMACIES_ROUTE,
+} from '../../../appRoutes';
+import { NavToggleIcon, NotificationIcon } from '../../../assets/icons';
+import logo from '../../../assets/logo.svg';
+import useAuthStore from '../../../store/auth';
+import { Dropdown } from '../../common/actions/Dropdown';
+
+export const Navbar = () => {
+	const location = useLocation();
+	const { logout } = useAuthStore((state) => state);
+	const patientHeaderOptions = [
+		{ title: 'Home', to: HOME_ROUTE },
+		{ title: 'Doctors', to: DOCTORS_ROUTE },
+		{ title: 'Labs', to: LABS_ROUTE },
+		{ title: 'Pharmacies', to: PHARMACIES_ROUTE },
+		{ title: 'Appointments', to: APPOINTMENTS_ROUTE },
+	];
+
+	const navbarOptions = [{ label: 'Logout', onClick: () => logout() }];
+
+	return (
+		<header className="flex flex-wrap md:justify-start md:flex-nowrap w-full bg-white text-sm py-4 card-box-shadow">
+			<nav className="wrapper-container w-full mx-auto px-4 flex flex-wrap basis-full items-center justify-between">
+				<div className="md:order-1 flex-none cursor-pointer">
+					<img src={logo} width={80} />
+				</div>
+				<div className="md:order-3 flex items-center gap-x-4">
+					<div className="cursor-pointer">
+						<NotificationIcon />
+					</div>
+					<Dropdown
+						title={
+							<img
+								className="inline-block size-10 rounded-full"
+								// TODO: image will get changed
+								src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80"
+								alt="Avatar"
+							/>
+						}
+						items={navbarOptions}
+					/>
+
+					<button
+						type="button"
+						className="md:hidden hs-collapse-toggle relative size-9 flex justify-center items-center gap-x-2 rounded-lg border border-gray-200 bg-white text-gray-800 shadow-2xs hover:bg-gray-50 focus:outline-hidden focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
+						id="hs-navbar-alignment-collapse"
+						aria-expanded="false"
+						aria-controls="hs-navbar-alignment"
+						aria-label="Toggle navigation"
+						data-hs-collapse="#hs-navbar-alignment"
+					>
+						<NavToggleIcon />
+						<span className="sr-only">Toggle</span>
+					</button>
+				</div>
+				<div
+					id="hs-navbar-alignment"
+					className="hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow md:grow-0 md:basis-auto md:block md:order-2"
+					aria-labelledby="hs-navbar-alignment-collapse"
+				>
+					<div className="flex flex-col gap-5 mt-5 md:flex-row md:items-center md:mt-0 md:ps-5">
+						{patientHeaderOptions.map(({ title, to }) => {
+							const isActive = location.pathname.startsWith(to);
+
+							return (
+								<Link
+									className={`font-medium transition-colors duration-200 px-2 pb-1 ${
+										isActive ? 'text-primary border-b-2' : 'text-typography-700 hover:text-black'
+									}`}
+									to={to}
+									key={title}
+								>
+									{title}
+								</Link>
+							);
+						})}
+					</div>
+				</div>
+			</nav>
+		</header>
+	);
+};

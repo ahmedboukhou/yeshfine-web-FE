@@ -8,7 +8,7 @@ interface AuthStore {
 
 	loginUser: (token: string, refreshToken: string) => void;
 	logout: () => void;
-	isLoggedIn: () => void;
+	checkLoggedIn: () => void;
 }
 
 const useAuthStore = create<AuthStore>((set) => ({
@@ -39,7 +39,7 @@ const useAuthStore = create<AuthStore>((set) => ({
 		});
 	},
 
-	isLoggedIn: () => {
+	checkLoggedIn: () => {
 		const token = localStorage.getItem('token');
 		const refreshToken = localStorage.getItem('refresh_token');
 

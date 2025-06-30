@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@floating-ui/react": "^0.27.13",
     "@hookform/resolvers": "^5.1.1",
     "@preline/pin-input": "^3.1.0",
     "@tailwindcss/forms": "^0.5.10",
