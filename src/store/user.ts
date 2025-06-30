@@ -2,7 +2,6 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import type { CurrentUserType } from '../interfaces';
 
-// 2. Define the store's state and actions
 interface CurrentUserStore {
 	currentUser: CurrentUserType | null;
 	setCurrentUser: (user: CurrentUserType) => void;

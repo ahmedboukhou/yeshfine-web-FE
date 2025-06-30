@@ -1,7 +1,9 @@
 import { useEffect, useState, type KeyboardEvent } from 'react';
 import { toast } from 'react-toastify';
 import { useResendOTPQuery, useVerifyOTPMutation } from '../../../apis/auth';
+import { AuthCardHeading } from '../../../components/common/cards/AuthCard';
 import { responseStatus } from '../../../interfaces/enums';
+import { maskPhoneNumber } from '../../../lib/helpers';
 import useAuthStore from '../../../store/auth';
 import { useCurrentUserStore } from '../../../store/user';
 
@@ -61,7 +63,6 @@ export function VerifyOTP({
 			}, 1000);
 
 			return () => {
-				setSeconds(60);
 				clearInterval(interval);
 			}; // Cleanup on unmount
 		}
@@ -99,6 +100,10 @@ export function VerifyOTP({
 
 	return (
 		<div>
+			<AuthCardHeading
+				heading={'We’ve just sent you a code'}
+				subHeading={`We have sent a OTP code to (${phone && maskPhoneNumber(phone)})`}
+			/>
 			<div
 				className="flex gap-3 justify-center flex-wrap"
 				data-hs-pin-input='{

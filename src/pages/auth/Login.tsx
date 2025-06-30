@@ -1,13 +1,13 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm, type SubmitHandler } from 'react-hook-form';
-import PhoneInput from 'react-phone-input-2';
 import { Link } from 'react-router';
 import { useLoginMutation } from '../../apis/auth';
 import { SIGNUP_ROUTE } from '../../appRoutes';
-import logo from '../../assets/logo.svg';
-import { AuthCard } from '../../components/common/cards/AuthCard';
-import type { LoginInput } from '../../interfaces/formInputTypes';
+import { AuthCard, AuthCardHeading } from '../../components/common/cards/AuthCard';
+import { InputField } from '../../components/common/inputs/InputField';
+import { PhoneNumberInput } from '../../components/common/inputs/PhoneInput';
 import { responseStatus } from '../../interfaces/enums';
+import type { LoginInput } from '../../interfaces/formInputTypes';
 import useAuthStore from '../../store/auth';
 import { useCurrentUserStore } from '../../store/user';
 import { loginSchema } from '../../validations';
@@ -46,49 +46,25 @@ export const Login = () => {
 
 	return (
 		<AuthCard>
+			<AuthCardHeading
+				heading="Log in to your account"
+				subHeading="Welcome back! Please enter your details."
+			/>
 			<form onSubmit={handleSubmit(onSubmit)}>
-				<div className="flex flex-col items-center">
-					<img src={logo} alt="yeshfine-logo" className=" mb-9" />
-					<div className="flex flex-col gap-3 text-center mb-12">
-						<h3 className="text-2xl font-bold">Log in to your account</h3>
-						<p className="text-typography-500">Welcome back! Please enter your details.</p>
-					</div>
-
-					<div className="w-full flex flex-col gap-5">
-						<div>
-							<label htmlFor="phone" className="input-label">
-								Phone Number
-							</label>
-							<PhoneInput
-								country="us"
-								value={phone}
-								{...register('phone')}
-								onChange={(value) => setValue('phone', value)}
-								buttonClass={`${errors.phone ? '!border-red-600' : ''} !py-1 !rounded-l-lg`}
-								inputClass={`${
-									errors.phone
-										? '`!focus:border-none !border-red-600 focus:ring-red-600 focus:ring-1'
-										: 'focus:ring-primary focus:ring-2 !focus:border-none'
-								} !py-5 !w-full !input-box-shadow !input !rounded-lg`}
-							/>
-							{errors.phone && <p className="text-red-600 text-sm mt-1">{errors.phone.message}</p>}
-						</div>
-						<div>
-							<label htmlFor="password" className="input-label">
-								Password
-							</label>
-							<input
-								type="password"
-								id="password"
-								{...register('password')}
-								className={`${errors.password ? '!outline-red-600' : ''} input input-box-shadow`}
-								placeholder="Enter"
-							/>
-							{errors.password && (
-								<p className="text-red-600 text-sm mt-1">{errors.password.message}</p>
-							)}
-						</div>
-					</div>
+				<div className="w-full flex flex-col gap-5">
+					<PhoneNumberInput
+						value={phone}
+						onChange={(value) => setValue('phone', value)}
+						register={register('phone')}
+						error={errors.phone}
+					/>
+					<InputField
+						label="Password"
+						id="password"
+						type="password"
+						error={errors.password}
+						register={register('password')}
+					/>
 				</div>
 				<div className="text-right mt-2.5">
 					<Link to="/forgot-password" className="link-text">
