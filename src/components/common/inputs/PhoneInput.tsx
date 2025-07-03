@@ -15,7 +15,7 @@ interface PhoneNumberInputProps {
 
 export const PhoneNumberInput: React.FC<PhoneNumberInputProps> = ({
 	id = 'phone',
-	label = 'Phone Number',
+	label,
 	value,
 	onChange,
 	register,

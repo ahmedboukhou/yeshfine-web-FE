@@ -1,6 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Fragment, useState } from 'react';
 import { useForm, type SubmitHandler } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
 import { useSignupMutation } from '../../../apis/auth';
 import { TickIcon } from '../../../assets/icons';
@@ -23,6 +24,8 @@ const defaultValues: SignupInput = {
 };
 
 export const Signup = () => {
+	const { t } = useTranslation(['auth']);
+
 	const [step, setStep] = useState<'role' | 'form' | 'otp'>('role');
 	const [role, setRole] = useState<Role>(Role.Patient);
 
@@ -60,7 +63,7 @@ export const Signup = () => {
 	return (
 		<AuthCard>
 			<AuthCardHeading
-				heading={step === 'role' ? 'Select account type' : 'Create an account'}
+				heading={step === 'role' ? t('selectAccountType') : 'Create an account'}
 				subHeading={
 					step === 'role'
 						? 'Welcome! Please select your account type.'
@@ -99,7 +102,7 @@ export const Signup = () => {
 					<form onSubmit={handleSubmit(onSubmit)}>
 						<div className="flex flex-col gap-5">
 							<InputField
-								label="Full Name"
+								label={t('fullName')}
 								id="name"
 								type="text"
 								register={register('name')}
@@ -107,7 +110,7 @@ export const Signup = () => {
 							/>
 
 							<InputField
-								label="Date of Birth"
+								label={t('dob')}
 								id="dob"
 								type="date"
 								register={register('dob')}
@@ -116,13 +119,14 @@ export const Signup = () => {
 
 							<PhoneNumberInput
 								value={phone}
+								label={t('phoneNumber')}
 								onChange={(value) => setValue('phone', value)}
 								register={register('phone')}
 								error={errors.phone}
 							/>
 
 							<InputField
-								label="Password"
+								label={t('password')}
 								id="password"
 								type="password"
 								register={register('password')}
@@ -130,7 +134,7 @@ export const Signup = () => {
 							/>
 
 							<InputField
-								label="Confirm Password"
+								label={t('confirmPassword')}
 								id="confirm_password"
 								type="password"
 								register={register('confirm_password')}
@@ -138,14 +142,14 @@ export const Signup = () => {
 							/>
 						</div>
 						<button type="submit" className="my-8 primary-btn w-full" disabled={isPending}>
-							Sign Up
+							{t('signUp')}
 						</button>
 					</form>
 
 					<p className="text-sm text-center">
-						Already have an account?{' '}
+						{t('alreadyHaveAccount')}{' '}
 						<Link to={LOGIN_ROUTE} className="link-text">
-							Login
+							{t('logIn')}
 						</Link>
 					</p>
 				</Fragment>

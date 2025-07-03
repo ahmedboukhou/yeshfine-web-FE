@@ -1,5 +1,7 @@
 import { yupResolver } from '@hookform/resolvers/yup';
+import { Fragment, useState } from 'react';
 import { useForm, type SubmitHandler } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
 import { useLoginMutation } from '../../apis/auth';
 import { AuthCard, AuthCardHeading } from '../../components/common/cards/AuthCard';
@@ -7,16 +9,16 @@ import { InputField } from '../../components/common/inputs/InputField';
 import { PhoneNumberInput } from '../../components/common/inputs/PhoneInput';
 import { responseStatus } from '../../interfaces/enums';
 import type { LoginInput } from '../../interfaces/formInputTypes';
+import { SIGNUP_ROUTE } from '../../routes';
 import useAuthStore from '../../store/auth';
 import { useCurrentUserStore } from '../../store/user';
 import { loginSchema } from '../../validations';
 import { VerifyOTP } from './signup/VerifyOTP';
-import { Fragment, useState } from 'react';
-import { SIGNUP_ROUTE } from '../../routes';
 
 const loginInitialValues: LoginInput = { phone: '', password: '' };
 
 export const Login = () => {
+	const { t } = useTranslation(['auth']);
 	const [userNotVerified, setUserNotVerified] = useState(false);
 	const {
 		register,
@@ -54,20 +56,18 @@ export const Login = () => {
 		<AuthCard>
 			{!userNotVerified ? (
 				<Fragment>
-					<AuthCardHeading
-						heading="Log in to your account"
-						subHeading="Welcome back! Please enter your details."
-					/>
+					<AuthCardHeading heading={t('loginToAccount')} subHeading={t('welcomeBack')} />
 					<form onSubmit={handleSubmit(onSubmit)}>
 						<div className="w-full flex flex-col gap-5">
 							<PhoneNumberInput
 								value={phone}
+								label={t('phoneNumber')}
 								onChange={(value) => setValue('phone', value)}
 								register={register('phone')}
 								error={errors.phone}
 							/>
 							<InputField
-								label="Password"
+								label={t('password')}
 								id="password"
 								type="password"
 								error={errors.password}
@@ -76,17 +76,17 @@ export const Login = () => {
 						</div>
 						<div className="text-right mt-2.5">
 							<Link to="/forgot-password" className="link-text">
-								Forgot Password
+								{t('forgotPassword')}
 							</Link>
 						</div>
 						<button type="submit" className="my-8 primary-btn w-full" disabled={isPending}>
-							Log In
+							{t('logIn')}
 						</button>
 					</form>
 					<p className="text-sm text-center">
-						Don’t have an account?{' '}
+						{t('noAccountPrompt')}{' '}
 						<Link to={SIGNUP_ROUTE} className="link-text">
-							Signup
+							{t('signUp')}
 						</Link>
 					</p>
 				</Fragment>

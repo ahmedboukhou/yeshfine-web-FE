@@ -5,5 +5,8 @@
 	"patients": "Patients",
 	"seeAll": "See All",
 	"search": "Search",
-	"filters": "Filters"
+	"filters": "Filters",
+	"next": "Next",
+	"back": "Back",
+	"continue": "Continue"
 }
