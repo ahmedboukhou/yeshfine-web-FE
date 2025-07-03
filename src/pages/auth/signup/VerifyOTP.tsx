@@ -72,13 +72,13 @@ export function VerifyOTP({
 		verifyOtp(
 			{ phone, otp },
 			{
-				onSuccess: ({ status, token, user }) => {
+				onSuccess: ({ status, data }) => {
 					if (status === responseStatus.Success) {
 						if (isForgotPassword && setShowCreatePasswordForm) {
 							setShowCreatePasswordForm(true);
 						} else {
-							setCurrentUser(user);
-							loginUser(token, 'none');
+							setCurrentUser(data.user);
+							loginUser(data.token, 'none');
 						}
 					}
 				},

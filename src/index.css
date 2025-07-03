@@ -11,6 +11,39 @@ body {
 	margin: 0;
 	box-sizing: border-box;
 }
+
+h1 {
+	@apply text-4xl font-bold;
+}
+
+h2 {
+	@apply text-3xl;
+}
+
+h3 {
+	@apply text-2xl font-semibold text-typography-700;
+}
+
+h4 {
+	@apply text-xl;
+}
+
+h5 {
+	@apply text-lg font-semibold text-typography-800;
+}
+
+h6 {
+	@apply text-base font-bold;
+}
+
+p {
+	@apply text-base;
+}
+
+span {
+	@apply text-sm;
+}
+
 @theme {
 	--font-display: 'Plus Jakarta Sans', 'sans-serif';
 
@@ -27,9 +60,9 @@ body {
 	--color-darker: #1b3d1c;
 
 	/* warning color */
-	--color-warning-50: #FEF6EE;
-	--color-warning-700: #B93815;
-
+	--color-warning-50: #fef6ee;
+	--color-warning-700: #b93815;
+	--color-warning-400: #f38744;
 
 	/* typography */
 	--color-typography-800: #27272a;
@@ -47,6 +80,7 @@ body {
 .card-box-shadow {
 	box-shadow: 0px 0px 2px 0px rgba(23, 26, 31, 0.2), 0px 0px 1px 0px rgba(23, 26, 31, 0.18);
 }
+
 .card-gradient {
 	background: linear-gradient(180deg, #fff 0%, #ebffec 100%);
 }
@@ -71,4 +105,55 @@ body {
 
 .wrapper {
 	@apply py-10;
+}
+
+/* Flexbox utilities */
+/* Flex row with items centered and space between */
+.flex-between-center {
+	@apply flex justify-between items-center;
+}
+
+/* Flex row with content centered both horizontally and vertically */
+.flex-center {
+	@apply flex justify-center items-center;
+}
+
+/* Flex row with content spaced between */
+.flex-between {
+	@apply flex justify-between;
+}
+
+/* Flex row with items vertically centered */
+.flex-items-center {
+	@apply flex items-center;
+}
+
+/* Flex column centered both ways */
+.flex-col-center {
+	@apply flex flex-col justify-center items-center;
+}
+
+/* Flex column with items spaced between */
+.flex-col-between {
+	@apply flex flex-col justify-between;
+}
+
+/* Flex start */
+.flex-start {
+	@apply flex justify-start items-start;
+}
+
+/* Flex end */
+.flex-end {
+	@apply flex justify-end items-end;
+}
+
+/* Flex row wrap */
+.flex-wrap {
+	@apply flex flex-wrap;
+}
+
+/* Flex grow + full width */
+.flex-grow-full {
+	@apply flex-grow w-full;
 }

@@ -3,6 +3,8 @@ import { useEffect } from 'react';
 import { Slide, ToastContainer } from 'react-toastify';
 import useAuthStore from './store/auth';
 import { AppRoutes } from './routes';
+import './i18n';
+
 
 async function loadPreline() {
 	return import('preline/dist/index.js');

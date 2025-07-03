@@ -89,7 +89,7 @@ export const AuthLayout = () => {
           `}</style>
 			</div>
 
-			<div className="col-span-2 lg:col-span-1 flex justify-center items-center px-5">
+			<div className="col-span-2 lg:col-span-1 flex-center px-5">
 				<Outlet />
 			</div>
 		</main>

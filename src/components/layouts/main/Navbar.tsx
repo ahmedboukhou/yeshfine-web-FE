@@ -33,12 +33,12 @@ export const Navbar = () => {
 
 	return (
 		<header className="flex flex-wrap md:justify-start md:flex-nowrap w-full bg-white text-sm py-4 card-box-shadow">
-			<nav className="wrapper-container w-full mx-auto px-4 flex flex-wrap basis-full items-center justify-between">
+			<nav className="wrapper-container w-full mx-auto px-4 flex-items-center basis-full flex-between-center">
 				<div className="md:order-1 flex-none cursor-pointer">
 					<img src={logo} width={80} />
 				</div>
 
-				<div className="md:order-3 flex items-center gap-x-4">
+				<div className="md:order-3 flex-items-center gap-x-4">
 					<div className="cursor-pointer">
 						<NotificationIcon />
 					</div>
@@ -57,7 +57,7 @@ export const Navbar = () => {
 					{/* Mobile Toggle Button */}
 					<button
 						type="button"
-						className="md:hidden relative size-9 flex justify-center items-center gap-x-2 rounded-lg border border-gray-200 hover:bg-gray-50 focus:outline-none cursor-pointer"
+						className="md:hidden relative size-9 flex-center gap-x-2 rounded-lg border border-gray-200 hover:bg-gray-50 focus:outline-none cursor-pointer"
 						onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
 					>
 						<NavToggleIcon />
@@ -87,7 +87,7 @@ export const Navbar = () => {
 			</nav>
 
 			{isMobileMenuOpen && (
-				<div className="fixed inset-0 bg-white z-50 flex flex-col items-center justify-center md:hidden transition-all duration-300">
+				<div className="fixed inset-0 bg-white z-50 flex-col flex-items-center justify-center md:hidden transition-all duration-300">
 					{/* Close button */}
 					<button
 						className="absolute top-4 right-4 text-xl cursor-pointer"

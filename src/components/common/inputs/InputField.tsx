@@ -20,6 +20,6 @@ export const InputField = ({
 			className={`input input-box-shadow ${error ? '!outline-red-600' : ''}`}
 			placeholder="Enter"
 		/>
-		{error && <p className="text-red-600 text-sm mt-1">{error.message}</p>}
+		{error && <span className="text-red-600 text-sm mt-1">{error.message}</span>}
 	</div>
 );

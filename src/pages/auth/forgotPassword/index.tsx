@@ -96,7 +96,7 @@ export const ForgotPassword = () => {
 
 const BackButton = ({ onClick, label }: { onClick: () => void; label: string }) => (
 	<div className="flex justify-center">
-		<button onClick={onClick} className="flex gap-2 items-center mt-8 cursor-pointer">
+		<button onClick={onClick} className="gap-2 flex-items-center mt-8 cursor-pointer">
 			<BackIcon />
 			<span className="link-text-secondary">{label}</span>
 		</button>

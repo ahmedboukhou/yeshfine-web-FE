@@ -18,7 +18,7 @@ export const Footer = () => {
 	return (
 		<footer>
 			<div className="bg-white py-12">
-				<div className="wrapper-container flex justify-between md:items-center flex-col md:flex-row gap-6">
+				<div className="wrapper-container flex-between md:items-center flex-col md:flex-row gap-6">
 					<img src={logo} width={80} className="cursor-pointer" />
 					<div className="flex gap-4 sm:gap-8 flex-col md:flex-row">
 						{footerOptions.map(({ title, href }) => (
@@ -42,7 +42,7 @@ export const Footer = () => {
 			</div>
 
 			<div className="bg-black text-white text-sm py-5">
-				<div className="flex justify-between flex-col md:flex-row wrapper-container">
+				<div className="flex-between flex-col md:flex-row wrapper-container">
 					<p className="cursor-pointer">
 						© {new Date().getFullYear()} Yeshfine. All rights reserved.
 					</p>
