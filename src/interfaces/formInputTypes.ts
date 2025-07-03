@@ -13,6 +13,7 @@ export type SignupInput = {
 	confirm_password: string;
 	role?: Role;
 };
+
 export type OTPInput = {
 	phone: string;
 	otp: string;

@@ -21,7 +21,7 @@ export function useLoginMutation() {
 	});
 }
 export function useSignupMutation() {
-	return useMutation<LoginResponse, CommonApiResponse, SignupInput>({
+	return useMutation<LoginResponse, CommonApiResponse, Omit<SignupInput, 'confirm_password'>>({
 		mutationFn: (values) => apiClient.post(`auth/signup`, values),
 		onError: ({ message }) => toast.error(message || 'Something went wrong'),
 	});

@@ -6,7 +6,7 @@ export const MainLayout = () => {
 	return (
 		<main className="min-h-screen bg-primary-light flex flex-col">
 			<Navbar />
-			<section className="flex-1 wrapper-container">
+			<section className="flex-1 wrapper-container wrapper">
 				<Outlet />
 			</section>
 			<Footer />

@@ -3,10 +3,10 @@ import { Fragment } from 'react';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { useNavigate } from 'react-router';
 import { useResetPasswordMutation } from '../../../apis/auth';
-import { LOGIN_ROUTE } from '../../../appRoutes';
 import { AuthCardHeading } from '../../../components/common/cards/AuthCard';
 import { InputField } from '../../../components/common/inputs/InputField';
 import type { ResetPasswordInput } from '../../../interfaces/formInputTypes';
+import { LOGIN_ROUTE } from '../../../routes';
 import { resetPasswordSchema } from '../../../validations';
 
 const defaultValues: ResetPasswordInput = {

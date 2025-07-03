@@ -3,15 +3,15 @@ import { Fragment, useState } from 'react';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { Link } from 'react-router';
 import { useSignupMutation } from '../../../apis/auth';
-import { LOGIN_ROUTE } from '../../../appRoutes';
+import { TickIcon } from '../../../assets/icons';
 import { AuthCard, AuthCardHeading } from '../../../components/common/cards/AuthCard';
 import { InputField } from '../../../components/common/inputs/InputField';
 import { PhoneNumberInput } from '../../../components/common/inputs/PhoneInput';
 import { Role } from '../../../interfaces/enums';
 import type { SignupInput } from '../../../interfaces/formInputTypes';
+import { LOGIN_ROUTE } from '../../../routes';
 import { signupSchema } from '../../../validations';
 import { VerifyOTP } from './VerifyOTP';
-import { TickIcon } from '../../../assets/icons';
 
 const defaultValues: SignupInput = {
 	name: '',
@@ -41,9 +41,9 @@ export const Signup = () => {
 	const phone = watch('phone');
 	const { mutateAsync: signup, isPending } = useSignupMutation();
 
-	const onSubmit: SubmitHandler<SignupInput> = (values) => {
+	const onSubmit: SubmitHandler<SignupInput> = ({ dob, name, password, phone, role }) => {
 		signup(
-			{ ...values, role },
+			{ dob, name, password, phone, role },
 			{
 				onSuccess: () => setStep('otp'),
 			}

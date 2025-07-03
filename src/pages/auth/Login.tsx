@@ -2,7 +2,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { Link } from 'react-router';
 import { useLoginMutation } from '../../apis/auth';
-import { SIGNUP_ROUTE } from '../../appRoutes';
 import { AuthCard, AuthCardHeading } from '../../components/common/cards/AuthCard';
 import { InputField } from '../../components/common/inputs/InputField';
 import { PhoneNumberInput } from '../../components/common/inputs/PhoneInput';
@@ -13,6 +12,7 @@ import { useCurrentUserStore } from '../../store/user';
 import { loginSchema } from '../../validations';
 import { VerifyOTP } from './signup/VerifyOTP';
 import { Fragment, useState } from 'react';
+import { SIGNUP_ROUTE } from '../../routes';
 
 const loginInitialValues: LoginInput = { phone: '', password: '' };
 

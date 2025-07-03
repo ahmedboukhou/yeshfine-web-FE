@@ -1,3 +1,3 @@
 export const PatientHome = () => {
-	return <div>PatientDashboard</div>;
+	return <p>dashboard homescreen</p>;
 };
