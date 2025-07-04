@@ -12,7 +12,7 @@ export const LabsPharmacyCard = () => {
 			<div className="flex flex-col gap-2.5">
 				<div className="flex-between">
 					<h5>MauriLab Express</h5>
-					<Rating rating={4.8} />
+					<Rating rating={"4.8"} />
 				</div>
 
 				<div className="gap-2 flex-items-center">

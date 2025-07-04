@@ -1,3 +1,4 @@
 {
-	"topRatedHeading": "Les mieux notés {{heading}}"
+	"topRatedHeading": "Les mieux notés {{heading}}",
+	"upcomingAppointments": "Prochains rendez-vous"
 }

@@ -64,7 +64,12 @@ span {
 	--color-warning-700: #b93815;
 	--color-warning-400: #f38744;
 
+	/* purple color */
+	--color-purple: #7110d6;
+	--color-purple-light: #f6edff;
+
 	/* typography */
+	--color-typography-900: #181d27;
 	--color-typography-800: #27272a;
 	--color-typography-700: #3f3f46;
 	--color-typography-600: #52525b;
@@ -84,6 +89,9 @@ span {
 .card-gradient {
 	background: linear-gradient(180deg, #fff 0%, #ebffec 100%);
 }
+.gradient-1 {
+	@apply bg-[linear-gradient(111deg,#1298BC_-37.21%,#88D702_115.79%)];
+}
 .input {
 	@apply py-2.5 px-3.5 block w-full focus:outline-2 border-none outline outline-border-1 bg-white focus:outline-primary rounded-lg sm:text-sm focus:ring-primary disabled:opacity-50 disabled:pointer-events-none;
 }
@@ -92,6 +100,12 @@ span {
 }
 .primary-btn {
 	@apply py-2.5 px-6 text-center font-semibold rounded-lg focus:bg-primary-active border border-transparent hover:bg-primary-hover bg-primary text-white focus:outline-none disabled:opacity-50 disabled:pointer-events-none cursor-pointer disabled:bg-primary/70;
+}
+.secondary-btn {
+	@apply py-2.5 px-6 text-center text-primary font-semibold rounded-lg focus:bg-primary-light-active border border-transparent hover:bg-primary-light bg-white focus:outline-none disabled:opacity-50 disabled:pointer-events-none cursor-pointer disabled:bg-primary/70;
+}
+.pagination-btn {
+	@apply py-2 px-2.5 hover:bg-white/50 gap-1 flex items-center justify-center bg-white rounded-lg border border-border-1 text-typography-600 font-semibold cursor-pointer;
 }
 .link-text {
 	@apply text-primary font-bold hover:underline text-sm cursor-pointer disabled:opacity-50 disabled:pointer-events-none disabled:text-primary/70;

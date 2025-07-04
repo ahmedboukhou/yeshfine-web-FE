@@ -1,3 +1,5 @@
+import { DoctorMainCard } from "./DoctorMainCard";
+
 export const PatientDoctorDetail = () => {
-	return <div>PatientDoctorDetail</div>;
+	return <main><DoctorMainCard/></main>;
 };

@@ -19,7 +19,7 @@ export const Footer = () => {
 		<footer>
 			<div className="bg-white py-12">
 				<div className="wrapper-container flex-between md:items-center flex-col md:flex-row gap-6">
-					<img src={logo} width={80} className="cursor-pointer" />
+					<img src={logo} width={80} className="cursor-pointer" alt="yeshfine-logo"/>
 					<div className="flex gap-4 sm:gap-8 flex-col md:flex-row">
 						{footerOptions.map(({ title, href }) => (
 							<a

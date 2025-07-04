@@ -5,7 +5,6 @@ import type { CurrentUserType } from '../interfaces';
 interface CurrentUserStore {
 	currentUser: CurrentUserType | null;
 	setCurrentUser: (user: CurrentUserType) => void;
-	clearCurrentUser: () => void;
 }
 
 export const useCurrentUserStore = create<CurrentUserStore>()(
@@ -13,10 +12,9 @@ export const useCurrentUserStore = create<CurrentUserStore>()(
 		(set) => ({
 			currentUser: null,
 			setCurrentUser: (user) => set({ currentUser: user }),
-			clearCurrentUser: () => set({ currentUser: null }),
 		}),
 		{
-			name: 'current-user',
+			name: 'current_user',
 		}
 	)
 );

@@ -14,7 +14,7 @@ export const AppointmentCard = () => {
 				<div className="flex-1">
 					<div className="flex-between-center">
 						<h5>Habiboulaye Diagna</h5>
-						<Rating rating={4.8} />
+						<Rating rating={'4.8'} />
 					</div>
 
 					<span className="text-typography-500">Neurologist | Mercy Hospital</span>

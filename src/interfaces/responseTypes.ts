@@ -1,4 +1,4 @@
-import type { CurrentUserType } from '.';
+import type { CurrentUserType, Doctor } from '.';
 import type { responseStatus } from './enums';
 
 // Common API Response
@@ -20,7 +20,12 @@ export type LoginResponse = CommonApiResponse & {
 	token: string;
 	isOtpVerified?: boolean;
 };
+
 export type VerifyOtpResponse = CommonApiResponse & {
 	data: { user: CurrentUserType; token: string };
 	isOtpVerified?: boolean;
+};
+
+export type DoctorsResponse = CommonApiResponse & {
+	data: { doctorsList: Doctor[] };
 };

@@ -1,5 +1,4 @@
 import { create } from 'zustand';
-import { useCurrentUserStore } from './user';
 
 interface AuthStore {
 	token: string | null;
@@ -28,10 +27,9 @@ const useAuthStore = create<AuthStore>((set) => ({
 	},
 
 	logout: () => {
-		const { clearCurrentUser } = useCurrentUserStore.getState();
-		clearCurrentUser();
 		localStorage.removeItem('token');
 		localStorage.removeItem('refresh_token');
+		localStorage.removeItem('current_user');
 		set({
 			token: null,
 			refreshToken: null,

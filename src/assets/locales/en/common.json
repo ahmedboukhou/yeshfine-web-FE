@@ -1,12 +1,13 @@
 {
-	"doctors": "Doctors",
-	"labs": "Labs",
-	"pharmacies": "Pharmacies",
-	"patients": "Patients",
-	"seeAll": "See All",
-	"search": "Search",
-	"filters": "Filters",
-	"next": "Next",
 	"back": "Back",
-	"continue": "Continue"
+	"continue": "Continue",
+	"doctors": "Doctors",
+	"filters": "Filters",
+	"labs": "Labs",
+	"next": "Next",
+	"patients": "Patients",
+	"pharmacies": "Pharmacies",
+	"search": "Search",
+	"seeAll": "See All",
+	"previous": "Previous"
 }

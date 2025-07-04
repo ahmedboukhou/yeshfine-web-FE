@@ -1,5 +1,12 @@
 {
+	"back": "Dos",
+	"continue": "Continuer",
 	"doctors": "Médecins",
+	"filters": "Filtres",
 	"labs": "LABORATOIRES",
-	"patients": "Les patients"
+	"next": "Suivant",
+	"patients": "Les patients",
+	"pharmacies": "Pharmacies",
+	"search": "Recherche",
+	"seeAll": "Voir tout"
 }
