@@ -24,7 +24,7 @@ const defaultValues: SignupInput = {
 };
 
 export const Signup = () => {
-	const { t } = useTranslation(['auth']);
+	const { t } = useTranslation(['auth', 'common']);
 
 	const [step, setStep] = useState<'role' | 'form' | 'otp'>('role');
 	const [role, setRole] = useState<Role>(Role.Patient);
@@ -63,12 +63,8 @@ export const Signup = () => {
 	return (
 		<AuthCard>
 			<AuthCardHeading
-				heading={step === 'role' ? t('selectAccountType') : 'Create an account'}
-				subHeading={
-					step === 'role'
-						? 'Welcome! Please select your account type.'
-						: 'Enter your personal details to continue'
-				}
+				heading={step === 'role' ? t('selectAccountType') : t('createAccount')}
+				subHeading={step === 'role' ? t('welcomeMessage') : t('enterDetails')}
 			/>
 
 			{step === 'role' ? (
@@ -89,12 +85,12 @@ export const Signup = () => {
 										<TickIcon />
 									</div>
 								)}
-								{item}
+								{t(item, { ns: 'common' })}
 							</div>
 						))}
 					</div>
 					<button className="mt-8 primary-btn w-full" onClick={() => setStep('form')}>
-						Next
+						{t('next', { ns: 'common' })}
 					</button>
 				</div>
 			) : (
