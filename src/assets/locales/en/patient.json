@@ -1,10 +1,10 @@
 {
-	"topRatedHeading": "Top Rated {{heading}}",
-	"upcomingAppointments": "Upcoming Appointments",
-	"lookingFor": "Looking for",
-	"specialistDoctors": "Specialist Doctors",
-	"scheduleWithTopDoctors": "Schedule an appointment with our top doctors.",
+	"bookAppointment": "Book Appointment",
 	"bookNow": "Book Now",
 	"experienceYears": "Exp: {{experience}} years",
-	"bookAppointment": "Book Appointment"
+	"lookingFor": "Looking for",
+	"scheduleWithTopDoctors": "Schedule an appointment with our top doctors.",
+	"specialistDoctors": "Specialist Doctors",
+	"topRatedHeading": "Top Rated {{heading}}",
+	"upcomingAppointments": "Upcoming Appointments"
 }

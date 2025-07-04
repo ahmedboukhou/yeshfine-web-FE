@@ -25,10 +25,6 @@ i18n
 		supportedLngs: languages,
 		debug: false,
 		ns: ['common'],
-
-		interpolation: {
-			escapeValue: false, // not needed for react as it escapes by default
-		},
 		detection: {
 			order: ['cookie', 'navigator', 'path', 'subdomain'],
 			caches: ['cookie'],

@@ -1,5 +1,7 @@
+import { Link } from 'react-router';
 import { FacebookIcon, InstagramIcon, LinkedInIcon, XIcon } from '../../../assets/icons';
 import logo from '../../../assets/logo.svg';
+import { HOME_ROUTE } from '../../../routes';
 
 export const Footer = () => {
 	const footerOptions = [
@@ -19,7 +21,9 @@ export const Footer = () => {
 		<footer>
 			<div className="bg-white py-12">
 				<div className="wrapper-container flex-between md:items-center flex-col md:flex-row gap-6">
-					<img src={logo} width={80} className="cursor-pointer" alt="yeshfine-logo"/>
+					<Link to={HOME_ROUTE}>
+						<img src={logo} width={80} className="cursor-pointer" alt="yeshfine-logo" />
+					</Link>
 					<div className="flex gap-4 sm:gap-8 flex-col md:flex-row">
 						{footerOptions.map(({ title, href }) => (
 							<a

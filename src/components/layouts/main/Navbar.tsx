@@ -11,18 +11,20 @@ import {
 } from '../../../routes';
 import useAuthStore from '../../../store/auth';
 import { Dropdown } from '../../common/actions/Dropdown';
+import { useTranslation } from 'react-i18next';
 
 export const Navbar = () => {
 	const location = useLocation();
+	const { t } = useTranslation(['common']);
 	const { logout } = useAuthStore((state) => state);
 	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
+	
 	const patientHeaderOptions = [
-		{ title: 'Home', to: HOME_ROUTE },
-		{ title: 'Doctors', to: DOCTORS_ROUTE },
-		{ title: 'Labs', to: LABS_ROUTE },
-		{ title: 'Pharmacies', to: PHARMACIES_ROUTE },
-		{ title: 'Appointments', to: APPOINTMENTS_ROUTE },
+		{ title: 'home', to: HOME_ROUTE },
+		{ title: 'doctors', to: DOCTORS_ROUTE },
+		{ title: 'labs', to: LABS_ROUTE },
+		{ title: 'pharmacies', to: PHARMACIES_ROUTE },
+		{ title: 'appointments', to: APPOINTMENTS_ROUTE },
 	];
 
 	const navbarOptions = [{ label: 'Logout', onClick: () => logout() }];
@@ -34,9 +36,9 @@ export const Navbar = () => {
 	return (
 		<header className="flex flex-wrap md:justify-start md:flex-nowrap w-full bg-white text-sm py-4 card-box-shadow">
 			<nav className="wrapper-container w-full mx-auto px-4 flex-items-center basis-full flex-between-center">
-				<div className="md:order-1 flex-none cursor-pointer">
-					<img src={logo} width={80} alt="yeshfine-logo"/>
-				</div>
+				<Link to={HOME_ROUTE} className="md:order-1 flex-none cursor-pointer">
+					<img src={logo} width={80} alt="yeshfine-logo" />
+				</Link>
 
 				<div className="md:order-3 flex-items-center gap-x-4">
 					<div className="cursor-pointer">
@@ -78,7 +80,7 @@ export const Navbar = () => {
 									to={to}
 									key={title}
 								>
-									{title}
+									{t('title')}
 								</Link>
 							);
 						})}

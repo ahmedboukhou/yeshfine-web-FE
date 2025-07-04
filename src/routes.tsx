@@ -13,8 +13,10 @@ import { PatientPharmacies } from './pages/patient/pharmacies';
 import useAuthStore from './store/auth';
 import { useCurrentUserStore } from './store/user';
 import { PatientDoctorDetail } from './pages/patient/doctors/detail';
+import { SelectLanguage } from './pages/auth/SelectLanguage';
 
 // App Routes
+export const ROOT_ROUTE = '/';
 export const LOGIN_ROUTE = '/login';
 export const LANGUAGE_ROUTE = '/select-language';
 export const FORGOT_PASSWORD_ROUTE = '/forgot-password';
@@ -68,6 +70,7 @@ export const AppRoutes = () => {
 			) : (
 				<Routes>
 					<Route element={<AuthLayout />}>
+						<Route element={<SelectLanguage />} path={ROOT_ROUTE} />
 						<Route element={<Login />} path={LOGIN_ROUTE} />
 						<Route element={<Signup />} path={SIGNUP_ROUTE} />
 						<Route element={<ForgotPassword />} path={FORGOT_PASSWORD_ROUTE} />
