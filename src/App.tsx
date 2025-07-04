@@ -1,8 +1,9 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { useEffect } from 'react';
 import { Slide, ToastContainer } from 'react-toastify';
-import { AppRoutes } from './appRoutes';
 import useAuthStore from './store/auth';
+import { AppRoutes } from './routes';
+import './i18n.ts';
 
 async function loadPreline() {
 	return import('preline/dist/index.js');

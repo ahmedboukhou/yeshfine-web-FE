@@ -1,12 +1,13 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Fragment } from 'react';
 import { useForm, type SubmitHandler } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
 import { useResetPasswordMutation } from '../../../apis/auth';
-import { LOGIN_ROUTE } from '../../../appRoutes';
 import { AuthCardHeading } from '../../../components/common/cards/AuthCard';
 import { InputField } from '../../../components/common/inputs/InputField';
 import type { ResetPasswordInput } from '../../../interfaces/formInputTypes';
+import { LOGIN_ROUTE } from '../../../routes';
 import { resetPasswordSchema } from '../../../validations';
 
 const defaultValues: ResetPasswordInput = {
@@ -25,6 +26,7 @@ export const ResetPassword = ({
 	setSuccess: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
 	const navigate = useNavigate();
+	const { t } = useTranslation(['auth', 'common']);
 
 	const {
 		register,
@@ -50,25 +52,21 @@ export const ResetPassword = ({
 	return (
 		<Fragment>
 			<AuthCardHeading
-				heading={success ? 'Password Reset Successful' : 'Create New Password'}
-				subHeading={
-					success
-						? 'Your password has been successfully reset. Click below to log in.'
-						: 'Please make sure to remember your new password'
-				}
+				heading={success ? t('passwordResetSuccess') : t('createNewPassword')}
+				subHeading={success ? t('resetSuccessMessage') : t('rememberNewPassword')}
 			/>
 			{!success ? (
 				<form onSubmit={handleSubmit(onSubmit)}>
 					<div className="flex flex-col gap-5">
 						<InputField
-							label="New Password"
+							label={t('newPassword')}
 							id="password"
 							type="password"
 							error={errors.newPassword}
 							register={register('newPassword')}
 						/>
 						<InputField
-							label="Confirm Password"
+							label={t('confirmPassword')}
 							id="confirm_password"
 							type="password"
 							error={errors.confirm_password}
@@ -76,12 +74,12 @@ export const ResetPassword = ({
 						/>
 					</div>
 					<button type="submit" className="mt-8 primary-btn w-full" disabled={isPending}>
-						Next
+						{t('next', { ns: 'common' })}
 					</button>
 				</form>
 			) : (
 				<button className="mt-8 primary-btn w-full" onClick={() => navigate(LOGIN_ROUTE)}>
-					Continue
+					{t('next', { ns: 'continue' })}
 				</button>
 			)}
 		</Fragment>

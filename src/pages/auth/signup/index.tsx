@@ -1,17 +1,18 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Fragment, useState } from 'react';
 import { useForm, type SubmitHandler } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
 import { useSignupMutation } from '../../../apis/auth';
-import { LOGIN_ROUTE } from '../../../appRoutes';
+import { TickIcon } from '../../../assets/icons';
 import { AuthCard, AuthCardHeading } from '../../../components/common/cards/AuthCard';
 import { InputField } from '../../../components/common/inputs/InputField';
 import { PhoneNumberInput } from '../../../components/common/inputs/PhoneInput';
 import { Role } from '../../../interfaces/enums';
 import type { SignupInput } from '../../../interfaces/formInputTypes';
+import { LOGIN_ROUTE } from '../../../routes';
 import { signupSchema } from '../../../validations';
 import { VerifyOTP } from './VerifyOTP';
-import { TickIcon } from '../../../assets/icons';
 
 const defaultValues: SignupInput = {
 	name: '',
@@ -23,6 +24,8 @@ const defaultValues: SignupInput = {
 };
 
 export const Signup = () => {
+	const { t } = useTranslation(['auth', 'common']);
+
 	const [step, setStep] = useState<'role' | 'form' | 'otp'>('role');
 	const [role, setRole] = useState<Role>(Role.Patient);
 
@@ -41,9 +44,9 @@ export const Signup = () => {
 	const phone = watch('phone');
 	const { mutateAsync: signup, isPending } = useSignupMutation();
 
-	const onSubmit: SubmitHandler<SignupInput> = (values) => {
+	const onSubmit: SubmitHandler<SignupInput> = ({ dob, name, password, phone, role }) => {
 		signup(
-			{ ...values, role },
+			{ dob, name, password, phone, role },
 			{
 				onSuccess: () => setStep('otp'),
 			}
@@ -60,12 +63,8 @@ export const Signup = () => {
 	return (
 		<AuthCard>
 			<AuthCardHeading
-				heading={step === 'role' ? 'Select account type' : 'Create an account'}
-				subHeading={
-					step === 'role'
-						? 'Welcome! Please select your account type.'
-						: 'Enter your personal details to continue'
-				}
+				heading={step === 'role' ? t('selectAccountType') : t('createAccount')}
+				subHeading={step === 'role' ? t('welcomeMessage') : t('enterDetails')}
 			/>
 
 			{step === 'role' ? (
@@ -86,12 +85,12 @@ export const Signup = () => {
 										<TickIcon />
 									</div>
 								)}
-								{item}
+								{t(item, { ns: 'common' })}
 							</div>
 						))}
 					</div>
 					<button className="mt-8 primary-btn w-full" onClick={() => setStep('form')}>
-						Next
+						{t('next', { ns: 'common' })}
 					</button>
 				</div>
 			) : (
@@ -99,7 +98,7 @@ export const Signup = () => {
 					<form onSubmit={handleSubmit(onSubmit)}>
 						<div className="flex flex-col gap-5">
 							<InputField
-								label="Full Name"
+								label={t('fullName')}
 								id="name"
 								type="text"
 								register={register('name')}
@@ -107,7 +106,7 @@ export const Signup = () => {
 							/>
 
 							<InputField
-								label="Date of Birth"
+								label={t('dob')}
 								id="dob"
 								type="date"
 								register={register('dob')}
@@ -116,13 +115,14 @@ export const Signup = () => {
 
 							<PhoneNumberInput
 								value={phone}
+								label={t('phoneNumber')}
 								onChange={(value) => setValue('phone', value)}
 								register={register('phone')}
 								error={errors.phone}
 							/>
 
 							<InputField
-								label="Password"
+								label={t('password')}
 								id="password"
 								type="password"
 								register={register('password')}
@@ -130,7 +130,7 @@ export const Signup = () => {
 							/>
 
 							<InputField
-								label="Confirm Password"
+								label={t('confirmPassword')}
 								id="confirm_password"
 								type="password"
 								register={register('confirm_password')}
@@ -138,14 +138,14 @@ export const Signup = () => {
 							/>
 						</div>
 						<button type="submit" className="my-8 primary-btn w-full" disabled={isPending}>
-							Sign Up
+							{t('signUp')}
 						</button>
 					</form>
 
 					<p className="text-sm text-center">
-						Already have an account?{' '}
+						{t('alreadyHaveAccount')}{' '}
 						<Link to={LOGIN_ROUTE} className="link-text">
-							Login
+							{t('logIn')}
 						</Link>
 					</p>
 				</Fragment>

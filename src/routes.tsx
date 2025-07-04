@@ -1,20 +1,24 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router';
-import { MainLayout } from '../components/layouts/main';
-import { Role } from '../interfaces/enums';
-import { AuthLayout } from '../pages/auth';
-import { ForgotPassword } from '../pages/auth/forgotPassword';
-import { Login } from '../pages/auth/Login';
-import { Signup } from '../pages/auth/signup';
-import { PatientAppointments } from '../pages/patient/appointments';
-import { PatientDoctors } from '../pages/patient/doctors';
-import { PatientHome } from '../pages/patient/home';
-import { PatientLabs } from '../pages/patient/labs';
-import { PatientPharmacies } from '../pages/patient/pharmacies';
-import useAuthStore from '../store/auth';
-import { useCurrentUserStore } from '../store/user';
+import { MainLayout } from './components/layouts/main';
+import { Role } from './interfaces/enums';
+import { AuthLayout } from './pages/auth';
+import { ForgotPassword } from './pages/auth/forgotPassword';
+import { Login } from './pages/auth/Login';
+import { Signup } from './pages/auth/signup';
+import { PatientAppointments } from './pages/patient/appointments';
+import { PatientDoctors } from './pages/patient/doctors';
+import { PatientHome } from './pages/patient/home';
+import { PatientLabs } from './pages/patient/labs';
+import { PatientPharmacies } from './pages/patient/pharmacies';
+import useAuthStore from './store/auth';
+import { useCurrentUserStore } from './store/user';
+import { PatientDoctorDetail } from './pages/patient/doctors/detail';
+import { SelectLanguage } from './pages/auth/SelectLanguage';
 
 // App Routes
+export const ROOT_ROUTE = '/';
 export const LOGIN_ROUTE = '/login';
+export const LANGUAGE_ROUTE = '/select-language';
 export const FORGOT_PASSWORD_ROUTE = '/forgot-password';
 export const SIGNUP_ROUTE = '/signup';
 
@@ -38,6 +42,7 @@ export const AppRoutes = () => {
 						<Route element={<MainLayout />}>
 							<Route element={<PatientHome />} path={HOME_ROUTE} />
 							<Route element={<PatientDoctors />} path={DOCTORS_ROUTE} />
+							<Route element={<PatientDoctorDetail />} path={`${DOCTORS_ROUTE}/:id`} />
 							<Route element={<PatientLabs />} path={LABS_ROUTE} />
 							<Route element={<PatientPharmacies />} path={PHARMACIES_ROUTE} />
 							<Route element={<PatientAppointments />} path={APPOINTMENTS_ROUTE} />
@@ -48,9 +53,9 @@ export const AppRoutes = () => {
 							<Route
 								path={HOME_ROUTE}
 								element={
-									<main className="flex items-center justify-center h-screen">
+									<main className="flex-center h-screen">
 										<div className="text-center">
-											<p>Development in progress</p>
+											<p>Development in progress, Please login with patient role</p>
 											<button onClick={logout} className="primary-btn mt-3">
 												Logout
 											</button>
@@ -65,6 +70,7 @@ export const AppRoutes = () => {
 			) : (
 				<Routes>
 					<Route element={<AuthLayout />}>
+						<Route element={<SelectLanguage />} path={ROOT_ROUTE} />
 						<Route element={<Login />} path={LOGIN_ROUTE} />
 						<Route element={<Signup />} path={SIGNUP_ROUTE} />
 						<Route element={<ForgotPassword />} path={FORGOT_PASSWORD_ROUTE} />

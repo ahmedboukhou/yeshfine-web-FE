@@ -1,13 +1,14 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useState } from 'react';
 import { useForm, type SubmitHandler } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
 import { useForgotPasswordMutation } from '../../../apis/auth';
-import { LOGIN_ROUTE } from '../../../appRoutes';
 import { BackIcon } from '../../../assets/icons';
 import { AuthCard, AuthCardHeading } from '../../../components/common/cards/AuthCard';
 import { PhoneNumberInput } from '../../../components/common/inputs/PhoneInput';
 import type { ForgotPasswordInput } from '../../../interfaces/formInputTypes';
+import { LOGIN_ROUTE } from '../../../routes';
 import { forgotPasswordSchema } from '../../../validations';
 import { VerifyOTP } from '../signup/VerifyOTP';
 import { ResetPassword } from './ResetPassword';
@@ -15,7 +16,9 @@ import { ResetPassword } from './ResetPassword';
 const defaultValues: ForgotPasswordInput = { phone: '' };
 
 export const ForgotPassword = () => {
+	const { t } = useTranslation(['auth', 'common']);
 	const navigate = useNavigate();
+
 	const [showOtpScreen, setShowOtpScreen] = useState(false);
 	const [showCreatePasswordForm, setShowCreatePasswordForm] = useState(false);
 	const [success, setSuccess] = useState(false);
@@ -54,7 +57,7 @@ export const ForgotPassword = () => {
 		return (
 			<AuthCard>
 				<ResetPassword phone={phone} success={success} setSuccess={setSuccess} />
-				{!success && <BackButton onClick={handleBack} label="Back" />}
+				{!success && <BackButton onClick={handleBack} label={t('back', { ns: 'common' })} />}
 			</AuthCard>
 		);
 	}
@@ -67,36 +70,34 @@ export const ForgotPassword = () => {
 					setShowCreatePasswordForm={setShowCreatePasswordForm}
 					isForgotPassword
 				/>
-				<BackButton onClick={handleBack} label="Back" />
+				<BackButton onClick={handleBack} label={t('back', { ns: 'common' })} />
 			</AuthCard>
 		);
 	}
 
 	return (
 		<AuthCard>
-			<AuthCardHeading
-				heading="Forgot Password?"
-				subHeading="No worries, we’ll send you reset instructions."
-			/>
+			<AuthCardHeading heading={t('forgotPasswordQuestion')} subHeading={t('forgotPasswordInfo')} />
 			<form onSubmit={handleSubmit(onSubmit)}>
 				<PhoneNumberInput
 					value={phone}
+					label={t('phoneNumber')}
 					onChange={(value) => setValue('phone', value)}
 					register={register('phone')}
 					error={errors.phone}
 				/>
 				<button type="submit" className="mt-8 primary-btn w-full" disabled={isPending}>
-					Next
+					{t('next', { ns: 'common' })}
 				</button>
 			</form>
-			<BackButton onClick={handleBack} label="Back to Login" />
+			<BackButton onClick={handleBack} label={t('backToLogin')} />
 		</AuthCard>
 	);
 };
 
 const BackButton = ({ onClick, label }: { onClick: () => void; label: string }) => (
 	<div className="flex justify-center">
-		<button onClick={onClick} className="flex gap-2 items-center mt-8 cursor-pointer">
+		<button onClick={onClick} className="gap-2 flex-items-center mt-8 cursor-pointer">
 			<BackIcon />
 			<span className="link-text-secondary">{label}</span>
 		</button>

@@ -11,6 +11,7 @@ import type {
 	CommonApiResponse,
 	ForgotPasswordResponse,
 	LoginResponse,
+	VerifyOtpResponse,
 } from '../../interfaces/responseTypes';
 import { apiClient } from '../../lib/api';
 
@@ -21,14 +22,14 @@ export function useLoginMutation() {
 	});
 }
 export function useSignupMutation() {
-	return useMutation<LoginResponse, CommonApiResponse, SignupInput>({
+	return useMutation<LoginResponse, CommonApiResponse, Omit<SignupInput, 'confirm_password'>>({
 		mutationFn: (values) => apiClient.post(`auth/signup`, values),
 		onError: ({ message }) => toast.error(message || 'Something went wrong'),
 	});
 }
 
 export function useVerifyOTPMutation() {
-	return useMutation<LoginResponse, CommonApiResponse, OTPInput>({
+	return useMutation<VerifyOtpResponse, CommonApiResponse, OTPInput>({
 		mutationFn: (values) => apiClient.post(`auth/verify-otp`, values),
 		onError: ({ message }) => toast.error(message || 'Something went wrong'),
 	});

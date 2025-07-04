@@ -22,7 +22,7 @@ export const Dropdown = ({ items, title }: AvatarDropdownProps) => {
 			<button
 				id="hs-dropdown-default"
 				type="button"
-				className="hs-dropdown-toggle flex items-center gap-x-2 cursor-pointer"
+				className="hs-dropdown-toggle flex-items-center gap-x-2 cursor-pointer"
 				aria-haspopup="menu"
 				aria-expanded="false"
 				aria-label="Dropdown"

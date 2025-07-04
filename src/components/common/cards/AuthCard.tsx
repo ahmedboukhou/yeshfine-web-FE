@@ -6,7 +6,7 @@ export const AuthCardHeading: FC<{ heading: string; subHeading: string }> = ({
 	subHeading,
 }) => {
 	return (
-		<div className="flex flex-col justify-center items-center gap-3 text-center mb-12">
+		<div className="flex-center flex-col gap-3 text-center mb-12">
 			<div>
 				<img src={logo} alt="yeshfine-logo" className="mb-3" />
 			</div>

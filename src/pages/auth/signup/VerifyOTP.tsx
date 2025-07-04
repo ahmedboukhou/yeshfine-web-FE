@@ -6,6 +6,7 @@ import { responseStatus } from '../../../interfaces/enums';
 import { maskPhoneNumber } from '../../../lib/helpers';
 import useAuthStore from '../../../store/auth';
 import { useCurrentUserStore } from '../../../store/user';
+import { useTranslation } from 'react-i18next';
 
 export function VerifyOTP({
 	phone,
@@ -16,6 +17,8 @@ export function VerifyOTP({
 	isForgotPassword?: boolean;
 	setShowCreatePasswordForm?: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
+	const { t } = useTranslation(['auth', 'common']);
+
 	const [otp, setOtp] = useState(''.padEnd(6, '')); // String of 6 chars
 	const [seconds, setSeconds] = useState(60);
 
@@ -72,13 +75,13 @@ export function VerifyOTP({
 		verifyOtp(
 			{ phone, otp },
 			{
-				onSuccess: ({ status, token, user }) => {
+				onSuccess: ({ status, data }) => {
 					if (status === responseStatus.Success) {
 						if (isForgotPassword && setShowCreatePasswordForm) {
 							setShowCreatePasswordForm(true);
 						} else {
-							setCurrentUser(user);
-							loginUser(token, 'none');
+							setCurrentUser(data.user);
+							loginUser(data.token, 'none');
 						}
 					}
 				},
@@ -101,8 +104,8 @@ export function VerifyOTP({
 	return (
 		<div>
 			<AuthCardHeading
-				heading={'We’ve just sent you a code'}
-				subHeading={`We have sent a OTP code to (${phone && maskPhoneNumber(phone)})`}
+				heading={t('codeSent')}
+				subHeading={`${t('otpSentMessage', { phone: phone && maskPhoneNumber(phone) })}`}
 			/>
 			<div
 				className="flex gap-3 justify-center flex-wrap"

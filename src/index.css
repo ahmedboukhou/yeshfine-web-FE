@@ -11,6 +11,39 @@ body {
 	margin: 0;
 	box-sizing: border-box;
 }
+
+h1 {
+	@apply text-4xl font-bold;
+}
+
+h2 {
+	@apply text-3xl;
+}
+
+h3 {
+	@apply text-2xl font-semibold text-typography-700;
+}
+
+h4 {
+	@apply text-xl;
+}
+
+h5 {
+	@apply text-lg font-semibold text-typography-800;
+}
+
+h6 {
+	@apply text-base font-bold;
+}
+
+p {
+	@apply text-base;
+}
+
+span {
+	@apply text-sm;
+}
+
 @theme {
 	--font-display: 'Plus Jakarta Sans', 'sans-serif';
 
@@ -26,7 +59,17 @@ body {
 	--color-primary-dark-active: #224f24;
 	--color-darker: #1b3d1c;
 
+	/* warning color */
+	--color-warning-50: #fef6ee;
+	--color-warning-700: #b93815;
+	--color-warning-400: #f38744;
+
+	/* purple color */
+	--color-purple: #7110d6;
+	--color-purple-light: #f6edff;
+
 	/* typography */
+	--color-typography-900: #181d27;
 	--color-typography-800: #27272a;
 	--color-typography-700: #3f3f46;
 	--color-typography-600: #52525b;
@@ -42,8 +85,12 @@ body {
 .card-box-shadow {
 	box-shadow: 0px 0px 2px 0px rgba(23, 26, 31, 0.2), 0px 0px 1px 0px rgba(23, 26, 31, 0.18);
 }
+
 .card-gradient {
 	background: linear-gradient(180deg, #fff 0%, #ebffec 100%);
+}
+.gradient-1 {
+	@apply bg-[linear-gradient(111deg,#1298BC_-37.21%,#88D702_115.79%)];
 }
 .input {
 	@apply py-2.5 px-3.5 block w-full focus:outline-2 border-none outline outline-border-1 bg-white focus:outline-primary rounded-lg sm:text-sm focus:ring-primary disabled:opacity-50 disabled:pointer-events-none;
@@ -54,12 +101,73 @@ body {
 .primary-btn {
 	@apply py-2.5 px-6 text-center font-semibold rounded-lg focus:bg-primary-active border border-transparent hover:bg-primary-hover bg-primary text-white focus:outline-none disabled:opacity-50 disabled:pointer-events-none cursor-pointer disabled:bg-primary/70;
 }
+.secondary-btn {
+	@apply py-2.5 px-6 text-center text-primary font-semibold rounded-lg focus:bg-primary-light-active border border-transparent hover:bg-primary-light bg-white focus:outline-none disabled:opacity-50 disabled:pointer-events-none cursor-pointer disabled:bg-primary/70;
+}
+.pagination-btn {
+	@apply py-2 px-2.5 hover:bg-white/50 gap-1 flex items-center justify-center bg-white rounded-lg border border-border-1 text-typography-600 font-semibold cursor-pointer;
+}
 .link-text {
 	@apply text-primary font-bold hover:underline text-sm cursor-pointer disabled:opacity-50 disabled:pointer-events-none disabled:text-primary/70;
 }
 .link-text-secondary {
 	@apply text-typography-700 text-sm font-semibold;
 }
-.wrapper-container{
-	@apply container mx-auto px-4 sm:px-6 lg:px-10;
+.wrapper-container {
+	@apply container mx-auto px-4 sm:px-6 lg:px-20;
+}
+
+.wrapper {
+	@apply py-10;
+}
+
+/* Flexbox utilities */
+/* Flex row with items centered and space between */
+.flex-between-center {
+	@apply flex justify-between items-center;
+}
+
+/* Flex row with content centered both horizontally and vertically */
+.flex-center {
+	@apply flex justify-center items-center;
+}
+
+/* Flex row with content spaced between */
+.flex-between {
+	@apply flex justify-between;
+}
+
+/* Flex row with items vertically centered */
+.flex-items-center {
+	@apply flex items-center;
+}
+
+/* Flex column centered both ways */
+.flex-col-center {
+	@apply flex flex-col justify-center items-center;
+}
+
+/* Flex column with items spaced between */
+.flex-col-between {
+	@apply flex flex-col justify-between;
+}
+
+/* Flex start */
+.flex-start {
+	@apply flex justify-start items-start;
+}
+
+/* Flex end */
+.flex-end {
+	@apply flex justify-end items-end;
+}
+
+/* Flex row wrap */
+.flex-wrap {
+	@apply flex flex-wrap;
+}
+
+/* Flex grow + full width */
+.flex-grow-full {
+	@apply flex-grow w-full;
 }
