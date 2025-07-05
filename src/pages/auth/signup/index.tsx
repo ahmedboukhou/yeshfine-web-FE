@@ -109,6 +109,7 @@ export const Signup = () => {
 								label={t('dob')}
 								id="dob"
 								type="date"
+								restrictFutureDate
 								register={register('dob')}
 								error={errors.dob}
 							/>
