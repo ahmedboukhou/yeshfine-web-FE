@@ -2,10 +2,9 @@ import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
 import { AppointmentCard } from '../../../components/common/cards/AppointmentCard';
-import { DoctorCard } from '../../../components/common/cards/DoctorCard';
 import { LabsPharmacyCard } from '../../../components/common/cards/LabsPharmacyCard';
-import { APPOINTMENTS_ROUTE, DOCTORS_ROUTE, LABS_ROUTE, PHARMACIES_ROUTE } from '../../../routes';
 import { HomeCarousal } from '../../../components/HomeCarousal';
+import { APPOINTMENTS_ROUTE, DOCTORS_ROUTE, LABS_ROUTE, PHARMACIES_ROUTE } from '../../../routes';
 
 export const PatientHome = () => {
 	const { t } = useTranslation(['patient', 'common']);
@@ -45,11 +44,11 @@ export const PatientHome = () => {
 				/>
 
 				<div className="grid grid-cols-12 gap-5">
-					{[1, 2, 3, 3].map(() => (
+					{/* {[1, 2, 3, 3].map(() => (
 						<div className=" col-span-12 sm:col-span-6  lg:col-span-4 2xl:col-span-3">
 							<DoctorCard />
 						</div>
-					))}
+					))} */}
 				</div>
 			</section>
 
