@@ -11,11 +11,16 @@
 	"labs": "Labs",
 	"logout": "Logout",
 	"next": "Next",
+	"all": "All",
 	"patient": "Patient",
 	"patients": "Patients",
 	"pharmacies": "Pharmacies",
 	"pharmacist": "Pharmacist",
 	"previous": "Previous",
 	"search": "Search",
+	"save": "Save",
+	"close": "Close",
+	"cancel": "Cancel",
+	"applyFilters": "Apply Filters",
 	"seeAll": "See All"
 }

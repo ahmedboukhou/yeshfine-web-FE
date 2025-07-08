@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link, useLocation } from 'react-router';
 import { NavToggleIcon, NotificationIcon } from '../../../assets/icons';
 import logo from '../../../assets/logo.svg';
@@ -11,14 +12,13 @@ import {
 } from '../../../routes';
 import useAuthStore from '../../../store/auth';
 import { Dropdown } from '../../common/actions/Dropdown';
-import { useTranslation } from 'react-i18next';
 
 export const Navbar = () => {
 	const location = useLocation();
-	const { t } = useTranslation(['common']);
+	const { t } = useTranslation();
 	const { logout } = useAuthStore((state) => state);
 	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-	
+
 	const patientHeaderOptions = [
 		{ title: 'home', to: HOME_ROUTE },
 		{ title: 'doctors', to: DOCTORS_ROUTE },
@@ -46,14 +46,42 @@ export const Navbar = () => {
 					</div>
 
 					<Dropdown
-						title={
-							<img
-								className="inline-block size-10 rounded-full cursor-pointer"
-								src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80"
-								alt="Avatar"
-							/>
+						button={
+							<div className=" flex-items-center gap-x-2 cursor-pointer">
+								<img
+									className="inline-block size-10 rounded-full cursor-pointer"
+									src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80"
+									alt="Avatar"
+								/>
+								<svg
+									className="hs-dropdown-open:rotate-180 size-4"
+									xmlns="http://www.w3.org/2000/svg"
+									width="24"
+									height="24"
+									viewBox="0 0 24 24"
+									fill="none"
+									stroke="currentColor"
+									strokeWidth="2"
+									strokeLinecap="round"
+									strokeLinejoin="round"
+								>
+									<path d="m6 9 6 6 6-6" />
+								</svg>
+							</div>
 						}
-						items={navbarOptions}
+						menu={
+							<div className="p-1 space-y-0.5">
+								{navbarOptions.map(({ label, onClick }) => (
+									<p
+										key={label}
+										className="py-2 px-3 rounded-lg text-sm text-typography-700 hover:bg-primary-light-hover focus:outline-hidden cursor-pointer"
+										onClick={onClick}
+									>
+										{label}
+									</p>
+								))}
+							</div>
+						}
 					/>
 
 					{/* Mobile Toggle Button */}
@@ -80,7 +108,7 @@ export const Navbar = () => {
 									to={to}
 									key={title}
 								>
-									{t('title')}
+									{t(title)}
 								</Link>
 							);
 						})}

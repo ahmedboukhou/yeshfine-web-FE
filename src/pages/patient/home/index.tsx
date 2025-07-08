@@ -1,13 +1,29 @@
 import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
+import { useGetAppointmentsQuery } from '../../../apis/patient/appointments';
+import { useGetTopRatedStatsQuery } from '../../../apis/patient/home';
 import { AppointmentCard } from '../../../components/common/cards/AppointmentCard';
-import { LabsPharmacyCard } from '../../../components/common/cards/LabsPharmacyCard';
+import { DoctorCard } from '../../../components/common/cards/DoctorCard';
+import { DoctorCardSkeleton } from '../../../components/common/skeletons/DoctorCardSkeleton';
 import { HomeCarousal } from '../../../components/HomeCarousal';
+import { AppointmentTypeEnum } from '../../../interfaces/enums';
 import { APPOINTMENTS_ROUTE, DOCTORS_ROUTE, LABS_ROUTE, PHARMACIES_ROUTE } from '../../../routes';
+import { useMediaQuery } from 'react-responsive'
 
 export const PatientHome = () => {
 	const { t } = useTranslation(['patient', 'common']);
+  const isTabletOrMobile = useMediaQuery({ maxWidth: 1224 })
+
+  console.log("🚀 ~ PatientHome ~ isTabletOrMobile:", isTabletOrMobile)
+	// get upcoming appointments
+	const { data: getAppointmentsResponse, isLoading: loadingAppointments } = useGetAppointmentsQuery(
+		{ page: 1, limit: 3, type: AppointmentTypeEnum.Upcoming }
+	);
+	const appointmentsData = getAppointmentsResponse?.data?.labs || [];
+
+	const { data, isFetching: gettingStats } = useGetTopRatedStatsQuery();
+	const { topDoctors, topLabs, topPharmacies } = data?.data || {};
 
 	const Heading: FC<{ text: string; route: string }> = ({ text, route }) => {
 		return (
@@ -44,11 +60,36 @@ export const PatientHome = () => {
 				/>
 
 				<div className="grid grid-cols-12 gap-5">
-					{/* {[1, 2, 3, 3].map(() => (
-						<div className=" col-span-12 sm:col-span-6  lg:col-span-4 2xl:col-span-3">
-							<DoctorCard />
-						</div>
-					))} */}
+					{gettingStats ? (
+						<DoctorCardSkeleton count={6} />
+					) : (
+						!!topDoctors?.length &&
+						topDoctors.map(
+							({
+								image,
+								name,
+								id,
+								experience,
+								clinicName,
+								averageRating,
+								distance,
+								speciality,
+								totalReviews,
+							}) => (
+								<DoctorCard
+									key={id}
+									image={image}
+									name={name}
+									id={id}
+									experience={experience}
+									clinicName={clinicName}
+									averageRating={averageRating}
+									speciality={speciality}
+									distance={distance}
+								/>
+							)
+						)
+					)}
 				</div>
 			</section>
 
@@ -58,11 +99,20 @@ export const PatientHome = () => {
 					route={LABS_ROUTE}
 				/>
 				<div className="grid grid-cols-12 gap-5">
-					{[1, 2, 3].map(() => (
-						<div className="col-span-12 sm:col-span-6 lg:col-span-4">
-							<LabsPharmacyCard />
-						</div>
-					))}
+					{/* {loadingLabs ? (
+						<LabsPharmacyCardSkeleton count={3} />
+					) : (
+						labsData.map(({ address, id, image, labDetail, name }) => (
+							<LabsPharmacyCard
+								address={address}
+								id={id}
+								image={image}
+								key={id}
+								labDetail={labDetail}
+								name={name}
+							/>
+						))
+					)} */}
 				</div>
 			</section>
 
@@ -72,13 +122,13 @@ export const PatientHome = () => {
 					route={PHARMACIES_ROUTE}
 				/>
 
-				<div className="grid grid-cols-12 gap-5">
+				{/* <div className="grid grid-cols-12 gap-5">
 					{[1, 2, 3].map(() => (
 						<div className=" col-span-12 sm:col-span-6 lg:col-span-4">
 							<LabsPharmacyCard />
 						</div>
 					))}
-				</div>
+				</div> */}
 			</section>
 		</main>
 	);

@@ -6,5 +6,9 @@
 	"scheduleWithTopDoctors": "Schedule an appointment with our top doctors.",
 	"specialistDoctors": "Specialist Doctors",
 	"topRatedHeading": "Top Rated {{heading}}",
-	"upcomingAppointments": "Upcoming Appointments"
+	"upcomingAppointments": "Upcoming Appointments",
+	"specializations": "Specializations",
+	"nearMe": "Near me",
+	"myCity": "My city",
+	"locations": "Locations"
 }

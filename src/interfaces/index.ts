@@ -7,7 +7,7 @@ export type CurrentUserType = {
 
 export interface AvailabilitySlot {
 	start: string; // "HH:mm" format
-	end: string;   // "HH:mm" format
+	end: string; // "HH:mm" format
 }
 
 export type Weekday = 'mon' | 'tue' | 'wed' | 'thu' | 'fri' | 'sat' | 'sun';
@@ -54,3 +54,51 @@ export interface Doctor {
 	updatedAt: string;
 	doctorDetail: DoctorDetail;
 }
+
+export type LabDetail = {
+	id: number;
+	average_rating: string;
+};
+
+export type Lab = {
+	id: number;
+	name: string;
+	address: string;
+	image: string;
+	labDetail: LabDetail;
+};
+
+export type TopDoctor = {
+	id: number;
+	name: string;
+	image: string;
+	speciality: string;
+	experience: number;
+	clinicName: string;
+	averageRating: string;
+	totalReviews: number;
+	distance: number | null;
+};
+
+export type TopPharmacy = {
+	id: number;
+	name: string;
+	image: string;
+	opening_time: string;
+	rating: string;
+	totalReviews: number;
+};
+
+export type TopLab = {
+	id: number;
+	name: string;
+	image: string;
+	licenseNumber: string;
+	rating: string;
+	totalReviews: number;
+};
+
+export type DoctorSpecialtiesType = {
+	id: number;
+	name: string;
+};
