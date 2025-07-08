@@ -18,7 +18,7 @@ type DoctorCardProps = {
 	name: string;
 	averageRating: string;
 	clinicName: string;
-	speciality: string;
+	specialty: string;
 	distance: number | null;
 };
 
@@ -29,14 +29,14 @@ export const DoctorCard: FC<DoctorCardProps> = ({
 	experience,
 	clinicName,
 	averageRating,
-	speciality,
+	specialty,
 	distance,
 }) => {
 	const { t } = useTranslation(['patient']);
 
 	return (
 		<div className="col-span-12 sm:col-span-6 lg:col-span-4 2xl:col-span-3">
-			<div className="flex flex-col group  bg-white border border-border-1 rounded-2xl overflow-hidden hover:shadow-lg focus:outline-hidden focus:shadow-lg transition">
+			<div className="flex flex-col group bg-white border border-border-1 rounded-2xl overflow-hidden hover:shadow-lg focus:outline-hidden focus:shadow-lg transition">
 				<Link
 					to={`${DOCTORS_ROUTE}/${id}`}
 					className="relative pt-[80%] rounded-t-xl overflow-hidden hidden sm:block"
@@ -49,8 +49,8 @@ export const DoctorCard: FC<DoctorCardProps> = ({
 				</Link>
 				<div className="md:p-6 p-3">
 					<Link to={`${DOCTORS_ROUTE}/${id}`} className="flex gap-3">
-						<div className="block sm:hidden">
-							<img src={image} width={80} className="h-full rounded-xl" />
+						<div className="block sm:hidden shrink-0">
+							<img src={image} width={80} className="w-20 h-20 rounded-xl" />
 						</div>
 						<div className="flex flex-col gap-3 flex-1">
 							<div className="grid grid-cols-3">
@@ -59,11 +59,11 @@ export const DoctorCard: FC<DoctorCardProps> = ({
 									<Rating rating={averageRating} />
 								</div>
 							</div>
-							<div className="flex-items-center gap-3">
-								<Badge specialty={speciality} />
+							<div className="flex gap-3 flex-col sm:flex-row">
+								<Badge specialty={specialty} />
 								<div className="gap-2 flex-items-center">
 									<BriefCaseIcon />
-									<span className="text-sm sm:text-xs xl:text-sm text-typography-500 text-nowrap">
+									<span className="text-xs text-typography-500 text-nowrap">
 										{t('experienceYears', { experience })}
 									</span>
 								</div>

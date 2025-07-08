@@ -37,7 +37,7 @@ export const HomeCarousal = () => {
 		>
 			<img src={slide.image} alt={slide.heading} className="w-full h-full object-cover" />
 
-			<div className="absolute top-8 left-8 text-white z-10 max-w-[60%]">
+			<div className="absolute top-15 left-8 text-white z-10 max-w-[60%]">
 				<h1>{t('lookingFor')}</h1>
 				<h1>{t(slide.heading)}?</h1>
 				<h4 className="mt-3">{t(slide.description)}</h4>

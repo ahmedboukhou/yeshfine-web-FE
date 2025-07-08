@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useLocation } from 'react-router';
-import { NavToggleIcon, NotificationIcon } from '../../../assets/icons';
+import { LanguageIcon, NavToggleIcon, NotificationIcon } from '../../../assets/icons';
 import logo from '../../../assets/logo.svg';
+import { supportedLanguages } from '../../../constants/mappedData';
+import i18n from '../../../i18n';
 import {
 	APPOINTMENTS_ROUTE,
 	DOCTORS_ROUTE,
@@ -33,6 +35,13 @@ export const Navbar = () => {
 		setIsMobileMenuOpen(false); // close on link click
 	};
 
+	const handleChange = useCallback(
+		async (value: string) => {
+			i18n.changeLanguage(value);
+		},
+		[i18n]
+	);
+
 	return (
 		<header className="flex flex-wrap md:justify-start md:flex-nowrap w-full bg-white text-sm py-4 card-box-shadow">
 			<nav className="wrapper-container w-full mx-auto px-4 flex-items-center basis-full flex-between-center">
@@ -41,9 +50,36 @@ export const Navbar = () => {
 				</Link>
 
 				<div className="md:order-3 flex-items-center gap-x-4">
-					<div className="cursor-pointer">
+					<Dropdown
+						button={
+							<button>
+								<LanguageIcon />
+							</button>
+						}
+						menu={
+							<div className="p-2 space-y-1">
+								{supportedLanguages.map(({ title, flag, value }) => (
+									<button
+										onClick={() => handleChange(value)}
+										disabled={i18n.language === value}
+										className={`${
+											i18n.language === value
+												? 'bg-primary text-white'
+												: 'text-typography-700 hover:bg-primary-light-hover'
+										} flex-between-center gap-3 py-2 px-3 rounded-lg w-full`}
+										key={value}
+									>
+										<img src={flag} alt={title} width={30} />
+
+										<p className="text-sm">{title}</p>
+									</button>
+								))}
+							</div>
+						}
+					/>
+					<button>
 						<NotificationIcon />
-					</div>
+					</button>
 
 					<Dropdown
 						button={

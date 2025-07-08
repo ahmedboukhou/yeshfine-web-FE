@@ -45,3 +45,10 @@ export function useGetDoctorSpecialtiesQuery() {
 		enabled: !!!specialties?.length,
 	});
 }
+
+export function useGetDoctorDetailQuery({ id }: { id?: string }) {
+	return useQuery({
+		queryKey: ['get-doctor-detail', id],
+		queryFn: (): Promise<DoctorSpecialtiesResponse> => apiClient.get(`patients/doctors/${id}`),
+	});
+}

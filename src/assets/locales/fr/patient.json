@@ -2,9 +2,13 @@
 	"bookAppointment": "Prendre rendez-vous",
 	"bookNow": "Reserve maintenant",
 	"experienceYears": "Exp : {{experience}} ans",
+	"locations": "Emplacements",
 	"lookingFor": "À la recherche de",
+	"myCity": "Ma ville",
+	"nearMe": "Proche de moi",
 	"scheduleWithTopDoctors": "Prenez rendez-vous avec nos meilleurs médecins.",
 	"specialistDoctors": "Médecins spécialistes",
+	"specializations": "Spécialisations",
 	"topRatedHeading": "Les mieux notés {{heading}}",
 	"upcomingAppointments": "Prochains rendez-vous"
 }

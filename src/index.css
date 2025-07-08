@@ -51,14 +51,6 @@ button {
 @theme {
 	--font-display: 'Plus Jakarta Sans', 'sans-serif';
 
-	/* breakpoints */
-	--breakpoint-sm: 640px;
-	--breakpoint-md: 768px;
-	--breakpoint-lg: 1024px;
-	--breakpoint-xl: 1280px;
-	--breakpoint-2xl: 1536px;
-	--breakpoint-3xl: 1920px;
-
 	/* green primary */
 	--color-primary-light: #edf7ee;
 	--color-primary-light-hover: #e4f3e5;

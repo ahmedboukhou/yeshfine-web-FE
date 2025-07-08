@@ -2,13 +2,17 @@
 	"bookAppointment": "Book Appointment",
 	"bookNow": "Book Now",
 	"experienceYears": "Exp: {{experience}} years",
+	"locations": "Locations",
 	"lookingFor": "Looking for",
+	"myCity": "My city",
+	"nearMe": "Near me",
 	"scheduleWithTopDoctors": "Schedule an appointment with our top doctors.",
 	"specialistDoctors": "Specialist Doctors",
+	"specializations": "Specializations",
 	"topRatedHeading": "Top Rated {{heading}}",
 	"upcomingAppointments": "Upcoming Appointments",
-	"specializations": "Specializations",
-	"nearMe": "Near me",
-	"myCity": "My city",
-	"locations": "Locations"
+	"treatedPatient": "Treated Patient",
+	"workLocation": "Work Location",
+	"workingHour": "Working Hour",
+	"consultationFee": "Consultation fee ({{duration}} min)"
 }

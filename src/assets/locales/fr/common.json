@@ -1,6 +1,10 @@
 {
+	"all": "Tous",
+	"applyFilters": "Appliquer des filtres",
 	"appointments": "Rendez-vous",
 	"back": "Dos",
+	"cancel": "Annuler",
+	"close": "Fermer",
 	"continue": "Continuer",
 	"doctor": "Médecin",
 	"doctors": "Médecins",
@@ -16,6 +20,7 @@
 	"pharmacies": "Pharmacies",
 	"pharmacist": "Pharmacien",
 	"previous": "Précédent",
+	"save": "Sauvegarder",
 	"search": "Recherche",
 	"seeAll": "Voir tout"
 }

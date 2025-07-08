@@ -51,7 +51,11 @@ export const PatientDoctors = () => {
 
 				<div className="flex-items-center gap-2">
 					<SearchInput onChange={handleSearch} />
-					<SearchDoctorFilter setFilterValues={setFilterValues} filterValues={filterValues} applyFilters={applyFilters}/>
+					<SearchDoctorFilter
+						setFilterValues={setFilterValues}
+						filterValues={filterValues}
+						applyFilters={applyFilters}
+					/>
 				</div>
 			</div>
 			<div className="grid grid-cols-12 gap-5 mb-10">
@@ -59,7 +63,13 @@ export const PatientDoctors = () => {
 					<DoctorCardSkeleton count={6} />
 				) : (
 					doctorsData.map(
-						({ image, name, id, doctorDetail: { experience, clinicName, average_rating } }) => (
+						({
+							image,
+							name,
+							id,
+							distance,
+							doctorDetail: { experience, clinicName, average_rating, speciality },
+						}) => (
 							<DoctorCard
 								key={id}
 								image={image}
@@ -68,6 +78,8 @@ export const PatientDoctors = () => {
 								experience={experience}
 								clinicName={clinicName}
 								averageRating={average_rating}
+								specialty={speciality}
+								distance={distance}
 							/>
 						)
 					)

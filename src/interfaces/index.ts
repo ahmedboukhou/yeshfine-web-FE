@@ -38,6 +38,7 @@ export interface Doctor {
 	phone: string;
 	email: string;
 	role: string;
+	distance: number | null;
 	image: string;
 	isOtpVerified: boolean;
 	isPasswordOtpVerified: boolean;
@@ -70,6 +71,7 @@ export type Lab = {
 
 export type TopDoctor = {
 	id: number;
+	user_id: number;
 	name: string;
 	image: string;
 	speciality: string;
@@ -84,9 +86,12 @@ export type TopPharmacy = {
 	id: number;
 	name: string;
 	image: string;
-	opening_time: string;
-	rating: string;
+	address: string;
+	openingTime: string; // format: "HH:mm:ss"
+	closingTime: string; // format: "HH:mm:ss"
+	averageRating: string;
 	totalReviews: number;
+	distance: number | null;
 };
 
 export type TopLab = {
@@ -94,8 +99,12 @@ export type TopLab = {
 	name: string;
 	image: string;
 	licenseNumber: string;
-	rating: string;
+	address: string;
+	averageRating: string;
 	totalReviews: number;
+	distance: number | null;
+	open: boolean;
+	todaySlot: string;
 };
 
 export type DoctorSpecialtiesType = {
