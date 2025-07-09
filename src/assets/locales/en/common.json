@@ -1,6 +1,10 @@
 {
+	"all": "All",
+	"applyFilters": "Apply Filters",
 	"appointments": "Appointments",
 	"back": "Back",
+	"cancel": "Cancel",
+	"close": "Close",
 	"continue": "Continue",
 	"doctor": "Doctor",
 	"doctors": "Doctors",
@@ -16,6 +20,18 @@
 	"pharmacies": "Pharmacies",
 	"pharmacist": "Pharmacist",
 	"previous": "Previous",
+	"save": "Save",
 	"search": "Search",
-	"seeAll": "See All"
+	"seeAll": "See All",
+	"experience": "Experience",
+	"rating": "Rating",
+	"viewMore": "View More",
+	"hospital": "Hospital",
+	"biography": "Biography",
+	"selectOption": "Select option",
+	"male": "Male",
+	"female": "Female",
+	"gender": "Gender",
+	"noReviews": "No reviews!",
+	"other": "Other"
 }

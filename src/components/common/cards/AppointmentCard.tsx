@@ -1,5 +1,5 @@
 import { CalendarIcon } from '../../../assets/icons';
-import { Rating } from '../Rating';
+import { Rating } from '../ui/Rating';
 
 export const AppointmentCard = () => {
 	return (

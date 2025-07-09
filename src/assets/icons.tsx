@@ -260,3 +260,48 @@ export const EmptyCircleIcon = () => (
 		<circle cx="10.335" cy="10.3348" r="7.835" stroke="#A1A1AA" />
 	</svg>
 );
+
+export const CrossIcon = () => (
+	<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+		<path
+			d="M18 6L6 18M6 6L18 18"
+			stroke="#3A3A3A"
+			stroke-width="2"
+			stroke-linecap="round"
+			stroke-linejoin="round"
+		/>
+	</svg>
+);
+
+export const ClockIcon = () => (
+	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+		<path
+			d="M8 5.33333V8L10 10M14 8C14 11.3137 11.3137 14 8 14C4.68629 14 2 11.3137 2 8C2 4.68629 4.68629 2 8 2C11.3137 2 14 4.68629 14 8Z"
+			stroke="#4CAF50"
+			stroke-width="1.5"
+			stroke-linecap="round"
+			stroke-linejoin="round"
+		/>
+	</svg>
+);
+
+export const LanguageIcon = () => (
+	<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+		<path
+			d="M19 10C19 14.9706 14.9706 19 10 19M19 10C19 5.02944 14.9706 1 10 1M19 10H1M10 19C5.02944 19 1 14.9706 1 10M10 19C11.6569 19 13 14.9706 13 10C13 5.02944 11.6569 1 10 1M10 19C8.34315 19 7 14.9706 7 10C7 5.02944 8.34315 1 10 1M1 10C1 5.02944 5.02944 1 10 1"
+			stroke="#27272A"
+			stroke-width="2"
+			stroke-linecap="round"
+			stroke-linejoin="round"
+		/>
+	</svg>
+);
+
+export const GreenDownArrowIcon = () => (
+	<svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewBox="0 0 21 20" fill="none">
+		<path
+			d="M12.8571 12.9885L17.756 8.08964L16.5775 6.91113L11.6786 11.81C11.0277 12.4609 9.97243 12.4609 9.32155 11.81L4.42265 6.91113L3.24414 8.08965L8.14304 12.9885C9.44479 14.2903 11.5553 14.2903 12.8571 12.9885Z"
+			fill="#4CAF50"
+		/>
+	</svg>
+);

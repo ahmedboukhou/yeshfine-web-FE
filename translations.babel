@@ -568,6 +568,36 @@
 						<name>common</name>
 						<children>
 							<concept_node>
+								<name>all</name>
+								<description/>
+								<comment/>
+								<translations>
+									<translation>
+										<language>en-US</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>fr-FR</language>
+										<approved>false</approved>
+									</translation>
+								</translations>
+							</concept_node>
+							<concept_node>
+								<name>applyFilters</name>
+								<description/>
+								<comment/>
+								<translations>
+									<translation>
+										<language>en-US</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>fr-FR</language>
+										<approved>false</approved>
+									</translation>
+								</translations>
+							</concept_node>
+							<concept_node>
 								<name>appointments</name>
 								<description/>
 								<comment/>
@@ -584,6 +614,36 @@
 							</concept_node>
 							<concept_node>
 								<name>back</name>
+								<description/>
+								<comment/>
+								<translations>
+									<translation>
+										<language>en-US</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>fr-FR</language>
+										<approved>false</approved>
+									</translation>
+								</translations>
+							</concept_node>
+							<concept_node>
+								<name>cancel</name>
+								<description/>
+								<comment/>
+								<translations>
+									<translation>
+										<language>en-US</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>fr-FR</language>
+										<approved>false</approved>
+									</translation>
+								</translations>
+							</concept_node>
+							<concept_node>
+								<name>close</name>
 								<description/>
 								<comment/>
 								<translations>
@@ -823,6 +883,21 @@
 								</translations>
 							</concept_node>
 							<concept_node>
+								<name>save</name>
+								<description/>
+								<comment/>
+								<translations>
+									<translation>
+										<language>en-US</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>fr-FR</language>
+										<approved>false</approved>
+									</translation>
+								</translations>
+							</concept_node>
+							<concept_node>
 								<name>search</name>
 								<description/>
 								<comment/>
@@ -903,7 +978,52 @@
 								</translations>
 							</concept_node>
 							<concept_node>
+								<name>locations</name>
+								<description/>
+								<comment/>
+								<translations>
+									<translation>
+										<language>en-US</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>fr-FR</language>
+										<approved>false</approved>
+									</translation>
+								</translations>
+							</concept_node>
+							<concept_node>
 								<name>lookingFor</name>
+								<description/>
+								<comment/>
+								<translations>
+									<translation>
+										<language>en-US</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>fr-FR</language>
+										<approved>false</approved>
+									</translation>
+								</translations>
+							</concept_node>
+							<concept_node>
+								<name>myCity</name>
+								<description/>
+								<comment/>
+								<translations>
+									<translation>
+										<language>en-US</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>fr-FR</language>
+										<approved>false</approved>
+									</translation>
+								</translations>
+							</concept_node>
+							<concept_node>
+								<name>nearMe</name>
 								<description/>
 								<comment/>
 								<translations>
@@ -934,6 +1054,21 @@
 							</concept_node>
 							<concept_node>
 								<name>specialistDoctors</name>
+								<description/>
+								<comment/>
+								<translations>
+									<translation>
+										<language>en-US</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>fr-FR</language>
+										<approved>false</approved>
+									</translation>
+								</translations>
+							</concept_node>
+							<concept_node>
+								<name>specializations</name>
 								<description/>
 								<comment/>
 								<translations>

@@ -10,6 +10,7 @@ export type SignupInput = {
 	phone: string;
 	password: string;
 	dob: string;
+	gender: string;
 	confirm_password: string;
 	role?: Role;
 };

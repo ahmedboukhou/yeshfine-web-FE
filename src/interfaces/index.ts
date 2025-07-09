@@ -7,7 +7,7 @@ export type CurrentUserType = {
 
 export interface AvailabilitySlot {
 	start: string; // "HH:mm" format
-	end: string;   // "HH:mm" format
+	end: string; // "HH:mm" format
 }
 
 export type Weekday = 'mon' | 'tue' | 'wed' | 'thu' | 'fri' | 'sat' | 'sun';
@@ -22,6 +22,7 @@ export interface DoctorDetail {
 	speciality: string;
 	language: string;
 	experience: number;
+	biography?: string | null;
 	liscenceNumber: string;
 	clinicName: string;
 	fee: string;
@@ -38,6 +39,7 @@ export interface Doctor {
 	phone: string;
 	email: string;
 	role: string;
+	distance: number | null;
 	image: string;
 	isOtpVerified: boolean;
 	isPasswordOtpVerified: boolean;
@@ -54,3 +56,87 @@ export interface Doctor {
 	updatedAt: string;
 	doctorDetail: DoctorDetail;
 }
+
+export type LabDetail = {
+	id: number;
+	average_rating: string;
+};
+
+export type Lab = {
+	id: number;
+	name: string;
+	address: string;
+	image: string;
+	labDetail: LabDetail;
+};
+
+export type TopDoctor = {
+	id: number;
+	user_id: number;
+	name: string;
+	image: string;
+	speciality: string;
+	experience: number;
+	clinicName: string;
+	averageRating: string;
+	totalReviews: number;
+	distance: number | null;
+};
+
+export type TopPharmacy = {
+	id: number;
+	name: string;
+	image: string;
+	address: string;
+	openingTime: string; // format: "HH:mm:ss"
+	closingTime: string; // format: "HH:mm:ss"
+	averageRating: string;
+	totalReviews: number;
+	distance: number | null;
+};
+
+export type TopLab = {
+	id: number;
+	name: string;
+	image: string;
+	licenseNumber: string;
+	address: string;
+	averageRating: string;
+	totalReviews: number;
+	distance: number | null;
+	open: boolean;
+	todaySlot: string;
+};
+
+export type DoctorSpecialtiesType = {
+	id: number;
+	name: string;
+};
+
+export type SelectType = {
+	label: string;
+	value: string;
+};
+
+export type TimeSlot = {
+	start: string; // format: "HH:mm"
+	end: string; // format: "HH:mm"
+};
+
+export type WeeklyAvailability = {
+	mon?: TimeSlot[];
+	tue?: TimeSlot[];
+	wed?: TimeSlot[];
+	thu?: TimeSlot[];
+	fri?: TimeSlot[];
+	sat?: TimeSlot[];
+	sun?: TimeSlot[];
+};
+
+export type DoctorReviewType = {
+	id: number;
+	rating: string;
+	review_text: string;
+	created_at: string;
+	user: { id: number; name: string; image: string };
+};

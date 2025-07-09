@@ -13,12 +13,15 @@ import type { SignupInput } from '../../../interfaces/formInputTypes';
 import { LOGIN_ROUTE } from '../../../routes';
 import { signupSchema } from '../../../validations';
 import { VerifyOTP } from './VerifyOTP';
+import { SelectField } from '../../../components/common/inputs/SelectField';
+import { genderOptions } from '../../../constants/mappedData';
 
 const defaultValues: SignupInput = {
 	name: '',
 	phone: '',
 	password: '',
 	confirm_password: '',
+	gender: '',
 	role: Role.Patient,
 	dob: '',
 };
@@ -44,9 +47,10 @@ export const Signup = () => {
 	const phone = watch('phone');
 	const { mutateAsync: signup, isPending } = useSignupMutation();
 
-	const onSubmit: SubmitHandler<SignupInput> = ({ dob, name, password, phone, role }) => {
+	const onSubmit: SubmitHandler<SignupInput> = ({ dob, name, password, phone, role, gender }) => {
+		console.log("🚀 ~ Signup ~ gender:", gender)
 		signup(
-			{ dob, name, password, phone, role },
+			{ dob, name, password, phone, role, gender },
 			{
 				onSuccess: () => setStep('otp'),
 			}
@@ -100,19 +104,29 @@ export const Signup = () => {
 							<InputField
 								label={t('fullName')}
 								id="name"
-								type="text"
 								register={register('name')}
 								error={errors.name}
 							/>
+							<div className="grid grid-cols-2 gap-x-5">
+								<SelectField
+									label={t('gender', { ns: 'common' })}
+									id="gender"
+									register={register('gender')}
+									options={genderOptions.map((gender) => {
+										return { value: gender, label: t(gender, { ns: 'common' }) };
+									})}
+									error={errors.gender}
+								/>
 
-							<InputField
-								label={t('dob')}
-								id="dob"
-								type="date"
-								restrictFutureDate
-								register={register('dob')}
-								error={errors.dob}
-							/>
+								<InputField
+									label={t('dob')}
+									id="dob"
+									type="date"
+									restrictFutureDate
+									register={register('dob')}
+									error={errors.dob}
+								/>
+							</div>
 
 							<PhoneNumberInput
 								value={phone}

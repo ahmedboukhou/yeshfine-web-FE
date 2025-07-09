@@ -14,6 +14,8 @@ import useAuthStore from './store/auth';
 import { useCurrentUserStore } from './store/user';
 import { PatientDoctorDetail } from './pages/patient/doctors/detail';
 import { SelectLanguage } from './pages/auth/SelectLanguage';
+import { PatientLabDetail } from './pages/patient/labs/detail';
+import { PatientPharmaciesDetail } from './pages/patient/pharmacies/detail';
 
 // App Routes
 export const ROOT_ROUTE = '/';
@@ -44,7 +46,9 @@ export const AppRoutes = () => {
 							<Route element={<PatientDoctors />} path={DOCTORS_ROUTE} />
 							<Route element={<PatientDoctorDetail />} path={`${DOCTORS_ROUTE}/:id`} />
 							<Route element={<PatientLabs />} path={LABS_ROUTE} />
+							<Route element={<PatientLabDetail />} path={`${LABS_ROUTE}/:id`} />
 							<Route element={<PatientPharmacies />} path={PHARMACIES_ROUTE} />
+							<Route element={<PatientPharmaciesDetail />} path={`${PHARMACIES_ROUTE}/:id`} />
 							<Route element={<PatientAppointments />} path={APPOINTMENTS_ROUTE} />
 							<Route element={<Navigate to={HOME_ROUTE} />} path="*" />
 						</Route>

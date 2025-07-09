@@ -9,3 +9,9 @@ export enum responseStatus {
 	Success = 'success',
 	Error = 'error',
 }
+
+export enum AppointmentTypeEnum {
+	Today = 'today',
+	Upcoming = 'upcoming',
+	Past = 'past',
+}
