@@ -8,8 +8,8 @@ import {
 	HospitalIcon,
 } from '../../../assets/icons';
 import { DOCTORS_ROUTE } from '../../../routes';
-import { Badge } from '../Badge';
-import { Rating } from '../Rating';
+import { Badge } from '../ui/Badge';
+import { Rating } from '../ui/Rating';
 
 type DoctorCardProps = {
 	id: number;

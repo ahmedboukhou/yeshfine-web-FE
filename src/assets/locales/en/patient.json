@@ -12,7 +12,7 @@
 	"topRatedHeading": "Top Rated {{heading}}",
 	"upcomingAppointments": "Upcoming Appointments",
 	"treatedPatient": "Treated Patient",
+	"noBiographyAdded": "No biography added",
 	"workLocation": "Work Location",
-	"workingHour": "Working Hour",
-	"consultationFee": "Consultation fee ({{duration}} min)"
+	"consultationFee": "Consultation fee"
 }

@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import { Link } from 'react-router';
 import { ActivityIcon, ClockIcon, LocationIcon } from '../../../assets/icons';
-import { Rating } from '../Rating';
+import { Rating } from '../ui/Rating';
 
 type LabsPharmacyCardProps = {
 	name: string;

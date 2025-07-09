@@ -1,15 +1,16 @@
 import { useQuery } from '@tanstack/react-query';
 import type {
+	DoctorDetailResponse,
+	DoctorReviewsResponse,
 	DoctorSpecialtiesResponse,
 	DoctorsResponse,
 	PayloadPaginationType,
 } from '../../interfaces/responseTypes';
 import { apiClient } from '../../lib/api';
 import { useDoctorSpecialtiesStore } from '../../store/doctorSpecialties';
-import type { DoctorSpecialtiesType } from '../../interfaces';
 
 type GetDoctorsQueryParams = PayloadPaginationType & {
-	specialization_filter?: DoctorSpecialtiesType[];
+	specialization_filter?: number[];
 	hospital_filter?: 'near me' | 'city';
 	location_filter?: string;
 	search?: string;
@@ -49,6 +50,18 @@ export function useGetDoctorSpecialtiesQuery() {
 export function useGetDoctorDetailQuery({ id }: { id?: string }) {
 	return useQuery({
 		queryKey: ['get-doctor-detail', id],
-		queryFn: (): Promise<DoctorSpecialtiesResponse> => apiClient.get(`patients/doctors/${id}`),
+		queryFn: (): Promise<DoctorDetailResponse> => apiClient.get(`patients/doctors/${id}`),
+	});
+}
+
+export function useGetDoctorReviewsQuery({
+	id,
+	limit,
+	page,
+}: { id?: string } & PayloadPaginationType) {
+	return useQuery({
+		queryKey: ['get-doctor-reviews', id, page],
+		queryFn: (): Promise<DoctorReviewsResponse> =>
+			apiClient.get(`patients/doctors/${id}/reviews`, { page, limit }),
 	});
 }

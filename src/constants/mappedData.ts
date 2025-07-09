@@ -7,3 +7,5 @@ export const supportedLanguages = [
 	{ subTitle: 'French', title: 'Français', value: 'fr', flag: frFlag },
 	{ subTitle: 'Arabic', title: 'العربية', value: 'es', flag: meFlag },
 ];
+
+export const genderOptions = ['male', 'female', 'other'];

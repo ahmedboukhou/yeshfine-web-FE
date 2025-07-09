@@ -1,6 +1,8 @@
 import type {
 	CurrentUserType,
 	Doctor,
+	DoctorDetail,
+	DoctorReviewType,
 	DoctorSpecialtiesType,
 	Lab,
 	TopDoctor,
@@ -24,6 +26,7 @@ export type PayloadPaginationType = {
 export type ResponsePagination = {
 	total: number;
 	page: number;
+	limit: number;
 	totalPages: number;
 };
 
@@ -64,4 +67,33 @@ export type PatientHomeTopEntitiesResponse = CommonApiResponse & {
 
 export type DoctorSpecialtiesResponse = CommonApiResponse & {
 	data: { doctorCategories: DoctorSpecialtiesType[] };
+};
+
+export type DoctorReviewsResponse = CommonApiResponse & {
+	data: {
+		items: {
+			doctor: {
+				id: number;
+				name: string;
+				image: string;
+				average_rating: string;
+				total_reviews: number;
+			};
+			reviews: DoctorReviewType[];
+		};
+		meta: ResponsePagination;
+	};
+};
+
+export type DoctorDetailResponse = {
+	data: {
+		id: number;
+		name: string;
+		image: string;
+		address: string;
+		latitude: number;
+		longitude: number;
+		treated_patients: string;
+		doctorDetail: DoctorDetail;
+	};
 };

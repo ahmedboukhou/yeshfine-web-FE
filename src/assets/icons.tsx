@@ -296,3 +296,12 @@ export const LanguageIcon = () => (
 		/>
 	</svg>
 );
+
+export const GreenDownArrowIcon = () => (
+	<svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" viewBox="0 0 21 20" fill="none">
+		<path
+			d="M12.8571 12.9885L17.756 8.08964L16.5775 6.91113L11.6786 11.81C11.0277 12.4609 9.97243 12.4609 9.32155 11.81L4.42265 6.91113L3.24414 8.08965L8.14304 12.9885C9.44479 14.2903 11.5553 14.2903 12.8571 12.9885Z"
+			fill="#4CAF50"
+		/>
+	</svg>
+);

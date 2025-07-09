@@ -1,64 +1,92 @@
+import GoogleMapReact from 'google-map-react';
+import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router';
 import { useGetDoctorDetailQuery } from '../../../../apis/patient/doctors';
-import { DoctorMainCard } from './DoctorMainCard';
-import hospitalImg from '../../../../assets/icons/hospital.svg';
-import timeImg from '../../../../assets/icons/time.svg';
 import briefcaseImg from '../../../../assets/icons/briefcase.svg';
 import feeImg from '../../../../assets/icons/fee.svg';
+import hospitalImg from '../../../../assets/icons/hospital.svg';
 import tripleImg from '../../../../assets/icons/user-triple.svg';
-import { useTranslation } from 'react-i18next';
-import GoogleMapReact from 'google-map-react';
+import { DoctorDetailsSkeleton } from '../../../../components/common/skeletons/DoctorDetailSkeleton';
+import { DoctorMainCardSkeleton } from '../../../../components/common/skeletons/DoctorMainCardSkeleton';
+import { DoctorMainCard } from './DoctorMainCard';
+import { DoctorRating } from './Rating';
 
 export const PatientDoctorDetail = () => {
 	const { id } = useParams();
 	const { t } = useTranslation(['common', 'patient']);
-	const { data } = useGetDoctorDetailQuery({ id });
-	console.log("🚀 ~ PatientDoctorDetail ~ data:", data)
+	const { data, isLoading } = useGetDoctorDetailQuery({ id });
+	const { doctorDetail, image, latitude, longitude, name, treated_patients } = data?.data || {};
+	const { average_rating, speciality, clinicName, fee, experience, biography, total_reviews } =
+		doctorDetail || {};
 
 	const docInfo = [
-		{ img: hospitalImg, heading: t('hospital'), text: 'asd' },
-		{ img: timeImg, heading: t('workingHour', { ns: 'patient' }), text: 'asd' },
-		{ img: feeImg, heading: t('consultationFee', { duration: 30, ns: 'patient' }), text: 'asd' },
-		{ img: briefcaseImg, heading: t('experience'), text: 'asd' },
-		{ img: tripleImg, heading: t('treatedPatient', { ns: 'patient' }), text: 'asd' },
+		{ img: hospitalImg, heading: t('hospital'), text: clinicName },
+		{ img: feeImg, heading: t('consultationFee', { ns: 'patient' }), text: fee },
+		{ img: briefcaseImg, heading: t('experience'), text: experience },
+		{ img: tripleImg, heading: t('treatedPatient', { ns: 'patient' }), text: treated_patients },
 	];
 
 	return (
 		<main>
-			<DoctorMainCard />
+			{isLoading ? (
+				<DoctorMainCardSkeleton />
+			) : (
+				<DoctorMainCard
+					name={name}
+					averageRating={average_rating}
+					image={image}
+					specialty={speciality}
+				/>
+			)}
 			<section className="mt-6 bg-white rounded-2xl border border-border-1 py-10 md:px-8 px-4">
-				<div className="grid grid-cols-3 gap-8">
-					{docInfo.map(({ img, heading, text }, index) => (
-						<div className="col-span-1 flex flex-col gap-1" key={index}>
-							<div className="flex-items-center gap-1">
-								<img src={img} />
-								<p className="text-typography-500 font-medium">{heading}</p>
+				{isLoading ? (
+					<DoctorDetailsSkeleton />
+				) : (
+					<div className="grid lg:grid-cols-3 gap-8">
+						{docInfo.map(({ img, heading, text }, index) => (
+							<div className="col-span-1 flex flex-col gap-1" key={index}>
+								<div className="flex-items-center gap-1">
+									<img src={img} />
+									<p className="text-typography-500 font-medium">{heading}</p>
+								</div>
+								<p>{text}</p>
 							</div>
-							<p>{text}</p>
+						))}
+						<div className="col-span-3">
+							<h5>{t('biography')}</h5>
+							<p className="text-typography-500 mt-1">
+								{biography ?? t('noBiographyAdded', { ns: 'patient' })}
+							</p>
 						</div>
-					))}
-					<div className="col-span-3">
-						<h5>{t('biography')}</h5>
-						<p className="text-typography-500 mt-1">
-							Dr. Patricia Ahoy specialist in Ear, Nose & Throat, and work in RS. Hermina Malang. It
-							is a long established fact that a reader will be distracted by the readable content.
-						</p>
-					</div>
 
-					<div className="col-span-3">
-						<h5>{t('workLocation', { ns: 'patient' })}</h5>
-						<p className="text-typography-500 mt-1">West Bank Alshifa Hospital</p>
-						<div className="h-80 mt-5">
-							<GoogleMapReact
-								bootstrapURLKeys={{ key: '' }}
-								defaultCenter={{
-									lat: 10.99835602,
-									lng: 77.01502627,
-								}}
-								defaultZoom={11}
-							/>
+						<div className="col-span-3">
+							<h5>{t('workLocation', { ns: 'patient' })}</h5>
+							<p className="text-typography-500 mt-1">{clinicName}</p>
+							<div className="h-60 mt-5">
+								{latitude && longitude && (
+									<GoogleMapReact
+										bootstrapURLKeys={{ key: import.meta.env.VITE_GOOGLE_MAP_API_KEY }}
+										defaultCenter={{
+											lat: latitude,
+											lng: longitude,
+										}}
+										defaultZoom={11}
+									/>
+								)}
+							</div>
 						</div>
 					</div>
+				)}
+
+				<div className="mt-8">
+					{isLoading ? (
+						<div className="h-5 w-40 bg-gray-200 rounded mb-3" />
+					) : (
+						<h5 className="mb-3">
+							{t('rating')} ({total_reviews})
+						</h5>
+					)}
+					<DoctorRating />
 				</div>
 			</section>
 		</main>

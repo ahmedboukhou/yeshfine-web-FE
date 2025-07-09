@@ -74,6 +74,7 @@ export const signupSchema = yup.object({
 		.oneOf([yup.ref('password')], 'Passwords must match'),
 
 	dob: requiredString('Date of Birth'),
+	gender: requiredString('Gender'),
 	name: requiredString('Name', {
 		min: 2,
 		max: 50,

@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 type InputFieldProps = {
 	label: string;
 	id: string;
-	type: string;
+	type?: string;
 	error: any;
 	register: any;
 	restrictFutureDate?: boolean;
@@ -12,7 +12,7 @@ type InputFieldProps = {
 export const InputField: FC<InputFieldProps> = ({
 	label,
 	id,
-	type,
+	type = 'text',
 	error,
 	register,
 	restrictFutureDate,

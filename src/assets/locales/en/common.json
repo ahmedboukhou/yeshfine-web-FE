@@ -27,5 +27,11 @@
 	"rating": "Rating",
 	"viewMore": "View More",
 	"hospital": "Hospital",
-	"biography": "Biography"
+	"biography": "Biography",
+	"selectOption": "Select option",
+	"male": "Male",
+	"female": "Female",
+	"gender": "Gender",
+	"noReviews": "No reviews!",
+	"other": "Other"
 }

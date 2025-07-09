@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useGetDoctorsQuery } from '../../../apis/patient/doctors';
 import { SearchInput } from '../../../components/common/actions/SearchInput';
 import { DoctorCard } from '../../../components/common/cards/DoctorCard';
-import { Pagination } from '../../../components/common/Pagination';
+import { Pagination } from '../../../components/common/ui/Pagination';
 import { DoctorCardSkeleton } from '../../../components/common/skeletons/DoctorCardSkeleton';
 import { SearchDoctorFilter } from './Filter';
 import type { DoctorSpecialtiesType } from '../../../interfaces';
@@ -24,7 +24,7 @@ export const PatientDoctors = () => {
 		page,
 		limit: 6,
 		search,
-		specialization_filter: filterValues.specializations,
+		specialization_filter: filterValues.specializations.map(({id})=>id),
 		location_filter: filterValues.location,
 	});
 	const doctorsData = data?.data?.items || [];

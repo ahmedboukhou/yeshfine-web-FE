@@ -22,6 +22,7 @@ export interface DoctorDetail {
 	speciality: string;
 	language: string;
 	experience: number;
+	biography?: string | null;
 	liscenceNumber: string;
 	clinicName: string;
 	fee: string;
@@ -110,4 +111,32 @@ export type TopLab = {
 export type DoctorSpecialtiesType = {
 	id: number;
 	name: string;
+};
+
+export type SelectType = {
+	label: string;
+	value: string;
+};
+
+export type TimeSlot = {
+	start: string; // format: "HH:mm"
+	end: string; // format: "HH:mm"
+};
+
+export type WeeklyAvailability = {
+	mon?: TimeSlot[];
+	tue?: TimeSlot[];
+	wed?: TimeSlot[];
+	thu?: TimeSlot[];
+	fri?: TimeSlot[];
+	sat?: TimeSlot[];
+	sun?: TimeSlot[];
+};
+
+export type DoctorReviewType = {
+	id: number;
+	rating: string;
+	review_text: string;
+	created_at: string;
+	user: { id: number; name: string; image: string };
 };
