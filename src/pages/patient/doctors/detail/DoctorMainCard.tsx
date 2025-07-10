@@ -1,10 +1,13 @@
 import { useTranslation } from 'react-i18next';
 import { BookAppointmentIcon } from '../../../../assets/icons';
-import { Rating } from '../../../../components/common/ui/Rating';
+import { Rating } from '../../../../components/ui/Rating';
 import type { FC } from 'react';
-import { Badge } from '../../../../components/common/ui/Badge';
+import { Badge } from '../../../../components/ui/Badge';
+import { Link } from 'react-router';
+import { BOOK_APPOINTMENT_ROUTE } from '../../../../routes';
 
 type DoctorTypeCardProps = {
+	id?: string;
 	name?: string;
 	averageRating?: string;
 	image?: string;
@@ -14,6 +17,7 @@ export const DoctorMainCard: FC<DoctorTypeCardProps> = ({
 	name,
 	averageRating,
 	image,
+	id,
 	specialty,
 }) => {
 	const { t } = useTranslation(['patient']);
@@ -32,16 +36,19 @@ export const DoctorMainCard: FC<DoctorTypeCardProps> = ({
 				</div>
 				<div className="flex-1 flex flex-col items-center justify-center text-center md:justify-between md:flex-row md:text-left gap-3">
 					<div>
-						<div className="flex gap-3">
+						<div className="flex gap-3 mb-1">
 							<h3 className="!text-typography-900">{name}</h3>
 							<Rating rating={averageRating} />
 						</div>
 						<Badge specialty={specialty} />
 					</div>
-					<button className="primary-btn w-full md:w-auto flex-center gap-2">
+					<Link
+						className="primary-btn w-full md:w-auto flex-center gap-2"
+						to={BOOK_APPOINTMENT_ROUTE.replace(':id', `${id}`)}
+					>
 						<BookAppointmentIcon />
 						{t('bookAppointment')}
-					</button>
+					</Link>
 				</div>
 			</div>
 		</div>

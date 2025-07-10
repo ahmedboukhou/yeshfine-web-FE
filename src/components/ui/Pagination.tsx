@@ -1,7 +1,5 @@
-// components/common/actions/Pagination.tsx
-
 import { useTranslation } from 'react-i18next';
-import { PaginationBackIcon, PaginationNextIcon } from '../../../assets/icons';
+import { PaginationBackIcon, PaginationNextIcon } from '../../assets/icons';
 
 interface PaginationProps {
 	currentPage: number;

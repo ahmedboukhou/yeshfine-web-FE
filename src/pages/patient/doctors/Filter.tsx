@@ -85,7 +85,7 @@ export const SearchDoctorFilter: FC<SearchDoctorFilterProps> = ({
 											/>
 											<label
 												htmlFor={`spec-${id}`}
-												className={`ms-3 cursor-pointer ${
+												className={`ms-3 cursor-pointer capitalize ${
 													isChecked ? 'text-primary font-semibold' : 'text-typography-600'
 												}`}
 											>

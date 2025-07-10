@@ -93,6 +93,8 @@ export type TopPharmacy = {
 	averageRating: string;
 	totalReviews: number;
 	distance: number | null;
+	todaySlot: string;
+
 };
 
 export type TopLab = {

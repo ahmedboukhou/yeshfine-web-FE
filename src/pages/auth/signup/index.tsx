@@ -5,16 +5,16 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
 import { useSignupMutation } from '../../../apis/auth';
 import { TickIcon } from '../../../assets/icons';
-import { AuthCard, AuthCardHeading } from '../../../components/common/cards/AuthCard';
-import { InputField } from '../../../components/common/inputs/InputField';
-import { PhoneNumberInput } from '../../../components/common/inputs/PhoneInput';
+import { InputField } from '../../../components/ui/inputs/InputField';
+import { PhoneNumberInput } from '../../../components/ui/inputs/PhoneInput';
+import { SelectField } from '../../../components/ui/inputs/SelectField';
+import { AuthCard, AuthCardHeading } from '../../../components/ui/cards/AuthCard';
+import { genderOptions } from '../../../constants/mappedData';
 import { Role } from '../../../interfaces/enums';
 import type { SignupInput } from '../../../interfaces/formInputTypes';
 import { LOGIN_ROUTE } from '../../../routes';
 import { signupSchema } from '../../../validations';
 import { VerifyOTP } from './VerifyOTP';
-import { SelectField } from '../../../components/common/inputs/SelectField';
-import { genderOptions } from '../../../constants/mappedData';
 
 const defaultValues: SignupInput = {
 	name: '',
@@ -48,7 +48,7 @@ export const Signup = () => {
 	const { mutateAsync: signup, isPending } = useSignupMutation();
 
 	const onSubmit: SubmitHandler<SignupInput> = ({ dob, name, password, phone, role, gender }) => {
-		console.log("🚀 ~ Signup ~ gender:", gender)
+		console.log('🚀 ~ Signup ~ gender:', gender);
 		signup(
 			{ dob, name, password, phone, role, gender },
 			{

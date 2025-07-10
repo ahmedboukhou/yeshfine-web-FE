@@ -7,9 +7,9 @@ import {
 	BriefCaseIcon,
 	HospitalIcon,
 } from '../../../assets/icons';
-import { DOCTORS_ROUTE } from '../../../routes';
-import { Badge } from '../ui/Badge';
-import { Rating } from '../ui/Rating';
+import { BOOK_APPOINTMENT_ROUTE, DOCTORS_ROUTE } from '../../../routes';
+import { Badge } from '../Badge';
+import { Rating } from '../Rating';
 
 type DoctorCardProps = {
 	id: number;
@@ -59,7 +59,7 @@ export const DoctorCard: FC<DoctorCardProps> = ({
 									<Rating rating={averageRating} />
 								</div>
 							</div>
-							<div className="flex gap-3 flex-col sm:flex-row">
+							<div className="flex gap-3 flex-col sm:flex-col md:flex-col xl:flex-row">
 								<Badge specialty={specialty} />
 								<div className="gap-2 flex-items-center">
 									<BriefCaseIcon />
@@ -84,10 +84,13 @@ export const DoctorCard: FC<DoctorCardProps> = ({
 							</div>
 						</div>
 					</Link>
-					<button className="primary-btn w-full mt-6 flex-center gap-2 text-sm font-semibold">
+					<Link
+						to={BOOK_APPOINTMENT_ROUTE.replace(':id', `${id}`)}
+						className="primary-btn w-full mt-6 flex-center gap-2 text-sm font-semibold"
+					>
 						<BookAppointmentIcon />
 						{t('bookAppointment')}
-					</button>
+					</Link>
 				</div>
 			</div>
 		</div>

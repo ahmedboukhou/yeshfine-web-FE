@@ -116,7 +116,7 @@ button {
 	@apply py-2 px-2.5 hover:bg-white/60 gap-1 flex items-center justify-center bg-white rounded-lg border border-border-1 text-typography-600 font-semibold cursor-pointer disabled:text-typography-600/60;
 }
 .link-text {
-	@apply text-primary font-bold flex items-center justify-center gap-2 hover:underline text-sm cursor-pointer disabled:opacity-50 disabled:pointer-events-none disabled:text-primary/70;
+	@apply text-primary font-bold hover:underline text-sm cursor-pointer disabled:opacity-50 disabled:pointer-events-none disabled:text-primary/70;
 }
 .link-text-secondary {
 	@apply text-typography-700 text-sm font-semibold;

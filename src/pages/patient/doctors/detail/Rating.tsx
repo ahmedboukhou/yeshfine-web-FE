@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router';
 import { useGetDoctorReviewsQuery } from '../../../../apis/patient/doctors';
-import { ReviewRating } from '../../../../components/common/ui/ReviewRating';
+import { ReviewRating } from '../../../../components/ui/ReviewRating';
 import { getRelativeTimeString } from '../../../../lib/dayjs';
 import { GreenDownArrowIcon } from '../../../../assets/icons';
-import { DoctorReviewsSkeleton } from '../../../../components/common/skeletons/DoctorReviewsSkeleton';
+import { DoctorReviewsSkeleton } from '../../../../components/ui/skeletons/DoctorReviewsSkeleton';
 import type { DoctorReviewType } from '../../../../interfaces';
 
 export const DoctorRating = () => {

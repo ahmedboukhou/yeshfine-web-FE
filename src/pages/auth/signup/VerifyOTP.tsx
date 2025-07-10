@@ -1,12 +1,12 @@
 import { useEffect, useState, type KeyboardEvent } from 'react';
+import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
 import { useResendOTPQuery, useVerifyOTPMutation } from '../../../apis/auth';
-import { AuthCardHeading } from '../../../components/common/cards/AuthCard';
+import { AuthCardHeading } from '../../../components/ui/cards/AuthCard';
 import { responseStatus } from '../../../interfaces/enums';
 import { maskPhoneNumber } from '../../../lib/helpers';
 import useAuthStore from '../../../store/auth';
 import { useCurrentUserStore } from '../../../store/user';
-import { useTranslation } from 'react-i18next';
 
 export function VerifyOTP({
 	phone,
@@ -81,7 +81,7 @@ export function VerifyOTP({
 							setShowCreatePasswordForm(true);
 						} else {
 							setCurrentUser(data.user);
-							loginUser(data.token, 'none');
+							loginUser(data.token, data.refreshToken);
 						}
 					}
 				},

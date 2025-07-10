@@ -41,11 +41,12 @@ export type ForgotPasswordResponse = CommonApiResponse & {
 export type LoginResponse = CommonApiResponse & {
 	user: CurrentUserType;
 	token: string;
+	refreshToken: string;
 	isOtpVerified?: boolean;
 };
 
 export type VerifyOtpResponse = CommonApiResponse & {
-	data: { user: CurrentUserType; token: string };
+	data: { user: CurrentUserType; token: string; refreshToken: string };
 	isOtpVerified?: boolean;
 };
 

@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import { Link } from 'react-router';
 import { ActivityIcon, ClockIcon, LocationIcon } from '../../../assets/icons';
-import { Rating } from '../ui/Rating';
+import { Rating } from '../Rating';
 
 type LabsPharmacyCardProps = {
 	name: string;
@@ -33,14 +33,16 @@ export const LabsPharmacyCard: FC<LabsPharmacyCardProps> = ({
 						alt={name}
 					/>
 				</div>
-				<div className="flex gap-3">
+				<div className="flex gap-3 mt-3">
 					<div className="block sm:hidden shrink-0">
 						<img src={image} width={80} className="w-20 h-20 rounded-xl" />
 					</div>
 					<div className="flex flex-col gap-2.5 flex-1">
-						<div className="flex-between">
-							<h5>{name}</h5>
-							<Rating rating={averageRating} />
+						<div className="grid grid-cols-3">
+							<h5 className="col-span-2 ellipses">{name}</h5>
+							<div className="col-span-1 flex-end">
+								<Rating rating={averageRating} />
+							</div>
 						</div>
 
 						<div className="gap-2 flex-items-center">
@@ -55,14 +57,10 @@ export const LabsPharmacyCard: FC<LabsPharmacyCardProps> = ({
 								<span className="text-primary font-semibold">{todaySlot}</span>
 							</div>
 
-							{distance ? (
-								<div className="flex-items-center">
-									<ActivityIcon />
-									<p className="text-warning-400 font-medium text-sm">{distance} km</p>
-								</div>
-							) : (
-								<div />
-							)}
+							<div className="flex-items-center">
+								<ActivityIcon />
+								<p className="text-warning-400 font-medium text-sm">{distance ?? 0} km</p>
+							</div>
 						</div>
 					</div>
 				</div>
