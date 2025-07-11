@@ -7,9 +7,9 @@ import {
 	BriefCaseIcon,
 	HospitalIcon,
 } from '../../../assets/icons';
-import { DOCTORS_ROUTE } from '../../../routes';
-import { Badge } from '../ui/Badge';
-import { Rating } from '../ui/Rating';
+import { BOOK_APPOINTMENT_ROUTE, DOCTORS_DETAIL_ROUTE } from '../../../routes';
+import { Badge } from '../Badge';
+import { Rating } from '../Rating';
 
 type DoctorCardProps = {
 	id: number;
@@ -19,6 +19,8 @@ type DoctorCardProps = {
 	averageRating: string;
 	clinicName: string;
 	specialty: string;
+	latitude: number;
+	longitude: number;
 	distance: number | null;
 };
 
@@ -31,6 +33,8 @@ export const DoctorCard: FC<DoctorCardProps> = ({
 	averageRating,
 	specialty,
 	distance,
+	latitude,
+	longitude,
 }) => {
 	const { t } = useTranslation(['patient']);
 
@@ -38,7 +42,7 @@ export const DoctorCard: FC<DoctorCardProps> = ({
 		<div className="col-span-12 sm:col-span-6 lg:col-span-4 2xl:col-span-3">
 			<div className="flex flex-col group bg-white border border-border-1 rounded-2xl overflow-hidden hover:shadow-lg focus:outline-hidden focus:shadow-lg transition">
 				<Link
-					to={`${DOCTORS_ROUTE}/${id}`}
+					to={DOCTORS_DETAIL_ROUTE.replace(':id', `${id}`)}
 					className="relative pt-[80%] rounded-t-xl overflow-hidden hidden sm:block"
 				>
 					<img
@@ -48,7 +52,7 @@ export const DoctorCard: FC<DoctorCardProps> = ({
 					/>
 				</Link>
 				<div className="md:p-6 p-3">
-					<Link to={`${DOCTORS_ROUTE}/${id}`} className="flex gap-3">
+					<Link to={DOCTORS_DETAIL_ROUTE.replace(':id', `${id}`)} className="flex gap-3">
 						<div className="block sm:hidden shrink-0">
 							<img src={image} width={80} className="w-20 h-20 rounded-xl" />
 						</div>
@@ -59,7 +63,7 @@ export const DoctorCard: FC<DoctorCardProps> = ({
 									<Rating rating={averageRating} />
 								</div>
 							</div>
-							<div className="flex gap-3 flex-col sm:flex-row">
+							<div className="flex gap-3 flex-col sm:flex-col md:flex-col xl:flex-row">
 								<Badge specialty={specialty} />
 								<div className="gap-2 flex-items-center">
 									<BriefCaseIcon />
@@ -70,24 +74,37 @@ export const DoctorCard: FC<DoctorCardProps> = ({
 							</div>
 
 							<div className="grid grid-cols-3">
-								<div className="flex-items-center gap-2 flex-1 col-span-2">
+								<div className="flex-items-center gap-2 flex-1 col-span-2 shrink-0">
 									<HospitalIcon />
 									<p className="text-typography-700 font-medium text-sm ellipses">{clinicName}</p>
 								</div>
 
-								{distance && (
-									<div className="flex-end shrink-0 text-nowrap col-span-1">
-										<ActivityIcon />
-										<p className="text-warning-400 font-medium text-sm">{distance} km</p>
-									</div>
-								)}
+								<div className="flex-end shrink-0 text-nowrap col-span-1">
+									<ActivityIcon />
+									<p className="text-warning-400 font-medium text-sm">{distance ?? 0} km</p>
+								</div>
 							</div>
 						</div>
 					</Link>
-					<button className="primary-btn w-full mt-6 flex-center gap-2 text-sm font-semibold">
+					<Link
+						to={{
+							pathname: BOOK_APPOINTMENT_ROUTE.replace(':id', `${id}`),
+						}}
+						state={{
+							id,
+							name,
+							image,
+							clinicName,
+							averageRating,
+							specialty,
+							latitude,
+							longitude,
+						}}
+						className="primary-btn w-full mt-6 flex-center gap-2 text-sm font-semibold"
+					>
 						<BookAppointmentIcon />
 						{t('bookAppointment')}
-					</button>
+					</Link>
 				</div>
 			</div>
 		</div>

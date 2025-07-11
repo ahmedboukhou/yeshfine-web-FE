@@ -4,9 +4,8 @@ import { useForm, type SubmitHandler } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
 import { useLoginMutation } from '../../apis/auth';
-import { AuthCard, AuthCardHeading } from '../../components/common/cards/AuthCard';
-import { InputField } from '../../components/common/inputs/InputField';
-import { PhoneNumberInput } from '../../components/common/inputs/PhoneInput';
+import { InputField } from '../../components/ui/inputs/InputField';
+import { PhoneNumberInput } from '../../components/ui/inputs/PhoneInput';
 import { responseStatus } from '../../interfaces/enums';
 import type { LoginInput } from '../../interfaces/formInputTypes';
 import { SIGNUP_ROUTE } from '../../routes';
@@ -14,6 +13,7 @@ import useAuthStore from '../../store/auth';
 import { useCurrentUserStore } from '../../store/user';
 import { loginSchema } from '../../validations';
 import { VerifyOTP } from './signup/VerifyOTP';
+import { AuthCard, AuthCardHeading } from '../../components/ui/cards/AuthCard';
 
 const loginInitialValues: LoginInput = { phone: '', password: '' };
 
@@ -45,7 +45,7 @@ export const Login = () => {
 						setUserNotVerified(true);
 					} else {
 						setCurrentUser(data.user);
-						loginUser(data.token, 'none');
+						loginUser(data.token, data.refreshToken);
 					}
 				}
 			},

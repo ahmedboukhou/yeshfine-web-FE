@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import * as yup from 'yup';
 
 // * Regex
@@ -73,7 +74,17 @@ export const signupSchema = yup.object({
 		.required('Confirm password is required')
 		.oneOf([yup.ref('password')], 'Passwords must match'),
 
-	dob: requiredString('Date of Birth'),
+	dob: yup
+		.string()
+		.required('Date of birth is required')
+		.test('is-valid-date', 'Invalid date format', (value) => {
+			return value ? dayjs(value, 'YYYY-MM-DD', true).isValid() : false;
+		})
+		.test('not-in-future', 'Invalid Date of birth', (value) => {
+			return value
+				? dayjs(value).isBefore(dayjs(), 'day') || dayjs(value).isSame(dayjs(), 'day')
+				: false;
+		}),
 	gender: requiredString('Gender'),
 	name: requiredString('Name', {
 		min: 2,

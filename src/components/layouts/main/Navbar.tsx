@@ -13,7 +13,7 @@ import {
 	PHARMACIES_ROUTE,
 } from '../../../routes';
 import useAuthStore from '../../../store/auth';
-import { Dropdown } from '../../common/actions/Dropdown';
+import { Dropdown } from '../../ui/actions/Dropdown';
 
 export const Navbar = () => {
 	const location = useLocation();
@@ -51,11 +51,7 @@ export const Navbar = () => {
 
 				<div className="md:order-3 flex-items-center gap-x-4">
 					<Dropdown
-						button={
-							<button>
-								<LanguageIcon />
-							</button>
-						}
+						button={<LanguageIcon />}
 						menu={
 							<div className="p-2 space-y-1">
 								{supportedLanguages.map(({ title, flag, value }) => (
@@ -174,7 +170,7 @@ export const Navbar = () => {
 										isActive ? 'text-primary' : 'text-gray-700'
 									}`}
 								>
-									{title}
+									{t(title)}
 								</Link>
 							);
 						})}

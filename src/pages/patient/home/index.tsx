@@ -3,14 +3,15 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
 // import { useGetAppointmentsQuery } from '../../../apis/patient/appointments';
 import { useGetTopRatedStatsQuery } from '../../../apis/patient/home';
-import { DoctorCard } from '../../../components/common/cards/DoctorCard';
-import { DoctorCardSkeleton } from '../../../components/common/skeletons/DoctorCardSkeleton';
-import { HomeCarousal } from '../../../components/HomeCarousal';
+import { DoctorCardSkeleton } from '../../../components/ui/skeletons/DoctorCardSkeleton';
+import { HomeCarousal } from '../../../components/ui/HomeCarousal';
 // import { AppointmentTypeEnum } from '../../../interfaces/enums';
 import { useMediaQuery } from 'react-responsive';
-import { LabsPharmacyCard } from '../../../components/common/cards/LabsPharmacyCard';
-import { LabsPharmacyCardSkeleton } from '../../../components/common/skeletons/LabsPharmacySkeleton';
-import { DOCTORS_ROUTE, LABS_ROUTE, PHARMACIES_ROUTE } from '../../../routes';
+import { LabsPharmacyCardSkeleton } from '../../../components/ui/skeletons/LabsPharmacySkeleton';
+import { APPOINTMENTS_ROUTE, DOCTORS_ROUTE, LABS_ROUTE, PHARMACIES_ROUTE } from '../../../routes';
+import { DoctorCard } from '../../../components/ui/cards/DoctorCard';
+import { LabsPharmacyCard } from '../../../components/ui/cards/LabsPharmacyCard';
+import { AppointmentCard } from '../../../components/ui/cards/AppointmentCard';
 
 export const PatientHome = () => {
 	const { t } = useTranslation(['patient', 'common']);
@@ -24,8 +25,6 @@ export const PatientHome = () => {
 
 	const { data, isFetching: gettingStats } = useGetTopRatedStatsQuery();
 	const { topDoctors, topLabs, topPharmacies } = data?.data || {};
-
-	const doctors = topDoctors?.slice(isSmallToLargeScreen ? 2 : 1)?.map((doctor) => doctor);
 
 	const Heading: FC<{ text: string; route: string }> = ({ text, route }) => {
 		return (
@@ -41,7 +40,7 @@ export const PatientHome = () => {
 	return (
 		<main className="flex flex-col gap-8">
 			<HomeCarousal />
-			{/* <section className="flex flex-col gap-5">
+			<section className="flex flex-col gap-5">
 				<Heading
 					text={t('upcomingAppointments', { heading: t('doctors', { ns: 'common' }) })}
 					route={APPOINTMENTS_ROUTE}
@@ -53,7 +52,7 @@ export const PatientHome = () => {
 						</div>
 					))}
 				</div>
-			</section> */}
+			</section>
 
 			<section className="flex flex-col gap-5">
 				<Heading
@@ -64,8 +63,8 @@ export const PatientHome = () => {
 				<div className="grid grid-cols-12 gap-5">
 					{gettingStats ? (
 						<DoctorCardSkeleton count={isSmallToLargeScreen ? 3 : 4} />
-					) : !!doctors?.length ? (
-						doctors.map(
+					) : !!topDoctors?.length ? (
+						topDoctors.map(
 							({
 								image,
 								name,
@@ -75,10 +74,14 @@ export const PatientHome = () => {
 								averageRating,
 								distance,
 								speciality,
+								latitude,
+								longitude,
 								user_id,
 							}) => (
 								<DoctorCard
 									key={id}
+									latitude={latitude}
+									longitude={longitude}
 									image={image}
 									name={name}
 									id={user_id}
@@ -136,17 +139,20 @@ export const PatientHome = () => {
 						<LabsPharmacyCardSkeleton count={3} />
 					) : (
 						!!topPharmacies?.length &&
-						topPharmacies.map(({ address, id, image, name, averageRating, distance }) => (
-							<LabsPharmacyCard
-								address={address}
-								image={image}
-								key={id}
-								averageRating={averageRating}
-								distance={distance}
-								name={name}
-								link={`${PHARMACIES_ROUTE}/${id}`}
-							/>
-						))
+						topPharmacies.map(
+							({ address, id, image, name, averageRating, distance, todaySlot }) => (
+								<LabsPharmacyCard
+									address={address}
+									image={image}
+									todaySlot={todaySlot}
+									key={id}
+									averageRating={averageRating}
+									distance={distance}
+									name={name}
+									link={`${PHARMACIES_ROUTE}/${id}`}
+								/>
+							)
+						)
 					)}
 				</div>
 			</section>

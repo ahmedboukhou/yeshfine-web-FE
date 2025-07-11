@@ -5,7 +5,7 @@ import meFlag from '../assets/icons/mauritania-flag.svg';
 export const supportedLanguages = [
 	{ subTitle: 'USA', title: 'English', value: 'en', flag: usFlag },
 	{ subTitle: 'French', title: 'Français', value: 'fr', flag: frFlag },
-	{ subTitle: 'Arabic', title: 'العربية', value: 'es', flag: meFlag },
+	{ subTitle: 'Arabic', title: 'العربية', value: 'ar', flag: meFlag },
 ];
 
 export const genderOptions = ['male', 'female', 'other'];

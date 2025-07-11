@@ -58,7 +58,7 @@ export const SearchDoctorFilter: FC<SearchDoctorFilterProps> = ({
 			</button>
 
 			{isOpen && (
-				<div className="absolute z-50 mt-2 min-w-md right-0 bg-white border border-gray-200 shadow-lg rounded-xl">
+				<div className="absolute z-50 mt-2 min-w-xs sm:min-w-sm md:min-w-md right-0 bg-white border border-gray-200 shadow-lg rounded-xl">
 					<div className="flex justify-between items-center py-4 px-5">
 						<h4 className="text-typography-800 font-semibold">{t('filters')}</h4>
 						<button onClick={closeModal}>
@@ -85,7 +85,7 @@ export const SearchDoctorFilter: FC<SearchDoctorFilterProps> = ({
 											/>
 											<label
 												htmlFor={`spec-${id}`}
-												className={`ms-3 cursor-pointer ${
+												className={`ms-3 cursor-pointer capitalize ${
 													isChecked ? 'text-primary font-semibold' : 'text-typography-600'
 												}`}
 											>

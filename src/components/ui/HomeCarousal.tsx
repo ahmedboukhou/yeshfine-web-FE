@@ -1,7 +1,7 @@
 import AliceCarousel from 'react-alice-carousel';
 import { useTranslation } from 'react-i18next';
-import carousalBg from '../assets/images/home-carousal-bg.jpg';
-import docImg from '../assets/images/home-carousal-doc.png';
+import carousalBg from '../../assets/images/home-carousal-bg.jpg';
+import docImg from '../../assets/images/home-carousal-doc.png';
 
 export const HomeCarousal = () => {
 	const { t } = useTranslation(['patient']);

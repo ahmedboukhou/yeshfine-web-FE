@@ -4,11 +4,11 @@ import { useForm, type SubmitHandler } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
 import { useResetPasswordMutation } from '../../../apis/auth';
-import { AuthCardHeading } from '../../../components/common/cards/AuthCard';
-import { InputField } from '../../../components/common/inputs/InputField';
+import { InputField } from '../../../components/ui/inputs/InputField';
 import type { ResetPasswordInput } from '../../../interfaces/formInputTypes';
 import { LOGIN_ROUTE } from '../../../routes';
 import { resetPasswordSchema } from '../../../validations';
+import { AuthCardHeading } from '../../../components/ui/cards/AuthCard';
 
 const defaultValues: ResetPasswordInput = {
 	phone: '',

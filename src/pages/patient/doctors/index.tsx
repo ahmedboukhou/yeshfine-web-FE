@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useGetDoctorsQuery } from '../../../apis/patient/doctors';
-import { SearchInput } from '../../../components/common/actions/SearchInput';
-import { DoctorCard } from '../../../components/common/cards/DoctorCard';
-import { Pagination } from '../../../components/common/ui/Pagination';
-import { DoctorCardSkeleton } from '../../../components/common/skeletons/DoctorCardSkeleton';
-import { SearchDoctorFilter } from './Filter';
+import { Pagination } from '../../../components/ui/Pagination';
+import { SearchInput } from '../../../components/ui/actions/SearchInput';
+import { DoctorCard } from '../../../components/ui/cards/DoctorCard';
+import { DoctorCardSkeleton } from '../../../components/ui/skeletons/DoctorCardSkeleton';
 import type { DoctorSpecialtiesType } from '../../../interfaces';
+import { SearchDoctorFilter } from './Filter';
 
 export const PatientDoctors = () => {
 	const { t } = useTranslation();
@@ -24,7 +24,7 @@ export const PatientDoctors = () => {
 		page,
 		limit: 6,
 		search,
-		specialization_filter: filterValues.specializations.map(({id})=>id),
+		specialization_filter: filterValues.specializations.map(({ id }) => id),
 		location_filter: filterValues.location,
 	});
 	const doctorsData = data?.data?.items || [];
@@ -42,8 +42,6 @@ export const PatientDoctors = () => {
 		};
 	}, [search]);
 
-	const applyFilters = () => refetch();
-
 	return (
 		<section>
 			<div className="mb-6 flex-between-center flex-wrap gap-3">
@@ -54,7 +52,7 @@ export const PatientDoctors = () => {
 					<SearchDoctorFilter
 						setFilterValues={setFilterValues}
 						filterValues={filterValues}
-						applyFilters={applyFilters}
+						applyFilters={refetch}
 					/>
 				</div>
 			</div>
@@ -68,10 +66,14 @@ export const PatientDoctors = () => {
 							name,
 							id,
 							distance,
+							latitude,
+							longitude,
 							doctorDetail: { experience, clinicName, average_rating, speciality },
 						}) => (
 							<DoctorCard
 								key={id}
+								latitude={latitude}
+								longitude={longitude}
 								image={image}
 								name={name}
 								id={id}

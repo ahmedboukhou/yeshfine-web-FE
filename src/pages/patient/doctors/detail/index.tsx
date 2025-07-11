@@ -6,8 +6,8 @@ import briefcaseImg from '../../../../assets/icons/briefcase.svg';
 import feeImg from '../../../../assets/icons/fee.svg';
 import hospitalImg from '../../../../assets/icons/hospital.svg';
 import tripleImg from '../../../../assets/icons/user-triple.svg';
-import { DoctorDetailsSkeleton } from '../../../../components/common/skeletons/DoctorDetailSkeleton';
-import { DoctorMainCardSkeleton } from '../../../../components/common/skeletons/DoctorMainCardSkeleton';
+import { DoctorDetailsSkeleton } from '../../../../components/ui/skeletons/DoctorDetailSkeleton';
+import { DoctorMainCardSkeleton } from '../../../../components/ui/skeletons/DoctorMainCardSkeleton';
 import { DoctorMainCard } from './DoctorMainCard';
 import { DoctorRating } from './Rating';
 
@@ -36,15 +36,22 @@ export const PatientDoctorDetail = () => {
 					averageRating={average_rating}
 					image={image}
 					specialty={speciality}
+					id={id}
+					clinicName={clinicName}
+					latitude={latitude}
+					longitude={longitude}
 				/>
 			)}
 			<section className="mt-6 bg-white rounded-2xl border border-border-1 py-10 md:px-8 px-4">
 				{isLoading ? (
 					<DoctorDetailsSkeleton />
 				) : (
-					<div className="grid lg:grid-cols-3 gap-8">
+					<div className="grid grid-cols-4 gap-8">
 						{docInfo.map(({ img, heading, text }, index) => (
-							<div className="col-span-1 flex flex-col gap-1" key={index}>
+							<div
+								className="col-span-4 md:col-span-2 xl:col-span-1 flex flex-col gap-1"
+								key={index}
+							>
 								<div className="flex-items-center gap-1">
 									<img src={img} />
 									<p className="text-typography-500 font-medium">{heading}</p>
@@ -52,14 +59,14 @@ export const PatientDoctorDetail = () => {
 								<p>{text}</p>
 							</div>
 						))}
-						<div className="col-span-3">
+						<div className="col-span-4">
 							<h5>{t('biography')}</h5>
 							<p className="text-typography-500 mt-1">
 								{biography ?? t('noBiographyAdded', { ns: 'patient' })}
 							</p>
 						</div>
 
-						<div className="col-span-3">
+						<div className="col-span-4">
 							<h5>{t('workLocation', { ns: 'patient' })}</h5>
 							<p className="text-typography-500 mt-1">{clinicName}</p>
 							<div className="h-60 mt-5">

@@ -1,6 +1,6 @@
 export const DoctorReviewsSkeleton = () => (
 	<section className="animate-pulse">
-		{Array.from({ length: 3 }).map((_, index) => (
+		{Array.from({ length: 4 }).map((_, index) => (
 			<div className="flex py-3 gap-3" key={index}>
 				{/* Profile Image */}
 				<div>

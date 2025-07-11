@@ -20,30 +20,30 @@ async function fetchWithRefresh<T>(url: string, options: FetchOptions = {}): Pro
 			headers,
 		});
 
-		// if (response.status === 401) {
-		// 	try {
-		// 		const newToken = await store.refreshAccessToken();
+		if (response.status === 401) {
+			try {
+				const newToken = await store.refreshAccessToken();
 
-		// 		const newHeaders = {
-		// 			...headers,
-		// 			Authorization: `Bearer ${newToken}`,
-		// 		};
+				const newHeaders = {
+					...headers,
+					Authorization: `Bearer ${newToken}`,
+				};
 
-		// 		const retryResponse = await fetch(`${import.meta.env.VITE_API_URL}${url}`, {
-		// 			...options,
-		// 			headers: newHeaders,
-		// 		});
+				const retryResponse = await fetch(`${import.meta.env.VITE_API_URL}${url}`, {
+					...options,
+					headers: newHeaders,
+				});
 
-		// 		if (!retryResponse.ok) {
-		// 			throw new Error(`Request failed with status: ${retryResponse.status}`);
-		// 		}
+				if (!retryResponse.ok) {
+					throw new Error(`Request failed with status: ${retryResponse.status}`);
+				}
 
-		// 		return retryResponse.json() as Promise<T>;
-		// 	} catch {
-		// 		store.logout();
-		// 		throw new Error('Session expired. Please login again.');
-		// 	}
-		// }
+				return retryResponse.json() as Promise<T>;
+			} catch {
+				store.logout();
+				throw new Error('Session expired. Please login again.');
+			}
+		}
 
 		if (!response.ok) {
 			const errorData = await response.json().catch(() => ({}));

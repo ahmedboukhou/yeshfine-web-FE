@@ -1,4 +1,4 @@
-import { type FC, type ReactNode } from 'react';
+import type { FC, ReactNode } from 'react';
 import logo from '../../../assets/logo.svg';
 
 export const AuthCardHeading: FC<{ heading: string; subHeading: string }> = ({

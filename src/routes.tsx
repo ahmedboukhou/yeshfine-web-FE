@@ -16,6 +16,7 @@ import { PatientDoctorDetail } from './pages/patient/doctors/detail';
 import { SelectLanguage } from './pages/auth/SelectLanguage';
 import { PatientLabDetail } from './pages/patient/labs/detail';
 import { PatientPharmaciesDetail } from './pages/patient/pharmacies/detail';
+import { PatientBookAppointment } from './pages/patient/doctors/detail/bookAppointment';
 
 // App Routes
 export const ROOT_ROUTE = '/';
@@ -28,6 +29,8 @@ export const HOME_ROUTE = '/home';
 
 // patient routes
 export const DOCTORS_ROUTE = '/doctors';
+export const DOCTORS_DETAIL_ROUTE = `${DOCTORS_ROUTE}/:id`;
+export const BOOK_APPOINTMENT_ROUTE = `${DOCTORS_ROUTE}/:id/book-appointment`;
 export const LABS_ROUTE = '/labs';
 export const PHARMACIES_ROUTE = '/pharmacies';
 export const APPOINTMENTS_ROUTE = '/appointments';
@@ -44,7 +47,8 @@ export const AppRoutes = () => {
 						<Route element={<MainLayout />}>
 							<Route element={<PatientHome />} path={HOME_ROUTE} />
 							<Route element={<PatientDoctors />} path={DOCTORS_ROUTE} />
-							<Route element={<PatientDoctorDetail />} path={`${DOCTORS_ROUTE}/:id`} />
+							<Route element={<PatientDoctorDetail />} path={DOCTORS_DETAIL_ROUTE} />
+							<Route element={<PatientBookAppointment />} path={BOOK_APPOINTMENT_ROUTE} />
 							<Route element={<PatientLabs />} path={LABS_ROUTE} />
 							<Route element={<PatientLabDetail />} path={`${LABS_ROUTE}/:id`} />
 							<Route element={<PatientPharmacies />} path={PHARMACIES_ROUTE} />
