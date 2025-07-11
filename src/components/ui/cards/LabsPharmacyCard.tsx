@@ -1,6 +1,7 @@
 import type { FC } from 'react';
 import { Link } from 'react-router';
-import { ActivityIcon, ClockIcon, LocationIcon } from '../../../assets/icons';
+import { ActivityIcon, LocationIcon } from '../../../assets/icons';
+import { Badge } from '../Badge';
 import { Rating } from '../Rating';
 
 type LabsPharmacyCardProps = {
@@ -24,7 +25,7 @@ export const LabsPharmacyCard: FC<LabsPharmacyCardProps> = ({
 	link,
 }) => {
 	return (
-		<Link to={link} className="col-span-12 sm:col-span-6 lg:col-span-4">
+		<Link to={link} className="col-span-12 sm:col-span-6 xl:col-span-4">
 			<div className="p-4 bg-white rounded-2xl border border-black/10">
 				<div className="relative pt-[50%] rounded-xl overflow-hidden hidden sm:block">
 					<img
@@ -50,12 +51,9 @@ export const LabsPharmacyCard: FC<LabsPharmacyCardProps> = ({
 							<span className="text-typography-700">{address}</span>
 						</div>
 
-						<div className="flex-between-center">
+						<div className="flex-between flex-col gap-y-2 md:flex-row">
 							<span className="text-xs text-primary">Open</span>
-							<div className="flex-items-center gap-1 bg-primary-light py-1 px-4 rounded-full">
-								<ClockIcon />
-								<span className="text-primary font-semibold">{todaySlot}</span>
-							</div>
+							<Badge specialty={todaySlot} variant="primary" />
 
 							<div className="flex-items-center">
 								<ActivityIcon />

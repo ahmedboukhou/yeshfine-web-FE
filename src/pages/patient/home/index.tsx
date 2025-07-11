@@ -8,9 +8,10 @@ import { HomeCarousal } from '../../../components/ui/HomeCarousal';
 // import { AppointmentTypeEnum } from '../../../interfaces/enums';
 import { useMediaQuery } from 'react-responsive';
 import { LabsPharmacyCardSkeleton } from '../../../components/ui/skeletons/LabsPharmacySkeleton';
-import { DOCTORS_ROUTE, LABS_ROUTE, PHARMACIES_ROUTE } from '../../../routes';
+import { APPOINTMENTS_ROUTE, DOCTORS_ROUTE, LABS_ROUTE, PHARMACIES_ROUTE } from '../../../routes';
 import { DoctorCard } from '../../../components/ui/cards/DoctorCard';
 import { LabsPharmacyCard } from '../../../components/ui/cards/LabsPharmacyCard';
+import { AppointmentCard } from '../../../components/ui/cards/AppointmentCard';
 
 export const PatientHome = () => {
 	const { t } = useTranslation(['patient', 'common']);
@@ -39,7 +40,7 @@ export const PatientHome = () => {
 	return (
 		<main className="flex flex-col gap-8">
 			<HomeCarousal />
-			{/* <section className="flex flex-col gap-5">
+			<section className="flex flex-col gap-5">
 				<Heading
 					text={t('upcomingAppointments', { heading: t('doctors', { ns: 'common' }) })}
 					route={APPOINTMENTS_ROUTE}
@@ -51,7 +52,7 @@ export const PatientHome = () => {
 						</div>
 					))}
 				</div>
-			</section> */}
+			</section>
 
 			<section className="flex flex-col gap-5">
 				<Heading
@@ -73,10 +74,14 @@ export const PatientHome = () => {
 								averageRating,
 								distance,
 								speciality,
+								latitude,
+								longitude,
 								user_id,
 							}) => (
 								<DoctorCard
 									key={id}
+									latitude={latitude}
+									longitude={longitude}
 									image={image}
 									name={name}
 									id={user_id}

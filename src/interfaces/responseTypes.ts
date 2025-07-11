@@ -5,6 +5,7 @@ import type {
 	DoctorReviewType,
 	DoctorSpecialtiesType,
 	Lab,
+	TimeSlot,
 	TopDoctor,
 	TopLab,
 	TopPharmacy,
@@ -27,6 +28,7 @@ export type ResponsePagination = {
 	total: number;
 	page: number;
 	limit: number;
+	hasMore: boolean;
 	totalPages: number;
 };
 
@@ -60,6 +62,9 @@ export type LabsResponse = CommonApiResponse & {
 
 export type AppointmentsResponse = CommonApiResponse & {
 	data: { labs: Lab[]; meta: ResponsePagination };
+};
+export type AppointmentSlotResponse = CommonApiResponse & {
+	data: { available_slots: TimeSlot[] };
 };
 
 export type PatientHomeTopEntitiesResponse = CommonApiResponse & {

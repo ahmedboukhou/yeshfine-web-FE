@@ -63,14 +63,18 @@ button {
 	--color-primary-dark-active: #224f24;
 	--color-darker: #1b3d1c;
 
-	/* warning color */
+	/* warning  */
 	--color-warning-50: #fef6ee;
 	--color-warning-700: #b93815;
 	--color-warning-400: #f38744;
 
-	/* purple color */
+	/* purple  */
 	--color-purple: #7110d6;
 	--color-purple-light: #f6edff;
+	/* blue */
+
+	--color-blue-50: #eff8ff;
+	--color-blue-700: #175cd3;
 
 	/* typography */
 	--color-typography-900: #181d27;
@@ -112,6 +116,9 @@ button {
 .outlined-btn {
 	@apply py-2.5 px-6 text-center text-primary font-semibold rounded-lg focus:bg-primary-light-active border border-primary hover:bg-primary-light bg-white focus:outline-none disabled:opacity-50 disabled:pointer-events-none cursor-pointer disabled:bg-primary/70;
 }
+.outlined-primary-btn {
+	@apply py-2.5 px-6 text-center text-primary font-semibold rounded-lg focus:bg-primary-light-active border border-primary hover:bg-primary-light bg-primary-light focus:outline-none disabled:opacity-50 disabled:pointer-events-none cursor-pointer disabled:bg-primary/70;
+}
 .pagination-btn {
 	@apply py-2 px-2.5 hover:bg-white/60 gap-1 flex items-center justify-center bg-white rounded-lg border border-border-1 text-typography-600 font-semibold cursor-pointer disabled:text-typography-600/60;
 }
@@ -127,6 +134,10 @@ button {
 
 .wrapper {
 	@apply py-10;
+}
+
+.card {
+	@apply rounded-2xl border border-border-1 bg-white p-3 md:p-6;
 }
 
 /* Flexbox utilities */

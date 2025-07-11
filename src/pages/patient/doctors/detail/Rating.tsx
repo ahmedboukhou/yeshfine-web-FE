@@ -2,11 +2,11 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router';
 import { useGetDoctorReviewsQuery } from '../../../../apis/patient/doctors';
-import { ReviewRating } from '../../../../components/ui/ReviewRating';
-import { getRelativeTimeString } from '../../../../lib/dayjs';
 import { GreenDownArrowIcon } from '../../../../assets/icons';
+import { ReviewRating } from '../../../../components/ui/ReviewRating';
 import { DoctorReviewsSkeleton } from '../../../../components/ui/skeletons/DoctorReviewsSkeleton';
 import type { DoctorReviewType } from '../../../../interfaces';
+import { getRelativeTimeString } from '../../../../lib/dayjs';
 
 export const DoctorRating = () => {
 	const { id } = useParams();
@@ -14,17 +14,16 @@ export const DoctorRating = () => {
 
 	const [page, setPage] = useState(1);
 	const [allReviews, setAllReviews] = useState<DoctorReviewType[]>([]);
-	const [hasMore, setHasMore] = useState(true);
 
-	const { data, isLoading } = useGetDoctorReviewsQuery({ id, page, limit: 2 });
-	const { reviews } = data?.data?.items || {};
+	const { data, isLoading } = useGetDoctorReviewsQuery({ id, page, limit: 4 });
+	const { items, meta } = data?.data || {};
+	const { reviews } = items || {};
 
 	// Append reviews on page change
 	useEffect(() => {
 		if (reviews && reviews.length > 0) {
 			setAllReviews((prev) => (page === 1 ? reviews : [...prev, ...reviews]));
 		} else if (reviews && reviews.length === 0) {
-			setHasMore(false);
 		}
 	}, [reviews, data, page]);
 
@@ -62,9 +61,9 @@ export const DoctorRating = () => {
 			)}
 			{isLoading && page > 1 && <DoctorReviewsSkeleton />}
 
-			{hasMore && !isLoading && (
+			{meta?.hasMore && !isLoading && (
 				<div className="mt-4 flex-center">
-					<button className="link-text !no-underline" onClick={handleViewMore}>
+					<button className="link-text !no-underline flex gap-2" onClick={handleViewMore}>
 						<span className="text-primary font-semibold">{t('viewMore')}</span>
 						<GreenDownArrowIcon />
 					</button>

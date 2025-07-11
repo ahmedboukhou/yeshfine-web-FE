@@ -37,6 +37,9 @@ export const PatientDoctorDetail = () => {
 					image={image}
 					specialty={speciality}
 					id={id}
+					clinicName={clinicName}
+					latitude={latitude}
+					longitude={longitude}
 				/>
 			)}
 			<section className="mt-6 bg-white rounded-2xl border border-border-1 py-10 md:px-8 px-4">

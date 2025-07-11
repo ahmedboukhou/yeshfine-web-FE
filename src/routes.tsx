@@ -29,6 +29,7 @@ export const HOME_ROUTE = '/home';
 
 // patient routes
 export const DOCTORS_ROUTE = '/doctors';
+export const DOCTORS_DETAIL_ROUTE = `${DOCTORS_ROUTE}/:id`;
 export const BOOK_APPOINTMENT_ROUTE = `${DOCTORS_ROUTE}/:id/book-appointment`;
 export const LABS_ROUTE = '/labs';
 export const PHARMACIES_ROUTE = '/pharmacies';
@@ -46,7 +47,7 @@ export const AppRoutes = () => {
 						<Route element={<MainLayout />}>
 							<Route element={<PatientHome />} path={HOME_ROUTE} />
 							<Route element={<PatientDoctors />} path={DOCTORS_ROUTE} />
-							<Route element={<PatientDoctorDetail />} path={`${DOCTORS_ROUTE}/:id`} />
+							<Route element={<PatientDoctorDetail />} path={DOCTORS_DETAIL_ROUTE} />
 							<Route element={<PatientBookAppointment />} path={BOOK_APPOINTMENT_ROUTE} />
 							<Route element={<PatientLabs />} path={LABS_ROUTE} />
 							<Route element={<PatientLabDetail />} path={`${LABS_ROUTE}/:id`} />

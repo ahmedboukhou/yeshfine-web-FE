@@ -75,6 +75,8 @@ export type TopDoctor = {
 	user_id: number;
 	name: string;
 	image: string;
+	latitude: number;
+	longitude: number;
 	speciality: string;
 	experience: number;
 	clinicName: string;
@@ -94,7 +96,6 @@ export type TopPharmacy = {
 	totalReviews: number;
 	distance: number | null;
 	todaySlot: string;
-
 };
 
 export type TopLab = {

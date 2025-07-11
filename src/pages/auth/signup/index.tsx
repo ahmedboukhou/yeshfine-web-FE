@@ -48,7 +48,6 @@ export const Signup = () => {
 	const { mutateAsync: signup, isPending } = useSignupMutation();
 
 	const onSubmit: SubmitHandler<SignupInput> = ({ dob, name, password, phone, role, gender }) => {
-		console.log('🚀 ~ Signup ~ gender:', gender);
 		signup(
 			{ dob, name, password, phone, role, gender },
 			{
@@ -122,7 +121,6 @@ export const Signup = () => {
 									label={t('dob')}
 									id="dob"
 									type="date"
-									restrictFutureDate
 									register={register('dob')}
 									error={errors.dob}
 								/>

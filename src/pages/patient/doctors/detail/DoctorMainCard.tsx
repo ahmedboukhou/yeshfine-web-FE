@@ -12,6 +12,9 @@ type DoctorTypeCardProps = {
 	averageRating?: string;
 	image?: string;
 	specialty?: string;
+	clinicName?: string;
+	latitude?: number;
+	longitude?: number;
 };
 export const DoctorMainCard: FC<DoctorTypeCardProps> = ({
 	name,
@@ -19,6 +22,9 @@ export const DoctorMainCard: FC<DoctorTypeCardProps> = ({
 	image,
 	id,
 	specialty,
+	clinicName,
+	latitude,
+	longitude,
 }) => {
 	const { t } = useTranslation(['patient']);
 
@@ -44,7 +50,19 @@ export const DoctorMainCard: FC<DoctorTypeCardProps> = ({
 					</div>
 					<Link
 						className="primary-btn w-full md:w-auto flex-center gap-2"
-						to={BOOK_APPOINTMENT_ROUTE.replace(':id', `${id}`)}
+						to={{
+							pathname: BOOK_APPOINTMENT_ROUTE.replace(':id', `${id}`),
+						}}
+						state={{
+							id,
+							name,
+							image,
+							clinicName,
+							averageRating,
+							specialty,
+							latitude,
+							longitude,
+						}}
 					>
 						<BookAppointmentIcon />
 						{t('bookAppointment')}

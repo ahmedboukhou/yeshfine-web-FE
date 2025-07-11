@@ -66,10 +66,14 @@ export const PatientDoctors = () => {
 							name,
 							id,
 							distance,
+							latitude,
+							longitude,
 							doctorDetail: { experience, clinicName, average_rating, speciality },
 						}) => (
 							<DoctorCard
 								key={id}
+								latitude={latitude}
+								longitude={longitude}
 								image={image}
 								name={name}
 								id={id}
