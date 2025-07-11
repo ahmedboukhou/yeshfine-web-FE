@@ -1,4 +1,5 @@
 import dayjs from 'dayjs';
+import type { TFunction } from 'i18next';
 import * as yup from 'yup';
 
 // * Regex
@@ -8,7 +9,9 @@ export const numberRegex = /^[0-9]+$/;
 // * Common Validations
 
 const requiredString = (
+	t: TFunction,
 	fieldName: string,
+	ns: string,
 	options?: {
 		min?: number;
 		minMessage?: string;
@@ -18,86 +21,113 @@ const requiredString = (
 		regexMessage?: string;
 	}
 ) => {
-	let schema = yup.string().required(`${fieldName} is required`);
+	let schema = yup
+		.string()
+		.required(t('requiredField', { field: t(fieldName, { ns }), ns: 'validations' }));
 
 	if (options?.regex) {
 		schema = schema.matches(
 			options.regex,
-			options.regexMessage || `${fieldName} format is invalid`
+			options.regexMessage ||
+				t('invalidFieldFormat', {
+					field: t(fieldName, { ns }),
+					ns: 'validations',
+				})
 		);
 	}
+
 	if (options?.min) {
 		schema = schema.min(
 			options.min,
-			options.minMessage || `${fieldName} must be at least ${options.min} characters`
+			options.minMessage ||
+				t('minLengthField', {
+					field: t(fieldName, { ns }),
+					min: options.min,
+					ns: 'validations',
+				})
 		);
 	}
 
 	if (options?.max) {
 		schema = schema.max(
 			options.max,
-			options.maxMessage || `${fieldName} must be at most ${options.max} characters`
+			options.maxMessage ||
+				t('maxLengthField', {
+					field: t(fieldName, { ns }),
+					max: options.max,
+					ns: 'validations',
+				})
 		);
 	}
 
 	return schema;
 };
 
-const phoneValidation = requiredString('Phone number', {
-	min: 4,
-});
-const passwordValidation = requiredString('Password', {
-	regex: numberRegex,
-	min: 6,
-	max: 8,
-	regexMessage: 'Password should contain only numeric characters',
-	minMessage: 'Password must contain 6-8 numeric characters',
-	maxMessage: 'Password must contain 6-8 numeric characters',
-});
+const phoneValidation = (t: TFunction) =>
+	requiredString(t, 'phone', 'common', {
+		min: 4,
+	});
+
+const passwordValidation = (t: TFunction) =>
+	requiredString(t, 'password', 'auth', {
+		regex: numberRegex,
+		min: 6,
+		max: 8,
+		regexMessage: t('numericPasswordOnly', { ns: 'validations' }),
+		minMessage: t('numericPasswordLength', { ns: 'validations' }),
+		maxMessage: t('numericPasswordLength', { ns: 'validations' }),
+	});
 
 // * Schemas
 
-export const loginSchema = yup.object({
-	phone: phoneValidation,
-	password: passwordValidation,
-});
+export const loginSchema = (t: TFunction) =>
+	yup.object({
+		phone: phoneValidation(t),
+		password: passwordValidation(t),
+	});
 
-export const forgotPasswordSchema = yup.object({
-	phone: phoneValidation,
-});
+export const forgotPasswordSchema = (t: TFunction) =>
+	yup.object({
+		phone: phoneValidation(t),
+	});
 
-export const signupSchema = yup.object({
-	phone: phoneValidation,
-	password: passwordValidation,
-	confirm_password: yup
-		.string()
-		.required('Confirm password is required')
-		.oneOf([yup.ref('password')], 'Passwords must match'),
+export const signupSchema = (t: TFunction) =>
+	yup.object({
+		phone: phoneValidation(t),
+		password: passwordValidation(t),
+		confirm_password: yup
+			.string()
+			.required(
+				t('requiredField', { field: t('confirmPassword', { ns: 'auth' }), ns: 'validations' })
+			)
+			.oneOf([yup.ref('password')], t('passwordsMustMatch', { ns: 'validations' })),
 
-	dob: yup
-		.string()
-		.required('Date of birth is required')
-		.test('is-valid-date', 'Invalid date format', (value) => {
-			return value ? dayjs(value, 'YYYY-MM-DD', true).isValid() : false;
-		})
-		.test('not-in-future', 'Invalid Date of birth', (value) => {
-			return value
-				? dayjs(value).isBefore(dayjs(), 'day') || dayjs(value).isSame(dayjs(), 'day')
-				: false;
+		dob: yup
+			.string()
+			.required(t('requiredField', { field: t('dob', { ns: 'auth' }), ns: 'validations' }))
+			.test('is-valid-date', t('invalidDateFormat', { ns: 'validations' }), (value) =>
+				value ? dayjs(value, 'YYYY-MM-DD', true).isValid() : false
+			)
+			.test('not-in-future', t('invalidDOB', { ns: 'validations' }), (value) =>
+				value ? dayjs(value).isBefore(dayjs(), 'day') || dayjs(value).isSame(dayjs(), 'day') : false
+			),
+
+		gender: requiredString(t, 'gender', 'common'),
+		name: requiredString(t, 'name', 'common', {
+			min: 2,
+			max: 50,
+			regex: nameRegex,
+			regexMessage: t('alphabetOnlyName', { ns: 'validations' }),
 		}),
-	gender: requiredString('Gender'),
-	name: requiredString('Name', {
-		min: 2,
-		max: 50,
-		regex: nameRegex,
-		regexMessage: 'Name should only contain alphabets',
-	}),
-});
+	});
 
-export const resetPasswordSchema = yup.object({
-	newPassword: passwordValidation,
-	confirm_password: yup
-		.string()
-		.required('Confirm password is required')
-		.oneOf([yup.ref('newPassword')], 'Passwords must match'),
-});
+export const resetPasswordSchema = (t: TFunction) =>
+	yup.object({
+		newPassword: passwordValidation(t),
+		confirm_password: yup
+			.string()
+			.required(
+				t('requiredField', { field: t('confirmPassword', { ns: 'auth' }), ns: 'validations' })
+			)
+			.oneOf([yup.ref('newPassword')], t('passwordsMustMatch', { ns: 'validations' })),
+	});

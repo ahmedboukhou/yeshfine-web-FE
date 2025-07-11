@@ -26,14 +26,14 @@ export const ResetPassword = ({
 	setSuccess: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
 	const navigate = useNavigate();
-	const { t } = useTranslation(['auth', 'common']);
+	const { t } = useTranslation(['auth', 'common', 'validations']);
 
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
 	} = useForm<ResetPasswordInput>({
-		resolver: yupResolver(resetPasswordSchema),
+		resolver: yupResolver(resetPasswordSchema(t)),
 		mode: 'all',
 		defaultValues,
 	});

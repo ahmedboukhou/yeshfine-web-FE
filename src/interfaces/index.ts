@@ -67,6 +67,8 @@ export type Lab = {
 	name: string;
 	address: string;
 	image: string;
+	todaySlot: string;
+	distance: null | number;
 	labDetail: LabDetail;
 };
 

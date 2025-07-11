@@ -41,7 +41,9 @@ export const PhoneNumberInput: React.FC<PhoneNumberInputProps> = ({
 						: 'focus:ring-primary focus:ring-2'
 				}`}
 			/>
-			{error && <span className="text-red-600 text-sm mt-1">{error.message}</span>}
+			<div className="mt-0.5">
+				{error && <span className="text-red-600 text-sm">{error.message}</span>}
+			</div>
 		</div>
 	);
 };

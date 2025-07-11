@@ -29,6 +29,14 @@ export const PatientBookAppointment = () => {
 		{ label: t('videoCall'), value: 'virtual' },
 	];
 
+	const handleSave = () => {
+		if (!showVerifyScreen) {
+			setShowVerifyScreen(true);
+		} else {
+			return;
+		}
+	};
+
 	return (
 		<section>
 			<Breadcrumb items={breadcrumbItems} />
@@ -105,7 +113,7 @@ export const PatientBookAppointment = () => {
 					<Link to={DOCTORS_DETAIL_ROUTE.replace(':id', `${id}`)} className="outlined-primary-btn">
 						{t('cancel', { ns: 'common' })}
 					</Link>
-					<button onClick={() => setShowVerifyScreen(true)} className="primary-btn">
+					<button onClick={handleSave} className="primary-btn">
 						{showVerifyScreen ? t('proceedPayment') : t('bookNow')}
 					</button>
 				</div>

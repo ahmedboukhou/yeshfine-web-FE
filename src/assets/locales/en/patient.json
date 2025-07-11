@@ -13,6 +13,7 @@
 	"myCity": "My city",
 	"nearMe": "Near me",
 	"noBiographyAdded": "No biography added",
+	"proceedPayment": "Proceed to Payment",
 	"rating": "Rating",
 	"reasonForVisit": "Reason for Visit",
 	"scheduleDate": "Schedule Date",
@@ -28,6 +29,5 @@
 	"updateDateTimeInfo": "You can update the date and time from the available doctor's schedule",
 	"verifyVisitDateTime": "Verify your visit Date & Time",
 	"videoCall": "Video call",
-	"proceedPayment": "Proceed to Payment",
 	"workLocation": "Work Location"
 }

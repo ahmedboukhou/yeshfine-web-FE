@@ -18,7 +18,7 @@ import { AuthCard, AuthCardHeading } from '../../components/ui/cards/AuthCard';
 const loginInitialValues: LoginInput = { phone: '', password: '' };
 
 export const Login = () => {
-	const { t } = useTranslation(['auth']);
+	const { t } = useTranslation(['auth', 'validations', 'common']);
 	const [userNotVerified, setUserNotVerified] = useState(false);
 	const {
 		register,
@@ -27,7 +27,7 @@ export const Login = () => {
 		watch,
 		formState: { errors },
 	} = useForm<LoginInput>({
-		resolver: yupResolver(loginSchema),
+		resolver: yupResolver(loginSchema(t)),
 		mode: 'all',
 		defaultValues: loginInitialValues,
 	});

@@ -8,13 +8,7 @@ type InputFieldProps = {
 	error: any;
 	register: any;
 };
-export const InputField: FC<InputFieldProps> = ({
-	label,
-	id,
-	type = 'text',
-	error,
-	register,
-}) => {
+export const InputField: FC<InputFieldProps> = ({ label, id, type = 'text', error, register }) => {
 	const { t } = useTranslation();
 
 	return (
@@ -29,7 +23,9 @@ export const InputField: FC<InputFieldProps> = ({
 				className={`input input-box-shadow ${error ? '!outline-red-600' : ''}`}
 				placeholder={t('enter')}
 			/>
-			{error && <span className="text-red-600 text-sm mt-1">{error.message}</span>}
+			<div className="mt-0.5">
+				{error && <span className="text-red-600 text-sm">{error.message}</span>}
+			</div>
 		</div>
 	);
 };

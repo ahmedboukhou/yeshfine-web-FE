@@ -18,7 +18,7 @@ export const PatientDoctors = () => {
 	const [search, setSearch] = useState('');
 	const {
 		data,
-		isFetching: loadingDoctors,
+		isLoading: loadingDoctors,
 		refetch,
 	} = useGetDoctorsQuery({
 		page,
@@ -93,6 +93,7 @@ export const PatientDoctors = () => {
 				currentPage={page}
 				totalPages={pagination?.totalPages || 1}
 				onPageChange={handlePageChange}
+				isLoading={loadingDoctors}
 			/>
 		</section>
 	);

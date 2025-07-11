@@ -1,6 +1,6 @@
 export const LabsPharmacyCardSkeleton = ({ count = 4 }: { count?: number }) => {
 	return Array.from({ length: count }).map((_, index) => (
-		<div key={index} className="col-span-12 sm:col-span-6 lg:col-span-4">
+		<div key={index} className="col-span-12 sm:col-span-6 xl:col-span-4">
 			<div className="p-4 bg-white rounded-2xl border border-black/10 animate-pulse">
 				{/* Image Placeholder */}
 				<div className="w-full h-40 bg-gray-300 rounded-xl mb-3" />

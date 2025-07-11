@@ -30,7 +30,7 @@ export const VerifyBooking: FC<VerifyBookingProps> = ({
 
 	return (
 		<section className="flex flex-col gap-8">
-			<div className="border border-border-1 card-gradient rounded-lg">
+			<div className="border border-border-1 card-gradient-2 rounded-lg">
 				<div className="p-4 flex gap-5">
 					<img className="inline-block size-22 rounded-lg" src={image} alt={name} />
 					<div className="flex-1 flex-col gap-3">

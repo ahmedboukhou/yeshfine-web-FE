@@ -5,13 +5,15 @@ interface PaginationProps {
 	currentPage: number;
 	totalPages: number;
 	onPageChange: (page: number) => void;
-	translation?: {
-		next?: string;
-		previous?: string;
-	};
+	isLoading?: boolean;
 }
 
-export const Pagination = ({ currentPage, totalPages, onPageChange }: PaginationProps) => {
+export const Pagination = ({
+	currentPage,
+	totalPages,
+	onPageChange,
+	isLoading = false,
+}: PaginationProps) => {
 	const { t } = useTranslation();
 	const handlePrevious = () => {
 		if (currentPage > 1) onPageChange(currentPage - 1);
@@ -21,14 +23,16 @@ export const Pagination = ({ currentPage, totalPages, onPageChange }: Pagination
 		if (currentPage < totalPages) onPageChange(currentPage + 1);
 	};
 
-	if (totalPages <= 1) return null;
-
 	return (
 		<nav
 			className="flex justify-between items-center gap-x-1 pt-5 border-t border-t-border-1"
 			aria-label="Pagination"
 		>
-			<button className="pagination-btn" onClick={handlePrevious} disabled={currentPage === 1}>
+			<button
+				className="pagination-btn"
+				onClick={handlePrevious}
+				disabled={isLoading || currentPage === 1}
+			>
 				<PaginationBackIcon />
 				<span aria-hidden="true" className="hidden sm:block">
 					{t('previous')}
@@ -39,6 +43,7 @@ export const Pagination = ({ currentPage, totalPages, onPageChange }: Pagination
 				{Array.from({ length: totalPages }, (_, i) => i + 1).map((pageNum) => (
 					<button
 						key={pageNum}
+						disabled={isLoading}
 						className={`min-h-9.5 min-w-9.5 flex justify-center items-center py-2 px-3 text-sm rounded-lg focus:outline-hidden ${
 							pageNum === currentPage
 								? 'bg-primary text-white'
@@ -51,7 +56,11 @@ export const Pagination = ({ currentPage, totalPages, onPageChange }: Pagination
 				))}
 			</div>
 
-			<button className="pagination-btn" onClick={handleNext} disabled={currentPage === totalPages}>
+			<button
+				className="pagination-btn"
+				onClick={handleNext}
+				disabled={isLoading || currentPage === totalPages}
+			>
 				<span aria-hidden="true" className="hidden sm:block">
 					{t('next')}
 				</span>

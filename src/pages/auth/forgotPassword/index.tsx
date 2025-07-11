@@ -16,7 +16,7 @@ import { ResetPassword } from './ResetPassword';
 const defaultValues: ForgotPasswordInput = { phone: '' };
 
 export const ForgotPassword = () => {
-	const { t } = useTranslation(['auth', 'common']);
+	const { t } = useTranslation(['auth', 'common','validations']);
 	const navigate = useNavigate();
 
 	const [showOtpScreen, setShowOtpScreen] = useState(false);
@@ -30,7 +30,7 @@ export const ForgotPassword = () => {
 		watch,
 		formState: { errors },
 	} = useForm<ForgotPasswordInput>({
-		resolver: yupResolver(forgotPasswordSchema),
+		resolver: yupResolver(forgotPasswordSchema(t)),
 		mode: 'all',
 		defaultValues,
 	});
