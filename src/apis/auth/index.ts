@@ -22,7 +22,9 @@ export function useLoginMutation() {
 	});
 }
 export function useSignupMutation() {
-	return useMutation<LoginResponse, CommonApiResponse, Omit<SignupInput, 'confirm_password'>>({
+	return useMutation<LoginResponse, CommonApiResponse, Omit<SignupInput, 'confirm_password'> & {
+  language: string;
+}>({
 		mutationFn: (values) => apiClient.post(`auth/signup`, values),
 		onError: ({ message }) => toast.error(message || 'Something went wrong'),
 	});
@@ -53,5 +55,11 @@ export function useResetPasswordMutation() {
 	return useMutation<ForgotPasswordResponse, CommonApiResponse, ResetPasswordInput>({
 		mutationFn: (values) => apiClient.post(`auth/reset-password`, values),
 		onError: ({ message }) => toast.error(message || 'Something went wrong'),
+	});
+}
+
+export function useChangeLanguageMutation() {
+	return useMutation<CommonApiResponse, CommonApiResponse, { language: string }>({
+		mutationFn: (values) => apiClient.post(`users/set-user-language`, values),
 	});
 }

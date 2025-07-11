@@ -1,6 +1,7 @@
 import { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useLocation } from 'react-router';
+import { useChangeLanguageMutation } from '../../../apis/auth';
 import { LanguageIcon, NavToggleIcon, NotificationIcon } from '../../../assets/icons';
 import logo from '../../../assets/logo.svg';
 import { supportedLanguages } from '../../../constants/mappedData';
@@ -30,7 +31,7 @@ export const Navbar = () => {
 	];
 
 	const navbarOptions = [{ label: 'Logout', onClick: () => logout() }];
-
+	const { mutateAsync: updateLanguage } = useChangeLanguageMutation();
 	const handleNavLinkClick = () => {
 		setIsMobileMenuOpen(false); // close on link click
 	};
@@ -38,7 +39,9 @@ export const Navbar = () => {
 	const handleChange = useCallback(
 		async (value: string) => {
 			i18n.changeLanguage(value);
+			updateLanguage({ language: value });
 		},
+
 		[i18n]
 	);
 

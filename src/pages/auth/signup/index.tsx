@@ -5,11 +5,12 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
 import { useSignupMutation } from '../../../apis/auth';
 import { TickIcon } from '../../../assets/icons';
+import { AuthCard, AuthCardHeading } from '../../../components/ui/cards/AuthCard';
 import { InputField } from '../../../components/ui/inputs/InputField';
 import { PhoneNumberInput } from '../../../components/ui/inputs/PhoneInput';
 import { SelectField } from '../../../components/ui/inputs/SelectField';
-import { AuthCard, AuthCardHeading } from '../../../components/ui/cards/AuthCard';
 import { genderOptions } from '../../../constants/mappedData';
+import i18n from '../../../i18n';
 import { Role } from '../../../interfaces/enums';
 import type { SignupInput } from '../../../interfaces/formInputTypes';
 import { LOGIN_ROUTE } from '../../../routes';
@@ -27,7 +28,7 @@ const defaultValues: SignupInput = {
 };
 
 export const Signup = () => {
-	const { t } = useTranslation(['auth', 'common']);
+	const { t } = useTranslation(['auth', 'common','validations']);
 
 	const [step, setStep] = useState<'role' | 'form' | 'otp'>('role');
 	const [role, setRole] = useState<Role>(Role.Patient);
@@ -39,7 +40,7 @@ export const Signup = () => {
 		watch,
 		formState: { errors },
 	} = useForm<SignupInput>({
-		resolver: yupResolver(signupSchema),
+		resolver: yupResolver(signupSchema(t)),
 		mode: 'all',
 		defaultValues,
 	});
@@ -49,7 +50,7 @@ export const Signup = () => {
 
 	const onSubmit: SubmitHandler<SignupInput> = ({ dob, name, password, phone, role, gender }) => {
 		signup(
-			{ dob, name, password, phone, role, gender },
+			{ dob, name, password, phone, role, gender, language: i18n.language },
 			{
 				onSuccess: () => setStep('otp'),
 			}

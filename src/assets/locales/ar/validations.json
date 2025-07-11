@@ -1,0 +1,12 @@
+{
+	"alphabetOnlyName": "يجب أن يحتوي الاسم على الحروف الأبجدية فقط",
+	"invalidDateFormat": "تنسيق التاريخ غير صالح",
+	"invalidDOB": "تاريخ الميلاد غير صالح",
+	"invalidFieldFormat": "تنسيق{{field}} غير صالح",
+	"maxLengthField": "يجب أن يكون{{field}} على الأكثر {{max}} حرفًا",
+	"minLengthField": "يجب أن يحتوي{{field}} على {{min}} حرفًا على الأقل",
+	"numericPasswordLength": "يجب أن تحتوي كلمة المرور على 6-8 أحرف رقمية",
+	"numericPasswordOnly": "يجب أن تحتوي كلمة المرور على أحرف رقمية فقط",
+	"passwordsMustMatch": "يجب أن تتطابق كلمات المرور",
+	"requiredField": "{{field}} مطلوب"
+}

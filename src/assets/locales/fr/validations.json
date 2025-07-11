@@ -1,0 +1,12 @@
+{
+	"alphabetOnlyName": "Le nom ne doit contenir que des lettres de l'alphabet",
+	"invalidDateFormat": "Format de date invalide",
+	"invalidDOB": "Date de naissance invalide",
+	"invalidFieldFormat": "Le format{{field}} n'est pas valide",
+	"maxLengthField": "{{field}} doit contenir au plus {{max}} caractères",
+	"minLengthField": "{{field}} doit contenir au moins {{min}} caractères",
+	"numericPasswordLength": "Le mot de passe doit contenir 6 à 8 caractères numériques",
+	"numericPasswordOnly": "Le mot de passe doit contenir uniquement des caractères numériques",
+	"passwordsMustMatch": "Les mots de passe doivent correspondre",
+	"requiredField": "{{field}} est requis"
+}

@@ -98,6 +98,9 @@ button {
 .card-gradient {
 	background: linear-gradient(180deg, #fff 0%, #ebffec 100%);
 }
+.card-gradient-2 {
+	background: linear-gradient(270deg, #ebffec 0%, #fff 100%);
+}
 .gradient-1 {
 	@apply bg-[linear-gradient(111deg,#1298BC_-37.21%,#88D702_115.79%)];
 }

@@ -4,7 +4,7 @@ import { apiClient } from '../../lib/api';
 
 export function useGetLabsQuery({ page, limit }: PayloadPaginationType) {
 	return useQuery({
-		queryKey: ['get-labs'],
+		queryKey: ['get-labs', page],
 		queryFn: (): Promise<LabsResponse> => apiClient.get(`patients/labs`, { page, limit }),
 	});
 }
