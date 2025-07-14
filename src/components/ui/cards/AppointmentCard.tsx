@@ -13,7 +13,7 @@ export const AppointmentCard = () => {
 
 				<div className="flex-1">
 					<div className="flex-between-center">
-						<h5>Habiboulaye Diagna</h5>
+						<h5 className="font-semibold text-typography-800">Habiboulaye Diagna</h5>
 						<Rating rating={'4.8'} />
 					</div>
 

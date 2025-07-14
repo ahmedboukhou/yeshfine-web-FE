@@ -60,6 +60,34 @@ export type LabsResponse = CommonApiResponse & {
 	data: { items: Lab[]; meta: ResponsePagination };
 };
 
+export type LabServiceType = {
+	name: string;
+	price: number;
+	description: string;
+	result_time: string;
+	requires_prescription: boolean;
+	pre_test_instructions: string;
+};
+
+export type LabDetailResponse = CommonApiResponse & {
+	data: {
+		lab: {
+			id: number;
+			name: string;
+			address: string;
+			image: string;
+			latitude: number;
+			longitude: number;
+			labDetail: {
+				id: number;
+				total_reviews: number;
+				average_rating: string;
+				servicesList: LabServiceType[];
+			};
+		};
+	};
+};
+
 export type AppointmentsResponse = CommonApiResponse & {
 	data: { labs: Lab[]; meta: ResponsePagination };
 };

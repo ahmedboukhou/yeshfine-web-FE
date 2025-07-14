@@ -57,11 +57,6 @@ export interface Doctor {
 	doctorDetail: DoctorDetail;
 }
 
-export type LabDetail = {
-	id: number;
-	average_rating: string;
-};
-
 export type Lab = {
 	id: number;
 	name: string;
@@ -69,7 +64,7 @@ export type Lab = {
 	image: string;
 	todaySlot: string;
 	distance: null | number;
-	labDetail: LabDetail;
+	labDetail: { id: number; average_rating: string };
 };
 
 export type TopDoctor = {

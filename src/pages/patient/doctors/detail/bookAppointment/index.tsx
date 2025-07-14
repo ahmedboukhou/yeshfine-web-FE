@@ -1,4 +1,4 @@
-import { Fragment, useMemo, useState } from 'react';
+import { Fragment, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useParams } from 'react-router';
 import { Breadcrumb } from '../../../../../components/ui/Breadcrumb';
@@ -6,7 +6,7 @@ import { SelectSlot } from '../../../../../components/ui/SelectSlot';
 import { DOCTORS_DETAIL_ROUTE, DOCTORS_ROUTE } from '../../../../../routes';
 import { VerifyBooking } from './VerifyBooking';
 
-export const PatientBookAppointment = () => {
+export const PatientDoctorBookAppointment = () => {
 	const { t } = useTranslation(['patient', 'common']);
 	const { id } = useParams<{ id: string }>();
 
@@ -16,14 +16,11 @@ export const PatientBookAppointment = () => {
 	const [reason, setReason] = useState('');
 	const [selectedSlot, setSelectedSlot] = useState<{ start: string; end: string } | null>(null);
 
-	const breadcrumbItems = useMemo(
-		() => [
-			{ title: t('doctors', { ns: 'common' }), path: DOCTORS_ROUTE },
-			{ title: t('doctorDetails'), path: DOCTORS_DETAIL_ROUTE.replace(':id', id || '') },
-			{ title: t('makeAppointment'), path: '' },
-		],
-		[t, id]
-	);
+	const breadcrumbItems = [
+		{ title: t('doctors', { ns: 'common' }), path: DOCTORS_ROUTE },
+		{ title: t('doctorDetails'), path: DOCTORS_DETAIL_ROUTE.replace(':id', id || '') },
+		{ title: t('makeAppointment'), path: '' },
+	];
 	const appointmentTypes = [
 		{ label: t('inPerson'), value: 'onsite' },
 		{ label: t('videoCall'), value: 'virtual' },
@@ -41,10 +38,10 @@ export const PatientBookAppointment = () => {
 		<section>
 			<Breadcrumb items={breadcrumbItems} />
 			<div className="mb-5 lg:mb-10">
-				<h3 className="!text-typography-800 !font-bold">
+				<h3 className="text-typography-800 font-bold">
 					{showVerifyScreen ? t('verifyVisitDateTime') : t('selectVisitDateTime')}
 				</h3>
-				<h5 className="!text-typography-600 !font-medium">
+				<h5 className="text-typography-600 font-medium">
 					{showVerifyScreen ? t('updateDateTimeInfo') : t('chooseDateTimeInfo')}
 				</h5>
 			</div>

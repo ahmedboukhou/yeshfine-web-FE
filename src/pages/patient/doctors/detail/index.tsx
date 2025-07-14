@@ -1,15 +1,18 @@
-import GoogleMapReact from 'google-map-react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router';
-import { useGetDoctorDetailQuery } from '../../../../apis/patient/doctors';
+import {
+	useGetDoctorDetailQuery,
+	useGetDoctorReviewsQuery,
+} from '../../../../apis/patient/doctors';
 import briefcaseImg from '../../../../assets/icons/briefcase.svg';
 import feeImg from '../../../../assets/icons/fee.svg';
 import hospitalImg from '../../../../assets/icons/hospital.svg';
 import tripleImg from '../../../../assets/icons/user-triple.svg';
+import { GoogleMap } from '../../../../components/ui/GoogleMap';
+import { ReviewList } from '../../../../components/ui/ReviewList';
 import { DoctorDetailsSkeleton } from '../../../../components/ui/skeletons/DoctorDetailSkeleton';
 import { DoctorMainCardSkeleton } from '../../../../components/ui/skeletons/DoctorMainCardSkeleton';
 import { DoctorMainCard } from './DoctorMainCard';
-import { DoctorRating } from './Rating';
 
 export const PatientDoctorDetail = () => {
 	const { id } = useParams();
@@ -60,26 +63,19 @@ export const PatientDoctorDetail = () => {
 							</div>
 						))}
 						<div className="col-span-4">
-							<h5>{t('biography')}</h5>
+							<h5 className="font-semibold text-typography-800">{t('biography')}</h5>
 							<p className="text-typography-500 mt-1">
 								{biography ?? t('noBiographyAdded', { ns: 'patient' })}
 							</p>
 						</div>
 
 						<div className="col-span-4">
-							<h5>{t('workLocation', { ns: 'patient' })}</h5>
+							<h5 className="font-semibold text-typography-800">
+								{t('workLocation', { ns: 'patient' })}
+							</h5>
 							<p className="text-typography-500 mt-1">{clinicName}</p>
 							<div className="h-60 mt-5">
-								{latitude && longitude && (
-									<GoogleMapReact
-										bootstrapURLKeys={{ key: import.meta.env.VITE_GOOGLE_MAP_API_KEY }}
-										defaultCenter={{
-											lat: latitude,
-											lng: longitude,
-										}}
-										defaultZoom={11}
-									/>
-								)}
+								<GoogleMap latitude={latitude} longitude={longitude} />
 							</div>
 						</div>
 					</div>
@@ -89,11 +85,11 @@ export const PatientDoctorDetail = () => {
 					{isLoading ? (
 						<div className="h-5 w-40 bg-gray-200 rounded mb-3" />
 					) : (
-						<h5 className="mb-3">
+						<h5 className="mb-3 font-semibold text-typography-800">
 							{t('rating')} ({total_reviews})
 						</h5>
 					)}
-					<DoctorRating />
+					<ReviewList id={id} useReviewQuery={useGetDoctorReviewsQuery} limit={4} />
 				</div>
 			</section>
 		</main>

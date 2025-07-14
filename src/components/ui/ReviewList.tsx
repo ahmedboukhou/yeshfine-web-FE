@@ -1,37 +1,52 @@
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useParams } from 'react-router';
-import { useGetDoctorReviewsQuery } from '../../../../apis/patient/doctors';
-import { GreenDownArrowIcon } from '../../../../assets/icons';
-import { ReviewRating } from '../../../../components/ui/ReviewRating';
-import { DoctorReviewsSkeleton } from '../../../../components/ui/skeletons/DoctorReviewsSkeleton';
-import type { DoctorReviewType } from '../../../../interfaces';
-import { getRelativeTimeString } from '../../../../lib/dayjs';
+import { GreenDownArrowIcon } from '../../assets/icons';
+import type { DoctorReviewType } from '../../interfaces';
+import { getRelativeTimeString } from '../../lib/dayjs';
+import { ReviewRating } from './ReviewRating';
+import { DoctorReviewsSkeleton } from './skeletons/DoctorReviewsSkeleton';
 
-export const DoctorRating = () => {
-	const { id } = useParams();
+type ReviewListProps = {
+	id?: string;
+	useReviewQuery: (params: { id?: string; page: number; limit: number }) => {
+		data: any;
+		isLoading: boolean;
+	};
+	limit?: number;
+	extractReviews?: (data: any) => {
+		reviews: DoctorReviewType[];
+		meta?: { hasMore: boolean };
+	};
+};
+
+export const ReviewList = ({
+	id,
+	useReviewQuery,
+	limit = 4,
+	extractReviews = (data) => {
+		const { items, meta } = data?.data || {};
+		const { reviews } = items || {};
+		return { reviews, meta };
+	},
+}: ReviewListProps) => {
 	const { t } = useTranslation();
-
 	const [page, setPage] = useState(1);
 	const [allReviews, setAllReviews] = useState<DoctorReviewType[]>([]);
 
-	const { data, isLoading } = useGetDoctorReviewsQuery({ id, page, limit: 4 });
-	const { items, meta } = data?.data || {};
-	const { reviews } = items || {};
+	const { data, isLoading } = useReviewQuery({ id, page, limit });
+	const { reviews = [], meta } = extractReviews(data);
 
-	// Append reviews on page change
 	useEffect(() => {
-		if (reviews && reviews.length > 0) {
+		if (reviews?.length > 0) {
 			setAllReviews((prev) => (page === 1 ? reviews : [...prev, ...reviews]));
-		} else if (reviews && reviews.length === 0) {
 		}
 	}, [reviews, data, page]);
 
 	const handleViewMore = () => setPage((prev) => prev + 1);
 
-	return isLoading && page === 1 ? (
-		<DoctorReviewsSkeleton />
-	) : (
+	if (isLoading && page === 1) return <DoctorReviewsSkeleton />;
+
+	return (
 		<section>
 			{!allReviews.length ? (
 				<p className="text-center font-medium">{t('noReviews')}</p>
@@ -42,7 +57,7 @@ export const DoctorRating = () => {
 							<img className="inline-block size-12 rounded-2xl object-top" src={image} alt={name} />
 						</div>
 						<div className="flex-1">
-							<div className="flex-between-center gap-3">
+							<div className="flex-between">
 								<span className="font-semibold text-typography-700">{name}</span>
 								<span className="font-medium text-typography-500">
 									{getRelativeTimeString(created_at)}
@@ -51,14 +66,15 @@ export const DoctorRating = () => {
 
 							<div className="flex-items-center gap-1">
 								<ReviewRating rating={+rating} />
-								<span className="text-xs text-typography-500">{rating}</span>
+								<span className="!text-xs text-typography-500">{rating}</span>
 							</div>
 
-							<span className="text-xs text-typography-500">{review_text}</span>
+							<span className="!text-xs text-typography-500">{review_text}</span>
 						</div>
 					</div>
 				))
 			)}
+
 			{isLoading && page > 1 && <DoctorReviewsSkeleton />}
 
 			{meta?.hasMore && !isLoading && (

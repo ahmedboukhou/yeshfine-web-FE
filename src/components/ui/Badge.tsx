@@ -23,7 +23,7 @@ export const Badge = ({ specialty = 'Cardiologist', variant }: BadgeProps) => {
 	return (
 		<div>
 			<span
-				className={`text-nowrap capitalize px-2.5 py-1.5 rounded-full text-xs sm:text-sm font-semibold ${selectedVariant}`}
+				className={`text-nowrap capitalize px-2.5 py-1.5 rounded-full !text-xs sm:text-sm font-semibold ${selectedVariant}`}
 			>
 				{specialty}
 			</span>

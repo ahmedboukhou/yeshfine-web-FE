@@ -40,7 +40,7 @@ export const LabsPharmacyCard: FC<LabsPharmacyCardProps> = ({
 					</div>
 					<div className="flex flex-col gap-2.5 flex-1">
 						<div className="grid grid-cols-3">
-							<h5 className="col-span-2 ellipses">{name}</h5>
+							<h5 className="col-span-2 ellipses font-semibold text-typography-800">{name}</h5>
 							<div className="col-span-1 flex-end">
 								<Rating rating={averageRating} />
 							</div>
@@ -52,7 +52,7 @@ export const LabsPharmacyCard: FC<LabsPharmacyCardProps> = ({
 						</div>
 
 						<div className="flex-between flex-col gap-y-2 md:flex-row">
-							<span className="text-xs text-primary">Open</span>
+							<span className="!text-xs text-primary">Open</span>
 							<Badge specialty={todaySlot} variant="primary" />
 
 							<div className="flex-items-center">

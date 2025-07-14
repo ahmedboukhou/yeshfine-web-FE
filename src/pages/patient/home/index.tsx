@@ -29,7 +29,7 @@ export const PatientHome = () => {
 	const Heading: FC<{ text: string; route: string }> = ({ text, route }) => {
 		return (
 			<div className="flex-between-center">
-				<h3>{text}</h3>
+				<h3 className="font-semibold text-typography-700">{text}</h3>
 				<Link to={route} className="text-primary font-medium hover:underline">
 					{t('seeAll', { ns: 'common' })}
 				</Link>
