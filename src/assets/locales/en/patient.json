@@ -31,5 +31,11 @@
 	"updateDateTimeInfo": "You can update the date and time from the available doctor's schedule",
 	"verifyVisitDateTime": "Verify your visit Date & Time",
 	"videoCall": "Video call",
+	"uploadPrescription": "Upload Prescription",
+	"prescriptionRequirementInfo": "This test requires a doctor’s prescription. You can take a photo or upload a scanned file.",
+	"uploadReport": "Upload Report",
+	"requiresPrescription": "Requires Prescription:",
+	"preTestInstructions": "Pre-test Instructions:",
+	"price": "Price",
 	"workLocation": "Work Location"
 }

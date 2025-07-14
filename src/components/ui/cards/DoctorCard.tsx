@@ -73,13 +73,13 @@ export const DoctorCard: FC<DoctorCardProps> = ({
 								</div>
 							</div>
 
-							<div className="grid grid-cols-3">
-								<div className="flex-items-center gap-2 flex-1 col-span-2 shrink-0">
+							<div className="flex gap-1">
+								<div className="flex-items-center gap-2 flex-1 col-span-2 w-20">
 									<HospitalIcon />
-									<p className="text-typography-700 font-medium text-sm ellipses">{clinicName}</p>
+									<p className="text-typography-700 font-medium text-sm ellipses ">{clinicName}</p>
 								</div>
 
-								<div className="flex-end shrink-0 text-nowrap col-span-1">
+								<div className="flex-end shrink-0 text-nowrap">
 									<ActivityIcon />
 									<p className="text-warning-400 font-medium text-sm">{distance ?? 0} km</p>
 								</div>

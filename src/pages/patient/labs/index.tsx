@@ -4,7 +4,7 @@ import { useGetLabsQuery } from '../../../apis/patient/labs';
 import { LabsPharmacyCard } from '../../../components/ui/cards/LabsPharmacyCard';
 import { Pagination } from '../../../components/ui/Pagination';
 import { LabsPharmacyCardSkeleton } from '../../../components/ui/skeletons/LabsPharmacySkeleton';
-import { LABS_ROUTE } from '../../../routes';
+import { LABS_DETAIL_ROUTE } from '../../../routes';
 
 export const PatientLabs = () => {
 	const { t } = useTranslation();
@@ -57,7 +57,7 @@ export const PatientLabs = () => {
 								averageRating={average_rating}
 								distance={distance}
 								name={name}
-								link={`${LABS_ROUTE}/${id}`}
+								link={LABS_DETAIL_ROUTE.replace(':id', `${id}`)}
 							/>
 						)
 					)

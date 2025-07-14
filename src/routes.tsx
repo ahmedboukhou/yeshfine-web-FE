@@ -33,6 +33,7 @@ export const DOCTORS_ROUTE = '/doctors';
 export const DOCTORS_DETAIL_ROUTE = `${DOCTORS_ROUTE}/:id`;
 export const DOCTOR_BOOK_APPOINTMENT_ROUTE = `${DOCTORS_ROUTE}/:id/book-appointment`;
 export const LABS_ROUTE = '/labs';
+export const LABS_DETAIL_ROUTE = `${LABS_ROUTE}/:id`;
 export const LAB_BOOK_APPOINTMENT_ROUTE = `${LABS_ROUTE}/:id/book-appointment`;
 export const PHARMACIES_ROUTE = '/pharmacies';
 export const APPOINTMENTS_ROUTE = '/appointments';
@@ -55,7 +56,7 @@ export const AppRoutes = () => {
 								path={DOCTOR_BOOK_APPOINTMENT_ROUTE}
 							/>
 							<Route element={<PatientLabs />} path={LABS_ROUTE} />
-							<Route element={<PatientLabDetail />} path={`${LABS_ROUTE}/:id`} />
+							<Route element={<PatientLabDetail />} path={LABS_DETAIL_ROUTE} />
 							<Route element={<PatientLabBookAppointment />} path={LAB_BOOK_APPOINTMENT_ROUTE} />
 							<Route element={<PatientPharmacies />} path={PHARMACIES_ROUTE} />
 							<Route element={<PatientPharmaciesDetail />} path={`${PHARMACIES_ROUTE}/:id`} />
