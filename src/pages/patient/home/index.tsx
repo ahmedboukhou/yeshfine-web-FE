@@ -8,7 +8,13 @@ import { HomeCarousal } from '../../../components/ui/HomeCarousal';
 // import { AppointmentTypeEnum } from '../../../interfaces/enums';
 import { useMediaQuery } from 'react-responsive';
 import { LabsPharmacyCardSkeleton } from '../../../components/ui/skeletons/LabsPharmacySkeleton';
-import { APPOINTMENTS_ROUTE, DOCTORS_ROUTE, LABS_ROUTE, PHARMACIES_ROUTE } from '../../../routes';
+import {
+	APPOINTMENTS_ROUTE,
+	DOCTORS_ROUTE,
+	LABS_DETAIL_ROUTE,
+	LABS_ROUTE,
+	PHARMACIES_ROUTE,
+} from '../../../routes';
 import { DoctorCard } from '../../../components/ui/cards/DoctorCard';
 import { LabsPharmacyCard } from '../../../components/ui/cards/LabsPharmacyCard';
 import { AppointmentCard } from '../../../components/ui/cards/AppointmentCard';
@@ -120,7 +126,7 @@ export const PatientHome = () => {
 									distance={distance}
 									todaySlot={todaySlot}
 									name={name}
-									link={`${LABS_ROUTE}/${id}`}
+									link={LABS_DETAIL_ROUTE.replace(':id', `${id}`)}
 								/>
 							)
 						)
