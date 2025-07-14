@@ -21,7 +21,7 @@ h2 {
 }
 
 h3 {
-	@apply text-2xl font-semibold text-typography-700;
+	@apply text-2xl;
 }
 
 h4 {
@@ -29,7 +29,7 @@ h4 {
 }
 
 h5 {
-	@apply text-lg font-semibold text-typography-800;
+	@apply text-lg;
 }
 
 h6 {
@@ -94,7 +94,9 @@ button {
 .card-box-shadow {
 	box-shadow: 0px 0px 2px 0px rgba(23, 26, 31, 0.2), 0px 0px 1px 0px rgba(23, 26, 31, 0.18);
 }
-
+.card-box-shadow-2 {
+	box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.12);
+}
 .card-gradient {
 	background: linear-gradient(180deg, #fff 0%, #ebffec 100%);
 }
@@ -134,66 +136,53 @@ button {
 .wrapper-container {
 	@apply container mx-auto px-4 sm:px-6 lg:px-20;
 }
-
 .wrapper {
 	@apply py-10;
 }
-
 .card {
 	@apply rounded-2xl border border-border-1 bg-white p-3 md:p-6;
 }
-
+.ellipses {
+	@apply text-ellipsis overflow-hidden whitespace-nowrap;
+}
 /* Flexbox utilities */
 /* Flex row with items centered and space between */
 .flex-between-center {
 	@apply flex justify-between items-center;
 }
-
 /* Flex row with content centered both horizontally and vertically */
 .flex-center {
 	@apply flex justify-center items-center;
 }
-
 /* Flex row with content spaced between */
 .flex-between {
 	@apply flex justify-between;
 }
-
 /* Flex row with items vertically centered */
 .flex-items-center {
 	@apply flex items-center;
 }
-
 /* Flex column centered both ways */
 .flex-col-center {
 	@apply flex flex-col justify-center items-center;
 }
-
 /* Flex column with items spaced between */
 .flex-col-between {
 	@apply flex flex-col justify-between;
 }
-
 /* Flex start */
 .flex-start {
 	@apply flex justify-start items-start;
 }
-
 /* Flex end */
 .flex-end {
 	@apply flex justify-end items-center;
 }
-
 /* Flex row wrap */
 .flex-wrap {
 	@apply flex flex-wrap;
 }
-
 /* Flex grow + full width */
 .flex-grow-full {
 	@apply flex-grow w-full;
-}
-
-.ellipses {
-	@apply text-ellipsis overflow-hidden whitespace-nowrap;
 }

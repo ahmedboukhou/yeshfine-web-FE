@@ -7,7 +7,7 @@ import {
 	BriefCaseIcon,
 	HospitalIcon,
 } from '../../../assets/icons';
-import { BOOK_APPOINTMENT_ROUTE, DOCTORS_DETAIL_ROUTE } from '../../../routes';
+import { DOCTOR_BOOK_APPOINTMENT_ROUTE, DOCTORS_DETAIL_ROUTE } from '../../../routes';
 import { Badge } from '../Badge';
 import { Rating } from '../Rating';
 
@@ -58,7 +58,7 @@ export const DoctorCard: FC<DoctorCardProps> = ({
 						</div>
 						<div className="flex flex-col gap-3 flex-1">
 							<div className="grid grid-cols-3">
-								<h5 className="col-span-2 ellipses">{name}</h5>
+								<h5 className="col-span-2 ellipses font-semibold text-typography-800">{name}</h5>
 								<div className="col-span-1 flex-end">
 									<Rating rating={averageRating} />
 								</div>
@@ -67,7 +67,7 @@ export const DoctorCard: FC<DoctorCardProps> = ({
 								<Badge specialty={specialty} />
 								<div className="gap-2 flex-items-center">
 									<BriefCaseIcon />
-									<span className="text-xs text-typography-500 text-nowrap">
+									<span className="!text-xs text-typography-500 text-nowrap">
 										{t('experienceYears', { experience })}
 									</span>
 								</div>
@@ -88,7 +88,7 @@ export const DoctorCard: FC<DoctorCardProps> = ({
 					</Link>
 					<Link
 						to={{
-							pathname: BOOK_APPOINTMENT_ROUTE.replace(':id', `${id}`),
+							pathname: DOCTOR_BOOK_APPOINTMENT_ROUTE.replace(':id', `${id}`),
 						}}
 						state={{
 							id,

@@ -4,19 +4,20 @@ import { Role } from './interfaces/enums';
 import { AuthLayout } from './pages/auth';
 import { ForgotPassword } from './pages/auth/forgotPassword';
 import { Login } from './pages/auth/Login';
+import { SelectLanguage } from './pages/auth/SelectLanguage';
 import { Signup } from './pages/auth/signup';
 import { PatientAppointments } from './pages/patient/appointments';
 import { PatientDoctors } from './pages/patient/doctors';
+import { PatientDoctorDetail } from './pages/patient/doctors/detail';
+import { PatientDoctorBookAppointment } from './pages/patient/doctors/detail/bookAppointment';
 import { PatientHome } from './pages/patient/home';
 import { PatientLabs } from './pages/patient/labs';
+import { PatientLabDetail } from './pages/patient/labs/detail';
+import { PatientLabBookAppointment } from './pages/patient/labs/detail/bookAppointment';
 import { PatientPharmacies } from './pages/patient/pharmacies';
+import { PatientPharmaciesDetail } from './pages/patient/pharmacies/detail';
 import useAuthStore from './store/auth';
 import { useCurrentUserStore } from './store/user';
-import { PatientDoctorDetail } from './pages/patient/doctors/detail';
-import { SelectLanguage } from './pages/auth/SelectLanguage';
-import { PatientLabDetail } from './pages/patient/labs/detail';
-import { PatientPharmaciesDetail } from './pages/patient/pharmacies/detail';
-import { PatientBookAppointment } from './pages/patient/doctors/detail/bookAppointment';
 
 // App Routes
 export const ROOT_ROUTE = '/';
@@ -30,8 +31,9 @@ export const HOME_ROUTE = '/home';
 // patient routes
 export const DOCTORS_ROUTE = '/doctors';
 export const DOCTORS_DETAIL_ROUTE = `${DOCTORS_ROUTE}/:id`;
-export const BOOK_APPOINTMENT_ROUTE = `${DOCTORS_ROUTE}/:id/book-appointment`;
+export const DOCTOR_BOOK_APPOINTMENT_ROUTE = `${DOCTORS_ROUTE}/:id/book-appointment`;
 export const LABS_ROUTE = '/labs';
+export const LAB_BOOK_APPOINTMENT_ROUTE = `${LABS_ROUTE}/:id/book-appointment`;
 export const PHARMACIES_ROUTE = '/pharmacies';
 export const APPOINTMENTS_ROUTE = '/appointments';
 
@@ -48,9 +50,13 @@ export const AppRoutes = () => {
 							<Route element={<PatientHome />} path={HOME_ROUTE} />
 							<Route element={<PatientDoctors />} path={DOCTORS_ROUTE} />
 							<Route element={<PatientDoctorDetail />} path={DOCTORS_DETAIL_ROUTE} />
-							<Route element={<PatientBookAppointment />} path={BOOK_APPOINTMENT_ROUTE} />
+							<Route
+								element={<PatientDoctorBookAppointment />}
+								path={DOCTOR_BOOK_APPOINTMENT_ROUTE}
+							/>
 							<Route element={<PatientLabs />} path={LABS_ROUTE} />
 							<Route element={<PatientLabDetail />} path={`${LABS_ROUTE}/:id`} />
+							<Route element={<PatientLabBookAppointment />} path={LAB_BOOK_APPOINTMENT_ROUTE} />
 							<Route element={<PatientPharmacies />} path={PHARMACIES_ROUTE} />
 							<Route element={<PatientPharmaciesDetail />} path={`${PHARMACIES_ROUTE}/:id`} />
 							<Route element={<PatientAppointments />} path={APPOINTMENTS_ROUTE} />

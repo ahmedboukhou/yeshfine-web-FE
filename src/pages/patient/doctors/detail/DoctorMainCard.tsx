@@ -4,7 +4,7 @@ import { Rating } from '../../../../components/ui/Rating';
 import type { FC } from 'react';
 import { Badge } from '../../../../components/ui/Badge';
 import { Link } from 'react-router';
-import { BOOK_APPOINTMENT_ROUTE } from '../../../../routes';
+import { DOCTOR_BOOK_APPOINTMENT_ROUTE } from '../../../../routes';
 
 type DoctorTypeCardProps = {
 	id?: string;
@@ -43,7 +43,7 @@ export const DoctorMainCard: FC<DoctorTypeCardProps> = ({
 				<div className="flex-1 flex flex-col items-center justify-center text-center md:justify-between md:flex-row md:text-left gap-3">
 					<div>
 						<div className="flex gap-3 mb-1">
-							<h3 className="!text-typography-900">{name}</h3>
+							<h3 className="text-typography-900">{name}</h3>
 							<Rating rating={averageRating} />
 						</div>
 						<Badge specialty={specialty} />
@@ -51,7 +51,7 @@ export const DoctorMainCard: FC<DoctorTypeCardProps> = ({
 					<Link
 						className="primary-btn w-full md:w-auto flex-center gap-2"
 						to={{
-							pathname: BOOK_APPOINTMENT_ROUTE.replace(':id', `${id}`),
+							pathname: DOCTOR_BOOK_APPOINTMENT_ROUTE.replace(':id', `${id}`),
 						}}
 						state={{
 							id,

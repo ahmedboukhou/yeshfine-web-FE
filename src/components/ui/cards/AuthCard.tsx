@@ -10,7 +10,7 @@ export const AuthCardHeading: FC<{ heading: string; subHeading: string }> = ({
 			<div>
 				<img src={logo} alt="yeshfine-logo" className="mb-3" />
 			</div>
-			<h3 className="text-2xl font-bold">{heading}</h3>
+			<h3 className="font-bold">{heading}</h3>
 			<p className="text-typography-500">{subHeading}</p>
 		</div>
 	);

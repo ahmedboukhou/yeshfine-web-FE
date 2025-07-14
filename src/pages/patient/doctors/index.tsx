@@ -45,7 +45,7 @@ export const PatientDoctors = () => {
 	return (
 		<section>
 			<div className="mb-6 flex-between-center flex-wrap gap-3">
-				<h3>{t('doctors')}</h3>
+				<h3 className="font-semibold text-typography-700">{t('doctors')}</h3>
 
 				<div className="flex-items-center gap-2">
 					<SearchInput onChange={handleSearch} />

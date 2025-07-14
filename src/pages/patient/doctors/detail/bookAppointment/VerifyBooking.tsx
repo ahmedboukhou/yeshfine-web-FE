@@ -1,11 +1,11 @@
 import dayjs from 'dayjs';
-import GoogleMapReact from 'google-map-react';
 import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router';
 import { RedHospitalIcon } from '../../../../../assets/icons';
 import calendarIcon from '../../../../../assets/icons/menu-board.svg';
 import { Badge } from '../../../../../components/ui/Badge';
+import { GoogleMap } from '../../../../../components/ui/GoogleMap';
 import { ReviewRating } from '../../../../../components/ui/ReviewRating';
 
 type VerifyBookingProps = {
@@ -48,26 +48,17 @@ export const VerifyBooking: FC<VerifyBookingProps> = ({
 			</div>
 
 			<div>
-				<h5 className="!text-typography-700">{t('workLocation')}</h5>
+				<h5 className="font-semibold text-typography-700">{t('workLocation')}</h5>
 				<p className="text-typography-500 mt-1">{clinicName}</p>
 
 				<div className="h-60 mt-5">
-					{latitude && longitude && (
-						<GoogleMapReact
-							bootstrapURLKeys={{ key: import.meta.env.VITE_GOOGLE_MAP_API_KEY }}
-							defaultCenter={{
-								lat: latitude,
-								lng: longitude,
-							}}
-							defaultZoom={11}
-						/>
-					)}
+					<GoogleMap latitude={latitude} longitude={longitude} />
 				</div>
 			</div>
 
 			<div className="p-4 card-box-shadow rounded-lg">
 				<div className="flex-between-center mb-5">
-					<h5 className="!text-typography-800">{t('scheduleDate')}</h5>
+					<h5 className="font-semibold text-typography-800">{t('scheduleDate')}</h5>
 				</div>
 				<div className="flex gap-5">
 					<div className="bg-blue-100 p-2 rounded-lg">
@@ -87,7 +78,7 @@ export const VerifyBooking: FC<VerifyBookingProps> = ({
 			</div>
 
 			<div className="p-4 card-box-shadow rounded-lg">
-				<h5 className="!text-typography-800 mb-5">{t('typeOfAppointment')}</h5>
+				<h5 className="font-semibold text-typography-800 mb-5">{t('typeOfAppointment')}</h5>
 				<div className="flex-items-center gap-5">
 					<RedHospitalIcon size="50" />
 					<p className="font-bold capitalize">{appointmentType}</p>
@@ -95,7 +86,7 @@ export const VerifyBooking: FC<VerifyBookingProps> = ({
 			</div>
 
 			<div className="p-4 card-box-shadow rounded-lg">
-				<h5 className="!text-typography-800 mb-5">{t('reasonForVisit')}</h5>
+				<h5 className="font-semibold text-typography-800 mb-5">{t('reasonForVisit')}</h5>
 				<p className="text-typography-600">{reason || '--'}</p>
 			</div>
 		</section>
