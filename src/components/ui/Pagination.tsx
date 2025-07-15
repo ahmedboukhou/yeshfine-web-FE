@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { PaginationBackIcon, PaginationNextIcon } from '../../assets/icons';
+import { PaginationSkeleton } from './skeletons/PaginationSkeleton';
 
 interface PaginationProps {
 	currentPage: number;
@@ -22,8 +23,9 @@ export const Pagination = ({
 	const handleNext = () => {
 		if (currentPage < totalPages) onPageChange(currentPage + 1);
 	};
-
-	return (
+	return isLoading ? (
+		<PaginationSkeleton />
+	) : (
 		<nav
 			className="flex justify-between items-center gap-x-1 pt-5 border-t border-t-border-1"
 			aria-label="Pagination"

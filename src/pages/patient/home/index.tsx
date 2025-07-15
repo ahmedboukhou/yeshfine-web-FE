@@ -13,6 +13,7 @@ import {
 	DOCTORS_ROUTE,
 	LABS_DETAIL_ROUTE,
 	LABS_ROUTE,
+	PHARMACIES_DETAIL_ROUTE,
 	PHARMACIES_ROUTE,
 } from '../../../routes';
 import { DoctorCard } from '../../../components/ui/cards/DoctorCard';
@@ -116,7 +117,7 @@ export const PatientHome = () => {
 					) : (
 						!!topLabs?.length &&
 						topLabs.map(
-							({ address, id, image, name, averageRating, distance, todaySlot, open }) => (
+							({ address, id, image, name, averageRating, distance, todaySlot, open, user_id }) => (
 								<LabsPharmacyCard
 									open={open}
 									address={address}
@@ -126,7 +127,7 @@ export const PatientHome = () => {
 									distance={distance}
 									todaySlot={todaySlot}
 									name={name}
-									link={LABS_DETAIL_ROUTE.replace(':id', `${id}`)}
+									link={LABS_DETAIL_ROUTE.replace(':id', `${user_id}`)}
 								/>
 							)
 						)
@@ -146,7 +147,7 @@ export const PatientHome = () => {
 					) : (
 						!!topPharmacies?.length &&
 						topPharmacies.map(
-							({ address, id, image, name, averageRating, distance, todaySlot }) => (
+							({ address, id, image, name, averageRating, distance, todaySlot, user_id }) => (
 								<LabsPharmacyCard
 									address={address}
 									image={image}
@@ -155,7 +156,7 @@ export const PatientHome = () => {
 									averageRating={averageRating}
 									distance={distance}
 									name={name}
-									link={`${PHARMACIES_ROUTE}/${id}`}
+									link={PHARMACIES_DETAIL_ROUTE.replace(':id', `${user_id}`)}
 								/>
 							)
 						)

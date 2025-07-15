@@ -5,6 +5,7 @@ import { Breadcrumb } from '../../../../../components/ui/Breadcrumb';
 import { SelectSlot } from '../../../../../components/ui/SelectSlot';
 import { DOCTORS_DETAIL_ROUTE, DOCTORS_ROUTE } from '../../../../../routes';
 import { VerifyBooking } from './VerifyBooking';
+import { useGetDoctorAppointmentSlotQuery } from '../../../../../apis/patient/appointments';
 
 export const PatientDoctorBookAppointment = () => {
 	const { t } = useTranslation(['patient', 'common']);
@@ -53,6 +54,7 @@ export const PatientDoctorBookAppointment = () => {
 							setDate={setDate}
 							selectedSlot={selectedSlot}
 							setSelectedSlot={setSelectedSlot}
+							useSlotsQuery={useGetDoctorAppointmentSlotQuery}
 						/>
 
 						<div className="border-t border-t-border-1 my-5 lg:my-10" />
@@ -106,7 +108,7 @@ export const PatientDoctorBookAppointment = () => {
 						selectedSlot={selectedSlot}
 					/>
 				)}
-				<div className="flex-end gap-5">
+				<div className="flex-end gap-5 mt-5">
 					<Link to={DOCTORS_DETAIL_ROUTE.replace(':id', `${id}`)} className="outlined-primary-btn">
 						{t('cancel', { ns: 'common' })}
 					</Link>

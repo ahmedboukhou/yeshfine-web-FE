@@ -91,6 +91,7 @@ export type TopPharmacy = {
 	closingTime: string; // format: "HH:mm:ss"
 	averageRating: string;
 	totalReviews: number;
+	user_id: number;
 	distance: number | null;
 	todaySlot: string;
 };
@@ -102,6 +103,7 @@ export type TopLab = {
 	licenseNumber: string;
 	address: string;
 	averageRating: string;
+	user_id: number;
 	totalReviews: number;
 	distance: number | null;
 	open: boolean;

@@ -22,17 +22,17 @@ export function useGetAppointmentsQuery({ page, limit, type }: GetAppointmentsQu
 	});
 }
 
-export function useGetAppointmentSlotQuery({
-	doctor_id,
+export function useGetDoctorAppointmentSlotQuery({
+	id,
 	appointment_date,
 }: {
-	doctor_id?: string;
+	id?: string;
 	appointment_date?: string;
 }) {
 	return useQuery({
-		queryKey: ['get-appointment-slots', doctor_id, appointment_date],
+		queryKey: ['get-appointment-slots', id, appointment_date],
 		queryFn: (): Promise<AppointmentSlotResponse> =>
-			apiClient.get(`patients/doctor-available-slots`, { doctor_id, appointment_date }),
+			apiClient.get(`patients/doctor-available-slots`, { doctor_id: id, appointment_date }),
 	});
 }
 

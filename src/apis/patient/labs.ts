@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import type {
+	AppointmentSlotResponse,
 	DoctorReviewsResponse,
 	LabDetailResponse,
 	LabsResponse,
@@ -30,5 +31,19 @@ export function useGetLabReviewsQuery({
 		queryKey: ['get-lab-reviews', id, page],
 		queryFn: (): Promise<DoctorReviewsResponse> =>
 			apiClient.get(`patients/labs/${id}/reviews`, { page, limit }),
+	});
+}
+
+export function useGetLabAppointmentSlotQuery({
+	id,
+	appointment_date,
+}: {
+	id?: string;
+	appointment_date?: string;
+}) {
+	return useQuery({
+		queryKey: ['get-appointment-slots', id, appointment_date],
+		queryFn: (): Promise<AppointmentSlotResponse> =>
+			apiClient.get(`patients/lab-available-slots`, { lab_id: id, appointment_date }),
 	});
 }
