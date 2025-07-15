@@ -1,8 +1,8 @@
-import { useTranslation } from 'react-i18next';
-import { useLocation, useParams } from 'react-router';
-import { LABS_DETAIL_ROUTE, LABS_ROUTE } from '../../../../../routes';
-import { Breadcrumb } from '../../../../../components/ui/Breadcrumb';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { Link, useLocation, useParams } from 'react-router';
+import { Breadcrumb } from '../../../../../components/ui/Breadcrumb';
+import { LABS_DETAIL_ROUTE, LABS_ROUTE } from '../../../../../routes';
 
 export const PatientLabBookAppointment = () => {
 	const { t } = useTranslation(['patient', 'common']);
@@ -75,6 +75,16 @@ export const PatientLabBookAppointment = () => {
 					onChange={(e) => setReason(e.target.value)}
 					placeholder={t('messageForDoctor')}
 				></textarea>
+
+				<div className="flex-end gap-5 mt-5">
+					<Link to={LABS_DETAIL_ROUTE.replace(':id', `${id}`)} className="outlined-primary-btn">
+						{t('cancel', { ns: 'common' })}
+					</Link>
+					<button onClick={handleSave} className="primary-btn">
+						{t('next', { ns: 'common' })}
+						{/* {showVerifyScreen ? t('proceedPayment') : t('bookNow')} */}
+					</button>
+				</div>
 			</div>
 		</section>
 	);
