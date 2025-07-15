@@ -845,6 +845,25 @@
 								</translations>
 							</concept_node>
 							<concept_node>
+								<name>clickToUpload</name>
+								<description/>
+								<comment/>
+								<translations>
+									<translation>
+										<language>ar-SA</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>en-US</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>fr-FR</language>
+										<approved>false</approved>
+									</translation>
+								</translations>
+							</concept_node>
+							<concept_node>
 								<name>close</name>
 								<description/>
 								<comment/>
@@ -978,6 +997,25 @@
 								</translations>
 							</concept_node>
 							<concept_node>
+								<name>fileFormatNote</name>
+								<description/>
+								<comment/>
+								<translations>
+									<translation>
+										<language>ar-SA</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>en-US</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>fr-FR</language>
+										<approved>false</approved>
+									</translation>
+								</translations>
+							</concept_node>
+							<concept_node>
 								<name>filters</name>
 								<description/>
 								<comment/>
@@ -1092,6 +1130,25 @@
 								</translations>
 							</concept_node>
 							<concept_node>
+								<name>location</name>
+								<description/>
+								<comment/>
+								<translations>
+									<translation>
+										<language>ar-SA</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>en-US</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>fr-FR</language>
+										<approved>false</approved>
+									</translation>
+								</translations>
+							</concept_node>
+							<concept_node>
 								<name>logout</name>
 								<description/>
 								<comment/>
@@ -1150,6 +1207,25 @@
 							</concept_node>
 							<concept_node>
 								<name>next</name>
+								<description/>
+								<comment/>
+								<translations>
+									<translation>
+										<language>ar-SA</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>en-US</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>fr-FR</language>
+										<approved>false</approved>
+									</translation>
+								</translations>
+							</concept_node>
+							<concept_node>
+								<name>no</name>
 								<description/>
 								<comment/>
 								<translations>
@@ -1339,6 +1415,25 @@
 								</translations>
 							</concept_node>
 							<concept_node>
+								<name>resultTime</name>
+								<description/>
+								<comment/>
+								<translations>
+									<translation>
+										<language>ar-SA</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>en-US</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>fr-FR</language>
+										<approved>false</approved>
+									</translation>
+								</translations>
+							</concept_node>
+							<concept_node>
 								<name>save</name>
 								<description/>
 								<comment/>
@@ -1415,7 +1510,45 @@
 								</translations>
 							</concept_node>
 							<concept_node>
+								<name>tests</name>
+								<description/>
+								<comment/>
+								<translations>
+									<translation>
+										<language>ar-SA</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>en-US</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>fr-FR</language>
+										<approved>false</approved>
+									</translation>
+								</translations>
+							</concept_node>
+							<concept_node>
 								<name>viewMore</name>
+								<description/>
+								<comment/>
+								<translations>
+									<translation>
+										<language>ar-SA</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>en-US</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>fr-FR</language>
+										<approved>false</approved>
+									</translation>
+								</translations>
+							</concept_node>
+							<concept_node>
+								<name>yes</name>
 								<description/>
 								<comment/>
 								<translations>
@@ -1572,6 +1705,25 @@
 								</translations>
 							</concept_node>
 							<concept_node>
+								<name>labDetails</name>
+								<description/>
+								<comment/>
+								<translations>
+									<translation>
+										<language>ar-SA</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>en-US</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>fr-FR</language>
+										<approved>false</approved>
+									</translation>
+								</translations>
+							</concept_node>
+							<concept_node>
 								<name>locations</name>
 								<description/>
 								<comment/>
@@ -1705,6 +1857,82 @@
 								</translations>
 							</concept_node>
 							<concept_node>
+								<name>noTestsFound</name>
+								<description/>
+								<comment/>
+								<translations>
+									<translation>
+										<language>ar-SA</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>en-US</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>fr-FR</language>
+										<approved>false</approved>
+									</translation>
+								</translations>
+							</concept_node>
+							<concept_node>
+								<name>prescriptionRequirementInfo</name>
+								<description/>
+								<comment/>
+								<translations>
+									<translation>
+										<language>ar-SA</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>en-US</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>fr-FR</language>
+										<approved>false</approved>
+									</translation>
+								</translations>
+							</concept_node>
+							<concept_node>
+								<name>preTestInstructions</name>
+								<description/>
+								<comment/>
+								<translations>
+									<translation>
+										<language>ar-SA</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>en-US</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>fr-FR</language>
+										<approved>false</approved>
+									</translation>
+								</translations>
+							</concept_node>
+							<concept_node>
+								<name>price</name>
+								<description/>
+								<comment/>
+								<translations>
+									<translation>
+										<language>ar-SA</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>en-US</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>fr-FR</language>
+										<approved>false</approved>
+									</translation>
+								</translations>
+							</concept_node>
+							<concept_node>
 								<name>proceedPayment</name>
 								<description/>
 								<comment/>
@@ -1744,6 +1972,25 @@
 							</concept_node>
 							<concept_node>
 								<name>reasonForVisit</name>
+								<description/>
+								<comment/>
+								<translations>
+									<translation>
+										<language>ar-SA</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>en-US</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>fr-FR</language>
+										<approved>false</approved>
+									</translation>
+								</translations>
+							</concept_node>
+							<concept_node>
+								<name>requiresPrescription</name>
 								<description/>
 								<comment/>
 								<translations>
@@ -1953,6 +2200,44 @@
 							</concept_node>
 							<concept_node>
 								<name>updateDateTimeInfo</name>
+								<description/>
+								<comment/>
+								<translations>
+									<translation>
+										<language>ar-SA</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>en-US</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>fr-FR</language>
+										<approved>false</approved>
+									</translation>
+								</translations>
+							</concept_node>
+							<concept_node>
+								<name>uploadPrescription</name>
+								<description/>
+								<comment/>
+								<translations>
+									<translation>
+										<language>ar-SA</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>en-US</language>
+										<approved>false</approved>
+									</translation>
+									<translation>
+										<language>fr-FR</language>
+										<approved>false</approved>
+									</translation>
+								</translations>
+							</concept_node>
+							<concept_node>
+								<name>uploadReport</name>
 								<description/>
 								<comment/>
 								<translations>

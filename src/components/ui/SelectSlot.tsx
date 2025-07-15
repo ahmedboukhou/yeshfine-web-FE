@@ -3,12 +3,16 @@ import { DayPicker } from 'react-day-picker';
 import 'react-day-picker/style.css';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router';
-import { useGetAppointmentSlotQuery } from '../../apis/patient/appointments';
+import type { AppointmentSlotResponse } from '../../interfaces/responseTypes';
 import { SlotSkeleton } from './skeletons/SlotSkeleton';
 
 interface SelectSlotProps {
 	date: Date;
 	setDate: Dispatch<SetStateAction<Date>>;
+	useSlotsQuery: (params: { id?: string; appointment_date?: string }) => {
+		data?: AppointmentSlotResponse;
+		isLoading: boolean;
+	};
 	selectedSlot: {
 		start: string;
 		end: string;
@@ -26,13 +30,14 @@ export const SelectSlot: FC<SelectSlotProps> = ({
 	setDate,
 	setSelectedSlot,
 	selectedSlot,
+	useSlotsQuery,
 }) => {
 	const { t } = useTranslation('patient');
 	const { id } = useParams<{ id: string }>();
 
-	const { data, isLoading } = useGetAppointmentSlotQuery({
+	const { data, isLoading } = useSlotsQuery({
 		appointment_date: date.toLocaleDateString(),
-		doctor_id: id,
+		id,
 	});
 
 	const { available_slots } = data?.data || {};

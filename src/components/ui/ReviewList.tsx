@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { GreenDownArrowIcon } from '../../assets/icons';
 import type { DoctorReviewType } from '../../interfaces';
+import type { DoctorReviewsResponse } from '../../interfaces/responseTypes';
 import { getRelativeTimeString } from '../../lib/dayjs';
 import { ReviewRating } from './ReviewRating';
 import { DoctorReviewsSkeleton } from './skeletons/DoctorReviewsSkeleton';
@@ -9,12 +10,12 @@ import { DoctorReviewsSkeleton } from './skeletons/DoctorReviewsSkeleton';
 type ReviewListProps = {
 	id?: string;
 	useReviewQuery: (params: { id?: string; page: number; limit: number }) => {
-		data: any;
+		data?: DoctorReviewsResponse;
 		isLoading: boolean;
 	};
 	limit?: number;
-	extractReviews?: (data: any) => {
-		reviews: DoctorReviewType[];
+	extractReviews?: (data?: DoctorReviewsResponse) => {
+		reviews?: DoctorReviewType[];
 		meta?: { hasMore: boolean };
 	};
 };
@@ -69,7 +70,7 @@ export const ReviewList = ({
 								<span className="!text-xs text-typography-500">{rating}</span>
 							</div>
 
-							<span className="!text-xs text-typography-500">{review_text}</span>
+							<span className="text-typography-500">{review_text}</span>
 						</div>
 					</div>
 				))
