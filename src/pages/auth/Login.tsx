@@ -83,12 +83,14 @@ export const Login = () => {
 							{t('logIn')}
 						</button>
 					</form>
-					<p className="text-sm text-center">
+
+					<span className="flex-center link-text-secondary">
 						{t('noAccountPrompt')}{' '}
 						<Link to={SIGNUP_ROUTE} className="link-text">
+							{' '}
 							{t('signUp')}
 						</Link>
-					</p>
+					</span>
 				</Fragment>
 			) : (
 				<VerifyOTP phone={phone} />

@@ -120,9 +120,15 @@ export type SelectType = {
 	value: string;
 };
 
+export type Ticket = {
+	number: number;
+	booked: boolean;
+};
+
 export type TimeSlot = {
 	start: string; // format: "HH:mm"
 	end: string; // format: "HH:mm"
+	tickets: Ticket[];
 };
 
 export type WeeklyAvailability = {

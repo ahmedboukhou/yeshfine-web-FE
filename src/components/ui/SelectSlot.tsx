@@ -40,16 +40,16 @@ export const SelectSlot: FC<SelectSlotProps> = ({
 		id,
 	});
 
-	const { available_slots } = data?.data || {};
+	const { slots } = data?.data || {};
 
 	const isSelected = (slot: { start: string; end: string }) =>
 		selectedSlot?.start === slot.start && selectedSlot?.end === slot.end;
 
 	useEffect(() => {
-		if (!isLoading && available_slots?.length && !selectedSlot) {
-			setSelectedSlot(available_slots[0]);
+		if (!isLoading && slots?.length && !selectedSlot) {
+			setSelectedSlot(slots[0]);
 		}
-	}, [available_slots, isLoading, selectedSlot, setSelectedSlot]);
+	}, [slots, isLoading, selectedSlot, setSelectedSlot]);
 
 	return (
 		<div>
@@ -88,8 +88,8 @@ export const SelectSlot: FC<SelectSlotProps> = ({
 						<SlotSkeleton />
 					) : (
 						<div className="grid grid-cols-2 gap-3">
-							{!!available_slots?.length ? (
-								available_slots.map((slot, index) => {
+							{!!slots?.length ? (
+								slots.map((slot, index) => {
 									const selected = isSelected(slot);
 									return (
 										<button
@@ -108,7 +108,7 @@ export const SelectSlot: FC<SelectSlotProps> = ({
 									);
 								})
 							) : (
-								<p className="col-span-2 text-center font-semibold">No slots found!</p>
+								<p className="col-span-2 text-center font-semibold">{t('noSlotsFound')}</p>
 							)}
 						</div>
 					)}

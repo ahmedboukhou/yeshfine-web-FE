@@ -13,12 +13,14 @@ interface SearchDoctorFilterProps {
 	filterValues: FilterValues;
 	setFilterValues: React.Dispatch<React.SetStateAction<FilterValues>>;
 	applyFilters: () => void;
+	clearFilters: () => void;
 }
 
 export const SearchDoctorFilter: FC<SearchDoctorFilterProps> = ({
 	filterValues,
 	setFilterValues,
 	applyFilters,
+	clearFilters,
 }) => {
 	const { t } = useTranslation(['common', 'patient']);
 	const [isOpen, setIsOpen] = useState(false);
@@ -127,10 +129,13 @@ export const SearchDoctorFilter: FC<SearchDoctorFilterProps> = ({
 					<div className="flex-end py-4 px-5 gap-2">
 						<button
 							type="button"
-							onClick={closeModal}
+							onClick={() => {
+								closeModal();
+								clearFilters();
+							}}
 							className="outlined-btn"
 						>
-							{t('cancel')}
+							{t('clear')}
 						</button>
 						<button
 							type="button"

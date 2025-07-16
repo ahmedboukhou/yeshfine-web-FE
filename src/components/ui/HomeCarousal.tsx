@@ -1,7 +1,9 @@
 import AliceCarousel from 'react-alice-carousel';
 import { useTranslation } from 'react-i18next';
 import carousalBg from '../../assets/images/home-carousal-bg.jpg';
-import docImg from '../../assets/images/home-carousal-doc.png';
+import patientCarousalImg1 from '../../assets/images/patient-carousal-1.png';
+import patientCarousalImg2 from '../../assets/images/patient-carousal-2.png';
+import patientCarousalImg3 from '../../assets/images/patient-carousal-3.png';
 
 export const HomeCarousal = () => {
 	const { t } = useTranslation(['patient']);
@@ -10,42 +12,36 @@ export const HomeCarousal = () => {
 		{
 			heading: 'specialistDoctors',
 			description: 'scheduleWithTopDoctors',
-			image: carousalBg,
+			image: patientCarousalImg1,
 		},
 		{
-			heading: 'specialistDoctors',
-			description: 'scheduleWithTopDoctors',
-			image: carousalBg,
+			heading: 'bookLabTest',
+			description: 'bookLabTestDescription',
+			image: patientCarousalImg2,
 		},
 		{
-			heading: 'specialistDoctors',
-			description: 'scheduleWithTopDoctors',
-			image: carousalBg,
-		},
-		{
-			heading: 'specialistDoctors',
-			description: 'scheduleWithTopDoctors',
-			image: carousalBg,
+			heading: 'findMedicines',
+			description: 'findMedicinesDescription',
+			image: patientCarousalImg3,
 		},
 	];
 
-	const items = slides.map((slide, index) => (
+	const items = slides.map(({ description, heading, image }, index) => (
 		<div
 			key={index}
 			className="relative h-[310px] overflow-hidden rounded-2xl"
 			onDragStart={(e) => e.preventDefault()}
 		>
-			<img src={slide.image} alt={slide.heading} className="w-full h-full object-cover" />
+			<img src={carousalBg} alt={heading} className="w-full h-full object-cover" />
 
 			<div className="absolute top-15 left-8 text-white z-10 max-w-[60%]">
-				<h1>{t('lookingFor')}</h1>
-				<h1>{t(slide.heading)}?</h1>
-				<h4 className="mt-3">{t(slide.description)}</h4>
+				<h1>{t(heading)}</h1>
+				<p className="mt-3">{t(description)}</p>
 				<button className="secondary-btn mt-6">{t('bookNow')}</button>
 			</div>
 
-			<div className="absolute top-0 right-0 md:right-10 h-full">
-				<img src={docImg} alt="Doctor image" className="h-full object-contain" />
+			<div className="absolute top-0 h-full max-w-[300px] sm:max-w-[350px] sm:right-10 right-2">
+				<img src={image} alt={heading} className="h-full w-full object-contain" />
 			</div>
 		</div>
 	));

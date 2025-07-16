@@ -63,11 +63,11 @@ export const DoctorCard: FC<DoctorCardProps> = ({
 									<Rating rating={averageRating} />
 								</div>
 							</div>
-							<div className="flex gap-3 flex-col sm:flex-col md:flex-col xl:flex-row">
+							<div className="flex gap-3 flex-col xl:flex-row">
 								<Badge specialty={specialty} />
 								<div className="gap-2 flex-items-center">
 									<BriefCaseIcon />
-									<span className="!text-xs text-typography-500 text-nowrap">
+									<span className="text-typography-500 text-nowrap ellipses">
 										{t('experienceYears', { experience })}
 									</span>
 								</div>
@@ -76,7 +76,7 @@ export const DoctorCard: FC<DoctorCardProps> = ({
 							<div className="flex gap-1">
 								<div className="flex-items-center gap-2 flex-1 col-span-2 w-20">
 									<HospitalIcon />
-									<p className="text-typography-700 font-medium text-sm ellipses ">{clinicName}</p>
+									<p className="text-typography-700 font-medium text-sm ellipses">{clinicName}</p>
 								</div>
 
 								<div className="flex-end shrink-0 text-nowrap">

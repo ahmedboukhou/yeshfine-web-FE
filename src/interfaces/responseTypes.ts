@@ -92,7 +92,7 @@ export type AppointmentsResponse = CommonApiResponse & {
 	data: { labs: Lab[]; meta: ResponsePagination };
 };
 export type AppointmentSlotResponse = CommonApiResponse & {
-	data: { available_slots: TimeSlot[] };
+	data: { slots: TimeSlot[] };
 };
 
 export type PatientHomeTopEntitiesResponse = CommonApiResponse & {

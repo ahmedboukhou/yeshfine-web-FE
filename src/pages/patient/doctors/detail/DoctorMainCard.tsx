@@ -10,7 +10,7 @@ type DoctorTypeCardProps = {
 	id?: string;
 	name?: string;
 	averageRating?: string;
-	image?: string;
+	image?: string;	
 	specialty?: string;
 	clinicName?: string;
 	latitude?: number;
@@ -43,7 +43,7 @@ export const DoctorMainCard: FC<DoctorTypeCardProps> = ({
 				<div className="flex-1 flex flex-col items-center justify-center text-center md:justify-between md:flex-row md:text-left gap-3">
 					<div>
 						<div className="flex gap-3 mb-1">
-							<h3 className="text-typography-900">{name}</h3>
+							<h3 className="text-typography-900 font-semibold">{name}</h3>
 							<Rating rating={averageRating} />
 						</div>
 						<Badge specialty={specialty} />
