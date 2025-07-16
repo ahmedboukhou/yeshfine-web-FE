@@ -103,7 +103,7 @@ export const SearchDoctorFilter: FC<SearchDoctorFilterProps> = ({
 							</h4>
 							<div className="grid grid-cols-3 gap-2 mt-2">
 								{[
-									{ label: t('nearMe', { ns: 'patient' }), value: 'near me' },
+									{ label: t('nearMe', { ns: 'patient' }), value: 'nearMe' },
 									{ label: t('myCity', { ns: 'patient' }), value: 'city' },
 									{ label: t('all'), value: '' },
 								].map(({ label, value }) => (
