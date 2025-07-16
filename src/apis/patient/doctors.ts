@@ -10,18 +10,18 @@ import { apiClient } from '../../lib/api';
 import { useDoctorSpecialtiesStore } from '../../store/doctorSpecialties';
 
 type GetDoctorsQueryParams = PayloadPaginationType & {
-	specialization_filter?: number[];
-	hospital_filter?: 'near me' | 'city';
-	location_filter?: string;
+	specialization?: number[];
+	hospital?: 'near me' | 'city';
+	location?: string;
 	search?: string;
 };
 
 export function useGetDoctorsQuery({
 	limit,
 	page,
-	hospital_filter,
-	location_filter,
-	specialization_filter,
+	hospital,
+	location,
+	specialization,
 	search,
 }: GetDoctorsQueryParams) {
 	return useQuery({
@@ -31,9 +31,9 @@ export function useGetDoctorsQuery({
 				page,
 				limit,
 				...(search && { search }),
-				...(!!specialization_filter?.length && { specialization_filter }),
-				...(hospital_filter && { specialization_filter }),
-				...(location_filter && { location_filter }),
+				...(!!specialization?.length && { specialization }),
+				...(hospital && { specialization }),
+				...(location && { location }),
 			}),
 	});
 }

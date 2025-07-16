@@ -18,14 +18,14 @@ export const PatientDoctors = () => {
 	const [search, setSearch] = useState('');
 	const {
 		data,
-		isLoading: loadingDoctors,
+		isFetching: loadingDoctors,
 		refetch,
 	} = useGetDoctorsQuery({
 		page,
 		limit: 6,
 		search,
-		specialization_filter: filterValues.specializations.map(({ id }) => id),
-		location_filter: filterValues.location,
+		specialization: filterValues.specializations.map(({ id }) => id),
+		location: filterValues.location,
 	});
 	const doctorsData = data?.data?.items || [];
 	const pagination = data?.data?.meta;
@@ -56,6 +56,7 @@ export const PatientDoctors = () => {
 					/>
 				</div>
 			</div>
+			<div>
 			<div className="grid grid-cols-12 gap-5 mb-10">
 				{loadingDoctors ? (
 					<DoctorCardSkeleton count={6} />
@@ -95,6 +96,7 @@ export const PatientDoctors = () => {
 				onPageChange={handlePageChange}
 				isLoading={loadingDoctors}
 			/>
+			</div>
 		</section>
 	);
 };
