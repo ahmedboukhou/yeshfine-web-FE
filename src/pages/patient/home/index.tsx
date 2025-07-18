@@ -3,11 +3,19 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
 // import { useGetAppointmentsQuery } from '../../../apis/patient/appointments';
 import { useGetTopRatedStatsQuery } from '../../../apis/patient/home';
-import { DoctorCardSkeleton } from '../../../components/ui/skeletons/DoctorCardSkeleton';
 import { HomeCarousal } from '../../../components/ui/HomeCarousal';
+import { DoctorCardSkeleton } from '../../../components/ui/skeletons/DoctorCardSkeleton';
 // import { AppointmentTypeEnum } from '../../../interfaces/enums';
 import { useMediaQuery } from 'react-responsive';
+import { useGetAppointmentsQuery } from '../../../apis/patient/appointments';
+import { AppointmentIcon, DoctorIcon, LabIcon, PharmacyIcon } from '../../../assets/icons';
+import { AppointmentCard } from '../../../components/ui/cards/AppointmentCard';
+import { DoctorCard } from '../../../components/ui/cards/DoctorCard';
+import { LabsPharmacyCard } from '../../../components/ui/cards/LabsPharmacyCard';
+import { NotFoundCard } from '../../../components/ui/cards/NotFoundCard';
+import { AppointmentCardSkeleton } from '../../../components/ui/skeletons/AppointmentCardSkeleton';
 import { LabsPharmacyCardSkeleton } from '../../../components/ui/skeletons/LabsPharmacySkeleton';
+import { AppointmentTypeEnum } from '../../../interfaces/enums';
 import {
 	APPOINTMENTS_ROUTE,
 	DOCTORS_ROUTE,
@@ -16,12 +24,6 @@ import {
 	PHARMACIES_DETAIL_ROUTE,
 	PHARMACIES_ROUTE,
 } from '../../../routes';
-import { DoctorCard } from '../../../components/ui/cards/DoctorCard';
-import { LabsPharmacyCard } from '../../../components/ui/cards/LabsPharmacyCard';
-import { AppointmentCard } from '../../../components/ui/cards/AppointmentCard';
-import { AppointmentTypeEnum } from '../../../interfaces/enums';
-import { useGetAppointmentsQuery } from '../../../apis/patient/appointments';
-import { AppointmentCardSkeleton } from '../../../components/ui/skeletons/AppointmentCardSkeleton';
 
 export const PatientHome = () => {
 	const { t } = useTranslation(['patient', 'common']);
@@ -82,7 +84,11 @@ export const PatientHome = () => {
 							)
 						)
 					) : (
-						<p>no appointments found</p>
+						<NotFoundCard
+							icon={<AppointmentIcon />}
+							heading={t('noAppointmentYet')}
+							subHeading={t('bookWhenReady')}
+						/>
 					)}
 				</div>
 			</section>
@@ -127,7 +133,11 @@ export const PatientHome = () => {
 							)
 						)
 					) : (
-						<p>No doctors Found</p>
+						<NotFoundCard
+							icon={<DoctorIcon />}
+							heading={t('unableToLoadDoctors')}
+							subHeading={t('doctorProfilesFetchError')}
+						/>
 					)}
 				</div>
 			</section>
@@ -140,8 +150,7 @@ export const PatientHome = () => {
 				<div className="grid grid-cols-12 gap-5">
 					{gettingStats ? (
 						<LabsPharmacyCardSkeleton count={3} />
-					) : (
-						!!topLabs?.length &&
+					) : !!topLabs?.length ? (
 						topLabs.map(
 							({ address, id, image, name, averageRating, distance, todaySlot, open, user_id }) => (
 								<LabsPharmacyCard
@@ -157,6 +166,12 @@ export const PatientHome = () => {
 								/>
 							)
 						)
+					) : (
+						<NotFoundCard
+							icon={<LabIcon />}
+							heading={t('labsNotDisplayed')}
+							subHeading={t('labsLoadingError')}
+						/>
 					)}
 				</div>
 			</section>
@@ -170,8 +185,7 @@ export const PatientHome = () => {
 				<div className="grid grid-cols-12 gap-5">
 					{gettingStats ? (
 						<LabsPharmacyCardSkeleton count={3} />
-					) : (
-						!!topPharmacies?.length &&
+					) : !!topPharmacies?.length ? (
 						topPharmacies.map(
 							({ address, id, image, name, averageRating, distance, todaySlot, user_id }) => (
 								<LabsPharmacyCard
@@ -186,6 +200,12 @@ export const PatientHome = () => {
 								/>
 							)
 						)
+					) : (
+						<NotFoundCard
+							icon={<PharmacyIcon />}
+							heading={t('pharmaciesUnavailable')}
+							subHeading={t('pharmaciesFetchError')}
+						/>
 					)}
 				</div>
 			</section>

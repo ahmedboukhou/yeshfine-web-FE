@@ -45,5 +45,13 @@
 	"uploadReport": "Téléverser le rapport",
 	"verifyVisitDateTime": "Vérifiez la date et l’heure de votre visite",
 	"videoCall": "Appel vidéo",
-	"workLocation": "Lieu de travail"
+	"workLocation": "Lieu de travail",
+	"unableToLoadDoctors": "Impossible de charger les médecins",
+	"doctorProfilesFetchError": "Une erreur s'est produite lors du chargement des profils des médecins. Veuillez vérifier votre connexion et réessayer.",
+	"bookWhenReady": "Quand vous serez prêt, réservez un médecin ou un test de laboratoire et il apparaîtra ici.",
+	"noAppointmentYet": "Aucun rendez-vous pour le moment",
+	"labsNotDisplayed": "Impossible d'afficher les laboratoires",
+	"labsLoadingError": "Nous rencontrons des difficultés pour charger les laboratoires à proximité. Pas d'inquiétude — actualisez dans un instant.",
+	"pharmaciesUnavailable": "Pharmacies indisponibles pour le moment",
+	"pharmaciesFetchError": "Un problème est survenu lors du chargement des données des pharmacies. Veuillez réessayer ou revenir plus tard."
 }
