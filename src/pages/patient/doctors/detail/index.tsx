@@ -19,8 +19,16 @@ export const PatientDoctorDetail = () => {
 	const { t } = useTranslation(['common', 'patient']);
 	const { data, isLoading } = useGetDoctorDetailQuery({ id });
 	const { doctorDetail, image, latitude, longitude, name, treated_patients } = data?.data || {};
-	const { average_rating, speciality, clinicName, fee, experience, biography, total_reviews } =
-		doctorDetail || {};
+	const {
+		average_rating,
+		speciality,
+		clinicName,
+		fee,
+		experience,
+		biography,
+		total_reviews,
+		id: doctorDetailId,
+	} = doctorDetail || {};
 
 	const docInfo = [
 		{ img: hospitalImg, heading: t('hospital'), text: clinicName },
@@ -40,6 +48,7 @@ export const PatientDoctorDetail = () => {
 					image={image}
 					specialty={speciality}
 					id={id}
+					doctorDetailId={doctorDetailId}
 					clinicName={clinicName}
 					latitude={latitude}
 					longitude={longitude}

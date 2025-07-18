@@ -36,6 +36,13 @@ export function useVerifyOTPMutation() {
 		onError: ({ message }) => toast.error(message || 'Something went wrong'),
 	});
 }
+
+export function useVerifyPasswordOTPMutation() {
+	return useMutation<VerifyOtpResponse, CommonApiResponse, OTPInput>({
+		mutationFn: (values) => apiClient.post(`auth/verify-password-otp`, values),
+		onError: ({ message }) => toast.error(message || 'Something went wrong'),
+	});
+}
 export function useResendOTPQuery({ phone }: { phone: string }) {
 	return useQuery({
 		queryKey: ['resend-otp', phone],

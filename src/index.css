@@ -71,10 +71,16 @@ button {
 	/* purple  */
 	--color-purple: #7110d6;
 	--color-purple-light: #f6edff;
-	/* blue */
 
+	/* blue */
 	--color-blue-50: #eff8ff;
 	--color-blue-700: #175cd3;
+	
+	/*  danger*/
+	--color-danger-50: #FEF3F2;
+	--color-danger-200: #FECDCA;
+	--color-danger-300: #FDA29B;
+	
 
 	/* typography */
 	--color-typography-900: #181d27;

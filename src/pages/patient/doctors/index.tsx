@@ -10,15 +10,15 @@ import { SearchDoctorFilter } from './Filter';
 
 export const PatientDoctors = () => {
 	const { t } = useTranslation();
-
+	
 	const [page, setPage] = useState(1);
 	const [filterValues, setFilterValues] = useState<{
 		specializations: DoctorSpecialtiesType[];
 		location: string;
-	}>({ specializations: [], location: '' });
+	}>({ specializations: [], location: 'all' });
 	const [search, setSearch] = useState('');
 	const [shouldRefetch, setShouldRefetch] = useState(false);
-	
+
 	const {
 		data,
 		isFetching: loadingDoctors,
@@ -52,7 +52,7 @@ export const PatientDoctors = () => {
 	};
 
 	const handleClearFilters = () => {
-		setFilterValues({ specializations: [], location: '' });
+		setFilterValues({ specializations: [], location: 'all' });
 		setShouldRefetch(true);
 	};
 
@@ -110,7 +110,7 @@ export const PatientDoctors = () => {
 						</Fragment>
 					) : (
 						<div className="col-span-12 my-4 flex-center">
-							<p>{t('noDoctorsFound', { ns: 'patient' })}</p>
+							<p>{t('notFound', { ns: 'patient', text: t('doctors', { ns: 'common' }) })}</p>
 						</div>
 					)}
 				</div>

@@ -19,16 +19,19 @@ import {
 import { DoctorCard } from '../../../components/ui/cards/DoctorCard';
 import { LabsPharmacyCard } from '../../../components/ui/cards/LabsPharmacyCard';
 import { AppointmentCard } from '../../../components/ui/cards/AppointmentCard';
+import { AppointmentTypeEnum } from '../../../interfaces/enums';
+import { useGetAppointmentsQuery } from '../../../apis/patient/appointments';
 
 export const PatientHome = () => {
 	const { t } = useTranslation(['patient', 'common']);
 	const isSmallToLargeScreen = useMediaQuery({ maxWidth: 1535 });
 
 	// get upcoming appointments
-	// const { data: getAppointmentsResponse, isLoading: loadingAppointments } = useGetAppointmentsQuery(
-	// 	{ page: 1, limit: 3, type: AppointmentTypeEnum.Upcoming }
-	// );
-	// const appointmentsData = getAppointmentsResponse?.data?.labs || [];
+	const { data: getAppointmentsResponse, isLoading: loadingAppointments } = useGetAppointmentsQuery(
+		{ page: 1, limit: 3, type: AppointmentTypeEnum.Upcoming }
+	);
+	const appointmentsData = getAppointmentsResponse?.data?.items || [];
+	console.log('🚀 ~ PatientHome ~ appointmentsData:', appointmentsData);
 
 	const { data, isFetching: gettingStats } = useGetTopRatedStatsQuery();
 	const { topDoctors, topLabs, topPharmacies } = data?.data || {};
@@ -53,11 +56,27 @@ export const PatientHome = () => {
 					route={APPOINTMENTS_ROUTE}
 				/>
 				<div className="flex gap-5 overflow-auto">
-					{[1, 2, 3].map(() => (
-						<div className=" col-span-12 sm:col-span-6  lg:col-span-4">
-							<AppointmentCard />
-						</div>
-					))}
+					{appointmentsData.map(
+						(
+							{
+								doctor: { image, name, speciality, clinicName },
+								appointment_date_formatted,
+								time_range,
+							},
+							index
+						) => (
+							<div key={index} className=" col-span-12 sm:col-span-6  lg:col-span-4">
+								<AppointmentCard
+									image={image}
+									name={name}
+									speciality={speciality}
+									clinicName={clinicName}
+									appointmentDate={appointment_date_formatted}
+									timeRange={time_range}
+								/>
+							</div>
+						)
+					)}
 				</div>
 			</section>
 

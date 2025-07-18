@@ -10,10 +10,11 @@ type DoctorTypeCardProps = {
 	id?: string;
 	name?: string;
 	averageRating?: string;
-	image?: string;	
+	image?: string;
 	specialty?: string;
 	clinicName?: string;
 	latitude?: number;
+	doctorDetailId?: number;
 	longitude?: number;
 };
 export const DoctorMainCard: FC<DoctorTypeCardProps> = ({
@@ -24,6 +25,7 @@ export const DoctorMainCard: FC<DoctorTypeCardProps> = ({
 	specialty,
 	clinicName,
 	latitude,
+	doctorDetailId,
 	longitude,
 }) => {
 	const { t } = useTranslation(['patient']);
@@ -62,6 +64,7 @@ export const DoctorMainCard: FC<DoctorTypeCardProps> = ({
 							specialty,
 							latitude,
 							longitude,
+							doctorDetailId,
 						}}
 					>
 						<BookAppointmentIcon />

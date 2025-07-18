@@ -1,7 +1,11 @@
 import { useEffect, useState, type KeyboardEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 import { toast } from 'react-toastify';
-import { useResendOTPQuery, useVerifyOTPMutation } from '../../../apis/auth';
+import {
+	useResendOTPQuery,
+	useVerifyOTPMutation,
+	useVerifyPasswordOTPMutation,
+} from '../../../apis/auth';
 import { AuthCardHeading } from '../../../components/ui/cards/AuthCard';
 import { responseStatus } from '../../../interfaces/enums';
 import { maskPhoneNumber } from '../../../lib/helpers';
@@ -24,6 +28,8 @@ export function VerifyOTP({
 
 	// APIs for signup flow
 	const { mutateAsync: verifyOtp, isPending } = useVerifyOTPMutation();
+	const { mutateAsync: verifyPasswordOtp, isPending: IsVerifyPasswordPending } =
+		useVerifyPasswordOTPMutation();
 	const { refetch: resendOtp, isLoading: loadingResendOtp } = useResendOTPQuery({ phone });
 
 	// APIs for reset password flow
@@ -72,21 +78,24 @@ export function VerifyOTP({
 	}, [seconds]);
 
 	const handleVerifyOTP = () => {
-		verifyOtp(
-			{ phone, otp },
-			{
-				onSuccess: ({ status, data }) => {
-					if (status === responseStatus.Success) {
-						if (isForgotPassword && setShowCreatePasswordForm) {
-							setShowCreatePasswordForm(true);
-						} else {
-							setCurrentUser(data.user);
-							loginUser(data.token, data.refreshToken);
-						}
-					}
-				},
+		const payload = { phone, otp };
+
+		const onSuccess = ({ status, data }: any) => {
+			if (status === responseStatus.Success) {
+				if (isForgotPassword && setShowCreatePasswordForm) {
+					setShowCreatePasswordForm(true);
+				} else {
+					setCurrentUser(data.user);
+					loginUser(data.token, data.refreshToken);
+				}
 			}
-		);
+		};
+
+		if (isForgotPassword) {
+			verifyPasswordOtp(payload, { onSuccess });
+		} else {
+			verifyOtp(payload, { onSuccess });
+		}
 	};
 
 	const handleResendOTP = async () => {
@@ -134,7 +143,7 @@ export function VerifyOTP({
 			</div>
 			<button
 				className="mb-8 primary-btn w-full"
-				disabled={otp.length !== 6 || isPending}
+				disabled={otp.length !== 6 || isPending || IsVerifyPasswordPending}
 				onClick={handleVerifyOTP}
 			>
 				Verify OTP

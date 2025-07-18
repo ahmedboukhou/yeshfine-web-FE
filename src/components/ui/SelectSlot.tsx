@@ -1,10 +1,11 @@
-import { useEffect, type Dispatch, type FC, type SetStateAction } from 'react';
+import { Fragment, useEffect, type Dispatch, type FC, type SetStateAction } from 'react';
 import { DayPicker } from 'react-day-picker';
 import 'react-day-picker/style.css';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router';
 import type { AppointmentSlotResponse } from '../../interfaces/responseTypes';
 import { SlotSkeleton } from './skeletons/SlotSkeleton';
+import type { TimeSlot } from '../../interfaces';
 
 interface SelectSlotProps {
 	date: Date;
@@ -13,16 +14,8 @@ interface SelectSlotProps {
 		data?: AppointmentSlotResponse;
 		isLoading: boolean;
 	};
-	selectedSlot: {
-		start: string;
-		end: string;
-	} | null;
-	setSelectedSlot: Dispatch<
-		SetStateAction<{
-			start: string;
-			end: string;
-		} | null>
-	>;
+	selectedSlot: TimeSlot | null;
+	setSelectedSlot: Dispatch<SetStateAction<TimeSlot | null>>;
 }
 
 export const SelectSlot: FC<SelectSlotProps> = ({
@@ -47,7 +40,12 @@ export const SelectSlot: FC<SelectSlotProps> = ({
 
 	useEffect(() => {
 		if (!isLoading && slots?.length && !selectedSlot) {
-			setSelectedSlot(slots[0]);
+			const firstSlot = slots[0];
+			const firstAvailableTicket = firstSlot.tickets.find((t) => !t.booked)?.number;
+			setSelectedSlot({
+				...firstSlot,
+				selectedTicketNumber: firstAvailableTicket,
+			});
 		}
 	}, [slots, isLoading, selectedSlot, setSelectedSlot]);
 
@@ -83,35 +81,84 @@ export const SelectSlot: FC<SelectSlotProps> = ({
             }
           `}</style>
 				</div>
-				<div className="flex-1 max-h-78 overflow-auto">
-					{isLoading ? (
-						<SlotSkeleton />
-					) : (
-						<div className="grid grid-cols-2 gap-3">
-							{!!slots?.length ? (
-								slots.map((slot, index) => {
-									const selected = isSelected(slot);
-									return (
-										<button
-											key={index}
-											onClick={() => setSelectedSlot(slot)}
-											className={`col-span-2 xl:col-span-1 p-3 flex-center rounded-full border w-full font-medium
-											${
-												selected
-													? 'bg-primary-light-active text-primary border-primary'
-													: 'bg-gray-200 border-border-1 text-typography-600 hover:bg-gray-200/80'
-											}
-											        disabled:pointer-events-none disabled:text-typography-600/50 border`}
-										>
-											{slot.start} - {slot.end}
-										</button>
-									);
-								})
-							) : (
-								<p className="col-span-2 text-center font-semibold">{t('noSlotsFound')}</p>
-							)}
-						</div>
-					)}
+				<div className="flex-1">
+					<div className="">
+						{isLoading ? (
+							<SlotSkeleton />
+						) : (
+							<div>
+								{!!slots?.length ? (
+									<div className="space-y-3">
+										{/* Slot Selection */}
+										<div className="grid grid-cols-2 gap-3 h-40 overflow-auto">
+											{slots.map((slot, index) => {
+												const selected = isSelected(slot);
+												return (
+													<div className="col-span-1 xl:col-span-1">
+														<button
+															key={index}
+															onClick={() => {
+																const firstAvailableTicket = slot.tickets.find(
+																	(t) => !t.booked
+																)?.number;
+																setSelectedSlot({
+																	...slot,
+																	selectedTicketNumber: firstAvailableTicket,
+																});
+															}}
+															className={`p-3 flex-center rounded-full border w-full font-medium
+                ${
+									selected
+										? 'bg-primary-light-active text-primary border-primary'
+										: 'bg-gray-200 border-border-1 text-typography-600 hover:bg-gray-200/80'
+								}
+                disabled:pointer-events-none disabled:text-typography-600/50 border`}
+														>
+															{slot.start} - {slot.end}
+														</button>
+													</div>
+												);
+											})}
+										</div>
+
+										{/* Ticket Selection for selected slot */}
+										{selectedSlot && (
+											<div className="space-y-2">
+												<h5>{t('tickets', { ns: 'common' })}</h5>
+												<div className="flex gap-3 flex-wrap">
+													{selectedSlot.tickets.map(({ booked, number }) => (
+														<button
+															key={number}
+															disabled={booked}
+															onClick={() =>
+																setSelectedSlot({
+																	...selectedSlot,
+																	selectedTicketNumber: number,
+																})
+															}
+															className={`h-12 w-12 border ${
+																booked
+																	? 'bg-danger-50 border-danger-200 text-danger-300'
+																	: selectedSlot.selectedTicketNumber === number
+																	? 'bg-primary border-primary text-white'
+																	: 'bg-white border-border-1 text-typography-500 hover:bg-primary-light-hover'
+															} rounded-lg disabled:pointer-events-none`}
+														>
+															{number}
+														</button>
+													))}
+												</div>
+											</div>
+										)}
+									</div>
+								) : (
+									<p className="col-span-2 text-center font-semibold">
+										{t('notFound', { ns: 'patient', text: t('slots', { ns: 'common' }) })}
+									</p>
+								)}
+							</div>
+						)}
+					</div>
 				</div>
 			</div>
 		</div>
