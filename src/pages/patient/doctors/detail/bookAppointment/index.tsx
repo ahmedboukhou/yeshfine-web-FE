@@ -1,21 +1,31 @@
 import { Fragment, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link, useParams } from 'react-router';
+import { Link, useLocation, useNavigate, useParams } from 'react-router';
+import { toast } from 'react-toastify';
+import {
+	useBookAppointmentMutation,
+	useGetDoctorAppointmentSlotQuery,
+} from '../../../../../apis/patient/appointments';
+import { Radio } from '../../../../../components/ui/actions/Radio';
 import { Breadcrumb } from '../../../../../components/ui/Breadcrumb';
 import { SelectSlot } from '../../../../../components/ui/SelectSlot';
-import { DOCTORS_DETAIL_ROUTE, DOCTORS_ROUTE } from '../../../../../routes';
+import type { TimeSlot } from '../../../../../interfaces';
+import { DOCTORS_DETAIL_ROUTE, DOCTORS_ROUTE, HOME_ROUTE } from '../../../../../routes';
 import { VerifyBooking } from './VerifyBooking';
-import { useGetDoctorAppointmentSlotQuery } from '../../../../../apis/patient/appointments';
 
 export const PatientDoctorBookAppointment = () => {
 	const { t } = useTranslation(['patient', 'common']);
 	const { id } = useParams<{ id: string }>();
+	const { state } = useLocation();
+	const navigate = useNavigate();
 
 	const [date, setDate] = useState<Date>(new Date());
 	const [appointmentType, setAppointmentType] = useState<string>('onsite');
 	const [showVerifyScreen, setShowVerifyScreen] = useState(false);
 	const [reason, setReason] = useState('');
-	const [selectedSlot, setSelectedSlot] = useState<{ start: string; end: string } | null>(null);
+	const [selectedSlot, setSelectedSlot] = useState<TimeSlot | null>(null);
+	const { doctorDetailId } = state;
+	const { mutateAsync: bookAppointment } = useBookAppointmentMutation();
 
 	const breadcrumbItems = [
 		{ title: t('doctors', { ns: 'common' }), path: DOCTORS_ROUTE },
@@ -31,6 +41,28 @@ export const PatientDoctorBookAppointment = () => {
 		if (!showVerifyScreen) {
 			setShowVerifyScreen(true);
 		} else {
+			selectedSlot &&
+				id &&
+				bookAppointment(
+					{
+						appointment_date: date,
+						appointment_type: appointmentType,
+						doctor_detail_id: doctorDetailId,
+						doctor_id: Number(id),
+						ticket_number: selectedSlot.selectedTicketNumber,
+						start_time: selectedSlot.start,
+						end_time: selectedSlot.end,
+						reason,
+					},
+					{
+						onSuccess: ({ message, status }) => {
+							if (status) {
+								toast.success(message);
+								navigate(HOME_ROUTE);
+							}
+						},
+					}
+				);
 			return;
 		}
 	};
@@ -61,28 +93,16 @@ export const PatientDoctorBookAppointment = () => {
 
 						<div>
 							<h4 className="text-typography-900 font-semibold mb-6">{t('typeOfAppointment')}</h4>
-							<div className="my-6">
-								<div className="flex gap-3">
-									{appointmentTypes.map((type) => (
-										<div className="flex items-center " key={type.value}>
-											<input
-												type="radio"
-												id={`appointment-type-${type.value}`}
-												name="appointment-type"
-												value={type.value}
-												checked={appointmentType === type.value}
-												onChange={(e) => setAppointmentType(e.target.value)}
-												className="shrink-0 mt-0.5 border-gray-200 rounded-full cursor-pointer text-primary focus:ring-0 checked:border-primary disabled:opacity-50 disabled:pointer-events-none"
-											/>
-											<label
-												htmlFor={`appointment-type-${type.value}`}
-												className="text-sm text-gray-600 ms-2  cursor-pointer"
-											>
-												{type.label}
-											</label>
-										</div>
-									))}
-								</div>
+							<div className="flex gap-3 my-6">
+								{appointmentTypes.map(({ label, value }) => (
+									<Radio
+										label={label}
+										key={value}
+										value={value}
+										checked={appointmentType === value}
+										onChange={(e) => setAppointmentType(e.target.value)}
+									/>
+								))}
 							</div>
 						</div>
 
@@ -109,11 +129,20 @@ export const PatientDoctorBookAppointment = () => {
 					/>
 				)}
 				<div className="flex-end gap-5 mt-5">
-					<Link to={DOCTORS_DETAIL_ROUTE.replace(':id', `${id}`)} className="outlined-primary-btn">
-						{t('cancel', { ns: 'common' })}
-					</Link>
-					<button onClick={handleSave} className="primary-btn">
-						{showVerifyScreen ? t('proceedPayment') : t('bookNow')}
+					{showVerifyScreen ? (
+						<button onClick={() => setShowVerifyScreen(false)} className="outlined-primary-btn">
+							{t('back', { ns: 'common' })}
+						</button>
+					) : (
+						<Link
+							to={DOCTORS_DETAIL_ROUTE.replace(':id', `${id}`)}
+							className="outlined-primary-btn"
+						>
+							{t('cancel', { ns: 'common' })}
+						</Link>
+					)}
+					<button onClick={handleSave} className="primary-btn" disabled={!!!selectedSlot}>
+						{showVerifyScreen ? t('bookAppointment') : t('bookNow', { ns: 'common' })}
 					</button>
 				</div>
 			</div>

@@ -66,6 +66,26 @@ export type Lab = {
 	distance: null | number;
 	labDetail: { id: number; average_rating: string };
 };
+export type AppointmentType = {
+	doctor: {
+		id: number;
+		name: string;
+		image: string;
+		speciality: string;
+		clinicName: string;
+	};
+	appointment_id: number;
+	appointment_type: string;
+	appointment_type_label: string;
+	appointment_date: string; // format: "YYYY-MM-DD"
+	appointment_date_formatted: string; // e.g. "18 Jul"
+	start_time: string; // format: "HH:mm:ss"
+	end_time: string; // format: "HH:mm:ss"
+	time_range: string; // e.g. "09:00 AM - 04:00 PM"
+	ticket_number: number;
+	distance: number | null;
+	meeting_link: string | null;
+};
 
 export type TopDoctor = {
 	id: number;
@@ -120,9 +140,16 @@ export type SelectType = {
 	value: string;
 };
 
+export type Ticket = {
+	number: number;
+	booked: boolean;
+};
+
 export type TimeSlot = {
 	start: string; // format: "HH:mm"
 	end: string; // format: "HH:mm"
+	tickets: Ticket[];
+	selectedTicketNumber?: number; // add this
 };
 
 export type WeeklyAvailability = {
@@ -141,4 +168,11 @@ export type DoctorReviewType = {
 	review_text: string;
 	created_at: string;
 	user: { id: number; name: string; image: string };
+};
+
+export type LabFilterType = {
+	labTestList: DoctorSpecialtiesType[];
+	location: string;
+	resultTime: 'all' | 'same_day' | 'more_than_2' | 'less_than_2';
+	showOpen: boolean;
 };

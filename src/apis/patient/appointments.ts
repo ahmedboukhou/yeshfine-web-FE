@@ -38,7 +38,7 @@ export function useGetDoctorAppointmentSlotQuery({
 
 export function useBookAppointmentMutation() {
 	return useMutation<CommonApiResponse, CommonApiResponse, BookAppointmentInput>({
-		mutationFn: (values) => apiClient.post(`auth/forgot-password`, values),
+		mutationFn: (values) => apiClient.post(`patients/appointments`, values),
 		onError: ({ message }) => toast.error(message || 'Something went wrong'),
 	});
 }

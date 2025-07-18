@@ -25,7 +25,7 @@ export function useGetDoctorsQuery({
 	search,
 }: GetDoctorsQueryParams) {
 	return useQuery({
-		queryKey: ['get-doctors', page],
+		queryKey: ['get-doctors'],
 		queryFn: (): Promise<DoctorsResponse> =>
 			apiClient.get(`patients/doctors-list`, {
 				page,

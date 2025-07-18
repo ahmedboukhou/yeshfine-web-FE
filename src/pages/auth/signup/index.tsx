@@ -4,7 +4,7 @@ import { useForm, type SubmitHandler } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
 import { useSignupMutation } from '../../../apis/auth';
-import { TickIcon } from '../../../assets/icons';
+import { BackIcon, TickIcon } from '../../../assets/icons';
 import { AuthCard, AuthCardHeading } from '../../../components/ui/cards/AuthCard';
 import { InputField } from '../../../components/ui/inputs/InputField';
 import { PhoneNumberInput } from '../../../components/ui/inputs/PhoneInput';
@@ -28,7 +28,7 @@ const defaultValues: SignupInput = {
 };
 
 export const Signup = () => {
-	const { t } = useTranslation(['auth', 'common','validations']);
+	const { t } = useTranslation(['auth', 'common', 'validations']);
 
 	const [step, setStep] = useState<'role' | 'form' | 'otp'>('role');
 	const [role, setRole] = useState<Role>(Role.Patient);
@@ -96,6 +96,13 @@ export const Signup = () => {
 					<button className="mt-8 primary-btn w-full" onClick={() => setStep('form')}>
 						{t('next', { ns: 'common' })}
 					</button>
+					<span className="flex-center link-text-secondary mt-8">
+						{t('alreadyHaveAccount')}{' '}
+						<Link to={LOGIN_ROUTE} className="link-text">
+							{' '}
+							{t('logIn')}
+						</Link>
+					</span>
 				</div>
 			) : (
 				<Fragment>
@@ -156,12 +163,22 @@ export const Signup = () => {
 						</button>
 					</form>
 
-					<p className="text-sm text-center">
+					<div className="flex justify-center">
+						<button
+							onClick={() => setStep('role')}
+							className="gap-2 flex-items-center cursor-pointer"
+						>
+							<BackIcon />
+							<span className="link-text-secondary">{t('selectAccountType')}</span>
+						</button>
+					</div>
+					<span className="flex-center link-text-secondary">
 						{t('alreadyHaveAccount')}{' '}
 						<Link to={LOGIN_ROUTE} className="link-text">
+							{' '}
 							{t('logIn')}
 						</Link>
-					</p>
+					</span>
 				</Fragment>
 			)}
 		</AuthCard>

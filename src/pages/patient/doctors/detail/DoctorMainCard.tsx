@@ -14,6 +14,7 @@ type DoctorTypeCardProps = {
 	specialty?: string;
 	clinicName?: string;
 	latitude?: number;
+	doctorDetailId?: number;
 	longitude?: number;
 };
 export const DoctorMainCard: FC<DoctorTypeCardProps> = ({
@@ -24,6 +25,7 @@ export const DoctorMainCard: FC<DoctorTypeCardProps> = ({
 	specialty,
 	clinicName,
 	latitude,
+	doctorDetailId,
 	longitude,
 }) => {
 	const { t } = useTranslation(['patient']);
@@ -43,7 +45,7 @@ export const DoctorMainCard: FC<DoctorTypeCardProps> = ({
 				<div className="flex-1 flex flex-col items-center justify-center text-center md:justify-between md:flex-row md:text-left gap-3">
 					<div>
 						<div className="flex gap-3 mb-1">
-							<h3 className="text-typography-900">{name}</h3>
+							<h3 className="text-typography-900 font-semibold">{name}</h3>
 							<Rating rating={averageRating} />
 						</div>
 						<Badge specialty={specialty} />
@@ -62,6 +64,7 @@ export const DoctorMainCard: FC<DoctorTypeCardProps> = ({
 							specialty,
 							latitude,
 							longitude,
+							doctorDetailId,
 						}}
 					>
 						<BookAppointmentIcon />

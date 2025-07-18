@@ -1,24 +1,27 @@
 import { useCallback, useEffect, useState, type FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useGetDoctorSpecialtiesQuery } from '../../../apis/patient/doctors';
+import { useGetLabTestsQuery } from '../../../apis/patient/labs';
 import { CrossIcon, FilterIcon } from '../../../assets/icons';
-import type { DoctorSpecialtiesType } from '../../../interfaces';
-import { useDoctorSpecialtiesStore } from '../../../store/doctorSpecialties';
+import type { LabFilterType } from '../../../interfaces';
+import { useLabTestsStore } from '../../../store/labTests';
 import { Checkbox } from '../../../components/ui/actions/Checkbox';
-
-interface FilterValues {
-	specializations: DoctorSpecialtiesType[];
-	location: string;
-}
+import { Radio } from '../../../components/ui/actions/Radio';
+import { Switch } from '../../../components/ui/actions/Switch';
 
 interface SearchDoctorFilterProps {
-	filterValues: FilterValues;
-	setFilterValues: React.Dispatch<React.SetStateAction<FilterValues>>;
+	filterValues: LabFilterType;
+	setFilterValues: React.Dispatch<React.SetStateAction<LabFilterType>>;
 	applyFilters: () => void;
 	clearFilters: () => void;
 }
 
-export const SearchDoctorFilter: FC<SearchDoctorFilterProps> = ({
+const resultTimeOptions = [
+	{ value: 'same_day', label: 'sameDay' },
+	{ value: 'less_than_2', label: 'lessThan48Hours' },
+	{ value: 'more_than_2', label: 'moreThan48Hours' },
+];
+
+export const SearchLabFilter: FC<SearchDoctorFilterProps> = ({
 	filterValues,
 	setFilterValues,
 	applyFilters,
@@ -27,14 +30,15 @@ export const SearchDoctorFilter: FC<SearchDoctorFilterProps> = ({
 	const { t } = useTranslation(['common', 'patient']);
 
 	const [isOpen, setIsOpen] = useState(false);
-	const { setSpecialties, specialties } = useDoctorSpecialtiesStore((state) => state);
 
-	const { data, isSuccess } = useGetDoctorSpecialtiesQuery();
-	const doctorSpecialties = data?.data?.doctorCategories || [];
+	const { labTestsData, setLabTestsData } = useLabTestsStore((state) => state);
+
+	const { data: labTestResponse, isSuccess } = useGetLabTestsQuery();
+	const labTests = labTestResponse?.data?.labtests || [];
 
 	useEffect(() => {
-		isSuccess && setSpecialties(doctorSpecialties);
-	}, [doctorSpecialties, isSuccess]);
+		isSuccess && labTests && setLabTestsData(labTests);
+	}, [labTests, isSuccess]);
 
 	const toggleModal = useCallback(() => setIsOpen((prev) => !prev), []);
 	const closeModal = useCallback(() => setIsOpen(false), []);
@@ -43,12 +47,12 @@ export const SearchDoctorFilter: FC<SearchDoctorFilterProps> = ({
 		(id: number) => {
 			setFilterValues((prev) => ({
 				...prev,
-				specializations: prev.specializations.some((spec) => spec.id === id)
-					? prev.specializations.filter((spec) => spec.id !== id)
-					: [...prev.specializations, specialties.find((spec) => spec.id === id)!].filter(Boolean),
+				labTestList: prev.labTestList.some((spec) => spec.id === id)
+					? prev.labTestList.filter((spec) => spec.id !== id)
+					: [...prev.labTestList, labTestsData.find((spec) => spec.id === id)!].filter(Boolean),
 			}));
 		},
-		[specialties, setFilterValues]
+		[labTests, setFilterValues]
 	);
 
 	const handleLocationChange = useCallback(
@@ -78,14 +82,14 @@ export const SearchDoctorFilter: FC<SearchDoctorFilterProps> = ({
 						</button>
 					</div>
 
-					<div className="py-8 px-5 bg-primary-light border-y border-gray-200">
+					<div className="py-8 px-5 flex flex-col gap-8 bg-primary-light border-y border-gray-200 max-h-90 overflow-auto">
 						<div>
 							<h4 className="text-typography-800 font-semibold">
-								{t('specializations', { ns: 'patient' })}
+								{t('testType', { ns: 'patient' })}
 							</h4>
 							<div className="flex flex-wrap gap-x-5 gap-y-4 max-h-40 overflow-y-auto mt-5">
-								{specialties.map(({ id, name }) => {
-									const isChecked = filterValues.specializations.some((spec) => spec.id === id);
+								{labTestsData.map(({ id, name }) => {
+									const isChecked = filterValues.labTestList.some((spec) => spec.id === id);
 									return (
 										<Checkbox
 											handleCheckbox={() => handleCheckboxChange(id)}
@@ -99,7 +103,27 @@ export const SearchDoctorFilter: FC<SearchDoctorFilterProps> = ({
 							</div>
 						</div>
 
-						<div className="mt-8">
+						<div>
+							<h4 className="text-typography-800 font-semibold">
+								{t('availability', { ns: 'patient' })}
+							</h4>
+							<div className="mt-3 flex-between-center gap-2">
+								<p className="text-primary font-semibold">
+									{t('onlyShowOpenLabs', { ns: 'patient' })}
+								</p>
+								<Switch
+									checked={filterValues.showOpen}
+									onChange={(checked) =>
+										setFilterValues((prev) => ({
+											...prev,
+											showOpen: checked,
+										}))
+									}
+								/>
+							</div>
+						</div>
+
+						<div>
 							<h4 className="text-typography-800 font-semibold">
 								{t('locations', { ns: 'patient' })}
 							</h4>
@@ -121,6 +145,26 @@ export const SearchDoctorFilter: FC<SearchDoctorFilterProps> = ({
 									>
 										{label}
 									</button>
+								))}
+							</div>
+						</div>
+
+						<div>
+							<h4 className="text-typography-800 font-semibold">{t('resultTime')}</h4>
+							<div className="flex flex-wrap gap-x-5 gap-y-4 max-h-40 overflow-y-auto mt-5">
+								{resultTimeOptions.map(({ value, label }) => (
+									<Radio
+										key={value}
+										label={t(label, { ns: 'patient' })}
+										value={value}
+										checked={filterValues.resultTime === value}
+										onChange={(val) =>
+											setFilterValues((prev) => ({
+												...prev,
+												resultTime: val.target.value as any,
+											}))
+										}
+									/>
 								))}
 							</div>
 						</div>

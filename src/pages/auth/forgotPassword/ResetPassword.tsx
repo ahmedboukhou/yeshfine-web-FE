@@ -79,7 +79,7 @@ export const ResetPassword = ({
 				</form>
 			) : (
 				<button className="mt-8 primary-btn w-full" onClick={() => navigate(LOGIN_ROUTE)}>
-					{t('next', { ns: 'continue' })}
+					{t('continue', { ns: 'common' })}
 				</button>
 			)}
 		</Fragment>

@@ -71,7 +71,7 @@ export const PatientLabDetail = () => {
 									to={{
 										pathname: LAB_BOOK_APPOINTMENT_ROUTE.replace(':id', `${id}`),
 									}}
-									state={{ ...selectedTest }}
+									state={{ ...selectedTest, latitude, longitude, address }}
 									className="primary-btn w-full mt-6 flex-center gap-2 text-sm font-semibold"
 								>
 									<BookAppointmentIcon />
@@ -112,9 +112,7 @@ export const PatientLabDetail = () => {
 													<span className="text-typography-700 font-semibold ellipses flex-1">
 														{test.name}
 													</span>
-													<div>
-														{isSelected ? <RadioIconFilled /> : <RadioIcon />}
-													</div>
+													<div>{isSelected ? <RadioIconFilled /> : <RadioIcon />}</div>
 												</div>
 												<div className="mb-3 flex mt-1">
 													<span className="text-typography-500 font-semibold !text-xs ellipses">
@@ -127,7 +125,7 @@ export const PatientLabDetail = () => {
 														<ClockIcon />
 
 														<span className="text-typography-500 font-semibold !text-xs">
-															{t('resultTime', { ns: 'common' })}
+															{t('resultTime', { ns: 'common' })}:
 															<span className="font-bold !text-xs">{test.result_time}</span>
 														</span>
 													</div>
@@ -138,7 +136,9 @@ export const PatientLabDetail = () => {
 										);
 									})
 								) : (
-									<p className=" text-center">{t('noTestsFound')}</p>
+									<p className=" text-center">
+										{t('notFound', { ns: 'patient', text: t('tests', { ns: 'common' }) })}
+									</p>
 								)}
 							</div>
 

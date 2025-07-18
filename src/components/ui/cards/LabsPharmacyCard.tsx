@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import { ActivityIcon, LocationIcon } from '../../../assets/icons';
 import { Badge } from '../Badge';
 import { Rating } from '../Rating';
+import { useTranslation } from 'react-i18next';
 
 type LabsPharmacyCardProps = {
 	name: string;
@@ -21,9 +22,10 @@ export const LabsPharmacyCard: FC<LabsPharmacyCardProps> = ({
 	averageRating,
 	distance,
 	todaySlot,
-	// open,
+	open,
 	link,
 }) => {
+	const { t } = useTranslation();
 	return (
 		<Link to={link} className="col-span-12 sm:col-span-6 xl:col-span-4">
 			<div className="p-4 bg-white rounded-2xl border border-black/10">
@@ -52,7 +54,9 @@ export const LabsPharmacyCard: FC<LabsPharmacyCardProps> = ({
 						</div>
 
 						<div className="flex-between flex-col gap-y-2 md:flex-row">
-							<span className="!text-xs text-primary">Open</span>
+							<span className={`!text-xs ${open ? 'text-primary' : 'text-typography-500'}`}>
+								{t(open ? 'open' : 'closed')}
+							</span>
 							<Badge specialty={todaySlot} variant="primary" />
 
 							<div className="flex-items-center">

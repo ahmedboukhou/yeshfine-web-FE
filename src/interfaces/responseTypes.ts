@@ -1,4 +1,5 @@
 import type {
+	AppointmentType,
 	CurrentUserType,
 	Doctor,
 	DoctorDetail,
@@ -89,10 +90,10 @@ export type LabDetailResponse = CommonApiResponse & {
 };
 
 export type AppointmentsResponse = CommonApiResponse & {
-	data: { labs: Lab[]; meta: ResponsePagination };
+	data: { items: AppointmentType[]; meta: ResponsePagination };
 };
 export type AppointmentSlotResponse = CommonApiResponse & {
-	data: { available_slots: TimeSlot[] };
+	data: { slots: TimeSlot[] };
 };
 
 export type PatientHomeTopEntitiesResponse = CommonApiResponse & {
@@ -101,6 +102,10 @@ export type PatientHomeTopEntitiesResponse = CommonApiResponse & {
 
 export type DoctorSpecialtiesResponse = CommonApiResponse & {
 	data: { doctorCategories: DoctorSpecialtiesType[] };
+};
+
+export type LabTestsResponse = CommonApiResponse & {
+	data: { labtests: DoctorSpecialtiesType[] };
 };
 
 export type DoctorReviewsResponse = CommonApiResponse & {
