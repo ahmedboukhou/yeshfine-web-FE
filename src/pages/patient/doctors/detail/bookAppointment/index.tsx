@@ -9,10 +9,9 @@ import {
 import { Radio } from '../../../../../components/ui/actions/Radio';
 import { Breadcrumb } from '../../../../../components/ui/Breadcrumb';
 import { SelectSlot } from '../../../../../components/ui/SelectSlot';
-import { responseStatus } from '../../../../../interfaces/enums';
+import type { TimeSlot } from '../../../../../interfaces';
 import { DOCTORS_DETAIL_ROUTE, DOCTORS_ROUTE, HOME_ROUTE } from '../../../../../routes';
 import { VerifyBooking } from './VerifyBooking';
-import type { TimeSlot } from '../../../../../interfaces';
 
 export const PatientDoctorBookAppointment = () => {
 	const { t } = useTranslation(['patient', 'common']);
@@ -50,7 +49,7 @@ export const PatientDoctorBookAppointment = () => {
 						appointment_type: appointmentType,
 						doctor_detail_id: doctorDetailId,
 						doctor_id: Number(id),
-						ticket_number:selectedSlot.selectedTicketNumber,
+						ticket_number: selectedSlot.selectedTicketNumber,
 						start_time: selectedSlot.start,
 						end_time: selectedSlot.end,
 						reason,

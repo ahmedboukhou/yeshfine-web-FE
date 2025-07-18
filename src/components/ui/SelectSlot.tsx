@@ -1,11 +1,11 @@
-import { Fragment, useEffect, type Dispatch, type FC, type SetStateAction } from 'react';
+import { useEffect, type Dispatch, type FC, type SetStateAction } from 'react';
 import { DayPicker } from 'react-day-picker';
 import 'react-day-picker/style.css';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router';
+import type { TimeSlot } from '../../interfaces';
 import type { AppointmentSlotResponse } from '../../interfaces/responseTypes';
 import { SlotSkeleton } from './skeletons/SlotSkeleton';
-import type { TimeSlot } from '../../interfaces';
 
 interface SelectSlotProps {
 	date: Date;
