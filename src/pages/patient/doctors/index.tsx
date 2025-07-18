@@ -10,8 +10,9 @@ import { SearchDoctorFilter } from './Filter';
 
 export const PatientDoctors = () => {
 	const { t } = useTranslation();
-	
+
 	const [page, setPage] = useState(1);
+	console.log('🚀 ~ PatientDoctors ~ page:', page);
 	const [filterValues, setFilterValues] = useState<{
 		specializations: DoctorSpecialtiesType[];
 		location: string;
@@ -36,22 +37,24 @@ export const PatientDoctors = () => {
 
 	useEffect(() => {
 		if (shouldRefetch) {
-			setPage(1);
 			refetch();
 			setShouldRefetch(false);
 		}
-	}, [page, shouldRefetch]);
+	}, [shouldRefetch]);
 
 	const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setPage(1);
 		setSearch(e.target.value);
 		setShouldRefetch(true);
 	};
 
 	const handleApplyFilters = () => {
+		setPage(1);
 		setShouldRefetch(true);
 	};
 
 	const handleClearFilters = () => {
+		setPage(1);
 		setFilterValues({ specializations: [], location: 'all' });
 		setShouldRefetch(true);
 	};

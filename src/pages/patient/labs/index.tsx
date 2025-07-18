@@ -37,22 +37,24 @@ export const PatientLabs = () => {
 
 	useEffect(() => {
 		if (shouldRefetch) {
-			setPage(1);
 			refetch();
 			setShouldRefetch(false);
 		}
 	}, [page, shouldRefetch]);
 
 	const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setPage(1);
 		setSearch(e.target.value);
 		setShouldRefetch(true);
 	};
 
 	const handleApplyFilters = () => {
+		setPage(1);
 		setShouldRefetch(true);
 	};
 
 	const handleClearFilters = () => {
+		setPage(1);
 		setFilterValues(filterInitialState);
 		setShouldRefetch(true);
 	};

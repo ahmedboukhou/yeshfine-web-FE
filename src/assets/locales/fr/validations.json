@@ -1,12 +1,12 @@
 {
-	"alphabetOnlyName": "Le nom ne doit contenir que des lettres de l'alphabet",
+	"alphabetOnlyName": "Le nom ne doit contenir que des lettres",
 	"invalidDateFormat": "Format de date invalide",
 	"invalidDOB": "Date de naissance invalide",
-	"invalidFieldFormat": "Le format{{field}} n'est pas valide",
-	"maxLengthField": "{{field}} doit contenir au plus {{max}} caractères",
-	"minLengthField": "{{field}} doit contenir au moins {{min}} caractères",
-	"numericPasswordLength": "Le mot de passe doit contenir 6 à 8 caractères numériques",
-	"numericPasswordOnly": "Le mot de passe doit contenir uniquement des caractères numériques",
+	"invalidFieldFormat": "Le format de {{field}} est invalide",
+	"maxLengthField": "{{field}} doit comporter au maximum {{max}} caractères",
+	"minLengthField": "{{field}} doit comporter au minimum {{min}} caractères",
+	"numericPasswordLength": "Le mot de passe doit comporter entre 6 et 8 chiffres",
+	"numericPasswordOnly": "Le mot de passe doit contenir uniquement des chiffres",
 	"passwordsMustMatch": "Les mots de passe doivent correspondre",
 	"requiredField": "{{field}} est requis"
 }

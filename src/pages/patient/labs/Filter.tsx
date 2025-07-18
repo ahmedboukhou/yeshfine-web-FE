@@ -82,7 +82,7 @@ export const SearchLabFilter: FC<SearchDoctorFilterProps> = ({
 						</button>
 					</div>
 
-					<div className="py-8 px-5 flex flex-col gap-8 bg-primary-light border-y border-gray-200">
+					<div className="py-8 px-5 flex flex-col gap-8 bg-primary-light border-y border-gray-200 max-h-90 overflow-auto">
 						<div>
 							<h4 className="text-typography-800 font-semibold">
 								{t('testType', { ns: 'patient' })}
