@@ -6,9 +6,9 @@ import { LabsPharmacyCard } from '../../../components/ui/cards/LabsPharmacyCard'
 import { Pagination } from '../../../components/ui/Pagination';
 import { LabsPharmacyCardSkeleton } from '../../../components/ui/skeletons/LabsPharmacySkeleton';
 import type { LabFilterType } from '../../../interfaces';
+import { LocationEnum } from '../../../interfaces/enums';
 import { LABS_DETAIL_ROUTE } from '../../../routes';
 import { SearchLabFilter } from './Filter';
-import { LocationEnum } from '../../../interfaces/enums';
 
 const filterInitialState: LabFilterType = {
 	labTestList: [],
@@ -71,8 +71,7 @@ export const PatientLabs = () => {
 				<h3 className="font-semibold text-typography-700">{t('labs')}</h3>
 
 				<div className="flex-items-center gap-2">
-					<SearchInput onChange={handleSearch}
-					 />
+					<SearchInput onChange={handleSearch} />
 					<SearchLabFilter
 						disabled={isFetching}
 						setFilterValues={setFilterValues}
@@ -93,12 +92,14 @@ export const PatientLabs = () => {
 								id,
 								image,
 								name,
+								isOpen,
 								distance,
 								todaySlot,
 								labDetail: { average_rating },
 							}) => (
 								<LabsPharmacyCard
 									address={address}
+									open={isOpen}
 									image={image}
 									todaySlot={todaySlot}
 									key={id}

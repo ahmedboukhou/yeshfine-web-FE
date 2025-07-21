@@ -63,6 +63,7 @@ export type Lab = {
 	id: number;
 	name: string;
 	address: string;
+	isOpen: boolean;
 	image: string;
 	todaySlot: string;
 	distance: null | number;
@@ -217,3 +218,18 @@ export type Pharmacy = {
 	distance: number | null;
 	is_open: boolean;
 };
+
+export type PharmacyInfo = {
+	id: number;
+	is_open: boolean;
+	time_range: string;
+	distance: number | null;
+	name: string;
+	address: string;
+	image: string;
+	latitude: number;
+	longitude: number;
+	pharmacyDetail: PharmacyDetail;
+};
+
+export type MedicinesByCategory = Record<string, Medicine[]>;

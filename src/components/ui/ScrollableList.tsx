@@ -5,11 +5,13 @@ type ScrollableList = {
 	medicineCategories: { id: number; name: string }[];
 	category: string;
 	onCategoryChange: (name: string) => void;
+	disabled?: boolean;
 };
 
 export const ScrollableList: FC<ScrollableList> = ({
 	medicineCategories,
 	category,
+	disabled,
 	onCategoryChange,
 }) => {
 	const scrollRef = useRef<HTMLDivElement>(null);
@@ -40,6 +42,7 @@ export const ScrollableList: FC<ScrollableList> = ({
 				{medicineCategories.map(({ id, name }) => (
 					<button
 						type="button"
+						disabled={disabled}
 						onClick={() => onCategoryChange(name)}
 						className={`!rounded-full mr-0.5 ${
 							category === name

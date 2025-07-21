@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 import { ActivityIcon, ClockIcon, LocationIcon } from '../../../assets/icons';
 import type { Medicine } from '../../../interfaces';
 import { Badge } from '../Badge';
+import { MedicineCard } from '../MedicineCard';
 
 type PharmacyCardProps = {
 	name: string;
@@ -61,23 +62,15 @@ export const PharmacyCard: FC<PharmacyCardProps> = ({
 						medicines
 							?.slice(0, 3)
 							.map(({ name, strength, unit_price, medicine_image, id, dosage_form }) => (
-								<div
-									key={id}
-									className="border border-border-1 col-span-1 rounded-xl h-55 overflow-hidden"
-								>
-									<img
-										src={medicine_image}
-										alt={name}
-										className="rounded-t-xl h-30 w-full object-cover object-top"
+								<div className="col-span-1" key={id}>
+									<MedicineCard
+										id={id}
+										image={medicine_image}
+										name={name}
+										strength={strength}
+										dosage={dosage_form}
+										price={unit_price}
 									/>
-
-									<div className="p-2 flex flex-col gap-1">
-										<span className="text-typography-700 font-semibold">MRU {unit_price}</span>
-										<small className="text-typography-700 font-semibold line-clamp-1">
-											{strength} {dosage_form}
-										</small>
-										<span className="text-typography-700 line-clamp-2">{name}</span>
-									</div>
 								</div>
 							))
 					) : (

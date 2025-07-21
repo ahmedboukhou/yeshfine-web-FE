@@ -12,7 +12,7 @@ import { PharmacyCardSkeleton } from '../../../components/ui/skeletons/PharmacyC
 import type { PharmacyFilterType } from '../../../interfaces';
 import { LocationEnum } from '../../../interfaces/enums';
 import { PHARMACIES_DETAIL_ROUTE } from '../../../routes';
-import { useMedicineCategoriesStore } from '../../../store/pharmacies';
+import { useMedicineCategoriesStore } from '../../../store/medicineCategories';
 import { SearchPharmacyFilter } from './Filter';
 
 const filterInitialState: PharmacyFilterType = {
@@ -106,6 +106,7 @@ export const PatientPharmacies = () => {
 					<ScrollableList
 						medicineCategories={medicineCategories}
 						category={category}
+						disabled={isFetching}
 						onCategoryChange={handleCategoryChange}
 					/>
 				)}
@@ -125,7 +126,6 @@ export const PatientPharmacies = () => {
 								medicines,
 								address,
 								time_range,
-								// todaySlot,
 							}) => (
 								<PharmacyCard
 									address={address}

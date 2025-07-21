@@ -16,6 +16,7 @@ import { PatientLabDetail } from './pages/patient/labs/detail';
 import { PatientLabBookAppointment } from './pages/patient/labs/detail/bookAppointment';
 import { PatientPharmacies } from './pages/patient/pharmacies';
 import { PatientPharmaciesDetail } from './pages/patient/pharmacies/detail';
+import { PatientMedicineCategories } from './pages/patient/pharmacies/detail/MedicineCategories';
 import useAuthStore from './store/auth';
 import { useCurrentUserStore } from './store/user';
 
@@ -37,6 +38,7 @@ export const LABS_DETAIL_ROUTE = `${LABS_ROUTE}/:id`;
 export const LAB_BOOK_APPOINTMENT_ROUTE = `${LABS_ROUTE}/:id/book-appointment`;
 export const PHARMACIES_ROUTE = '/pharmacies';
 export const PHARMACIES_DETAIL_ROUTE = `${PHARMACIES_ROUTE}/:id`;
+export const PHARMACIES_MEDICINE_DETAIL_ROUTE = `${PHARMACIES_ROUTE}/:id/medicines`;
 export const APPOINTMENTS_ROUTE = '/appointments';
 
 export const AppRoutes = () => {
@@ -61,6 +63,10 @@ export const AppRoutes = () => {
 							<Route element={<PatientLabBookAppointment />} path={LAB_BOOK_APPOINTMENT_ROUTE} />
 							<Route element={<PatientPharmacies />} path={PHARMACIES_ROUTE} />
 							<Route element={<PatientPharmaciesDetail />} path={PHARMACIES_DETAIL_ROUTE} />
+							<Route
+								element={<PatientMedicineCategories />}
+								path={PHARMACIES_MEDICINE_DETAIL_ROUTE}
+							/>
 							<Route element={<PatientAppointments />} path={APPOINTMENTS_ROUTE} />
 							<Route element={<Navigate to={HOME_ROUTE} />} path="*" />
 						</Route>

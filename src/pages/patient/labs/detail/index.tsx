@@ -126,7 +126,7 @@ export const PatientLabDetail = () => {
 
 														<span className="text-typography-500 font-semibold !text-xs">
 															{t('resultTime', { ns: 'common' })}:
-															<span className="font-bold !text-xs">{test.result_time}</span>
+															<span className="font-bold !text-xs">{test.result_time_in_days}</span>
 														</span>
 													</div>
 
