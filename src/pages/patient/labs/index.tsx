@@ -8,10 +8,11 @@ import { LabsPharmacyCardSkeleton } from '../../../components/ui/skeletons/LabsP
 import type { LabFilterType } from '../../../interfaces';
 import { LABS_DETAIL_ROUTE } from '../../../routes';
 import { SearchLabFilter } from './Filter';
+import { LocationEnum } from '../../../interfaces/enums';
 
 const filterInitialState: LabFilterType = {
 	labTestList: [],
-	location: '',
+	location: LocationEnum.All,
 	showOpen: false,
 	resultTime: 'all',
 };
@@ -70,8 +71,10 @@ export const PatientLabs = () => {
 				<h3 className="font-semibold text-typography-700">{t('labs')}</h3>
 
 				<div className="flex-items-center gap-2">
-					<SearchInput onChange={handleSearch} />
+					<SearchInput onChange={handleSearch}
+					 />
 					<SearchLabFilter
+						disabled={isFetching}
 						setFilterValues={setFilterValues}
 						filterValues={filterValues}
 						applyFilters={handleApplyFilters}

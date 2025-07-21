@@ -2,17 +2,19 @@ import { useCallback, useEffect, useState, type FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useGetLabTestsQuery } from '../../../apis/patient/labs';
 import { CrossIcon, FilterIcon } from '../../../assets/icons';
-import type { LabFilterType } from '../../../interfaces';
-import { useLabTestsStore } from '../../../store/labTests';
 import { Checkbox } from '../../../components/ui/actions/Checkbox';
 import { Radio } from '../../../components/ui/actions/Radio';
 import { Switch } from '../../../components/ui/actions/Switch';
+import type { LabFilterType } from '../../../interfaces';
+import { LocationEnum } from '../../../interfaces/enums';
+import { useLabTestsStore } from '../../../store/labTests';
 
 interface SearchDoctorFilterProps {
 	filterValues: LabFilterType;
 	setFilterValues: React.Dispatch<React.SetStateAction<LabFilterType>>;
 	applyFilters: () => void;
 	clearFilters: () => void;
+	disabled: boolean;
 }
 
 const resultTimeOptions = [
@@ -26,6 +28,7 @@ export const SearchLabFilter: FC<SearchDoctorFilterProps> = ({
 	setFilterValues,
 	applyFilters,
 	clearFilters,
+	disabled,
 }) => {
 	const { t } = useTranslation(['common', 'patient']);
 
@@ -56,7 +59,7 @@ export const SearchLabFilter: FC<SearchDoctorFilterProps> = ({
 	);
 
 	const handleLocationChange = useCallback(
-		(location: string) => {
+		(location: LocationEnum) => {
 			setFilterValues((prev) => ({ ...prev, location }));
 		},
 		[setFilterValues]
@@ -66,6 +69,7 @@ export const SearchLabFilter: FC<SearchDoctorFilterProps> = ({
 		<div className="relative inline-block">
 			<button
 				type="button"
+				disabled={disabled}
 				onClick={toggleModal}
 				className="primary-btn flex items-center gap-2.5 font-medium px-2.5"
 			>
@@ -129,9 +133,9 @@ export const SearchLabFilter: FC<SearchDoctorFilterProps> = ({
 							</h4>
 							<div className="grid grid-cols-3 gap-2 mt-2">
 								{[
-									{ label: t('nearMe', { ns: 'patient' }), value: 'near_me' },
-									{ label: t('myCity', { ns: 'patient' }), value: 'my_city' },
-									{ label: t('all'), value: 'all' },
+									{ label: t('nearMe', { ns: 'patient' }), value: LocationEnum.NearMe },
+									{ label: t('myCity', { ns: 'patient' }), value: LocationEnum.City },
+									{ label: t('all'), value: LocationEnum.All },
 								].map(({ label, value }) => (
 									<button
 										key={value}

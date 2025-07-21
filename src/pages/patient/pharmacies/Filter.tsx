@@ -1,58 +1,31 @@
-import { useCallback, useEffect, useState, type FC } from 'react';
+import { useCallback, useState, type FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useGetDoctorSpecialtiesQuery } from '../../../apis/patient/doctors';
 import { CrossIcon, FilterIcon } from '../../../assets/icons';
-import type { DoctorSpecialtiesType } from '../../../interfaces';
-import { useDoctorSpecialtiesStore } from '../../../store/doctorSpecialties';
-import { Checkbox } from '../../../components/ui/actions/Checkbox';
+import type { PharmacyFilterType } from '../../../interfaces';
 import { LocationEnum } from '../../../interfaces/enums';
-
-interface FilterValues {
-	specializations: DoctorSpecialtiesType[];
-	location: LocationEnum;
-}
+import { Switch } from '../../../components/ui/actions/Switch';
 
 interface SearchDoctorFilterProps {
-	filterValues: FilterValues;
-	setFilterValues: React.Dispatch<React.SetStateAction<FilterValues>>;
+	filterValues: PharmacyFilterType;
+	disabled: boolean;
+	setFilterValues: React.Dispatch<React.SetStateAction<PharmacyFilterType>>;
 	applyFilters: () => void;
 	clearFilters: () => void;
-	disabled: boolean;
 }
 
-export const SearchDoctorFilter: FC<SearchDoctorFilterProps> = ({
+export const SearchPharmacyFilter: FC<SearchDoctorFilterProps> = ({
 	filterValues,
 	setFilterValues,
+	disabled,
 	applyFilters,
 	clearFilters,
-	disabled,
 }) => {
 	const { t } = useTranslation(['common', 'patient']);
 
 	const [isOpen, setIsOpen] = useState(false);
-	const { setSpecialties, specialties } = useDoctorSpecialtiesStore((state) => state);
-
-	const { data, isSuccess } = useGetDoctorSpecialtiesQuery();
-	const doctorSpecialties = data?.data?.doctorCategories || [];
-
-	useEffect(() => {
-		isSuccess && setSpecialties(doctorSpecialties);
-	}, [doctorSpecialties, isSuccess]);
 
 	const toggleModal = useCallback(() => setIsOpen((prev) => !prev), []);
 	const closeModal = useCallback(() => setIsOpen(false), []);
-
-	const handleCheckboxChange = useCallback(
-		(id: number) => {
-			setFilterValues((prev) => ({
-				...prev,
-				specializations: prev.specializations.some((spec) => spec.id === id)
-					? prev.specializations.filter((spec) => spec.id !== id)
-					: [...prev.specializations, specialties.find((spec) => spec.id === id)!].filter(Boolean),
-			}));
-		},
-		[specialties, setFilterValues]
-	);
 
 	const handleLocationChange = useCallback(
 		(location: LocationEnum) => {
@@ -82,28 +55,28 @@ export const SearchDoctorFilter: FC<SearchDoctorFilterProps> = ({
 						</button>
 					</div>
 
-					<div className="py-8 px-5 bg-primary-light border-y border-gray-200">
+					<div className="py-8 px-5 flex flex-col gap-8 bg-primary-light border-y border-gray-200 max-h-90 overflow-auto">
 						<div>
 							<h4 className="text-typography-800 font-semibold">
-								{t('specializations', { ns: 'patient' })}
+								{t('availability', { ns: 'patient' })}
 							</h4>
-							<div className="flex flex-wrap gap-x-5 gap-y-4 max-h-40 overflow-y-auto mt-5">
-								{specialties.map(({ id, name }) => {
-									const isChecked = filterValues.specializations.some((spec) => spec.id === id);
-									return (
-										<Checkbox
-											handleCheckbox={() => handleCheckboxChange(id)}
-											id={id}
-											key={id}
-											isChecked={isChecked}
-											name={name}
-										/>
-									);
-								})}
+							<div className="mt-3 flex-between-center gap-2">
+								<p className="text-primary font-semibold">
+									{t('onlyShowOpenLabs', { ns: 'patient' })}
+								</p>
+								<Switch
+									checked={filterValues.showOpen}
+									onChange={(checked) =>
+										setFilterValues((prev) => ({
+											...prev,
+											showOpen: checked,
+										}))
+									}
+								/>
 							</div>
 						</div>
 
-						<div className="mt-8">
+						<div>
 							<h4 className="text-typography-800 font-semibold">
 								{t('locations', { ns: 'patient' })}
 							</h4>

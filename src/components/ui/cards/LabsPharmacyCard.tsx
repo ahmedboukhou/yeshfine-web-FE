@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import { Link } from 'react-router';
-import { ActivityIcon, LocationIcon } from '../../../assets/icons';
+import { ActivityIcon, ClockIcon, LocationIcon } from '../../../assets/icons';
 import { Badge } from '../Badge';
 import { Rating } from '../Rating';
 import { useTranslation } from 'react-i18next';
@@ -28,7 +28,7 @@ export const LabsPharmacyCard: FC<LabsPharmacyCardProps> = ({
 	const { t } = useTranslation();
 	return (
 		<Link to={link} className="col-span-12 sm:col-span-6 xl:col-span-4">
-			<div className="p-4 bg-white rounded-2xl border border-black/10">
+			<div className="p-4 bg-white rounded-2xl border border-border-1">
 				<div className="relative pt-[50%] rounded-xl overflow-hidden hidden sm:block">
 					<img
 						className="size-full absolute top-0 start-0 object-cover object-top group-hover:scale-105 group-focus:scale-105 transition-transform duration-500 ease-in-out rounded-t-xl"
@@ -57,7 +57,7 @@ export const LabsPharmacyCard: FC<LabsPharmacyCardProps> = ({
 							<span className={`!text-xs ${open ? 'text-primary' : 'text-typography-500'}`}>
 								{t(open ? 'open' : 'closed')}
 							</span>
-							<Badge specialty={todaySlot} variant="primary" />
+							<Badge icon={<ClockIcon />} specialty={todaySlot} variant="primary" />
 
 							<div className="flex-items-center">
 								<ActivityIcon />

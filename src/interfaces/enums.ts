@@ -15,3 +15,9 @@ export enum AppointmentTypeEnum {
 	Upcoming = 'upcoming',
 	Past = 'past',
 }
+
+export enum LocationEnum {
+	All = 'all',
+	City = 'my_city',
+	NearMe = 'near_me',
+}
