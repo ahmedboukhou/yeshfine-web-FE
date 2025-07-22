@@ -1,5 +1,6 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
-import type { AppointmentTypeEnum } from '../../interfaces/enums';
+import { toast } from 'react-toastify';
+import type { BookAppointmentInput } from '../../interfaces/formInputTypes';
 import type {
 	AppointmentSlotResponse,
 	AppointmentsResponse,
@@ -7,18 +8,26 @@ import type {
 	PayloadPaginationType,
 } from '../../interfaces/responseTypes';
 import { apiClient } from '../../lib/api';
-import { toast } from 'react-toastify';
-import type { BookAppointmentInput } from '../../interfaces/formInputTypes';
+import type { AppointmentTypeEnum } from '../../interfaces/enums';
+
+export function useGetPatientUpcomingAppointmentsQuery() {
+	return useQuery({
+		queryKey: ['get-patient-upcoming-appointments'],
+		queryFn: (): Promise<AppointmentsResponse> =>
+			apiClient.get(`dashboard/patient/upcoming-appointments`),
+	});
+}
 
 type GetAppointmentsQueryParams = PayloadPaginationType & {
 	type: AppointmentTypeEnum;
+	search: string;
 };
 
-export function useGetAppointmentsQuery({ page, limit, type }: GetAppointmentsQueryParams) {
+export function useGetAppointmentsQuery({ page, limit, type, search }: GetAppointmentsQueryParams) {
 	return useQuery({
-		queryKey: ['get-appointments'],
+		queryKey: ['get-patient-appointments', type],
 		queryFn: (): Promise<AppointmentsResponse> =>
-			apiClient.get(`patients/appointments`, { page, limit, type }),
+			apiClient.get(`patients/appointments`, { page, limit, type, ...(search && { search }) }),
 	});
 }
 

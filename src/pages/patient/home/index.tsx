@@ -1,21 +1,18 @@
-import type { FC } from 'react';
+import { type FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router';
-// import { useGetAppointmentsQuery } from '../../../apis/patient/appointments';
-import { useGetTopRatedStatsQuery } from '../../../apis/patient/home';
-import { HomeCarousal } from '../../../components/ui/HomeCarousal';
-import { DoctorCardSkeleton } from '../../../components/ui/skeletons/DoctorCardSkeleton';
-// import { AppointmentTypeEnum } from '../../../interfaces/enums';
 import { useMediaQuery } from 'react-responsive';
-import { useGetAppointmentsQuery } from '../../../apis/patient/appointments';
+import { Link } from 'react-router';
+import { useGetPatientUpcomingAppointmentsQuery } from '../../../apis/patient/appointments';
+import { useGetTopRatedStatsQuery } from '../../../apis/patient/home';
 import { AppointmentIcon, DoctorIcon, LabIcon, PharmacyIcon } from '../../../assets/icons';
 import { AppointmentCard } from '../../../components/ui/cards/AppointmentCard';
 import { DoctorCard } from '../../../components/ui/cards/DoctorCard';
 import { LabsPharmacyCard } from '../../../components/ui/cards/LabsPharmacyCard';
 import { NotFoundCard } from '../../../components/ui/cards/NotFoundCard';
+import { HomeCarousal } from '../../../components/ui/HomeCarousal';
 import { AppointmentCardSkeleton } from '../../../components/ui/skeletons/AppointmentCardSkeleton';
+import { DoctorCardSkeleton } from '../../../components/ui/skeletons/DoctorCardSkeleton';
 import { LabsPharmacyCardSkeleton } from '../../../components/ui/skeletons/LabsPharmacySkeleton';
-import { AppointmentTypeEnum } from '../../../interfaces/enums';
 import {
 	APPOINTMENTS_ROUTE,
 	DOCTORS_ROUTE,
@@ -30,9 +27,8 @@ export const PatientHome = () => {
 	const isSmallToLargeScreen = useMediaQuery({ maxWidth: 1535 });
 
 	// get upcoming appointments
-	const { data: getAppointmentsResponse, isLoading: loadingAppointments } = useGetAppointmentsQuery(
-		{ page: 1, limit: 3, type: AppointmentTypeEnum.Upcoming }
-	);
+	const { data: getAppointmentsResponse, isLoading: loadingAppointments } =
+		useGetPatientUpcomingAppointmentsQuery();
 	const appointmentsData = getAppointmentsResponse?.data?.items || [];
 
 	const { data, isFetching: gettingStats } = useGetTopRatedStatsQuery();
@@ -52,12 +48,13 @@ export const PatientHome = () => {
 	return (
 		<main className="flex flex-col gap-8">
 			<HomeCarousal />
+
 			<section className="flex flex-col gap-5">
 				<Heading
 					text={t('upcomingAppointments', { heading: t('doctors', { ns: 'common' }) })}
 					route={APPOINTMENTS_ROUTE}
 				/>
-				<div className="flex gap-5 overflow-auto">
+				<div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
 					{loadingAppointments ? (
 						<AppointmentCardSkeleton />
 					) : appointmentsData?.length > 0 ? (
@@ -70,16 +67,15 @@ export const PatientHome = () => {
 								},
 								index
 							) => (
-								<div key={index} className=" col-span-12 sm:col-span-6  lg:col-span-4">
-									<AppointmentCard
-										image={image}
-										name={name}
-										specialty={speciality}
-										clinicName={clinicName}
-										appointmentDate={appointment_date_formatted}
-										timeRange={time_range}
-									/>
-								</div>
+								<AppointmentCard
+									image={image}
+									key={index}
+									name={name}
+									specialty={speciality}
+									clinicName={clinicName}
+									appointmentDate={appointment_date_formatted}
+									timeRange={time_range}
+								/>
 							)
 						)
 					) : (
