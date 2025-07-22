@@ -47,5 +47,15 @@
 	"uploadReport": "تحميل التقرير",
 	"verifyVisitDateTime": "تحقق من تاريخ ووقت زيارتك",
 	"videoCall": "مكالمة فيديو",
-	"workLocation": "موقع العمل"
+	"workLocation": "موقع العمل",
+	"unableToLoadDoctors": "تعذر تحميل الأطباء",
+	"doctorProfilesFetchError": "حدث خطأ أثناء جلب ملفات الأطباء. يرجى التحقق من اتصالك والمحاولة مرة أخرى.",
+	"bookWhenReady": "عندما تكون جاهزًا، احجز طبيبًا أو فحصًا مخبريًا وسيظهر هنا.",
+	"noAppointmentYet": "لا يوجد موعد بعد",
+	"labsNotDisplayed": "تعذر عرض المختبرات",
+	"labsLoadingError": "نواجه مشكلة في تحميل المختبرات القريبة. لا تقلق — قم بالتحديث بعد قليل.",
+	"pharmaciesUnavailable": "الصيدليات غير متاحة حاليًا",
+	"pharmaciesFetchError": "حدثت مشكلة أثناء جلب بيانات الصيدليات. يرجى المحاولة مرة أخرى أو العودة لاحقًا.",
+	"pharmacyDetails": "تفاصيل الصيدلية",
+	"allCategories": "جميع الفئات"
 }

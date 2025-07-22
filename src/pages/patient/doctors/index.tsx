@@ -6,26 +6,21 @@ import { SearchInput } from '../../../components/ui/actions/SearchInput';
 import { DoctorCard } from '../../../components/ui/cards/DoctorCard';
 import { DoctorCardSkeleton } from '../../../components/ui/skeletons/DoctorCardSkeleton';
 import type { DoctorSpecialtiesType } from '../../../interfaces';
+import { LocationEnum } from '../../../interfaces/enums';
 import { SearchDoctorFilter } from './Filter';
 
 export const PatientDoctors = () => {
 	const { t } = useTranslation();
 
 	const [page, setPage] = useState(1);
-	console.log('🚀 ~ PatientDoctors ~ page:', page);
 	const [filterValues, setFilterValues] = useState<{
 		specializations: DoctorSpecialtiesType[];
-		location: string;
-	}>({ specializations: [], location: 'all' });
+		location: LocationEnum;
+	}>({ specializations: [], location: LocationEnum.All });
 	const [search, setSearch] = useState('');
 	const [shouldRefetch, setShouldRefetch] = useState(false);
 
-	const {
-		data,
-		isFetching: loadingDoctors,
-		refetch,
-		isSuccess,
-	} = useGetDoctorsQuery({
+	const { data, isFetching, refetch } = useGetDoctorsQuery({
 		page,
 		limit: 6,
 		search,
@@ -55,7 +50,7 @@ export const PatientDoctors = () => {
 
 	const handleClearFilters = () => {
 		setPage(1);
-		setFilterValues({ specializations: [], location: 'all' });
+		setFilterValues({ specializations: [], location: LocationEnum.All });
 		setShouldRefetch(true);
 	};
 
@@ -74,6 +69,7 @@ export const PatientDoctors = () => {
 					<SearchDoctorFilter
 						setFilterValues={setFilterValues}
 						filterValues={filterValues}
+						disabled={isFetching}
 						applyFilters={handleApplyFilters}
 						clearFilters={handleClearFilters}
 					/>
@@ -81,7 +77,7 @@ export const PatientDoctors = () => {
 			</div>
 			<div>
 				<div className="grid grid-cols-12 gap-5 mb-10">
-					{loadingDoctors ? (
+					{isFetching ? (
 						<DoctorCardSkeleton count={6} />
 					) : !!doctorsData?.length ? (
 						<Fragment>
@@ -100,6 +96,7 @@ export const PatientDoctors = () => {
 										latitude={latitude}
 										longitude={longitude}
 										image={image}
+										doctorDetailId={id}
 										name={name}
 										id={id}
 										experience={experience}
@@ -118,15 +115,12 @@ export const PatientDoctors = () => {
 					)}
 				</div>
 
-				{/* Pagination */}
-				{isSuccess && !!doctorsData?.length && (
-					<Pagination
-						currentPage={page}
-						totalPages={pagination?.totalPages || 1}
-						onPageChange={handlePageChange}
-						isLoading={loadingDoctors}
-					/>
-				)}
+				<Pagination
+					currentPage={page}
+					totalPages={pagination?.totalPages || 1}
+					onPageChange={handlePageChange}
+					isLoading={isFetching}
+				/>
 			</div>
 		</section>
 	);

@@ -6,12 +6,13 @@ import { LabsPharmacyCard } from '../../../components/ui/cards/LabsPharmacyCard'
 import { Pagination } from '../../../components/ui/Pagination';
 import { LabsPharmacyCardSkeleton } from '../../../components/ui/skeletons/LabsPharmacySkeleton';
 import type { LabFilterType } from '../../../interfaces';
+import { LocationEnum } from '../../../interfaces/enums';
 import { LABS_DETAIL_ROUTE } from '../../../routes';
 import { SearchLabFilter } from './Filter';
 
 const filterInitialState: LabFilterType = {
 	labTestList: [],
-	location: '',
+	location: LocationEnum.All,
 	showOpen: false,
 	resultTime: 'all',
 };
@@ -25,7 +26,7 @@ export const PatientLabs = () => {
 
 	const [filterValues, setFilterValues] = useState<LabFilterType>(filterInitialState);
 
-	const { data, isFetching, refetch, isSuccess } = useGetLabsQuery({
+	const { data, isFetching, refetch } = useGetLabsQuery({
 		page,
 		limit: 6,
 		...filterValues,
@@ -72,6 +73,7 @@ export const PatientLabs = () => {
 				<div className="flex-items-center gap-2">
 					<SearchInput onChange={handleSearch} />
 					<SearchLabFilter
+						disabled={isFetching}
 						setFilterValues={setFilterValues}
 						filterValues={filterValues}
 						applyFilters={handleApplyFilters}
@@ -90,12 +92,14 @@ export const PatientLabs = () => {
 								id,
 								image,
 								name,
+								isOpen,
 								distance,
 								todaySlot,
 								labDetail: { average_rating },
 							}) => (
 								<LabsPharmacyCard
 									address={address}
+									open={isOpen}
 									image={image}
 									todaySlot={todaySlot}
 									key={id}
@@ -114,14 +118,12 @@ export const PatientLabs = () => {
 				)}
 			</div>
 
-			{isSuccess && !!labs?.length && (
-				<Pagination
-					currentPage={page}
-					totalPages={meta?.totalPages || 1}
-					onPageChange={handlePageChange}
-					isLoading={isFetching}
-				/>
-			)}
+			<Pagination
+				currentPage={page}
+				totalPages={meta?.totalPages || 1}
+				onPageChange={handlePageChange}
+				isLoading={isFetching}
+			/>
 		</section>
 	);
 };

@@ -1,11 +1,10 @@
 import { useEffect, type Dispatch, type FC, type SetStateAction } from 'react';
-import { DayPicker } from 'react-day-picker';
-import 'react-day-picker/style.css';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router';
 import type { TimeSlot } from '../../interfaces';
 import type { AppointmentSlotResponse } from '../../interfaces/responseTypes';
 import { SlotSkeleton } from './skeletons/SlotSkeleton';
+import { DatePicker } from './actions/DayPicker';
 
 interface SelectSlotProps {
 	date: Date;
@@ -53,34 +52,7 @@ export const SelectSlot: FC<SelectSlotProps> = ({
 		<div>
 			<h4 className="text-typography-900 font-semibold mb-6">{t('selectDateTime')}</h4>
 			<div className="flex gap-6 flex-col md:flex-row">
-				<div>
-					<DayPicker
-						required
-						animate
-						mode="single"
-						selected={date}
-						onSelect={setDate}
-						disabled={{ before: new Date() }}
-						className="card-gradient border border-border-1 rounded-xl p-2.5 card-box-shadow inline-block"
-					/>
-					<style>{`
-            .rdp-root {
-              --rdp-accent-color: #4caf50;
-            }
-            .rdp-caption_label{color:#3F3F46;
-              font-weight:600;
-            }
-            .rdp-day button{
-              color:#52525B;
-            }
-            .rdp-selected .rdp-day_button {
-              background-color: #4caf50;
-              color: white !important;
-              font-size:14px;
-              font-weight:normal
-            }
-          `}</style>
-				</div>
+				<DatePicker date={date} setDate={setDate} />
 				<div className="flex-1">
 					<div className="">
 						{isLoading ? (

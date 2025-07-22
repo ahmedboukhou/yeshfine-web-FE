@@ -1,12 +1,17 @@
-import type { FC } from 'react';
+import { type FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router';
-// import { useGetAppointmentsQuery } from '../../../apis/patient/appointments';
-import { useGetTopRatedStatsQuery } from '../../../apis/patient/home';
-import { DoctorCardSkeleton } from '../../../components/ui/skeletons/DoctorCardSkeleton';
-import { HomeCarousal } from '../../../components/ui/HomeCarousal';
-// import { AppointmentTypeEnum } from '../../../interfaces/enums';
 import { useMediaQuery } from 'react-responsive';
+import { Link } from 'react-router';
+import { useGetPatientUpcomingAppointmentsQuery } from '../../../apis/patient/appointments';
+import { useGetTopRatedStatsQuery } from '../../../apis/patient/home';
+import { AppointmentIcon, DoctorIcon, LabIcon, PharmacyIcon } from '../../../assets/icons';
+import { AppointmentCard } from '../../../components/ui/cards/AppointmentCard';
+import { DoctorCard } from '../../../components/ui/cards/DoctorCard';
+import { LabsPharmacyCard } from '../../../components/ui/cards/LabsPharmacyCard';
+import { NotFoundCard } from '../../../components/ui/cards/NotFoundCard';
+import { HomeCarousal } from '../../../components/ui/HomeCarousal';
+import { AppointmentCardSkeleton } from '../../../components/ui/skeletons/AppointmentCardSkeleton';
+import { DoctorCardSkeleton } from '../../../components/ui/skeletons/DoctorCardSkeleton';
 import { LabsPharmacyCardSkeleton } from '../../../components/ui/skeletons/LabsPharmacySkeleton';
 import {
 	APPOINTMENTS_ROUTE,
@@ -16,23 +21,15 @@ import {
 	PHARMACIES_DETAIL_ROUTE,
 	PHARMACIES_ROUTE,
 } from '../../../routes';
-import { DoctorCard } from '../../../components/ui/cards/DoctorCard';
-import { LabsPharmacyCard } from '../../../components/ui/cards/LabsPharmacyCard';
-import { AppointmentCard } from '../../../components/ui/cards/AppointmentCard';
-import { AppointmentTypeEnum } from '../../../interfaces/enums';
-import { useGetAppointmentsQuery } from '../../../apis/patient/appointments';
-import { AppointmentCardSkeleton } from '../../../components/ui/skeletons/AppointmentCardSkeleton';
 
 export const PatientHome = () => {
 	const { t } = useTranslation(['patient', 'common']);
 	const isSmallToLargeScreen = useMediaQuery({ maxWidth: 1535 });
 
 	// get upcoming appointments
-	const { data: getAppointmentsResponse, isLoading: loadingAppointments } = useGetAppointmentsQuery(
-		{ page: 1, limit: 3, type: AppointmentTypeEnum.Upcoming }
-	);
+	const { data: getAppointmentsResponse, isLoading: loadingAppointments } =
+		useGetPatientUpcomingAppointmentsQuery();
 	const appointmentsData = getAppointmentsResponse?.data?.items || [];
-	console.log('🚀 ~ PatientHome ~ appointmentsData:', appointmentsData);
 
 	const { data, isFetching: gettingStats } = useGetTopRatedStatsQuery();
 	const { topDoctors, topLabs, topPharmacies } = data?.data || {};
@@ -51,12 +48,13 @@ export const PatientHome = () => {
 	return (
 		<main className="flex flex-col gap-8">
 			<HomeCarousal />
+
 			<section className="flex flex-col gap-5">
 				<Heading
 					text={t('upcomingAppointments', { heading: t('doctors', { ns: 'common' }) })}
 					route={APPOINTMENTS_ROUTE}
 				/>
-				<div className="flex gap-5 overflow-auto">
+				<div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
 					{loadingAppointments ? (
 						<AppointmentCardSkeleton />
 					) : appointmentsData?.length > 0 ? (
@@ -69,20 +67,23 @@ export const PatientHome = () => {
 								},
 								index
 							) => (
-								<div key={index} className=" col-span-12 sm:col-span-6  lg:col-span-4">
-									<AppointmentCard
-										image={image}
-										name={name}
-										speciality={speciality}
-										clinicName={clinicName}
-										appointmentDate={appointment_date_formatted}
-										timeRange={time_range}
-									/>
-								</div>
+								<AppointmentCard
+									image={image}
+									key={index}
+									name={name}
+									specialty={speciality}
+									clinicName={clinicName}
+									appointmentDate={appointment_date_formatted}
+									timeRange={time_range}
+								/>
 							)
 						)
 					) : (
-						<p>no appointments found</p>
+						<NotFoundCard
+							icon={<AppointmentIcon />}
+							heading={t('noAppointmentYet')}
+							subHeading={t('bookWhenReady')}
+						/>
 					)}
 				</div>
 			</section>
@@ -117,6 +118,7 @@ export const PatientHome = () => {
 									longitude={longitude}
 									image={image}
 									name={name}
+									doctorDetailId={id}
 									id={user_id}
 									experience={experience}
 									clinicName={clinicName}
@@ -127,7 +129,11 @@ export const PatientHome = () => {
 							)
 						)
 					) : (
-						<p>No doctors Found</p>
+						<NotFoundCard
+							icon={<DoctorIcon />}
+							heading={t('unableToLoadDoctors')}
+							subHeading={t('doctorProfilesFetchError')}
+						/>
 					)}
 				</div>
 			</section>
@@ -140,8 +146,7 @@ export const PatientHome = () => {
 				<div className="grid grid-cols-12 gap-5">
 					{gettingStats ? (
 						<LabsPharmacyCardSkeleton count={3} />
-					) : (
-						!!topLabs?.length &&
+					) : !!topLabs?.length ? (
 						topLabs.map(
 							({ address, id, image, name, averageRating, distance, todaySlot, open, user_id }) => (
 								<LabsPharmacyCard
@@ -157,6 +162,12 @@ export const PatientHome = () => {
 								/>
 							)
 						)
+					) : (
+						<NotFoundCard
+							icon={<LabIcon />}
+							heading={t('labsNotDisplayed')}
+							subHeading={t('labsLoadingError')}
+						/>
 					)}
 				</div>
 			</section>
@@ -170,8 +181,7 @@ export const PatientHome = () => {
 				<div className="grid grid-cols-12 gap-5">
 					{gettingStats ? (
 						<LabsPharmacyCardSkeleton count={3} />
-					) : (
-						!!topPharmacies?.length &&
+					) : !!topPharmacies?.length ? (
 						topPharmacies.map(
 							({ address, id, image, name, averageRating, distance, todaySlot, user_id }) => (
 								<LabsPharmacyCard
@@ -186,6 +196,12 @@ export const PatientHome = () => {
 								/>
 							)
 						)
+					) : (
+						<NotFoundCard
+							icon={<PharmacyIcon />}
+							heading={t('pharmaciesUnavailable')}
+							subHeading={t('pharmaciesFetchError')}
+						/>
 					)}
 				</div>
 			</section>

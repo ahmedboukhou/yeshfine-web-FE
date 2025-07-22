@@ -1,9 +1,6 @@
 export const AppointmentCardSkeleton = ({ count = 3 }: { count?: number }) => {
 	return Array.from({ length: count }).map((_, index) => (
-		<div
-			key={index}
-			className="p-5 bg-white rounded-2xl border border-black/10 w-full max-w-sm animate-pulse"
-		>
+		<div key={index} className="p-5 bg-white rounded-2xl border border-black/10 w-full h-40">
 			<div className="flex gap-2.5">
 				{/* Avatar Skeleton */}
 				<div className="inline-block size-11 bg-gray-300 rounded-full" />

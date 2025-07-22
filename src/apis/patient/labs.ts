@@ -1,6 +1,8 @@
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import { toast } from 'react-toastify';
+import type { LabFilterType } from '../../interfaces';
 import type {
-	AppointmentSlotResponse,
+	CommonApiResponse,
 	DoctorReviewsResponse,
 	LabDetailResponse,
 	LabsResponse,
@@ -9,7 +11,6 @@ import type {
 } from '../../interfaces/responseTypes';
 import { apiClient } from '../../lib/api';
 import { useLabTestsStore } from '../../store/labTests';
-import type { LabFilterType } from '../../interfaces';
 
 type GetLabsQueryParams = PayloadPaginationType &
 	Omit<LabFilterType, 'labTestList'> & {
@@ -60,25 +61,18 @@ export function useGetLabReviewsQuery({
 	});
 }
 
-export function useGetLabAppointmentSlotQuery({
-	id,
-	appointment_date,
-}: {
-	id?: string;
-	appointment_date?: string;
-}) {
-	return useQuery({
-		queryKey: ['get-appointment-slots', id, appointment_date],
-		queryFn: (): Promise<AppointmentSlotResponse> =>
-			apiClient.get(`patients/lab-available-slots`, { lab_id: id, appointment_date }),
-	});
-}
-
 export function useGetLabTestsQuery() {
 	const { labTestsData } = useLabTestsStore((state) => state);
 	return useQuery({
 		queryKey: ['get-lab-tests'],
 		queryFn: (): Promise<LabTestsResponse> => apiClient.get(`labs/lab-tests`),
-		enabled: !!!labTestsData?.length,
+		enabled: !labTestsData?.length,
+	});
+}
+
+export function useLabBookAppointmentMutation() {
+	return useMutation<CommonApiResponse, CommonApiResponse, FormData>({
+		mutationFn: (formData) => apiClient.post(`patients/book-lab-appointment`, formData),
+		onError: ({ message }) => toast.error(message || 'Something went wrong'),
 	});
 }

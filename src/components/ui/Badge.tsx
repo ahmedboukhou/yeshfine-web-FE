@@ -1,3 +1,5 @@
+import type { ReactNode } from 'react';
+
 const badgeVariants = {
 	purple: 'text-purple bg-purple-light',
 	warning: 'bg-warning-50 text-warning-700',
@@ -11,10 +13,11 @@ type BadgeVariant = keyof typeof badgeVariants;
 
 interface BadgeProps {
 	specialty?: string;
+	icon?: ReactNode;
 	variant?: BadgeVariant;
 }
 
-export const Badge = ({ specialty = 'Cardiologist', variant }: BadgeProps) => {
+export const Badge = ({ specialty = 'Cardiologist', variant, icon }: BadgeProps) => {
 	const selectedVariant =
 		variant && badgeVariants[variant]
 			? badgeVariants[variant]
@@ -23,8 +26,9 @@ export const Badge = ({ specialty = 'Cardiologist', variant }: BadgeProps) => {
 	return (
 		<div>
 			<span
-				className={`text-nowrap capitalize px-2.5 py-1.5 rounded-full !text-xs sm:text-sm font-semibold ${selectedVariant}`}
+				className={`flex gap-1 w-fit  text-nowrap capitalize px-2.5 py-1.5 rounded-full !text-xs sm:text-sm font-semibold ${selectedVariant}`}
 			>
+				{icon}
 				{specialty}
 			</span>
 		</div>

@@ -2,9 +2,9 @@ import type { ChangeEventHandler, FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { SearchIcon } from '../../../assets/icons';
 
-export const SearchInput: FC<{ onChange: ChangeEventHandler<HTMLInputElement> }> = ({
-	onChange,
-}) => {
+export const SearchInput: FC<{
+	onChange: ChangeEventHandler<HTMLInputElement>;
+}> = ({ onChange }) => {
 	const { t } = useTranslation();
 	return (
 		<div className="relative xs:w-40 sm:w-xs">

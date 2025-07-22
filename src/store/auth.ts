@@ -48,6 +48,7 @@ const useAuthStore = create<AuthStore>((set, get) => ({
 		localStorage.removeItem('current_user');
 		localStorage.removeItem('specialties');
 		localStorage.removeItem('lab_tests');
+		localStorage.removeItem('medicine_categories');
 		set({
 			token: null,
 			refreshToken: null,

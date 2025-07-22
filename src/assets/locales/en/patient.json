@@ -47,5 +47,15 @@
 	"uploadReport": "Upload Report",
 	"verifyVisitDateTime": "Verify your visit Date & Time",
 	"videoCall": "Video call",
-	"workLocation": "Work Location"
+	"workLocation": "Work Location",
+	"unableToLoadDoctors": "Unable to Load Doctors",
+	"doctorProfilesFetchError": "Something went wrong while fetching doctor profiles. Please check your connection and try again.",
+	"bookWhenReady": "When you're ready, book a doctor or lab test and it’ll show up here.",
+	"noAppointmentYet": "No appointment yet",
+	"labsNotDisplayed": "Labs Couldn’t Be Displayed",
+	"labsLoadingError": "We’re having trouble loading nearby labs. Don’t worry — just refresh in a few moments.",
+	"pharmaciesUnavailable": "Pharmacies Unavailable Right Now",
+	"pharmaciesFetchError": "There was an issue fetching pharmacy data. Please try again or come back shortly.",
+	"pharmacyDetails": "Pharmacy Details",
+	"allCategories": "All Categories"
 }

@@ -2,7 +2,7 @@ import { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useLocation } from 'react-router';
 import { useChangeLanguageMutation } from '../../../apis/auth';
-import { LanguageIcon, NavToggleIcon, NotificationIcon } from '../../../assets/icons';
+import { LanguageIcon, NavToggleIcon, NotificationIcon, SignOutIcon } from '../../../assets/icons';
 import logo from '../../../assets/logo.svg';
 import { supportedLanguages } from '../../../constants/mappedData';
 import i18n from '../../../i18n';
@@ -30,7 +30,7 @@ export const Navbar = () => {
 		{ title: 'appointments', to: APPOINTMENTS_ROUTE },
 	];
 
-	const navbarOptions = [{ label: 'Logout', onClick: () => logout() }];
+	const navbarOptions = [{ label: t('signOut'), icon: <SignOutIcon />, onClick: () => logout() }];
 	const { mutateAsync: updateLanguage } = useChangeLanguageMutation();
 	const handleNavLinkClick = () => {
 		setIsMobileMenuOpen(false); // close on link click
@@ -106,14 +106,16 @@ export const Navbar = () => {
 						}
 						menu={
 							<div className="p-1 space-y-0.5">
-								{navbarOptions.map(({ label, onClick }) => (
-									<p
+								{navbarOptions.map(({ label, onClick, icon }) => (
+									<div
 										key={label}
-										className="py-2 px-3 rounded-lg text-sm text-typography-700 hover:bg-primary-light-hover focus:outline-hidden cursor-pointer"
-										onClick={onClick}
+										className="py-2 px-3 flex-items-center rounded-lg gap-1 hover:bg-primary-light-hover focus:outline-hidden cursor-pointer"
 									>
-										{label}
-									</p>
+										{icon}
+										<p className=" text-sm text-typography-700" onClick={onClick}>
+											{label}
+										</p>
+									</div>
 								))}
 							</div>
 						}

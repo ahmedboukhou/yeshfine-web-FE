@@ -65,7 +65,7 @@ export type LabServiceType = {
 	name: string;
 	price: number;
 	description: string;
-	result_time: string;
+	result_time_in_days: string;
 	requires_prescription: boolean;
 	pre_test_instructions: string;
 };
