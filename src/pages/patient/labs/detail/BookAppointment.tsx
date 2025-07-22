@@ -3,17 +3,17 @@ import { useState } from 'react';
 import type { FileWithPath } from 'react-dropzone';
 import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate, useParams } from 'react-router';
-import { useGetLabAppointmentSlotQuery } from '../../../../../apis/patient/labs';
-import { ClockIcon } from '../../../../../assets/icons';
-import calendarIcon from '../../../../../assets/icons/menu-board.svg';
-import { Badge } from '../../../../../components/ui/Badge';
-import { Breadcrumb } from '../../../../../components/ui/Breadcrumb';
-import { DropZone } from '../../../../../components/ui/dropzone';
-import { FilePreview } from '../../../../../components/ui/dropzone/FilePreview';
-import { GoogleMap } from '../../../../../components/ui/GoogleMap';
-import { SelectSlot } from '../../../../../components/ui/SelectSlot';
-import { LABS_DETAIL_ROUTE, LABS_ROUTE } from '../../../../../routes';
-import type { TimeSlot } from '../../../../../interfaces';
+import { ClockIcon } from '../../../../assets/icons';
+import calendarIcon from '../../../../assets/icons/menu-board.svg';
+import { DatePicker } from '../../../../components/ui/actions/DayPicker';
+import { Breadcrumb } from '../../../../components/ui/Breadcrumb';
+import { DropZone } from '../../../../components/ui/dropzone';
+import { FilePreview } from '../../../../components/ui/dropzone/FilePreview';
+import { GoogleMap } from '../../../../components/ui/GoogleMap';
+import { APPOINTMENTS_ROUTE, LABS_DETAIL_ROUTE, LABS_ROUTE } from '../../../../routes';
+import { useLabBookAppointmentMutation } from '../../../../apis/patient/labs';
+import { toast } from 'react-toastify';
+import { responseStatus } from '../../../../interfaces/enums';
 
 export const PatientLabBookAppointment = () => {
 	const { t } = useTranslation(['patient', 'common']);
@@ -24,25 +24,23 @@ export const PatientLabBookAppointment = () => {
 	const [step, setStep] = useState(1);
 	const [date, setDate] = useState<Date>(new Date());
 	const [uploadedFiles, setUploadedFiles] = useState<FileWithPath[]>([]);
+	const { latitude, address, longitude, labDetailId, selectedTest } = state;
+	const {
+		requires_prescription,
+		result_time_in_days,
+		name,
+		price,
+		description,
+		pre_test_instructions,
+	} = selectedTest || {};
 
-	const [selectedSlot, setSelectedSlot] = useState<TimeSlot | null>(null);
+	const { mutateAsync: bookAppointment, isPending } = useLabBookAppointmentMutation();
 
 	const breadcrumbItems = [
 		{ title: t('labs', { ns: 'common' }), path: LABS_ROUTE },
 		{ title: t('labDetails'), path: LABS_DETAIL_ROUTE.replace(':id', `${id}`) },
 		{ title: t('makeAppointment'), path: '' },
 	];
-	const {
-		name,
-		price,
-		description,
-		result_time,
-		pre_test_instructions,
-		requires_prescription,
-		latitude,
-		address,
-		longitude,
-	} = state;
 
 	const heading = () => {
 		switch (step) {
@@ -74,7 +72,24 @@ export const PatientLabBookAppointment = () => {
 		if (step <= 2) {
 			setStep(requires_prescription ? step + 1 : step + 2);
 		} else {
-			return;
+			const formData = new FormData();
+			formData.append('appointment_date', date.toISOString());
+			formData.append('lab_id', String(id));
+			formData.append('lab_detail_id', String(labDetailId));
+			formData.append('services', JSON.stringify(selectedTest));
+
+			if (uploadedFiles.length > 0) {
+				formData.append('file', uploadedFiles[0]);
+			}
+
+			bookAppointment(formData, {
+				onSuccess: ({ message, status }) => {
+					if (status === responseStatus.Success) {
+						toast.success(message);
+						navigate(APPOINTMENTS_ROUTE);
+					} else toast.error(message);
+				},
+			});
 		}
 	};
 
@@ -99,7 +114,7 @@ export const PatientLabBookAppointment = () => {
 
 					<span className="text-typography-500 font-semibold !text-xs">
 						{t('resultTime', { ns: 'common' })}:
-						<span className="font-bold !text-xs">{result_time}</span>
+						<span className="font-bold !text-xs">{result_time_in_days}</span>
 					</span>
 				</div>
 
@@ -136,13 +151,7 @@ export const PatientLabBookAppointment = () => {
 				{step === 1 && (
 					<div className="flex flex-col gap-5 md:gap-10">
 						<LabInfoCard />
-						<SelectSlot
-							date={date}
-							setDate={setDate}
-							selectedSlot={selectedSlot}
-							setSelectedSlot={setSelectedSlot}
-							useSlotsQuery={useGetLabAppointmentSlotQuery}
-						/>
+						<DatePicker date={date} setDate={setDate} />
 					</div>
 				)}
 
@@ -189,10 +198,6 @@ export const PatientLabBookAppointment = () => {
 									<span className="text-typography-500">{t('appointment', { ns: 'common' })}</span>
 									<div className="flex gap-2">
 										<p className="font-bold">{`${dayjs(date).format('ddd, DD MMM YYYY')}`}</p>
-										<Badge
-											variant="primary"
-											specialty={`${selectedSlot?.start} - ${selectedSlot?.end}`}
-										/>
 									</div>
 								</div>
 							</div>
@@ -204,8 +209,14 @@ export const PatientLabBookAppointment = () => {
 					<button onClick={handleCancel} className="outlined-primary-btn">
 						{step > 1 ? t('back', { ns: 'common' }) : t('cancel', { ns: 'common' })}
 					</button>
-					<button onClick={handleSave} className="primary-btn">
-						{step > 2 ? t('proceedPayment') : t('next', { ns: 'common' })}
+					<button
+						onClick={handleSave}
+						className="primary-btn"
+						disabled={
+							isPending || (step === 2 && requires_prescription && uploadedFiles.length === 0)
+						}
+					>
+						{step === 3 ? t('bookAppointment') : t('next', { ns: 'common' })}
 					</button>
 				</div>
 			</div>

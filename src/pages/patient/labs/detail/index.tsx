@@ -26,7 +26,7 @@ export const PatientLabDetail = () => {
 
 	const { data, isLoading } = useGetLabDetailQuery({ id });
 	const { image, name, labDetail, address, latitude, longitude } = data?.data?.lab || {};
-	const { average_rating, servicesList, total_reviews } = labDetail || {};
+	const { average_rating, servicesList, total_reviews, id: labDetailId } = labDetail || {};
 	const breadcrumbItems = [
 		{ title: t('labs', { ns: 'common' }), path: LABS_ROUTE },
 		{ title: t('labDetails'), path: '' },
@@ -71,7 +71,7 @@ export const PatientLabDetail = () => {
 									to={{
 										pathname: LAB_BOOK_APPOINTMENT_ROUTE.replace(':id', `${id}`),
 									}}
-									state={{ ...selectedTest, latitude, longitude, address }}
+									state={{ selectedTest, latitude, longitude, address, labDetailId }}
 									className="primary-btn w-full mt-6 flex-center gap-2 text-sm font-semibold"
 								>
 									<BookAppointmentIcon />

@@ -13,6 +13,7 @@ import { Rating } from '../Rating';
 
 type DoctorCardProps = {
 	id: number;
+	doctorDetailId: number;
 	image: string;
 	experience: number;
 	name: string;
@@ -33,6 +34,7 @@ export const DoctorCard: FC<DoctorCardProps> = ({
 	averageRating,
 	specialty,
 	distance,
+	doctorDetailId,
 	latitude,
 	longitude,
 }) => {
@@ -99,6 +101,7 @@ export const DoctorCard: FC<DoctorCardProps> = ({
 							specialty,
 							latitude,
 							longitude,
+							doctorDetailId,
 						}}
 						className="primary-btn w-full mt-6 flex-center gap-2 text-sm font-semibold"
 					>

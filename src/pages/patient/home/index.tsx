@@ -34,7 +34,6 @@ export const PatientHome = () => {
 		{ page: 1, limit: 3, type: AppointmentTypeEnum.Upcoming }
 	);
 	const appointmentsData = getAppointmentsResponse?.data?.items || [];
-	console.log('🚀 ~ PatientHome ~ appointmentsData:', appointmentsData);
 
 	const { data, isFetching: gettingStats } = useGetTopRatedStatsQuery();
 	const { topDoctors, topLabs, topPharmacies } = data?.data || {};
@@ -75,7 +74,7 @@ export const PatientHome = () => {
 									<AppointmentCard
 										image={image}
 										name={name}
-										speciality={speciality}
+										specialty={speciality}
 										clinicName={clinicName}
 										appointmentDate={appointment_date_formatted}
 										timeRange={time_range}
@@ -123,6 +122,7 @@ export const PatientHome = () => {
 									longitude={longitude}
 									image={image}
 									name={name}
+									doctorDetailId={id}
 									id={user_id}
 									experience={experience}
 									clinicName={clinicName}

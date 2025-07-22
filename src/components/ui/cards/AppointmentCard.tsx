@@ -6,7 +6,7 @@ import { Badge } from '../Badge';
 type AppointmentCardProps = {
 	image: string;
 	name: string;
-	speciality: string;
+	specialty: string;
 	clinicName: string;
 	appointmentDate: string;
 	timeRange: string;
@@ -15,7 +15,7 @@ type AppointmentCardProps = {
 export const AppointmentCard: FC<AppointmentCardProps> = ({
 	image,
 	name,
-	speciality,
+	specialty,
 	clinicName,
 	appointmentDate,
 	timeRange,
@@ -31,8 +31,8 @@ export const AppointmentCard: FC<AppointmentCardProps> = ({
 						<Rating rating={'4.8'} />
 					</div>
 
-					<span className="text-typography-500">
-						{speciality} | {clinicName}
+					<span className="text-typography-500 capitalize">
+						{specialty} | {clinicName}
 					</span>
 
 					<div className="mt-2.5 flex-between-center">

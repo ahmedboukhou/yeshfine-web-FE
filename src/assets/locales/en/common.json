@@ -25,7 +25,6 @@
 	"labs": "Labs",
 	"location": "Location",
 	"bookNow": "Book Now",
-	"logout": "Logout",
 	"male": "Male",
 	"name": "Name",
 	"next": "Next",
@@ -41,7 +40,7 @@
 	"phone": "Phone",
 	"previous": "Previous",
 	"rating": "Rating",
-	"resultTime": "Result Time",
+	"resultTime": "Result Time in days",
 	"save": "Save",
 	"search": "Search",
 	"open": "Open",
@@ -50,7 +49,8 @@
 	"selectOption": "Select option",
 	"tests": "Tests",
 	"viewMore": "View More",
+	"manageProfile": "Manage Profile",
 	"yes": "Yes",
-
-	"medicines": "Medicines"
+	"medicines": "Medicines",
+	"signOut": "Sign Out"
 }

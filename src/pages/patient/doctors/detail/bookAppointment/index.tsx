@@ -25,7 +25,7 @@ export const PatientDoctorBookAppointment = () => {
 	const [reason, setReason] = useState('');
 	const [selectedSlot, setSelectedSlot] = useState<TimeSlot | null>(null);
 	const { doctorDetailId } = state;
-	const { mutateAsync: bookAppointment } = useBookAppointmentMutation();
+	const { mutateAsync: bookAppointment, isPending } = useBookAppointmentMutation();
 
 	const breadcrumbItems = [
 		{ title: t('doctors', { ns: 'common' }), path: DOCTORS_ROUTE },
@@ -141,7 +141,11 @@ export const PatientDoctorBookAppointment = () => {
 							{t('cancel', { ns: 'common' })}
 						</Link>
 					)}
-					<button onClick={handleSave} className="primary-btn" disabled={!selectedSlot}>
+					<button
+						onClick={handleSave}
+						className="primary-btn"
+						disabled={!selectedSlot || isPending}
+					>
 						{showVerifyScreen ? t('bookAppointment') : t('bookNow', { ns: 'common' })}
 					</button>
 				</div>

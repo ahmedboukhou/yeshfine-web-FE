@@ -13,7 +13,7 @@ import { PatientDoctorBookAppointment } from './pages/patient/doctors/detail/boo
 import { PatientHome } from './pages/patient/home';
 import { PatientLabs } from './pages/patient/labs';
 import { PatientLabDetail } from './pages/patient/labs/detail';
-import { PatientLabBookAppointment } from './pages/patient/labs/detail/bookAppointment';
+import { PatientLabBookAppointment } from './pages/patient/labs/detail/BookAppointment';
 import { PatientPharmacies } from './pages/patient/pharmacies';
 import { PatientPharmaciesDetail } from './pages/patient/pharmacies/detail';
 import { PatientMedicineCategories } from './pages/patient/pharmacies/detail/MedicineCategories';

@@ -56,7 +56,6 @@
 	"labsLoadingError": "We’re having trouble loading nearby labs. Don’t worry — just refresh in a few moments.",
 	"pharmaciesUnavailable": "Pharmacies Unavailable Right Now",
 	"pharmaciesFetchError": "There was an issue fetching pharmacy data. Please try again or come back shortly.",
-	
 	"pharmacyDetails": "Pharmacy Details",
 	"allCategories": "All Categories"
 }

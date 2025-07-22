@@ -25,7 +25,6 @@
 	"labs": "Laboratoires",
 	"location": "Emplacement",
 	"bookNow": "Réservez maintenant",
-	"logout": "Déconnexion",
 	"male": "Homme",
 	"name": "Nom",
 	"next": "Suivant",
@@ -41,14 +40,16 @@
 	"phone": "Téléphone",
 	"previous": "Précédent",
 	"rating": "Évaluation",
-	"resultTime": "Délai des résultats",
 	"save": "Enregistrer",
 	"search": "Rechercher",
 	"open": "Ouvert",
+	"signOut": "Se déconnecter",
 	"closed": "Fermé",
 	"seeAll": "Voir tout",
 	"selectOption": "Sélectionner une option",
 	"tests": "Tests",
 	"viewMore": "Voir plus",
-	"yes": "Oui"
+	"yes": "Oui",
+	"resultTime": "Délai des résultats en jours",
+	"medicines": "Médicaments"
 }

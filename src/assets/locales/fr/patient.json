@@ -53,5 +53,7 @@
 	"labsNotDisplayed": "Impossible d'afficher les laboratoires",
 	"labsLoadingError": "Nous rencontrons des difficultés pour charger les laboratoires à proximité. Pas d'inquiétude — actualisez dans un instant.",
 	"pharmaciesUnavailable": "Pharmacies indisponibles pour le moment",
-	"pharmaciesFetchError": "Un problème est survenu lors du chargement des données des pharmacies. Veuillez réessayer ou revenir plus tard."
+	"pharmaciesFetchError": "Un problème est survenu lors du chargement des données des pharmacies. Veuillez réessayer ou revenir plus tard.",
+	"pharmacyDetails": "Détails de la pharmacie",
+	"allCategories": "Toutes les catégories"
 }

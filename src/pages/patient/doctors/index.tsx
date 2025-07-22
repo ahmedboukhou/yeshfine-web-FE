@@ -96,6 +96,7 @@ export const PatientDoctors = () => {
 										latitude={latitude}
 										longitude={longitude}
 										image={image}
+										doctorDetailId={id}
 										name={name}
 										id={id}
 										experience={experience}

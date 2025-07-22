@@ -8,9 +8,12 @@ async function fetchWithRefresh<T>(url: string, options: FetchOptions = {}): Pro
 	const store = useAuthStore.getState();
 	let token = store.token || localStorage.getItem('token');
 
+	// Check if the body is FormData
+	const isFormData = options.body instanceof FormData;
+
 	const headers: Record<string, string> = {
-		'Content-Type': 'application/json',
 		...(token && { Authorization: `Bearer ${token}` }),
+		...(!isFormData && { 'Content-Type': 'application/json' }), // only set for JSON
 		...(options.headers || {}),
 	};
 
@@ -23,7 +26,6 @@ async function fetchWithRefresh<T>(url: string, options: FetchOptions = {}): Pro
 		if (response.status === 401) {
 			try {
 				const newToken = await store.refreshAccessToken();
-
 				const newHeaders = {
 					...headers,
 					Authorization: `Bearer ${newToken}`,
@@ -69,25 +71,34 @@ export const apiClient = {
 		return fetchWithRefresh<T>(fullUrl, { method: 'GET' });
 	},
 
-	post: <T>(url: string, data: unknown): Promise<T> =>
-		fetchWithRefresh<T>(url, {
+	post: <T>(url: string, data: unknown): Promise<T> => {
+		const isFormData = data instanceof FormData;
+		return fetchWithRefresh<T>(url, {
 			method: 'POST',
-			body: JSON.stringify(data),
-		}),
+			body: isFormData ? data : JSON.stringify(data),
+		});
+	},
 
-	put: <T>(url: string, data: unknown): Promise<T> =>
-		fetchWithRefresh<T>(url, {
+	put: <T>(url: string, data: unknown): Promise<T> => {
+		const isFormData = data instanceof FormData;
+		return fetchWithRefresh<T>(url, {
 			method: 'PUT',
-			body: JSON.stringify(data),
-		}),
+			body: isFormData ? data : JSON.stringify(data),
+		});
+	},
 
-	delete: <T>(url: string, data: unknown): Promise<T> =>
-		fetchWithRefresh<T>(url, {
+	delete: <T>(url: string, data: unknown): Promise<T> => {
+		return fetchWithRefresh<T>(url, {
 			method: 'DELETE',
 			body: JSON.stringify(data),
-		}),
+		});
+	},
 
-	upload: async (url: string, data: BodyInit, headers?: Record<string, string>): Promise<Response> => {
+	upload: async (
+		url: string,
+		data: BodyInit,
+		headers?: Record<string, string>
+	): Promise<Response> => {
 		const response = await fetch(url, {
 			method: 'PUT',
 			headers,
