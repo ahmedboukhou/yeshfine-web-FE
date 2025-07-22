@@ -32,7 +32,7 @@ export const PatientPharmacies = () => {
 		(state) => state
 	);
 
-	const { data, isFetching, refetch, isSuccess } = useGetPharmaciesQuery({
+	const { data, isFetching, refetch } = useGetPharmaciesQuery({
 		page,
 		limit: 6,
 		...filterValues,
@@ -47,7 +47,7 @@ export const PatientPharmacies = () => {
 	const medicineTypes = medicineCategoriesResponse?.data?.medicineCategories || [];
 
 	useEffect(() => {
-		gotCategories && setMedicineCategories(medicineTypes);
+		gotCategories && !medicineCategories?.length && setMedicineCategories(medicineTypes);
 	}, [medicineTypes, gotCategories]);
 
 	useEffect(() => {
@@ -117,16 +117,7 @@ export const PatientPharmacies = () => {
 				) : !!pharmacies?.length ? (
 					<Fragment>
 						{pharmacies.map(
-							({
-								is_open,
-								id,
-								image,
-								name,
-								distance,
-								medicines,
-								address,
-								time_range,
-							}) => (
+							({ is_open, id, image, name, distance, medicines, address, time_range }) => (
 								<PharmacyCard
 									address={address}
 									image={image}
@@ -148,14 +139,12 @@ export const PatientPharmacies = () => {
 				)}
 			</div>
 
-			{isSuccess && !!pharmacies?.length && (
-				<Pagination
-					currentPage={page}
-					totalPages={meta?.totalPages || 1}
-					onPageChange={handlePageChange}
-					isLoading={isFetching}
-				/>
-			)}
+			<Pagination
+				currentPage={page}
+				totalPages={meta?.totalPages || 1}
+				onPageChange={handlePageChange}
+				isLoading={isFetching}
+			/>
 		</section>
 	);
 };

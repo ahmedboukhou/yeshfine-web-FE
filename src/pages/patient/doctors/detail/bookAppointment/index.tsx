@@ -141,7 +141,7 @@ export const PatientDoctorBookAppointment = () => {
 							{t('cancel', { ns: 'common' })}
 						</Link>
 					)}
-					<button onClick={handleSave} className="primary-btn" disabled={!!!selectedSlot}>
+					<button onClick={handleSave} className="primary-btn" disabled={!selectedSlot}>
 						{showVerifyScreen ? t('bookAppointment') : t('bookNow', { ns: 'common' })}
 					</button>
 				</div>

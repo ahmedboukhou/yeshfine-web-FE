@@ -79,6 +79,6 @@ export function useGetLabTestsQuery() {
 	return useQuery({
 		queryKey: ['get-lab-tests'],
 		queryFn: (): Promise<LabTestsResponse> => apiClient.get(`labs/lab-tests`),
-		enabled: !!!labTestsData?.length,
+		enabled: !labTestsData?.length,
 	});
 }

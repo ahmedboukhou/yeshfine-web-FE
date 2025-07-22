@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import type {
 	DoctorSpecialtiesType,
+	MedicineDetail,
 	Pharmacy,
 	PharmacyFilterType,
 	PharmacyInfo,
@@ -54,7 +55,7 @@ export function useGetMedicinesCategoriesQuery() {
 		queryFn: (): Promise<{
 			data: { medicineCategories: DoctorSpecialtiesType[] };
 		}> => apiClient.get(`pharmacy/medicine/categories`),
-		enabled: !!!medicineCategories.length,
+		enabled: !medicineCategories.length,
 	});
 }
 
@@ -68,21 +69,30 @@ export function useGetPharmacyDetailQuery({ id }: { id?: string }) {
 	});
 }
 
+type PharmacyMedicineDetailResponse = {
+	data: { medicines: MedicineDetail[]; meta: ResponsePagination };
+};
 export function useGetPharmacyMedicinesQuery({
 	id,
 	search,
 	category,
+	page,
+	limit,
 }: {
 	id?: string;
 	search: string;
 	category: string;
+	page: number;
+	limit: number;
 }) {
 	return useQuery({
-		queryKey: ['get-medicine-detail', id, search, category],
-		queryFn: (): Promise<PharmacyDetailsResponse> =>
+		queryKey: ['get-medicine-detail', id, search, page],
+		queryFn: (): Promise<PharmacyMedicineDetailResponse> =>
 			apiClient.get(`patients/pharmacy/${id}/medicines`, {
 				...(search && { search }),
 				...(category && { category }),
+				page,
+				limit,
 			}),
 	});
 }

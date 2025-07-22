@@ -43,7 +43,7 @@ export function useGetDoctorSpecialtiesQuery() {
 	return useQuery({
 		queryKey: ['get-specialties'],
 		queryFn: (): Promise<DoctorSpecialtiesResponse> => apiClient.get(`doctors/doctor-categories`),
-		enabled: !!!specialties?.length,
+		enabled: !specialties?.length,
 	});
 }
 

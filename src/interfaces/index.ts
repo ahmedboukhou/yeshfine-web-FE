@@ -233,3 +233,17 @@ export type PharmacyInfo = {
 };
 
 export type MedicinesByCategory = Record<string, Medicine[]>;
+
+export type MedicineDetail = {
+  id: number;
+  name: string;
+  generic_name: string;
+  manufacturer: string;
+  strength: string;
+  unit_price: string; // could be number if parsed
+  medicine_image: string;
+  dosage_form: string;
+  category: string;
+  quantity: number;
+  description: string;
+};

@@ -26,7 +26,7 @@ export const PatientLabs = () => {
 
 	const [filterValues, setFilterValues] = useState<LabFilterType>(filterInitialState);
 
-	const { data, isFetching, refetch, isSuccess } = useGetLabsQuery({
+	const { data, isFetching, refetch } = useGetLabsQuery({
 		page,
 		limit: 6,
 		...filterValues,
@@ -118,14 +118,12 @@ export const PatientLabs = () => {
 				)}
 			</div>
 
-			{isSuccess && !!labs?.length && (
-				<Pagination
-					currentPage={page}
-					totalPages={meta?.totalPages || 1}
-					onPageChange={handlePageChange}
-					isLoading={isFetching}
-				/>
-			)}
+			<Pagination
+				currentPage={page}
+				totalPages={meta?.totalPages || 1}
+				onPageChange={handlePageChange}
+				isLoading={isFetching}
+			/>
 		</section>
 	);
 };

@@ -20,7 +20,7 @@ export const PatientDoctors = () => {
 	const [search, setSearch] = useState('');
 	const [shouldRefetch, setShouldRefetch] = useState(false);
 
-	const { data, isFetching, refetch, isSuccess } = useGetDoctorsQuery({
+	const { data, isFetching, refetch } = useGetDoctorsQuery({
 		page,
 		limit: 6,
 		search,
@@ -114,15 +114,12 @@ export const PatientDoctors = () => {
 					)}
 				</div>
 
-				{/* Pagination */}
-				{isSuccess && !!doctorsData?.length && (
-					<Pagination
-						currentPage={page}
-						totalPages={pagination?.totalPages || 1}
-						onPageChange={handlePageChange}
-						isLoading={isFetching}
-					/>
-				)}
+				<Pagination
+					currentPage={page}
+					totalPages={pagination?.totalPages || 1}
+					onPageChange={handlePageChange}
+					isLoading={isFetching}
+				/>
 			</div>
 		</section>
 	);

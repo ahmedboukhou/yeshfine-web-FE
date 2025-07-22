@@ -17,7 +17,7 @@ export const MedicineCard: FC<MedicineCardProps> = ({
 	price,
 }) => {
 	return (
-		<div key={id} className="border border-border-1 rounded-xl h-55 overflow-hidden">
+		<div key={id} className="border border-border-1 rounded-xl h-55 overflow-hidden bg-white">
 			<img src={image} alt={name} className="rounded-t-xl h-30 w-full object-cover object-top" />
 
 			<div className="p-2 flex flex-col gap-1">

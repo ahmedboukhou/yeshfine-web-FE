@@ -72,10 +72,10 @@ export const Pagination = ({
 					) : (
 						<button
 							key={page}
-							disabled={isLoading}
+							disabled={isLoading || page === currentPage}
 							className={`min-h-9.5 min-w-9.5 flex justify-center items-center py-2 px-3 text-sm rounded-lg focus:outline-hidden ${
 								page === currentPage
-									? 'bg-primary text-white'
+									? 'bg-primary text-white !pointer-events-none'
 									: 'cursor-pointer text-gray-800 hover:bg-gray-100'
 							}`}
 							onClick={() => onPageChange(page as number)}

@@ -33,7 +33,7 @@ export const PatientPharmaciesDetail = () => {
 
 	const breadcrumbItems = [
 		{ title: t('pharmacies', { ns: 'common' }), path: PHARMACIES_ROUTE },
-		{ title: name || t('labDetails'), path: '' },
+		{ title: t('pharmacyDetails'), path: '' },
 	];
 
 	return (
