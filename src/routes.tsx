@@ -19,6 +19,7 @@ import { PatientPharmaciesDetail } from './pages/patient/pharmacies/detail';
 import { PatientMedicineCategories } from './pages/patient/pharmacies/detail/MedicineCategories';
 import useAuthStore from './store/auth';
 import { useCurrentUserStore } from './store/user';
+import { PatientAppointmentDetails } from './pages/patient/appointments/details';
 
 // App Routes
 export const ROOT_ROUTE = '/';
@@ -40,6 +41,7 @@ export const PHARMACIES_ROUTE = '/pharmacies';
 export const PHARMACIES_DETAIL_ROUTE = `${PHARMACIES_ROUTE}/:id`;
 export const PHARMACIES_MEDICINE_DETAIL_ROUTE = `${PHARMACIES_ROUTE}/:id/medicines`;
 export const APPOINTMENTS_ROUTE = '/appointments';
+export const APPOINTMENTS_DETAIL_ROUTE = `${APPOINTMENTS_ROUTE}/:id`;
 
 export const AppRoutes = () => {
 	const { isAuthenticated, logout } = useAuthStore((state) => state);
@@ -68,6 +70,7 @@ export const AppRoutes = () => {
 								path={PHARMACIES_MEDICINE_DETAIL_ROUTE}
 							/>
 							<Route element={<PatientAppointments />} path={APPOINTMENTS_ROUTE} />
+							<Route element={<PatientAppointmentDetails />} path={APPOINTMENTS_DETAIL_ROUTE} />
 							<Route element={<Navigate to={HOME_ROUTE} />} path="*" />
 						</Route>
 					) : (

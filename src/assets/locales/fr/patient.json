@@ -55,5 +55,6 @@
 	"pharmaciesUnavailable": "Pharmacies indisponibles pour le moment",
 	"pharmaciesFetchError": "Un problème est survenu lors du chargement des données des pharmacies. Veuillez réessayer ou revenir plus tard.",
 	"pharmacyDetails": "Détails de la pharmacie",
-	"allCategories": "Toutes les catégories"
+	"allCategories": "Toutes les catégories",
+	"upcomingDoctorAppointments": "Rendez-vous médicaux à venir"
 }

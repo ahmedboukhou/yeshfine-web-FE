@@ -57,5 +57,6 @@
 	"pharmaciesUnavailable": "Pharmacies Unavailable Right Now",
 	"pharmaciesFetchError": "There was an issue fetching pharmacy data. Please try again or come back shortly.",
 	"pharmacyDetails": "Pharmacy Details",
-	"allCategories": "All Categories"
+	"allCategories": "All Categories",
+	"upcomingDoctorAppointments": "Upcoming Doctor Appointments"
 }

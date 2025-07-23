@@ -3,26 +3,32 @@ import { toast } from 'react-toastify';
 import type { BookAppointmentInput } from '../../interfaces/formInputTypes';
 import type {
 	AppointmentSlotResponse,
-	AppointmentsResponse,
 	CommonApiResponse,
 	PayloadPaginationType,
+	ResponsePagination,
 } from '../../interfaces/responseTypes';
 import { apiClient } from '../../lib/api';
-import type { AppointmentTypeEnum } from '../../interfaces/enums';
+import type { AppointmentFilterTypeEnum } from '../../interfaces/enums';
+import type { AppointmentType, UpcomingAppointmentType } from '../../interfaces';
 
+type PatientUpcomingAppointmentsResponse = CommonApiResponse & {
+	data: UpcomingAppointmentType[];
+};
 export function useGetPatientUpcomingAppointmentsQuery() {
 	return useQuery({
 		queryKey: ['get-patient-upcoming-appointments'],
-		queryFn: (): Promise<AppointmentsResponse> =>
+		queryFn: (): Promise<PatientUpcomingAppointmentsResponse> =>
 			apiClient.get(`dashboard/patient/upcoming-appointments`),
 	});
 }
 
 type GetAppointmentsQueryParams = PayloadPaginationType & {
-	type: AppointmentTypeEnum;
+	type: AppointmentFilterTypeEnum;
 	search: string;
 };
-
+type AppointmentsResponse = CommonApiResponse & {
+	data: { items: AppointmentType[]; meta: ResponsePagination };
+};
 export function useGetAppointmentsQuery({ page, limit, type, search }: GetAppointmentsQueryParams) {
 	return useQuery({
 		queryKey: ['get-patient-appointments', type],

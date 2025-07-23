@@ -10,7 +10,7 @@ export enum responseStatus {
 	Error = 'error',
 }
 
-export enum AppointmentTypeEnum {
+export enum AppointmentFilterTypeEnum {
 	Today = 'today',
 	Upcoming = 'upcoming',
 	Past = 'past',

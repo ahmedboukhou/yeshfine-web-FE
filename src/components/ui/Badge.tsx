@@ -5,6 +5,7 @@ const badgeVariants = {
 	warning: 'bg-warning-50 text-warning-700',
 	primary: 'bg-primary-light text-primary',
 	blue: 'bg-blue-50 text-blue-700',
+	danger: 'bg-danger-50 text-danger-500',
 };
 
 const variantKeys = Object.keys(badgeVariants);

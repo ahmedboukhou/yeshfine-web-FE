@@ -235,15 +235,33 @@ export type PharmacyInfo = {
 export type MedicinesByCategory = Record<string, Medicine[]>;
 
 export type MedicineDetail = {
-  id: number;
-  name: string;
-  generic_name: string;
-  manufacturer: string;
-  strength: string;
-  unit_price: string; // could be number if parsed
-  medicine_image: string;
-  dosage_form: string;
-  category: string;
-  quantity: number;
-  description: string;
+	id: number;
+	name: string;
+	generic_name: string;
+	manufacturer: string;
+	strength: string;
+	unit_price: string; // could be number if parsed
+	medicine_image: string;
+	dosage_form: string;
+	category: string;
+	quantity: number;
+	description: string;
+};
+
+export type UpcomingAppointmentType = {
+	appointment_id: number;
+	doctor_id: number;
+	doctor_name: string;
+	doctor_image: string;
+	address: string;
+	appointment_date: string; // e.g., "24 Jul"
+	start_time: string; // e.g., "09:00 AM"
+	end_time: string; // e.g., "04:00 PM"
+	speciality: string;
+	experience: number; // in years
+	clinicName: string;
+	status: string; // e.g., "scheduled"
+	appointment_type: string; // e.g., "In Person"
+	meeting_link: string | null;
+	distance: number | null;
 };

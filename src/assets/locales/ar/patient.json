@@ -57,5 +57,6 @@
 	"pharmaciesUnavailable": "الصيدليات غير متاحة حاليًا",
 	"pharmaciesFetchError": "حدثت مشكلة أثناء جلب بيانات الصيدليات. يرجى المحاولة مرة أخرى أو العودة لاحقًا.",
 	"pharmacyDetails": "تفاصيل الصيدلية",
-	"allCategories": "جميع الفئات"
+	"allCategories": "جميع الفئات",
+	"upcomingDoctorAppointments": "المواعيد القادمة مع الطبيب"
 }
