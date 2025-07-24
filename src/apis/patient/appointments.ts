@@ -1,5 +1,7 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
+import type { AppointmentType, UpcomingAppointmentType } from '../../interfaces';
+import type { AppointmentFilterTypeEnum } from '../../interfaces/enums';
 import type { BookAppointmentInput } from '../../interfaces/formInputTypes';
 import type {
 	AppointmentSlotResponse,
@@ -8,8 +10,6 @@ import type {
 	ResponsePagination,
 } from '../../interfaces/responseTypes';
 import { apiClient } from '../../lib/api';
-import type { AppointmentFilterTypeEnum } from '../../interfaces/enums';
-import type { AppointmentType, UpcomingAppointmentType } from '../../interfaces';
 
 type PatientUpcomingAppointmentsResponse = CommonApiResponse & {
 	data: UpcomingAppointmentType[];
@@ -55,5 +55,28 @@ export function useBookAppointmentMutation() {
 	return useMutation<CommonApiResponse, CommonApiResponse, BookAppointmentInput>({
 		mutationFn: (values) => apiClient.post(`patients/appointments`, values),
 		onError: ({ message }) => toast.error(message || 'Something went wrong'),
+	});
+}
+
+export function useMarkAsCompleteAppointmentMutation() {
+	return useMutation<CommonApiResponse, CommonApiResponse, { id?: string }>({
+		mutationFn: (values) =>
+			apiClient.put(`patients/doctor/mark/appointment/${values?.id}`, values),
+		onError: ({ message }) => toast.error(message || 'Something went wrong'),
+	});
+}
+
+type PatientAppointmentDetailResponseType = CommonApiResponse & {
+	data: Omit<AppointmentType, 'doctor' | 'appointment_id' | 'distance'> & {
+		id: number; // replaces appointment_id
+		reason: string;
+		show_mark_complete: boolean;
+	};
+};
+export function useGetPatientAppointmentDetailQuery({ id }: { id?: string }) {
+	return useQuery({
+		queryKey: ['get-patient-appointment-detail', id],
+		queryFn: (): Promise<PatientAppointmentDetailResponseType> =>
+			apiClient.get(`patients/appointments/${id}`),
 	});
 }

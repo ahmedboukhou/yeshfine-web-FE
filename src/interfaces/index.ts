@@ -1,4 +1,4 @@
-import type { LocationEnum } from './enums';
+import type { LabStatusEnum, LocationEnum } from './enums';
 
 export type CurrentUserType = {
 	name: string;
@@ -264,4 +264,25 @@ export type UpcomingAppointmentType = {
 	appointment_type: string; // e.g., "In Person"
 	meeting_link: string | null;
 	distance: number | null;
+};
+
+export type LabInfo = {
+	name: string;
+	address: string;
+	latitude: number;
+	longitude: number;
+	distance: number;
+	isOpen: boolean;
+	image: string;
+	timeRange: string; // e.g., "08:00 AM-08:00 PM"
+};
+
+export type LabAppointmentReport = {
+	appointment_id: number;
+	appointment_date: string; // format: "YYYY-MM-DD"
+	report: string | null;
+	report_available: boolean;
+	total_amount: string; // e.g., "500.00"
+	report_status: LabStatusEnum; // e.g., "pending"
+	lab: LabInfo;
 };

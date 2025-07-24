@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
-import type { LabFilterType } from '../../interfaces';
+import type { LabAppointmentReport, LabFilterType } from '../../interfaces';
 import type {
 	CommonApiResponse,
 	DoctorReviewsResponse,
@@ -8,9 +8,11 @@ import type {
 	LabsResponse,
 	LabTestsResponse,
 	PayloadPaginationType,
+	ResponsePagination,
 } from '../../interfaces/responseTypes';
 import { apiClient } from '../../lib/api';
 import { useLabTestsStore } from '../../store/labTests';
+import type { LabStatusEnum } from '../../interfaces/enums';
 
 type GetLabsQueryParams = PayloadPaginationType &
 	Omit<LabFilterType, 'labTestList'> & {
@@ -67,6 +69,21 @@ export function useGetLabTestsQuery() {
 		queryKey: ['get-lab-tests'],
 		queryFn: (): Promise<LabTestsResponse> => apiClient.get(`labs/lab-tests`),
 		enabled: !labTestsData?.length,
+	});
+}
+
+type LabAppointmentReportResponse = {
+	data: { items: LabAppointmentReport[]; meta: ResponsePagination };
+};
+export function useGetLabReportsQuery({
+	page,
+	filter,
+	limit,
+}: PayloadPaginationType & { filter?: LabStatusEnum | '' }) {
+	return useQuery({
+		queryKey: ['get-lab-reports', page, filter],
+		queryFn: (): Promise<LabAppointmentReportResponse> =>
+			apiClient.get(`patients/labs/reports`, { page, limit, ...(filter && { filter }) }),
 	});
 }
 

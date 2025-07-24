@@ -52,5 +52,16 @@
 	"yes": "Oui",
 	"resultTime": "Délai des résultats en jours",
 	"medicines": "Médicaments",
-	"join": "Rejoindre"
+	"join": "Rejoindre",
+	"details": "Détails",
+	"pending": "En attente",
+	"paid": "Payé",
+	"uploaded": "Téléversé",
+	"markAsComplete": "Marquer comme terminé",
+	"upcoming": "À venir",
+	"past": "Passés",
+	"payNow": "Payer maintenant",
+	"view": "Voir",
+	"download": "Télécharger",
+	"reports": "Rapports"
 }

@@ -56,5 +56,10 @@
 	"pharmaciesFetchError": "Un problème est survenu lors du chargement des données des pharmacies. Veuillez réessayer ou revenir plus tard.",
 	"pharmacyDetails": "Détails de la pharmacie",
 	"allCategories": "Toutes les catégories",
-	"upcomingDoctorAppointments": "Rendez-vous médicaux à venir"
+	"upcomingDoctorAppointments": "Rendez-vous médicaux à venir",
+	"allLabs": "Tous les laboratoires",
+	"yourReports": "Vos rapports",
+	"labProcessingMessage": "Le laboratoire traite encore vos résultats. Vous recevrez une notification dès que le rapport sera téléversé.",
+	"reportPaymentRequired": "Rapport disponible, pour le consulter ou le télécharger, veuillez effectuer le paiement.",
+	"labReadyMessage": "Votre rapport de laboratoire est prêt à être consulté ou téléchargé"
 }

@@ -62,7 +62,7 @@ export const SelectSlot: FC<SelectSlotProps> = ({
 								{!!slots?.length ? (
 									<div className="space-y-3">
 										{/* Slot Selection */}
-										<div className="grid grid-cols-2 gap-3 h-40 overflow-auto">
+										<div className="grid grid-cols-1 lg:grid-cols-2 gap-3 h-40 overflow-auto">
 											{slots.map((slot, index) => {
 												const selected = isSelected(slot);
 												return (

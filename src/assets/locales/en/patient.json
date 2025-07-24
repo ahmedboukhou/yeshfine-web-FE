@@ -58,5 +58,10 @@
 	"pharmaciesFetchError": "There was an issue fetching pharmacy data. Please try again or come back shortly.",
 	"pharmacyDetails": "Pharmacy Details",
 	"allCategories": "All Categories",
-	"upcomingDoctorAppointments": "Upcoming Doctor Appointments"
+	"upcomingDoctorAppointments": "Upcoming Doctor Appointments",
+	"allLabs": "All Labs",
+	"yourReports": "Your Reports",
+	"labProcessingMessage": "The lab is still processing your results. You’ll receive a notification as soon as the report is uploaded.",
+	"reportPaymentRequired": "Report available, To view or download your lab report, please complete the payment.",
+	"labReadyMessage": "Your lab is ready to be view or download"
 }

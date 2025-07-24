@@ -58,5 +58,10 @@
 	"pharmaciesFetchError": "حدثت مشكلة أثناء جلب بيانات الصيدليات. يرجى المحاولة مرة أخرى أو العودة لاحقًا.",
 	"pharmacyDetails": "تفاصيل الصيدلية",
 	"allCategories": "جميع الفئات",
-	"upcomingDoctorAppointments": "المواعيد القادمة مع الطبيب"
+	"upcomingDoctorAppointments": "المواعيد القادمة مع الطبيب",
+	"allLabs": "جميع المختبرات",
+	"yourReports": "تقاريري",
+	"labProcessingMessage": "لا يزال المختبر يعالج نتائجك. ستتلقى إشعارًا بمجرد تحميل التقرير.",
+	"reportPaymentRequired": "التقرير متاح، لعرضه أو تنزيله، يرجى إتمام الدفع.",
+	"labReadyMessage": "تقرير المختبر جاهز للعرض أو التنزيل"
 }

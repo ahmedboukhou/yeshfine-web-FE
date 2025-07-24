@@ -6,7 +6,8 @@ import { RedHospitalIcon } from '../../../../../assets/icons';
 import calendarIcon from '../../../../../assets/icons/menu-board.svg';
 import { Badge } from '../../../../../components/ui/Badge';
 import { GoogleMap } from '../../../../../components/ui/GoogleMap';
-import { ReviewRating } from '../../../../../components/ui/ReviewRating';
+import { DoctorInfoCard } from '../../../../../components/ui/cards/DoctorInfoCard';
+import { LocationInfo } from '../../../../../components/ui/LocationInfo';
 
 type VerifyBookingProps = {
 	appointmentType?: string;
@@ -30,27 +31,14 @@ export const VerifyBooking: FC<VerifyBookingProps> = ({
 
 	return (
 		<section className="flex flex-col gap-8">
-			<div className="border border-border-1 card-gradient-2 rounded-lg">
-				<div className="p-4 flex gap-5">
-					<img className="inline-block size-22 rounded-lg" src={image} alt={name} />
-					<div className="flex-1 flex-col gap-3">
-						<div className="flex-items-center gap-2">
-							<span className="text-typography-500">{t('rating')}</span>
-							<ReviewRating rating={averageRating} />
-							<span className="text-typography-500">{averageRating}</span>
-						</div>
-						<p className="font-bold text-typography-900">{name}</p>
-						<div className="mt-2">
-							<Badge specialty={specialty} />
-						</div>
-					</div>
-				</div>
-			</div>
-
+			<DoctorInfoCard
+				averageRating={averageRating}
+				name={name}
+				image={image}
+				specialty={specialty}
+			/>
 			<div>
-				<h5 className="font-semibold text-typography-700">{t('workLocation')}</h5>
-				<p className="text-typography-500 mt-1">{clinicName}</p>
-
+				<LocationInfo address={clinicName} />
 				<div className="h-60 mt-5">
 					<GoogleMap latitude={latitude} longitude={longitude} />
 				</div>
@@ -61,8 +49,8 @@ export const VerifyBooking: FC<VerifyBookingProps> = ({
 					<h5 className="font-semibold text-typography-800">{t('scheduleDate')}</h5>
 				</div>
 				<div className="flex gap-5">
-					<div className="bg-blue-100 p-2 rounded-lg">
-						<img src={calendarIcon} />
+					<div>
+						<img src={calendarIcon} className="min-w-12 bg-blue-100 p-2 rounded-lg" />
 					</div>
 					<div className="flex-1">
 						<span className="text-typography-500">{t('appointment', { ns: 'common' })}</span>

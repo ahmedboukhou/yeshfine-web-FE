@@ -52,5 +52,16 @@
 	"resultTime": "وقت النتيجة بالأيام",
 	"signOut": "تسجيل الخروج",
 	"medicines": "الأدوية",
-	"join": "انضم"
+	"join": "انضم",
+	"details": "تفاصيل",
+	"pending": "قيد الانتظار",
+	"paid": "مدفوع",
+	"uploaded": "تم التحميل",
+	"markAsComplete": "وضع علامة كمكتمل",
+	"upcoming": "القادمة",
+	"past": "السابقة",
+	"payNow": "ادفع الآن",
+	"view": "عرض",
+	"download": "تنزيل",
+	"reports": "التقارير"
 }

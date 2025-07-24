@@ -71,7 +71,7 @@ export const PatientHome = () => {
 									clinicName,
 									end_time,
 									appointment_id,
-									meeting_link
+									meeting_link,
 								},
 								index
 							) => (

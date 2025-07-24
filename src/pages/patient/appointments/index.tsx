@@ -9,7 +9,7 @@ import { AppointmentCardSkeleton } from '../../../components/ui/skeletons/Appoin
 import { AppointmentFilterTypeEnum } from '../../../interfaces/enums';
 
 export const PatientAppointments = () => {
-	const { t } = useTranslation();
+	const { t } = useTranslation(['common', 'patient']);
 
 	const [page, setPage] = useState(1);
 	const [shouldRefetch, setShouldRefetch] = useState(false);
@@ -23,8 +23,8 @@ export const PatientAppointments = () => {
 	const { items, meta } = getAppointmentsResponse?.data || {};
 
 	const tabData = [
-		{ label: 'Upcoming', value: AppointmentFilterTypeEnum.Upcoming },
-		{ label: 'Past', value: AppointmentFilterTypeEnum.Past },
+		{ label: t('upcoming', { ns: 'patient' }), value: AppointmentFilterTypeEnum.Upcoming },
+		{ label: t('past', { ns: 'patient' }), value: AppointmentFilterTypeEnum.Past },
 	];
 
 	useEffect(() => {
@@ -80,6 +80,7 @@ export const PatientAppointments = () => {
 								appointment_type_label,
 								distance,
 								appointment_id,
+								meeting_link,
 							},
 							index
 						) => (
@@ -88,9 +89,11 @@ export const PatientAppointments = () => {
 									key={index}
 									id={appointment_id}
 									distance={distance}
+									meeting_link={meeting_link}
 									image={image}
 									label={appointment_type_label}
 									name={name}
+									meetingButtonDisabled={type === AppointmentFilterTypeEnum.Past}
 									specialty={speciality}
 									clinicName={clinicName}
 									appointmentDate={appointment_date_formatted}

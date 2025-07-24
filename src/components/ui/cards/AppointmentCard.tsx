@@ -14,6 +14,7 @@ type AppointmentCardProps = {
 	meeting_link: string | null;
 	specialty: string;
 	clinicName: string;
+	meetingButtonDisabled?: boolean;
 	appointmentDate: string;
 	timeRange: string;
 	label: string;
@@ -30,12 +31,16 @@ export const AppointmentCard: FC<AppointmentCardProps> = ({
 	distance,
 	meeting_link,
 	id,
+	meetingButtonDisabled,
 }) => {
 	const { t } = useTranslation();
 	const isInPerson = label === 'In Person';
 
 	return (
-		<Link to={APPOINTMENTS_DETAIL_ROUTE.replace(':id', `${id}`)}>
+		<Link
+			to={APPOINTMENTS_DETAIL_ROUTE.replace(':id', `${id}`)}
+			state={{ clinicName, name, image, specialty }}
+		>
 			<div className={`p-4 bg-white rounded-2xl border border-black/10 h-45 space-y-1`}>
 				<div className="flex gap-2.5 ">
 					<img className="inline-block size-15 rounded-full" src={image} alt={name} />
@@ -57,9 +62,9 @@ export const AppointmentCard: FC<AppointmentCardProps> = ({
 				</div>
 
 				<div className="flex-between flex-col gap-2 mt-2">
-					<div className="">
+					<div>
 						{isInPerson ? (
-							<div className="flex-between-center">
+							<div className="flex-between-center mt-2">
 								<div className="flex-items-center gap-1">
 									<div>
 										<LocationIcon />
@@ -97,8 +102,12 @@ export const AppointmentCard: FC<AppointmentCardProps> = ({
 							<div>
 								{meeting_link && (
 									<button
+										disabled={meetingButtonDisabled}
 										className="primary-btn w-full flex-center gap-2"
-										onClick={() => window.open(meeting_link)}
+										onClick={(e) => {
+											e.preventDefault();
+											window.open(meeting_link);
+										}}
 									>
 										<VideoIcon />
 										{t('join')}

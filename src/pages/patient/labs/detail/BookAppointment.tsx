@@ -191,8 +191,8 @@ export const PatientLabBookAppointment = () => {
 								<h5 className="font-semibold text-typography-800">{t('scheduleDate')}</h5>
 							</div>
 							<div className="flex gap-5">
-								<div className="bg-blue-100 p-2 rounded-lg">
-									<img src={calendarIcon} />
+								<div>
+									<img src={calendarIcon} className="min-w-12 bg-blue-100 p-2 rounded-lg" />
 								</div>
 								<div className="flex-1">
 									<span className="text-typography-500">{t('appointment', { ns: 'common' })}</span>
