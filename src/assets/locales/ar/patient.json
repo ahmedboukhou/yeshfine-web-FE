@@ -61,7 +61,14 @@
 	"upcomingDoctorAppointments": "المواعيد القادمة مع الطبيب",
 	"allLabs": "جميع المختبرات",
 	"yourReports": "تقاريري",
+	"viewYourPrescription": "عرض وصفتك الطبية",
+	"yourReport": "تقريرك",
 	"labProcessingMessage": "لا يزال المختبر يعالج نتائجك. ستتلقى إشعارًا بمجرد تحميل التقرير.",
 	"reportPaymentRequired": "التقرير متاح، لعرضه أو تنزيله، يرجى إتمام الدفع.",
-	"labReadyMessage": "تقرير المختبر جاهز للعرض أو التنزيل"
+	"labReadyMessage": "تقرير فحصك المخبري جاهز للعرض أو التنزيل",
+	"labReportNotAvailable": "تقرير فحصك المخبري غير متاح بعد.",
+	"labProcessing": "لا يزال المختبر يعالج نتائجك.",
+	"estimatedTimeRemaining": "الوقت المتبقي المقدر: {{time}}",
+	"labReportAvailable": "تقرير فحصك المخبري متاح.",
+	"labReportPaymentRequired": "لعرض أو تنزيل تقرير فحصك المخبري، يرجى إتمام الدفع."
 }

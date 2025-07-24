@@ -3,6 +3,8 @@ import { useState } from 'react';
 import type { FileWithPath } from 'react-dropzone';
 import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate, useParams } from 'react-router';
+import { toast } from 'react-toastify';
+import { useLabBookAppointmentMutation } from '../../../../apis/patient/labs';
 import { ClockIcon } from '../../../../assets/icons';
 import calendarIcon from '../../../../assets/icons/menu-board.svg';
 import { DatePicker } from '../../../../components/ui/actions/DayPicker';
@@ -10,10 +12,8 @@ import { Breadcrumb } from '../../../../components/ui/Breadcrumb';
 import { DropZone } from '../../../../components/ui/dropzone';
 import { FilePreview } from '../../../../components/ui/dropzone/FilePreview';
 import { GoogleMap } from '../../../../components/ui/GoogleMap';
-import { APPOINTMENTS_ROUTE, LABS_DETAIL_ROUTE, LABS_ROUTE } from '../../../../routes';
-import { useLabBookAppointmentMutation } from '../../../../apis/patient/labs';
-import { toast } from 'react-toastify';
 import { responseStatus } from '../../../../interfaces/enums';
+import { LABS_DETAIL_ROUTE, LABS_ROUTE } from '../../../../routes';
 
 export const PatientLabBookAppointment = () => {
 	const { t } = useTranslation(['patient', 'common']);
@@ -86,7 +86,7 @@ export const PatientLabBookAppointment = () => {
 				onSuccess: ({ message, status }) => {
 					if (status === responseStatus.Success) {
 						toast.success(message);
-						navigate(APPOINTMENTS_ROUTE);
+						navigate(LABS_ROUTE);
 					} else toast.error(message);
 				},
 			});

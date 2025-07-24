@@ -30,7 +30,7 @@ export const VerifyBooking: FC<VerifyBookingProps> = ({
 	const { name, image, clinicName, averageRating, specialty, latitude, longitude } = state;
 
 	return (
-		<section className="flex flex-col gap-8">
+		<section className="space-y-8">
 			<DoctorInfoCard
 				averageRating={averageRating}
 				name={name}

@@ -5,6 +5,7 @@ import type {
 	CommonApiResponse,
 	DoctorReviewsResponse,
 	LabDetailResponse,
+	LabServiceType,
 	LabsResponse,
 	LabTestsResponse,
 	PayloadPaginationType,
@@ -48,6 +49,25 @@ export function useGetLabDetailQuery({ id }: { id?: string }) {
 	return useQuery({
 		queryKey: ['get-lab-detail', id],
 		queryFn: (): Promise<LabDetailResponse> => apiClient.get(`patients/labs/${id}`),
+	});
+}
+type LabAppointmentDetailResponse = {
+	data: {
+		appointment_id: number;
+		appointment_date: string; // e.g., "30 Jul"
+		report: string | null;
+		prescription: string | null;
+		services: LabServiceType;
+		total_amount: string; // e.g., "500.00"
+		is_paid: boolean;
+	};
+};
+
+export function useGetLabReportDetailQuery({ id }: { id?: string }) {
+	return useQuery({
+		queryKey: ['get-lab-report-detail', id],
+		queryFn: (): Promise<LabAppointmentDetailResponse> =>
+			apiClient.get(`patients/labs/appointment/${id}`),
 	});
 }
 

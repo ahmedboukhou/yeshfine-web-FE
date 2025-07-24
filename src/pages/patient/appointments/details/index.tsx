@@ -99,7 +99,7 @@ export const PatientAppointmentDetails = () => {
 							<div className="flex-1">
 								<span className="text-typography-500">{t('appointment', { ns: 'common' })}</span>
 								<div className="flex gap-2 flex-wrap">
-									<p className="font-bold">{`${dayjs(appointment_date).format(
+									<p className="font-bold text-typography-900">{`${dayjs(appointment_date).format(
 										'ddd, DD MMM YYYY'
 									)}`}</p>
 									<Badge variant="primary" specialty={`${time_range} (#${ticket_number})`} />

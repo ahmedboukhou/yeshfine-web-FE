@@ -12,8 +12,7 @@ export const PatientLabReports = () => {
 
 	const [page, setPage] = useState(1);
 	const [filter, setFilter] = useState<LabStatusEnum | ''>('');
-	console.log('🚀 ~ PatientLabReports ~ filter:', filter);
-	const { data, isFetching } = useGetLabReportsQuery({ page, limit: 2, filter });
+	const { data, isFetching } = useGetLabReportsQuery({ page, limit: 6, filter });
 	const { items, meta } = data?.data || {};
 
 	const handlePageChange = (newPage: number) => {
@@ -22,6 +21,7 @@ export const PatientLabReports = () => {
 	return (
 		<section>
 			<div className="flex-end mb-6">
+				{/* TODO: make it separate */}
 				<Select
 					id="lab-filter"
 					name="lab-filter"
@@ -53,7 +53,7 @@ export const PatientLabReports = () => {
 						({
 							report_status,
 							appointment_id,
-							lab: { address, image, distance, isOpen, name, timeRange },
+							lab: { address, image, distance, isOpen, name, timeRange,latitude,longitude },
 						}) => (
 							<LabReportCard
 								address={address}
@@ -63,6 +63,8 @@ export const PatientLabReports = () => {
 								image={image}
 								id={appointment_id}
 								timeRange={timeRange}
+								latitude={latitude}
+								longitude={longitude}
 								reportStatus={report_status}
 							/>
 						)

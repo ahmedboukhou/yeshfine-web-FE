@@ -61,5 +61,12 @@
 	"yourReports": "Vos rapports",
 	"labProcessingMessage": "Le laboratoire traite encore vos résultats. Vous recevrez une notification dès que le rapport sera téléversé.",
 	"reportPaymentRequired": "Rapport disponible, pour le consulter ou le télécharger, veuillez effectuer le paiement.",
-	"labReadyMessage": "Votre rapport de laboratoire est prêt à être consulté ou téléchargé"
+	"viewYourPrescription": "Voir votre ordonnance",
+	"yourReport": "Votre rapport",
+	"labReadyMessage": "Votre rapport d'analyse est prêt à être consulté ou téléchargé",
+	"labReportNotAvailable": "Votre rapport d'analyse n'est pas encore disponible.",
+	"labProcessing": "Le laboratoire traite encore vos résultats.",
+	"estimatedTimeRemaining": "Temps restant estimé : {{time}}",
+	"labReportAvailable": "Votre rapport d'analyse est disponible.",
+	"labReportPaymentRequired": "Pour consulter ou télécharger votre rapport d'analyse, veuillez effectuer le paiement."
 }
