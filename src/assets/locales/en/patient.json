@@ -70,5 +70,6 @@
 	"labProcessing": "The lab is still processing your results.",
 	"estimatedTimeRemaining": "Estimated time remaining: {{time}}",
 	"labReportAvailable": "Your lab test report is available.",
+	"itemsLeftInStock": "{{count}} items left in stock",
 	"labReportPaymentRequired": "To view or download your lab report, please complete the payment."
 }

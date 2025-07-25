@@ -68,6 +68,17 @@ const phoneValidation = (t: TFunction) =>
 		min: 4,
 	});
 
+const dobValidation = (t: TFunction) =>
+	yup
+		.string()
+		.required(t('requiredField', { field: t('dob', { ns: 'auth' }), ns: 'validations' }))
+		.test('is-valid-date', t('invalidDateFormat', { ns: 'validations' }), (value) =>
+			value ? dayjs(value, 'YYYY-MM-DD', true).isValid() : false
+		)
+		.test('not-in-future', t('invalidDOB', { ns: 'validations' }), (value) =>
+			value ? dayjs(value).isBefore(dayjs(), 'day') || dayjs(value).isSame(dayjs(), 'day') : false
+		);
+
 const passwordValidation = (t: TFunction) =>
 	requiredString(t, 'password', 'auth', {
 		regex: numberRegex,
@@ -119,6 +130,19 @@ export const signupSchema = (t: TFunction) =>
 			regex: nameRegex,
 			regexMessage: t('alphabetOnlyName', { ns: 'validations' }),
 		}),
+	});
+
+export const patientProfileSchema = (t: TFunction) =>
+	yup.object({
+		gender: requiredString(t, 'gender', 'common'),
+		name: requiredString(t, 'name', 'common', {
+			min: 2,
+			max: 50,
+			regex: nameRegex,
+			regexMessage: t('alphabetOnlyName', { ns: 'validations' }),
+		}),
+
+		dob: dobValidation(t),
 	});
 
 export const resetPasswordSchema = (t: TFunction) =>

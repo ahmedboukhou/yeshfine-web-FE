@@ -65,5 +65,9 @@
 	"view": "View",
 	"download": "Download",
 	"prescription": "Prescription",
+	"popularProducts": "Popular Products",
+	"addToCart": "Add to cart",
+	"dob": "Date of Birth",
+	"profile": "Profile",
 	"reports": "Reports"
 }

@@ -23,8 +23,8 @@ export const PatientAppointments = () => {
 	const { items, meta } = getAppointmentsResponse?.data || {};
 
 	const tabData = [
-		{ label: t('upcoming', { ns: 'patient' }), value: AppointmentFilterTypeEnum.Upcoming },
-		{ label: t('past', { ns: 'patient' }), value: AppointmentFilterTypeEnum.Past },
+		{ label: t('upcoming'), value: AppointmentFilterTypeEnum.Upcoming },
+		{ label: t('past'), value: AppointmentFilterTypeEnum.Past },
 	];
 
 	useEffect(() => {
@@ -65,16 +65,25 @@ export const PatientAppointments = () => {
 						setPage(1);
 						setShouldRefetch(true);
 					}}
+					disabled={loadingAppointments}
 				/>
 			</div>
 			<div className="grid grid-cols-6 gap-5 mb-10">
 				{loadingAppointments ? (
-					<AppointmentCardSkeleton />
+					<AppointmentCardSkeleton count={6} />
 				) : !!items?.length ? (
 					items?.map(
 						(
 							{
-								doctor: { image, name, speciality, clinicName },
+								doctor: {
+									image,
+									name,
+									speciality,
+									clinicName,
+									average_rating,
+									latitude,
+									longitude,
+								},
 								appointment_date_formatted,
 								time_range,
 								appointment_type_label,
@@ -89,6 +98,9 @@ export const PatientAppointments = () => {
 									key={index}
 									id={appointment_id}
 									distance={distance}
+									latitude={latitude}
+									longitude={longitude}
+									rating={average_rating}
 									meeting_link={meeting_link}
 									image={image}
 									label={appointment_type_label}

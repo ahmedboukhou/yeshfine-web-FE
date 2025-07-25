@@ -40,3 +40,9 @@ export type BookAppointmentInput = {
 	reason: string;
 	doctor_detail_id?: number;
 };
+
+export type PatientProfileInput = {
+	name:string
+	dob:string
+	gender:string
+}

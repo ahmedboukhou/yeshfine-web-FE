@@ -70,5 +70,6 @@
 	"labProcessing": "لا يزال المختبر يعالج نتائجك.",
 	"estimatedTimeRemaining": "الوقت المتبقي المقدر: {{time}}",
 	"labReportAvailable": "تقرير فحصك المخبري متاح.",
+	"itemsLeftInStock": "تبقى {{count}} عناصر في المخزون",
 	"labReportPaymentRequired": "لعرض أو تنزيل تقرير فحصك المخبري، يرجى إتمام الدفع."
 }

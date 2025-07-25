@@ -2,9 +2,11 @@ import { useQuery } from '@tanstack/react-query';
 import type {
 	DoctorSpecialtiesType,
 	MedicineDetail,
+	MedicineFullDetail,
 	Pharmacy,
 	PharmacyFilterType,
 	PharmacyInfo,
+	PopularProduct,
 } from '../../interfaces';
 import type {
 	CommonApiResponse,
@@ -69,7 +71,7 @@ export function useGetPharmacyDetailQuery({ id }: { id?: string }) {
 	});
 }
 
-type PharmacyMedicineDetailResponse = {
+type PharmacyMedicinesDetailResponse = {
 	data: { medicines: MedicineDetail[]; meta: ResponsePagination };
 };
 export function useGetPharmacyMedicinesQuery({
@@ -86,13 +88,27 @@ export function useGetPharmacyMedicinesQuery({
 	limit: number;
 }) {
 	return useQuery({
-		queryKey: ['get-medicine-detail', id, search, page],
-		queryFn: (): Promise<PharmacyMedicineDetailResponse> =>
+		queryKey: ['get-medicines-detail', id, search, page],
+		queryFn: (): Promise<PharmacyMedicinesDetailResponse> =>
 			apiClient.get(`patients/pharmacy/${id}/medicines`, {
 				...(search && { search }),
 				...(category && { category }),
 				page,
 				limit,
 			}),
+	});
+}
+
+type MedicineDetailResponse = {
+	data: {
+		medicine: MedicineFullDetail;
+		popularProducts: PopularProduct[];
+	};
+};
+export function useGetPharmacyMedicineDetailQuery({ id }: { id: string }) {
+	return useQuery({
+		queryKey: ['get-pharmacy-medicine-detail', id],
+		queryFn: (): Promise<MedicineDetailResponse> => apiClient.get(`patients/medicine/${id}`),
+		enabled: !!id,
 	});
 }

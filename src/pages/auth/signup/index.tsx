@@ -126,7 +126,7 @@ export const Signup = () => {
 								/>
 
 								<InputField
-									label={t('dob')}
+									label={t('dob',{ns:'common'})}
 									id="dob"
 									type="date"
 									register={register('dob')}

@@ -72,6 +72,9 @@ export const PatientHome = () => {
 									end_time,
 									appointment_id,
 									meeting_link,
+									latitude,
+									longitude,
+									rating,
 								},
 								index
 							) => (
@@ -80,6 +83,9 @@ export const PatientHome = () => {
 										id={appointment_id}
 										image={doctor_image}
 										distance={distance}
+										latitude={latitude}
+										longitude={longitude}
+										rating={rating}
 										name={doctor_name}
 										label={appointment_type}
 										specialty={speciality}

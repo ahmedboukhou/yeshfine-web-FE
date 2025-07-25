@@ -4,6 +4,8 @@ export type CurrentUserType = {
 	name: string;
 	phone: string;
 	role: string;
+	gender: string;
+	image: string;
 	dob: string;
 };
 
@@ -74,8 +76,11 @@ export type AppointmentType = {
 		id: number;
 		name: string;
 		image: string;
+		average_rating: string;
 		speciality: string;
 		clinicName: string;
+		latitude: number;
+		longitude: number;
 	};
 	appointment_id: number;
 	appointment_type: string;
@@ -254,12 +259,15 @@ export type UpcomingAppointmentType = {
 	doctor_name: string;
 	doctor_image: string;
 	address: string;
+	latitude: number;
+	longitude: number;
 	appointment_date: string; // e.g., "24 Jul"
 	start_time: string; // e.g., "09:00 AM"
 	end_time: string; // e.g., "04:00 PM"
 	speciality: string;
 	experience: number; // in years
 	clinicName: string;
+	rating: string;
 	status: string; // e.g., "scheduled"
 	appointment_type: string; // e.g., "In Person"
 	meeting_link: string | null;
@@ -285,4 +293,28 @@ export type LabAppointmentReport = {
 	total_amount: string; // e.g., "500.00"
 	report_status: LabStatusEnum; // e.g., "pending"
 	lab: LabInfo;
+};
+
+export type PharmacyBasic = {
+	id: number;
+	name: string;
+	address: string;
+	image: string;
+	pharmacyDetail: PharmacyDetail;
+};
+
+export type MedicineFullDetail = MedicineDetail & {
+	expiry_date: string; // format: "YYYY-MM-DD"
+	pharmacy_id: number;
+	pharmacy: PharmacyBasic;
+};
+
+export type PopularProduct = {
+	id: number;
+	name: string;
+	strength: string;
+	unit_price: string;
+	medicine_image: string;
+	dosage_form: string;
+	category: string;
 };

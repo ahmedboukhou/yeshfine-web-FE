@@ -12,6 +12,7 @@ export const Dropdown = ({ menu, button }: AvatarDropdownProps) => {
 		if (window.HSStaticMethods && window.HSStaticMethods.autoInit) {
 			window.HSStaticMethods.autoInit();
 		}
+		console.log('asd')
 	}, []);
 
 	return (

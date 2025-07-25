@@ -52,11 +52,13 @@ export const PatientLabReports = () => {
 					items?.map(
 						({
 							report_status,
+							appointment_date,
 							appointment_id,
-							lab: { address, image, distance, isOpen, name, timeRange,latitude,longitude },
+							lab: { address, image, distance, isOpen, name, timeRange, latitude, longitude },
 						}) => (
 							<LabReportCard
 								address={address}
+								appointment_date={appointment_date}
 								distance={distance}
 								isOpen={isOpen}
 								name={name}

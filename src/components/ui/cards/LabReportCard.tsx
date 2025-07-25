@@ -1,17 +1,25 @@
 import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
-import { ClockIcon, DownloadIcon, EyeIcon, LocationIcon } from '../../../assets/icons';
+import {
+	CalendarIcon,
+	ClockIcon,
+	DownloadIcon,
+	EyeIcon,
+	LocationIcon,
+} from '../../../assets/icons';
 import pendingIcon from '../../../assets/icons/pending.svg';
 import tickIcon from '../../../assets/icons/tick-circle.svg';
 import { LabStatusEnum } from '../../../interfaces/enums';
 import { LABS_REPORT_DETAIL_ROUTE } from '../../../routes';
 import { Badge } from '../Badge';
 import { Distance } from '../Distance';
+import dayjs from 'dayjs';
 
 type LabReportCardProps = {
 	reportStatus: LabStatusEnum;
 	name: string;
+	appointment_date: string;
 	id: number;
 	longitude: number;
 	latitude: number;
@@ -29,6 +37,7 @@ export const LabReportCard: FC<LabReportCardProps> = ({
 	distance,
 	isOpen,
 	name,
+	appointment_date,
 	timeRange,
 	latitude,
 	longitude,
@@ -52,7 +61,7 @@ export const LabReportCard: FC<LabReportCardProps> = ({
 			state={{ name, timeRange, address, isOpen, image, latitude, longitude, reportStatus }}
 			className="p-4 bg-white rounded-2xl border border-border-1 col-span-12 md:col-span-6 xl:col-span-4"
 		>
-			<div className="flex gap-2 mb-5">
+			<div className="flex gap-2">
 				<img src={image} alt={name} className="w-20 h-20 rounded-xl" />
 				<div className="flex-1 space-y-1">
 					<div className="flex-between">
@@ -73,6 +82,17 @@ export const LabReportCard: FC<LabReportCardProps> = ({
 						<Badge icon={<ClockIcon />} specialty={timeRange} variant="primary" />
 					</div>
 				</div>
+			</div>
+
+			<div className="flex-between-center my-3">
+				<div className="flex gap-1">
+					<CalendarIcon />
+
+					<span className="text-typography-800">{dayjs(appointment_date).format('DD MMM')}</span>
+				</div>
+
+				{/* TODO: change test and price */}
+				<Badge specialty={timeRange} variant="purple" />
 			</div>
 
 			<div className="border border-border-1 p-3 rounded-lg flex-between-center gap-2 h-25">

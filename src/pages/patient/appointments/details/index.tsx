@@ -16,13 +16,15 @@ import { toast } from 'react-toastify';
 import { AppointmentTypeEnum } from '../../../../interfaces/enums';
 // import { GoogleMap } from '../../../../components/ui/GoogleMap';
 import { AppointmentDetailsSkeleton } from '../../../../components/ui/skeletons/AppointmentDetailSkeleton';
+import { LocationInfo } from '../../../../components/ui/LocationInfo';
+import { GoogleMap } from '../../../../components/ui/GoogleMap';
 
 export const PatientAppointmentDetails = () => {
 	const { t } = useTranslation(['patient', 'common']);
 	const { id } = useParams<{ id: string }>();
 	const { state } = useLocation();
 
-	const { name, image, specialty } = state;
+	const { name, image, specialty, latitude, longitude, rating, clinicName } = state;
 	const { data, isLoading } = useGetPatientAppointmentDetailQuery({ id });
 	const {
 		appointment_date,
@@ -59,17 +61,16 @@ export const PatientAppointmentDetails = () => {
 				<AppointmentDetailsSkeleton />
 			) : (
 				<div className="space-y-8 card">
-					<DoctorInfoCard averageRating={2} name={name} image={image} specialty={specialty} />
-					{/* TODO:add rating and latitudes */}
-					{/* {appointment_type === AppointmentTypeEnum.Onsite && (
-					<>
-						<LocationInfo address={clinicName} />
+					<DoctorInfoCard averageRating={rating} name={name} image={image} specialty={specialty} />
+					{appointment_type === AppointmentTypeEnum.Onsite && (
+						<>
+							<LocationInfo address={clinicName} />
 
-						<div className="h-60 mt-5">
-							<GoogleMap latitude={latitude} longitude={longitude} />
-						</div>
-					</>
-				)} */}
+							<div className="h-60 mt-5">
+								<GoogleMap latitude={latitude} longitude={longitude} />
+							</div>
+						</>
+					)}
 
 					<div className="p-4 card-box-shadow rounded-lg">
 						<div className="flex-between-center mb-5">

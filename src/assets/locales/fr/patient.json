@@ -68,5 +68,6 @@
 	"labProcessing": "Le laboratoire traite encore vos résultats.",
 	"estimatedTimeRemaining": "Temps restant estimé : {{time}}",
 	"labReportAvailable": "Votre rapport d'analyse est disponible.",
+	"itemsLeftInStock": "Il reste {{count}} articles en stock",
 	"labReportPaymentRequired": "Pour consulter ou télécharger votre rapport d'analyse, veuillez effectuer le paiement."
 }
