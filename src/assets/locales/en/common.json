@@ -52,5 +52,22 @@
 	"manageProfile": "Manage Profile",
 	"yes": "Yes",
 	"medicines": "Medicines",
-	"signOut": "Sign Out"
+	"signOut": "Sign Out",
+	"join": "Join",
+	"details": "Details",
+	"pending": "Pending",
+	"paid": "Paid",
+	"uploaded": "Uploaded",
+	"markAsComplete": "Mark as Complete",
+	"upcoming": "Upcoming",
+	"past": "Past",
+	"payNow": "Pay Now",
+	"view": "View",
+	"download": "Download",
+	"prescription": "Prescription",
+	"popularProducts": "Popular Products",
+	"addToCart": "Add to cart",
+	"dob": "Date of Birth",
+	"profile": "Profile",
+	"reports": "Reports"
 }

@@ -1,16 +1,26 @@
 import type { FC } from 'react';
-import { CalendarIcon, LocationIcon } from '../../../assets/icons';
-import { Rating } from '../Rating';
+import { CalendarIcon, LocationIcon, VideoIcon } from '../../../assets/icons';
 import { Badge } from '../Badge';
 import { Distance } from '../Distance';
+import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router';
+import { APPOINTMENTS_DETAIL_ROUTE } from '../../../routes';
 
 type AppointmentCardProps = {
 	image: string;
+	id: number;
 	name: string;
+	rating: string;
+	latitude: number;
+	longitude: number;
+	distance: number | null;
+	meeting_link: string | null;
 	specialty: string;
 	clinicName: string;
+	meetingButtonDisabled?: boolean;
 	appointmentDate: string;
 	timeRange: string;
+	label: string;
 };
 
 export const AppointmentCard: FC<AppointmentCardProps> = ({
@@ -20,40 +30,100 @@ export const AppointmentCard: FC<AppointmentCardProps> = ({
 	clinicName,
 	appointmentDate,
 	timeRange,
+	label,
+	distance,
+	meeting_link,
+	id,
+	meetingButtonDisabled,
+	latitude,
+	longitude,
+	rating,
 }) => {
+	const { t } = useTranslation();
+	const isInPerson = label === 'In Person';
+
 	return (
-		<div className={`p-5 bg-white rounded-2xl border border-black/10 h-40`}>
-			<div className="flex gap-2.5 ">
-				<img className="inline-block size-11 rounded-full" src={image} alt={name} />
+		<Link
+			to={APPOINTMENTS_DETAIL_ROUTE.replace(':id', `${id}`)}
+			state={{ clinicName, name, image, specialty, latitude, longitude, rating }}
+		>
+			<div className={`p-4 bg-white rounded-2xl border border-black/10 h-45 space-y-1`}>
+				<div className="flex gap-2.5 ">
+					<img className="inline-block size-15 rounded-full" src={image} alt={name} />
 
-				<div className="flex-1 flex flex-col flex-between space-y-1">
-					<div className="flex-between-center">
-						<h5 className="font-semibold text-typography-800">{name}</h5>
-						<Rating rating={'4.8'} />
+					<div className="flex-1 flex flex-col gap-1">
+						<div className="flex-between-center">
+							<h5 className="font-semibold text-typography-800 line-clamp-1">{name}</h5>
+							<Badge specialty={label} variant={isInPerson ? 'danger' : 'blue'} />
+						</div>
+
+						{isInPerson ? (
+							<Badge specialty={specialty} variant={'primary'} />
+						) : (
+							<span className="text-typography-700 capitalize line-clamp-1">
+								{specialty} | {clinicName}
+							</span>
+						)}
 					</div>
+				</div>
 
-					<Badge specialty={specialty} />
-					<div className="flex-between-center">
-						<div className="flex-items-center gap-1">
-							<div>
-								<LocationIcon />
+				<div className="flex-between flex-col gap-2 mt-2">
+					<div>
+						{isInPerson ? (
+							<div className="flex-between-center mt-2">
+								<div className="flex-items-center gap-1">
+									<div>
+										<LocationIcon />
+									</div>
+									<span className="text-typography-700 line-clamp-1">{clinicName}</span>
+								</div>
+
+								<Distance distance={distance} />
 							</div>
-							<span className="text-typography-700 line-clamp-1">{clinicName}</span>
-						</div>
+						) : (
+							<div className="flex-between-center">
+								<div className="flex gap-1">
+									<CalendarIcon />
 
-						<Distance distance={9} />
+									<span className="text-typography-800">{appointmentDate}</span>
+								</div>
+
+								<Badge specialty={timeRange} variant="primary" />
+							</div>
+						)}
 					</div>
-					<div className="flex-between-center mt-3">
-						<div className="flex gap-1">
-							<CalendarIcon />
 
-							<span className="text-typography-800">{appointmentDate}</span>
-						</div>
+					<div>
+						{isInPerson ? (
+							<div className="flex-between-center mt-4">
+								<div className="flex gap-1">
+									<CalendarIcon />
 
-						<Badge specialty={timeRange} variant="primary" />
+									<span className="text-typography-800">{appointmentDate}</span>
+								</div>
+
+								<Badge specialty={timeRange} variant="primary" />
+							</div>
+						) : (
+							<div>
+								{meeting_link && (
+									<button
+										disabled={meetingButtonDisabled}
+										className="primary-btn w-full flex-center gap-2"
+										onClick={(e) => {
+											e.preventDefault();
+											window.open(meeting_link);
+										}}
+									>
+										<VideoIcon />
+										{t('join')}
+									</button>
+								)}
+							</div>
+						)}
 					</div>
 				</div>
 			</div>
-		</div>
+		</Link>
 	);
 };

@@ -1,5 +1,4 @@
 import type {
-	AppointmentType,
 	CurrentUserType,
 	Doctor,
 	DoctorDetail,
@@ -89,9 +88,6 @@ export type LabDetailResponse = CommonApiResponse & {
 	};
 };
 
-export type AppointmentsResponse = CommonApiResponse & {
-	data: { items: AppointmentType[]; meta: ResponsePagination };
-};
 export type AppointmentSlotResponse = CommonApiResponse & {
 	data: { slots: TimeSlot[] };
 };

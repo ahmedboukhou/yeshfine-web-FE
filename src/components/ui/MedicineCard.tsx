@@ -1,5 +1,5 @@
 import { Fragment, useState, type FC } from 'react';
-import { AddToCartModal } from './modals/AddToCart';
+import MedicineDetailModal from './modals/MedicineDetail';
 
 type MedicineCardProps = {
 	id: number | string;
@@ -24,6 +24,9 @@ export const MedicineCard: FC<MedicineCardProps> = ({
 			<div
 				key={`${id}`}
 				aria-haspopup="dialog"
+				aria-expanded="false"
+				aria-controls={`hs-${id}`}
+				data-hs-overlay={`#hs-${id}`}
 				onClick={() => setOpen(true)}
 				className="border border-border-1 rounded-xl h-55 overflow-hidden bg-white cursor-pointer"
 			>
@@ -37,8 +40,7 @@ export const MedicineCard: FC<MedicineCardProps> = ({
 					<span className="text-typography-700 line-clamp-2">{name}</span>
 				</div>
 			</div>
-
-			<AddToCartModal id={`${id}`} open={open} onClose={() => setOpen(false)} />
+			<MedicineDetailModal id={`${id}`} open={open} onClose={() => setOpen(false)} />
 		</Fragment>
 	);
 };

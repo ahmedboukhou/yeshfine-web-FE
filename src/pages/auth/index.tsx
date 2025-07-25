@@ -44,9 +44,9 @@ export const AuthLayout = () => {
 				alt={slide.heading}
 				className="w-full object-cover object-top h-full rounded-2xl"
 			/>
-			<div className="absolute bottom-5 rounded-b-2xl p-8 h-48 text-white backdrop-blur-lg w-[calc(100%-20px)] bg-black/40">
-				<h2 className="text-2xl font-bold">{t(slide.heading)}</h2>
-				<p className="text-sm">{t(slide.description)}</p>
+			<div className="absolute bottom-5 rounded-b-2xl p-8 h-60 text-white backdrop-blur-lg w-[calc(100%-20px)] bg-black/40">
+				<h2 className="font-bold">{t(slide.heading)}</h2>
+				<span>{t(slide.description)}</span>
 			</div>
 		</div>
 	));

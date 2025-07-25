@@ -51,5 +51,22 @@
 	"viewMore": "Voir plus",
 	"yes": "Oui",
 	"resultTime": "Délai des résultats en jours",
-	"medicines": "Médicaments"
+	"medicines": "Médicaments",
+	"join": "Rejoindre",
+	"details": "Détails",
+	"pending": "En attente",
+	"paid": "Payé",
+	"uploaded": "Téléversé",
+	"markAsComplete": "Marquer comme terminé",
+	"upcoming": "À venir",
+	"past": "Passés",
+	"payNow": "Payer maintenant",
+	"view": "Voir",
+	"download": "Télécharger",
+	"prescription": "Ordonnance",
+	"popularProducts": "Produits populaires",
+	"addToCart": "Ajouter au panier",
+	"dob": "Date de naissance",
+	"profile": "Profil",
+	"reports": "Rapports"
 }

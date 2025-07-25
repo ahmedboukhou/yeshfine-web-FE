@@ -10,10 +10,20 @@ export enum responseStatus {
 	Error = 'error',
 }
 
-export enum AppointmentTypeEnum {
+export enum AppointmentFilterTypeEnum {
 	Today = 'today',
 	Upcoming = 'upcoming',
 	Past = 'past',
+}
+
+export enum AppointmentTypeEnum {
+	Onsite = 'onsite',
+	Virtual = 'virtual',
+}
+export enum LabStatusEnum {
+	Pending = 'pending',
+	Uploaded = 'uploaded',
+	Paid = 'paid',
 }
 
 export enum LocationEnum {

@@ -57,5 +57,19 @@
 	"pharmaciesUnavailable": "الصيدليات غير متاحة حاليًا",
 	"pharmaciesFetchError": "حدثت مشكلة أثناء جلب بيانات الصيدليات. يرجى المحاولة مرة أخرى أو العودة لاحقًا.",
 	"pharmacyDetails": "تفاصيل الصيدلية",
-	"allCategories": "جميع الفئات"
+	"allCategories": "جميع الفئات",
+	"upcomingDoctorAppointments": "المواعيد القادمة مع الطبيب",
+	"allLabs": "جميع المختبرات",
+	"yourReports": "تقاريري",
+	"viewYourPrescription": "عرض وصفتك الطبية",
+	"yourReport": "تقريرك",
+	"labProcessingMessage": "لا يزال المختبر يعالج نتائجك. ستتلقى إشعارًا بمجرد تحميل التقرير.",
+	"reportPaymentRequired": "التقرير متاح، لعرضه أو تنزيله، يرجى إتمام الدفع.",
+	"labReadyMessage": "تقرير فحصك المخبري جاهز للعرض أو التنزيل",
+	"labReportNotAvailable": "تقرير فحصك المخبري غير متاح بعد.",
+	"labProcessing": "لا يزال المختبر يعالج نتائجك.",
+	"estimatedTimeRemaining": "الوقت المتبقي المقدر: {{time}}",
+	"labReportAvailable": "تقرير فحصك المخبري متاح.",
+	"itemsLeftInStock": "تبقى {{count}} عناصر في المخزون",
+	"labReportPaymentRequired": "لعرض أو تنزيل تقرير فحصك المخبري، يرجى إتمام الدفع."
 }

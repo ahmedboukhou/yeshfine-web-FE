@@ -32,7 +32,7 @@ export type ResetPasswordInput = {
 
 export type BookAppointmentInput = {
 	doctor_id: number;
-	appointment_date: Date;
+	appointment_date: string;
 	start_time: string;
 	end_time: string;
 	ticket_number?: number;
@@ -40,3 +40,9 @@ export type BookAppointmentInput = {
 	reason: string;
 	doctor_detail_id?: number;
 };
+
+export type PatientProfileInput = {
+	name:string
+	dob:string
+	gender:string
+}

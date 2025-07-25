@@ -1,9 +1,10 @@
 import type { FC } from 'react';
-import { Link } from 'react-router';
-import { ActivityIcon, ClockIcon, LocationIcon } from '../../../assets/icons';
-import { Badge } from '../Badge';
-import { Rating } from '../Rating';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router';
+import { ClockIcon, LocationIcon } from '../../../assets/icons';
+import { Badge } from '../Badge';
+import { Distance } from '../Distance';
+import { Rating } from '../Rating';
 
 type LabsPharmacyCardProps = {
 	name: string;
@@ -59,10 +60,7 @@ export const LabsPharmacyCard: FC<LabsPharmacyCardProps> = ({
 							</span>
 							<Badge icon={<ClockIcon />} specialty={todaySlot} variant="primary" />
 
-							<div className="flex-items-center">
-								<ActivityIcon />
-								<p className="text-warning-400 font-medium text-sm">{distance ?? 0} km</p>
-							</div>
+							<Distance distance={distance} />
 						</div>
 					</div>
 				</div>

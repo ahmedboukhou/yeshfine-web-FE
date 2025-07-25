@@ -12,6 +12,7 @@ import { SelectSlot } from '../../../../../components/ui/SelectSlot';
 import type { TimeSlot } from '../../../../../interfaces';
 import { DOCTORS_DETAIL_ROUTE, DOCTORS_ROUTE, HOME_ROUTE } from '../../../../../routes';
 import { VerifyBooking } from './VerifyBooking';
+import dayjs from 'dayjs';
 
 export const PatientDoctorBookAppointment = () => {
 	const { t } = useTranslation(['patient', 'common']);
@@ -45,7 +46,7 @@ export const PatientDoctorBookAppointment = () => {
 				id &&
 				bookAppointment(
 					{
-						appointment_date: date,
+						appointment_date: dayjs(date).format('YYYY-MM-DD'),
 						appointment_type: appointmentType,
 						doctor_detail_id: doctorDetailId,
 						doctor_id: Number(id),

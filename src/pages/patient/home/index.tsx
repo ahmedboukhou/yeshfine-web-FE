@@ -29,7 +29,7 @@ export const PatientHome = () => {
 	// get upcoming appointments
 	const { data: getAppointmentsResponse, isLoading: loadingAppointments } =
 		useGetPatientUpcomingAppointmentsQuery();
-	const appointmentsData = getAppointmentsResponse?.data?.items || [];
+	const { data: appointmentsData } = getAppointmentsResponse || {};
 
 	const { data, isFetching: gettingStats } = useGetTopRatedStatsQuery();
 	const { topDoctors, topLabs, topPharmacies } = data?.data || {};
@@ -51,39 +51,60 @@ export const PatientHome = () => {
 
 			<section className="flex flex-col gap-5">
 				<Heading
-					text={t('upcomingAppointments', { heading: t('doctors', { ns: 'common' }) })}
+					text={t('upcomingDoctorAppointments', { heading: t('doctors', { ns: 'common' }) })}
 					route={APPOINTMENTS_ROUTE}
 				/>
-				<div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
+				<div className="grid grid-cols-6 gap-5">
 					{loadingAppointments ? (
 						<AppointmentCardSkeleton />
-					) : appointmentsData?.length > 0 ? (
+					) : !!appointmentsData?.length ? (
 						appointmentsData?.map(
 							(
 								{
-									doctor: { image, name, speciality, clinicName },
-									appointment_date_formatted,
-									time_range,
+									doctor_image,
+									start_time,
+									appointment_date,
+									distance,
+									speciality,
+									appointment_type,
+									doctor_name,
+									clinicName,
+									end_time,
+									appointment_id,
+									meeting_link,
+									latitude,
+									longitude,
+									rating,
 								},
 								index
 							) => (
-								<AppointmentCard
-									image={image}
-									key={index}
-									name={name}
-									specialty={speciality}
-									clinicName={clinicName}
-									appointmentDate={appointment_date_formatted}
-									timeRange={time_range}
-								/>
+								<div key={index} className="col-span-6 md:col-span-3 xl:col-span-2">
+									<AppointmentCard
+										id={appointment_id}
+										image={doctor_image}
+										distance={distance}
+										latitude={latitude}
+										longitude={longitude}
+										rating={rating}
+										name={doctor_name}
+										label={appointment_type}
+										specialty={speciality}
+										meeting_link={meeting_link}
+										clinicName={clinicName}
+										appointmentDate={appointment_date}
+										timeRange={`${start_time} - ${end_time}`}
+									/>
+								</div>
 							)
 						)
 					) : (
-						<NotFoundCard
-							icon={<AppointmentIcon />}
-							heading={t('noAppointmentYet')}
-							subHeading={t('bookWhenReady')}
-						/>
+						<div className="col-span-6">
+							<NotFoundCard
+								icon={<AppointmentIcon />}
+								heading={t('noAppointmentYet')}
+								subHeading={t('bookWhenReady')}
+							/>
+						</div>
 					)}
 				</div>
 			</section>

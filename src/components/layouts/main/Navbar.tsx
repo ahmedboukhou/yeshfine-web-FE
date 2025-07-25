@@ -1,8 +1,15 @@
 import { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link, useLocation } from 'react-router';
+import { Link, useLocation, useNavigate } from 'react-router';
 import { useChangeLanguageMutation } from '../../../apis/auth';
-import { LanguageIcon, NavToggleIcon, NotificationIcon, SignOutIcon } from '../../../assets/icons';
+import {
+	CloseIcon,
+	LanguageIcon,
+	NavToggleIcon,
+	NotificationIcon,
+	ProfileIcon,
+	SignOutIcon,
+} from '../../../assets/icons';
 import logo from '../../../assets/logo.svg';
 import { supportedLanguages } from '../../../constants/mappedData';
 import i18n from '../../../i18n';
@@ -12,15 +19,20 @@ import {
 	HOME_ROUTE,
 	LABS_ROUTE,
 	PHARMACIES_ROUTE,
+	PROFILE_ROUTE,
 } from '../../../routes';
 import useAuthStore from '../../../store/auth';
 import { Dropdown } from '../../ui/actions/Dropdown';
+import { useCurrentUserStore } from '../../../store/user';
 
 export const Navbar = () => {
 	const location = useLocation();
+	const navigate = useNavigate();
 	const { t } = useTranslation();
 	const { logout } = useAuthStore((state) => state);
 	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+	const { currentUser } = useCurrentUserStore((state) => state);
+	const { name, image } = currentUser || {};
 
 	const patientHeaderOptions = [
 		{ title: 'home', to: HOME_ROUTE },
@@ -30,7 +42,10 @@ export const Navbar = () => {
 		{ title: 'appointments', to: APPOINTMENTS_ROUTE },
 	];
 
-	const navbarOptions = [{ label: t('signOut'), icon: <SignOutIcon />, onClick: () => logout() }];
+	const profileOptions = [
+		{ label: t('profile'), icon: <ProfileIcon />, onClick: () => navigate(PROFILE_ROUTE) },
+		{ label: t('signOut'), icon: <SignOutIcon />, onClick: () => logout() },
+	];
 	const { mutateAsync: updateLanguage } = useChangeLanguageMutation();
 	const handleNavLinkClick = () => {
 		setIsMobileMenuOpen(false); // close on link click
@@ -85,8 +100,11 @@ export const Navbar = () => {
 							<div className=" flex-items-center gap-x-2 cursor-pointer">
 								<img
 									className="inline-block size-10 rounded-full cursor-pointer"
-									src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80"
-									alt="Avatar"
+									src={
+										image ??
+										'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhtMRbtowke9ZnnGtyYJmIuJaB2Q1y5I-3IA&s'
+									}
+									alt={name}
 								/>
 								<svg
 									className="hs-dropdown-open:rotate-180 size-4"
@@ -105,16 +123,15 @@ export const Navbar = () => {
 							</div>
 						}
 						menu={
-							<div className="p-1 space-y-0.5">
-								{navbarOptions.map(({ label, onClick, icon }) => (
+							<div className="space-y-0.5 p-1">
+								{profileOptions.map(({ label, onClick, icon }) => (
 									<div
+										onClick={onClick}
 										key={label}
 										className="py-2 px-3 flex-items-center rounded-lg gap-1 hover:bg-primary-light-hover focus:outline-hidden cursor-pointer"
 									>
 										{icon}
-										<p className=" text-sm text-typography-700" onClick={onClick}>
-											{label}
-										</p>
+										<p className=" text-sm text-typography-700">{label}</p>
 									</div>
 								))}
 							</div>
@@ -154,13 +171,13 @@ export const Navbar = () => {
 			</nav>
 
 			{isMobileMenuOpen && (
-				<div className="fixed inset-0 bg-white z-50 flex-col flex-items-center justify-center md:hidden block transition-all duration-300">
+				<div className="fixed inset-0 bg-primary-light z-50 flex-col flex-items-center justify-center md:hidden block transition-all duration-300">
 					{/* Close button */}
 					<button
-						className="absolute top-4 right-4 text-xl cursor-pointer"
+						className="absolute top-4 right-4 text-xl cursor-pointer bg-white p-1 rounded-full"
 						onClick={() => setIsMobileMenuOpen(false)}
 					>
-						&times;
+						<CloseIcon />
 					</button>
 
 					<div className="flex flex-col gap-6 text-lg">

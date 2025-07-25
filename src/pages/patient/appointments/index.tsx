@@ -6,15 +6,15 @@ import { SearchInput } from '../../../components/ui/actions/SearchInput';
 import { Tabs } from '../../../components/ui/actions/Tabs';
 import { AppointmentCard } from '../../../components/ui/cards/AppointmentCard';
 import { AppointmentCardSkeleton } from '../../../components/ui/skeletons/AppointmentCardSkeleton';
-import { AppointmentTypeEnum } from '../../../interfaces/enums';
+import { AppointmentFilterTypeEnum } from '../../../interfaces/enums';
 
 export const PatientAppointments = () => {
-	const { t } = useTranslation();
+	const { t } = useTranslation(['common', 'patient']);
 
 	const [page, setPage] = useState(1);
 	const [shouldRefetch, setShouldRefetch] = useState(false);
 	const [search, setSearch] = useState('');
-	const [type, setType] = useState(AppointmentTypeEnum.Upcoming);
+	const [type, setType] = useState(AppointmentFilterTypeEnum.Upcoming);
 	const {
 		data: getAppointmentsResponse,
 		isFetching: loadingAppointments,
@@ -23,8 +23,8 @@ export const PatientAppointments = () => {
 	const { items, meta } = getAppointmentsResponse?.data || {};
 
 	const tabData = [
-		{ label: 'Upcoming', value: AppointmentTypeEnum.Upcoming },
-		{ label: 'Past', value: AppointmentTypeEnum.Past },
+		{ label: t('upcoming'), value: AppointmentFilterTypeEnum.Upcoming },
+		{ label: t('past'), value: AppointmentFilterTypeEnum.Past },
 	];
 
 	useEffect(() => {
@@ -65,34 +65,59 @@ export const PatientAppointments = () => {
 						setPage(1);
 						setShouldRefetch(true);
 					}}
+					disabled={loadingAppointments}
 				/>
 			</div>
-			<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 overflow-auto">
+			<div className="grid grid-cols-6 gap-5 mb-10">
 				{loadingAppointments ? (
-					<AppointmentCardSkeleton />
+					<AppointmentCardSkeleton count={6} />
 				) : !!items?.length ? (
 					items?.map(
 						(
 							{
-								doctor: { image, name, speciality, clinicName },
+								doctor: {
+									image,
+									name,
+									speciality,
+									clinicName,
+									average_rating,
+									latitude,
+									longitude,
+								},
 								appointment_date_formatted,
 								time_range,
+								appointment_type_label,
+								distance,
+								appointment_id,
+								meeting_link,
 							},
 							index
 						) => (
-							<AppointmentCard
-								key={index}
-								image={image}
-								name={name}
-								specialty={speciality}
-								clinicName={clinicName}
-								appointmentDate={appointment_date_formatted}
-								timeRange={time_range}
-							/>
+							<div key={index} className="col-span-6 md:col-span-3 xl:col-span-2">
+								<AppointmentCard
+									key={index}
+									id={appointment_id}
+									distance={distance}
+									latitude={latitude}
+									longitude={longitude}
+									rating={average_rating}
+									meeting_link={meeting_link}
+									image={image}
+									label={appointment_type_label}
+									name={name}
+									meetingButtonDisabled={type === AppointmentFilterTypeEnum.Past}
+									specialty={speciality}
+									clinicName={clinicName}
+									appointmentDate={appointment_date_formatted}
+									timeRange={time_range}
+								/>
+							</div>
 						)
 					)
 				) : (
-					<p>asd</p>
+					<div className="col-span-6 my-4 flex-center">
+						<p>{t('notFound', { ns: 'patient', text: t('pharmacies', { ns: 'common' }) })}</p>
+					</div>
 				)}
 			</div>
 

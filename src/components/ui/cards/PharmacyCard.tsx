@@ -1,9 +1,10 @@
 import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
-import { ActivityIcon, ClockIcon, LocationIcon } from '../../../assets/icons';
+import { ClockIcon, LocationIcon } from '../../../assets/icons';
 import type { Medicine } from '../../../interfaces';
 import { Badge } from '../Badge';
+import { Distance } from '../Distance';
 import { MedicineCard } from '../MedicineCard';
 
 type PharmacyCardProps = {
@@ -35,11 +36,8 @@ export const PharmacyCard: FC<PharmacyCardProps> = ({
 					<img src={image} alt={name} className="w-20 h-20 rounded-xl" />
 					<div className="flex-1 space-y-1">
 						<div className="flex-between">
-							<h5 className="ellipses font-semibold text-typography-800">{name}</h5>
-							<div className="flex-items-center">
-								<ActivityIcon />
-								<p className="text-warning-400 font-medium text-sm">{distance ?? 0} km</p>
-							</div>
+							<h5 className="line-clamp-1 font-semibold text-typography-800">{name}</h5>
+							<Distance distance={distance} />
 						</div>
 
 						<div className="gap-2 flex-items-center">

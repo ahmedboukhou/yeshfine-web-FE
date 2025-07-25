@@ -1,13 +1,13 @@
 import { useCallback, useEffect, useState, type FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useGetLabTestsQuery } from '../../../apis/patient/labs';
-import { CrossIcon, FilterIcon } from '../../../assets/icons';
-import { Checkbox } from '../../../components/ui/actions/Checkbox';
-import { Radio } from '../../../components/ui/actions/Radio';
-import { Switch } from '../../../components/ui/actions/Switch';
-import type { LabFilterType } from '../../../interfaces';
-import { LocationEnum } from '../../../interfaces/enums';
-import { useLabTestsStore } from '../../../store/labTests';
+import { useGetLabTestsQuery } from '../../../../apis/patient/labs';
+import { FilterIcon, CrossIcon } from '../../../../assets/icons';
+import { Checkbox } from '../../../../components/ui/actions/Checkbox';
+import { Radio } from '../../../../components/ui/actions/Radio';
+import { Switch } from '../../../../components/ui/actions/Switch';
+import type { LabFilterType } from '../../../../interfaces';
+import { LocationEnum } from '../../../../interfaces/enums';
+import { useLabTestsStore } from '../../../../store/labTests';
 
 interface SearchDoctorFilterProps {
 	filterValues: LabFilterType;

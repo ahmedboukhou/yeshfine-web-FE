@@ -19,6 +19,9 @@ import { PatientPharmaciesDetail } from './pages/patient/pharmacies/detail';
 import { PatientMedicineCategories } from './pages/patient/pharmacies/detail/MedicineCategories';
 import useAuthStore from './store/auth';
 import { useCurrentUserStore } from './store/user';
+import { PatientAppointmentDetails } from './pages/patient/appointments/details';
+import { PatientLabReportDetail } from './pages/patient/labs/reports/details';
+import { PatientProfile } from './pages/patient/profile';
 
 // App Routes
 export const ROOT_ROUTE = '/';
@@ -34,12 +37,15 @@ export const DOCTORS_ROUTE = '/doctors';
 export const DOCTORS_DETAIL_ROUTE = `${DOCTORS_ROUTE}/:id`;
 export const DOCTOR_BOOK_APPOINTMENT_ROUTE = `${DOCTORS_ROUTE}/:id/book-appointment`;
 export const LABS_ROUTE = '/labs';
+export const LABS_REPORT_DETAIL_ROUTE = '/labs/reports/:id';
 export const LABS_DETAIL_ROUTE = `${LABS_ROUTE}/:id`;
 export const LAB_BOOK_APPOINTMENT_ROUTE = `${LABS_ROUTE}/:id/book-appointment`;
 export const PHARMACIES_ROUTE = '/pharmacies';
 export const PHARMACIES_DETAIL_ROUTE = `${PHARMACIES_ROUTE}/:id`;
 export const PHARMACIES_MEDICINE_DETAIL_ROUTE = `${PHARMACIES_ROUTE}/:id/medicines`;
 export const APPOINTMENTS_ROUTE = '/appointments';
+export const APPOINTMENTS_DETAIL_ROUTE = `${APPOINTMENTS_ROUTE}/:id`;
+export const PROFILE_ROUTE = `profile`;
 
 export const AppRoutes = () => {
 	const { isAuthenticated, logout } = useAuthStore((state) => state);
@@ -51,23 +57,37 @@ export const AppRoutes = () => {
 				<Routes>
 					{currentUser.role === Role.Patient ? (
 						<Route element={<MainLayout />}>
+							{/* home */}
 							<Route element={<PatientHome />} path={HOME_ROUTE} />
+
+							{/* doctors */}
 							<Route element={<PatientDoctors />} path={DOCTORS_ROUTE} />
 							<Route element={<PatientDoctorDetail />} path={DOCTORS_DETAIL_ROUTE} />
 							<Route
 								element={<PatientDoctorBookAppointment />}
 								path={DOCTOR_BOOK_APPOINTMENT_ROUTE}
 							/>
+
+							{/* labs */}
 							<Route element={<PatientLabs />} path={LABS_ROUTE} />
 							<Route element={<PatientLabDetail />} path={LABS_DETAIL_ROUTE} />
+							<Route element={<PatientLabReportDetail />} path={LABS_REPORT_DETAIL_ROUTE} />
 							<Route element={<PatientLabBookAppointment />} path={LAB_BOOK_APPOINTMENT_ROUTE} />
+
+							{/* pharmacies */}
 							<Route element={<PatientPharmacies />} path={PHARMACIES_ROUTE} />
 							<Route element={<PatientPharmaciesDetail />} path={PHARMACIES_DETAIL_ROUTE} />
 							<Route
 								element={<PatientMedicineCategories />}
 								path={PHARMACIES_MEDICINE_DETAIL_ROUTE}
 							/>
+							{/* appointments */}
 							<Route element={<PatientAppointments />} path={APPOINTMENTS_ROUTE} />
+							<Route element={<PatientAppointmentDetails />} path={APPOINTMENTS_DETAIL_ROUTE} />
+
+							{/* profile */}
+							<Route element={<PatientProfile />} path={PROFILE_ROUTE} />
+
 							<Route element={<Navigate to={HOME_ROUTE} />} path="*" />
 						</Route>
 					) : (

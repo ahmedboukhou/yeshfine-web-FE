@@ -43,7 +43,7 @@ export const DoctorMainCard: FC<DoctorTypeCardProps> = ({
 					/>
 				</div>
 				<div className="flex-1 flex flex-col items-center justify-center text-center md:justify-between md:flex-row md:text-left gap-3">
-					<div>
+					<div className='flex items-center md:items-start flex-col item'>
 						<div className="flex gap-3 mb-1">
 							<h3 className="text-typography-900 font-semibold">{name}</h3>
 							<Rating rating={averageRating} />
@@ -51,7 +51,7 @@ export const DoctorMainCard: FC<DoctorTypeCardProps> = ({
 						<Badge specialty={specialty} />
 					</div>
 					<Link
-						className="primary-btn w-full md:w-auto flex-center gap-2"
+						className="primary-btn w-full md:w-auto flex-center gap-2 text-nowrap"
 						to={{
 							pathname: DOCTOR_BOOK_APPOINTMENT_ROUTE.replace(':id', `${id}`),
 						}}

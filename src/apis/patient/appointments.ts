@@ -1,28 +1,34 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
+import type { AppointmentType, UpcomingAppointmentType } from '../../interfaces';
+import type { AppointmentFilterTypeEnum } from '../../interfaces/enums';
 import type { BookAppointmentInput } from '../../interfaces/formInputTypes';
 import type {
 	AppointmentSlotResponse,
-	AppointmentsResponse,
 	CommonApiResponse,
 	PayloadPaginationType,
+	ResponsePagination,
 } from '../../interfaces/responseTypes';
 import { apiClient } from '../../lib/api';
-import type { AppointmentTypeEnum } from '../../interfaces/enums';
 
+type PatientUpcomingAppointmentsResponse = CommonApiResponse & {
+	data: UpcomingAppointmentType[];
+};
 export function useGetPatientUpcomingAppointmentsQuery() {
 	return useQuery({
 		queryKey: ['get-patient-upcoming-appointments'],
-		queryFn: (): Promise<AppointmentsResponse> =>
+		queryFn: (): Promise<PatientUpcomingAppointmentsResponse> =>
 			apiClient.get(`dashboard/patient/upcoming-appointments`),
 	});
 }
 
 type GetAppointmentsQueryParams = PayloadPaginationType & {
-	type: AppointmentTypeEnum;
+	type: AppointmentFilterTypeEnum;
 	search: string;
 };
-
+type AppointmentsResponse = CommonApiResponse & {
+	data: { items: AppointmentType[]; meta: ResponsePagination };
+};
 export function useGetAppointmentsQuery({ page, limit, type, search }: GetAppointmentsQueryParams) {
 	return useQuery({
 		queryKey: ['get-patient-appointments', type],
@@ -49,5 +55,28 @@ export function useBookAppointmentMutation() {
 	return useMutation<CommonApiResponse, CommonApiResponse, BookAppointmentInput>({
 		mutationFn: (values) => apiClient.post(`patients/appointments`, values),
 		onError: ({ message }) => toast.error(message || 'Something went wrong'),
+	});
+}
+
+export function useMarkAsCompleteAppointmentMutation() {
+	return useMutation<CommonApiResponse, CommonApiResponse, { id?: string }>({
+		mutationFn: (values) =>
+			apiClient.put(`patients/doctor/mark/appointment/${values?.id}`, values),
+		onError: ({ message }) => toast.error(message || 'Something went wrong'),
+	});
+}
+
+type PatientAppointmentDetailResponseType = CommonApiResponse & {
+	data: Omit<AppointmentType, 'doctor' | 'appointment_id' | 'distance'> & {
+		id: number; // replaces appointment_id
+		reason: string;
+		show_mark_complete: boolean;
+	};
+};
+export function useGetPatientAppointmentDetailQuery({ id }: { id?: string }) {
+	return useQuery({
+		queryKey: ['get-patient-appointment-detail', id],
+		queryFn: (): Promise<PatientAppointmentDetailResponseType> =>
+			apiClient.get(`patients/appointments/${id}`),
 	});
 }

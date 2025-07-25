@@ -1,14 +1,10 @@
 import { type FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
-import {
-	ActivityIcon,
-	BookAppointmentIcon,
-	BriefCaseIcon,
-	HospitalIcon,
-} from '../../../assets/icons';
+import { BookAppointmentIcon, BriefCaseIcon, HospitalIcon } from '../../../assets/icons';
 import { DOCTOR_BOOK_APPOINTMENT_ROUTE, DOCTORS_DETAIL_ROUTE } from '../../../routes';
 import { Badge } from '../Badge';
+import { Distance } from '../Distance';
 import { Rating } from '../Rating';
 
 type DoctorCardProps = {
@@ -81,10 +77,7 @@ export const DoctorCard: FC<DoctorCardProps> = ({
 									<p className="text-typography-700 font-medium text-sm ellipses">{clinicName}</p>
 								</div>
 
-								<div className="flex-end shrink-0 text-nowrap">
-									<ActivityIcon />
-									<p className="text-warning-400 font-medium text-sm">{distance ?? 0} km</p>
-								</div>
+								<Distance distance={distance} />
 							</div>
 						</div>
 					</Link>

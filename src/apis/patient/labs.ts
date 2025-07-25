@@ -1,16 +1,19 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
-import type { LabFilterType } from '../../interfaces';
+import type { LabAppointmentReport, LabFilterType } from '../../interfaces';
 import type {
 	CommonApiResponse,
 	DoctorReviewsResponse,
 	LabDetailResponse,
+	LabServiceType,
 	LabsResponse,
 	LabTestsResponse,
 	PayloadPaginationType,
+	ResponsePagination,
 } from '../../interfaces/responseTypes';
 import { apiClient } from '../../lib/api';
 import { useLabTestsStore } from '../../store/labTests';
+import type { LabStatusEnum } from '../../interfaces/enums';
 
 type GetLabsQueryParams = PayloadPaginationType &
 	Omit<LabFilterType, 'labTestList'> & {
@@ -48,6 +51,25 @@ export function useGetLabDetailQuery({ id }: { id?: string }) {
 		queryFn: (): Promise<LabDetailResponse> => apiClient.get(`patients/labs/${id}`),
 	});
 }
+type LabAppointmentDetailResponse = {
+	data: {
+		appointment_id: number;
+		appointment_date: string; // e.g., "30 Jul"
+		report: string | null;
+		prescription: string | null;
+		services: LabServiceType;
+		total_amount: string; // e.g., "500.00"
+		is_paid: boolean;
+	};
+};
+
+export function useGetLabReportDetailQuery({ id }: { id?: string }) {
+	return useQuery({
+		queryKey: ['get-lab-report-detail', id],
+		queryFn: (): Promise<LabAppointmentDetailResponse> =>
+			apiClient.get(`patients/labs/appointment/${id}`),
+	});
+}
 
 export function useGetLabReviewsQuery({
 	id,
@@ -67,6 +89,21 @@ export function useGetLabTestsQuery() {
 		queryKey: ['get-lab-tests'],
 		queryFn: (): Promise<LabTestsResponse> => apiClient.get(`labs/lab-tests`),
 		enabled: !labTestsData?.length,
+	});
+}
+
+type LabAppointmentReportResponse = {
+	data: { items: LabAppointmentReport[]; meta: ResponsePagination };
+};
+export function useGetLabReportsQuery({
+	page,
+	filter,
+	limit,
+}: PayloadPaginationType & { filter?: LabStatusEnum | '' }) {
+	return useQuery({
+		queryKey: ['get-lab-reports', page, filter],
+		queryFn: (): Promise<LabAppointmentReportResponse> =>
+			apiClient.get(`patients/labs/reports`, { page, limit, ...(filter && { filter }) }),
 	});
 }
 

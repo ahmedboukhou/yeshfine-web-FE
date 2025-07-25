@@ -29,7 +29,7 @@ export const PatientLabDetail = () => {
 	const { average_rating, servicesList, total_reviews, id: labDetailId } = labDetail || {};
 	const breadcrumbItems = [
 		{ title: t('labs', { ns: 'common' }), path: LABS_ROUTE },
-		{ title: t('labDetails'), path: '' },
+		{ title: t('details', { ns: 'common' }), path: '' },
 	];
 
 	const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => setSearch(e.target.value);
