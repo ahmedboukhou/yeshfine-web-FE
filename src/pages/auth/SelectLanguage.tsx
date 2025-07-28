@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
 import { EmptyCircleIcon, TickIcon } from '../../assets/icons';
-import { supportedLanguages } from '../../constants/mappedData';
+import { supportedLanguages } from '../../constants';
 import i18n from '../../i18n';
 import { SIGNUP_ROUTE } from '../../routes';
 import { AuthCard, AuthCardHeading } from '../../components/ui/cards/AuthCard';

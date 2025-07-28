@@ -9,7 +9,7 @@ import { AuthCard, AuthCardHeading } from '../../../components/ui/cards/AuthCard
 import { InputField } from '../../../components/ui/inputs/InputField';
 import { PhoneNumberInput } from '../../../components/ui/inputs/PhoneInput';
 import { SelectField } from '../../../components/ui/inputs/SelectField';
-import { genderOptions } from '../../../constants/mappedData';
+import { genderOptions } from '../../../constants';
 import i18n from '../../../i18n';
 import { Role } from '../../../interfaces/enums';
 import type { SignupInput } from '../../../interfaces/formInputTypes';
@@ -126,7 +126,7 @@ export const Signup = () => {
 								/>
 
 								<InputField
-									label={t('dob',{ns:'common'})}
+									label={t('dob', { ns: 'common' })}
 									id="dob"
 									type="date"
 									register={register('dob')}
@@ -136,7 +136,7 @@ export const Signup = () => {
 
 							<PhoneNumberInput
 								value={phone}
-								label={t('phoneNumber')}
+								label={t('phoneNumber', { ns: 'common' })}
 								onChange={(value) => setValue('phone', value)}
 								register={register('phone')}
 								error={errors.phone}

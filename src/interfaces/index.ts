@@ -1,12 +1,12 @@
 import type { LabStatusEnum, LocationEnum } from './enums';
 
 export type CurrentUserType = {
-	name: string;
-	phone: string;
-	role: string;
-	gender: string;
-	image: string;
-	dob: string;
+	name?: string;
+	phone?: string;
+	role?: string;
+	gender?: string;
+	image?: string | null;
+	dob?: string;
 };
 
 export interface AvailabilitySlot {

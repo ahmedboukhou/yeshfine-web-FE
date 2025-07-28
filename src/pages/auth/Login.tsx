@@ -61,7 +61,7 @@ export const Login = () => {
 						<div className="w-full flex flex-col gap-5">
 							<PhoneNumberInput
 								value={phone}
-								label={t('phoneNumber')}
+								label={t('phoneNumber', { ns: 'common' })}
 								onChange={(value) => setValue('phone', value)}
 								register={register('phone')}
 								error={errors.phone}

@@ -11,7 +11,7 @@ import {
 	SignOutIcon,
 } from '../../../assets/icons';
 import logo from '../../../assets/logo.svg';
-import { supportedLanguages } from '../../../constants/mappedData';
+import { supportedLanguages } from '../../../constants';
 import i18n from '../../../i18n';
 import {
 	APPOINTMENTS_ROUTE,
