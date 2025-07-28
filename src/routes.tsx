@@ -22,6 +22,8 @@ import { useCurrentUserStore } from './store/user';
 import { PatientAppointmentDetails } from './pages/patient/appointments/details';
 import { PatientLabReportDetail } from './pages/patient/labs/reports/details';
 import { PatientProfile } from './pages/patient/profile';
+import { PatientMedicineDetails } from './pages/patient/pharmacies/detail/medicineDetails';
+import { PatientCart } from './pages/patient/cart';
 
 // App Routes
 export const ROOT_ROUTE = '/';
@@ -42,8 +44,10 @@ export const LABS_DETAIL_ROUTE = `${LABS_ROUTE}/:id`;
 export const LAB_BOOK_APPOINTMENT_ROUTE = `${LABS_ROUTE}/:id/book-appointment`;
 export const PHARMACIES_ROUTE = '/pharmacies';
 export const PHARMACIES_DETAIL_ROUTE = `${PHARMACIES_ROUTE}/:id`;
-export const PHARMACIES_MEDICINE_DETAIL_ROUTE = `${PHARMACIES_ROUTE}/:id/medicines`;
+export const PHARMACIES_MEDICINE_CATEGORY_ROUTE = `${PHARMACIES_ROUTE}/:id/medicines`;
+export const PHARMACIES_MEDICINE_DETAIL_ROUTE = `/medicines/:id`;
 export const APPOINTMENTS_ROUTE = '/appointments';
+export const CART_ROUTE = '/cart';
 export const APPOINTMENTS_DETAIL_ROUTE = `${APPOINTMENTS_ROUTE}/:id`;
 export const PROFILE_ROUTE = `profile`;
 
@@ -79,8 +83,11 @@ export const AppRoutes = () => {
 							<Route element={<PatientPharmaciesDetail />} path={PHARMACIES_DETAIL_ROUTE} />
 							<Route
 								element={<PatientMedicineCategories />}
-								path={PHARMACIES_MEDICINE_DETAIL_ROUTE}
+								path={PHARMACIES_MEDICINE_CATEGORY_ROUTE}
 							/>
+							<Route element={<PatientCart />} path={CART_ROUTE} />
+
+							<Route element={<PatientMedicineDetails />} path={PHARMACIES_MEDICINE_DETAIL_ROUTE} />
 							{/* appointments */}
 							<Route element={<PatientAppointments />} path={APPOINTMENTS_ROUTE} />
 							<Route element={<PatientAppointmentDetails />} path={APPOINTMENTS_DETAIL_ROUTE} />

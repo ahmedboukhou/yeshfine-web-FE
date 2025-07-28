@@ -1,5 +1,6 @@
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import type {
+	Cart,
 	DoctorSpecialtiesType,
 	MedicineDetail,
 	MedicineFullDetail,
@@ -105,10 +106,46 @@ type MedicineDetailResponse = {
 		popularProducts: PopularProduct[];
 	};
 };
-export function useGetPharmacyMedicineDetailQuery({ id }: { id: string }) {
+export function useGetPharmacyMedicineDetailQuery({ id }: { id?: string }) {
 	return useQuery({
 		queryKey: ['get-pharmacy-medicine-detail', id],
 		queryFn: (): Promise<MedicineDetailResponse> => apiClient.get(`patients/medicine/${id}`),
 		enabled: !!id,
+	});
+}
+
+type UpdateCartItemQuantityInput = {
+	cart_item_id: string;
+	quantity: number;
+};
+
+export function useUpdateCartItemQuantityMutation() {
+	return useMutation<CommonApiResponse, CommonApiResponse, UpdateCartItemQuantityInput>({
+		mutationFn: (values) => apiClient.put(`patients/update-cart-item-quantity`, values),
+	});
+}
+
+type AddToCartInput = {
+	medicine_id?: string;
+	quantity: number;
+};
+export function useAddToCartMutation() {
+	return useMutation<CommonApiResponse, CommonApiResponse, AddToCartInput>({
+		mutationFn: (values) => apiClient.post(`patients/add-to-cart`, values),
+	});
+}
+
+type CartResponse = {
+	data: {
+		carts: Cart[];
+		total_amount: number;
+		total_items: number;
+		pharmacy_count: number;
+	};
+};
+export function useGetCartItemsQuery() {
+	return useQuery({
+		queryKey: ['get-patient-cart'],
+		queryFn: (): Promise<CartResponse> => apiClient.get(`patients/cart`),
 	});
 }
