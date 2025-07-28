@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Link, useLocation, useNavigate } from 'react-router';
 import { useChangeLanguageMutation } from '../../../apis/auth';
 import {
+	CartIcon,
 	CloseIcon,
 	LanguageIcon,
 	NavToggleIcon,
@@ -11,10 +12,11 @@ import {
 	SignOutIcon,
 } from '../../../assets/icons';
 import logo from '../../../assets/logo.svg';
-import { supportedLanguages } from '../../../constants/mappedData';
+import { supportedLanguages } from '../../../constants';
 import i18n from '../../../i18n';
 import {
 	APPOINTMENTS_ROUTE,
+	CART_ROUTE,
 	DOCTORS_ROUTE,
 	HOME_ROUTE,
 	LABS_ROUTE,
@@ -91,6 +93,9 @@ export const Navbar = () => {
 							</div>
 						}
 					/>
+					<Link to={CART_ROUTE}>
+						<CartIcon />
+					</Link>
 					<button>
 						<NotificationIcon />
 					</button>

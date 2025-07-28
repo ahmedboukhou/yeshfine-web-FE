@@ -2,7 +2,7 @@ import i18n from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import resourcesToBackend from 'i18next-resources-to-backend';
 import { initReactI18next } from 'react-i18next';
-import { supportedLanguages } from './constants/mappedData';
+import { supportedLanguages } from './constants';
 
 const languages = supportedLanguages.map(({ value }) => value);
 

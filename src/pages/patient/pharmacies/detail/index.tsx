@@ -9,7 +9,7 @@ import { Distance } from '../../../../components/ui/Distance';
 import { GoogleMap } from '../../../../components/ui/GoogleMap';
 import { LocationInfo } from '../../../../components/ui/LocationInfo';
 import { LabDetailSkeleton } from '../../../../components/ui/skeletons/LabDetailSkeleton';
-import { PHARMACIES_MEDICINE_DETAIL_ROUTE, PHARMACIES_ROUTE } from '../../../../routes';
+import { PHARMACIES_MEDICINE_CATEGORY_ROUTE, PHARMACIES_ROUTE } from '../../../../routes';
 import { MedicineCard } from '../../../../components/ui/MedicineCard';
 
 export const PatientPharmaciesDetail = () => {
@@ -76,7 +76,7 @@ export const PatientPharmaciesDetail = () => {
 													{category}
 												</h4>
 												<Link
-													to={`${PHARMACIES_MEDICINE_DETAIL_ROUTE.replace(
+													to={`${PHARMACIES_MEDICINE_CATEGORY_ROUTE.replace(
 														':id',
 														`${id}`
 													)}?category=${category}`}

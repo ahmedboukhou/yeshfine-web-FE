@@ -7,10 +7,11 @@ interface PhoneNumberInputProps {
 	id?: string;
 	label?: string;
 	value: string;
-	onChange: (value: string) => void;
-	register: UseFormRegisterReturn;
+	onChange?: (value: string) => void;
+	register?: UseFormRegisterReturn;
 	error?: FieldError;
 	required?: boolean;
+	disabled?: boolean;
 }
 
 export const PhoneNumberInput: React.FC<PhoneNumberInputProps> = ({
@@ -19,6 +20,7 @@ export const PhoneNumberInput: React.FC<PhoneNumberInputProps> = ({
 	value,
 	onChange,
 	register,
+	disabled,
 	error,
 	required = false,
 }) => {
@@ -32,14 +34,16 @@ export const PhoneNumberInput: React.FC<PhoneNumberInputProps> = ({
 			<PhoneInput
 				country="us"
 				value={value}
+				disabled={disabled}
 				{...register}
-				onChange={(phone) => onChange(phone.startsWith('+') ? phone : `+${phone}`)}
+				onChange={(phone) => onChange && onChange(phone.startsWith('+') ? phone : `+${phone}`)}
 				buttonClass={`${error ? '!border-red-600' : ''} !py-1 !rounded-l-lg`}
-				inputClass={`!py-5 !w-full !input-box-shadow !input !rounded-lg ${
+				inputClass={` !py-5 !w-full !input-box-shadow !input !rounded-lg ${
 					error
 						? '!border-red-600 focus:ring-red-600 focus:ring-1'
 						: 'focus:ring-primary focus:ring-2'
 				}`}
+				inputStyle={{ color: disabled ? 'gray' : 'black' }}
 			/>
 			<div className="mt-0.5">
 				{error && <span className="text-red-600 text-sm">{error.message}</span>}

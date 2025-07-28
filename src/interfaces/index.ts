@@ -1,12 +1,12 @@
 import type { LabStatusEnum, LocationEnum } from './enums';
 
 export type CurrentUserType = {
-	name: string;
-	phone: string;
-	role: string;
-	gender: string;
-	image: string;
-	dob: string;
+	name?: string;
+	phone?: string;
+	role?: string;
+	gender?: string;
+	image?: string | null;
+	dob?: string;
 };
 
 export interface AvailabilitySlot {
@@ -317,4 +317,30 @@ export type PopularProduct = {
 	medicine_image: string;
 	dosage_form: string;
 	category: string;
+};
+
+export type CartMedicine = {
+	id: number;
+	name: string;
+	generic_name: string;
+	strength: string;
+	medicine_image: string;
+	dosage_form: string;
+	available_stock: number;
+};
+
+export type CartItem = {
+	id: number;
+	medicine: CartMedicine;
+	quantity: number;
+	unit_price: number;
+	subtotal: number;
+};
+
+export type Cart = {
+	cart_id: number;
+	pharmacy: PharmacyBasic; // reused
+	total_amount: number;
+	total_items: number;
+	items: CartItem[];
 };

@@ -69,5 +69,9 @@
 	"estimatedTimeRemaining": "Temps restant estimé : {{time}}",
 	"labReportAvailable": "Votre rapport d'analyse est disponible.",
 	"itemsLeftInStock": "Il reste {{count}} articles en stock",
+	"myCart": "Mon panier",
+	"paymentDetail": "Détail du paiement",
+	"subtotal": "Sous-total",
+	"total": "Total",
 	"labReportPaymentRequired": "Pour consulter ou télécharger votre rapport d'analyse, veuillez effectuer le paiement."
 }

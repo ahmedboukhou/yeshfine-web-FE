@@ -13,6 +13,7 @@ const requiredString = (
 	fieldName: string,
 	ns: string,
 	options?: {
+		isRequired?: boolean;
 		min?: number;
 		minMessage?: string;
 		maxMessage?: string;

@@ -81,7 +81,7 @@ export const ForgotPassword = () => {
 			<form onSubmit={handleSubmit(onSubmit)}>
 				<PhoneNumberInput
 					value={phone}
-					label={t('phoneNumber')}
+					label={t('phoneNumber', { ns: 'common' })}
 					onChange={(value) => setValue('phone', value)}
 					register={register('phone')}
 					error={errors.phone}

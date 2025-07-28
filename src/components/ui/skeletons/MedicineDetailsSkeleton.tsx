@@ -1,36 +1,30 @@
 import { MedicineCardSkeleton } from './MedicineCardSkeleton';
 
-export const MedicineDetailsSkeleton = () => {
+export const MedicineDetailCardSkeleton = () => {
 	return (
-		<div className="bg-primary-light rounded-2xl pointer-events-none">
-			<div className=" py-5 px-4 animate-pulse">
-				{/* Content Grid */}
-				<div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-					{/* Medicine Image */}
-					<div className="bg-white rounded-lg flex items-center justify-center h-120 px-10">
-						<div className="w-full h-full bg-gray-300 rounded-lg" />
-					</div>
+		<div className="py-5 px-4 rounded-2xl pointer-events-none card animate-pulse">
+			<div className="grid grid-cols-12 gap-4">
+				{/* Left: Medicine Image */}
+				<div className="rounded-lg flex items-center justify-center h-120 px-10 bg-gray-300 col-span-7" />
 
-					{/* Medicine Info */}
-					<div className="flex items-center">
-						<div className="space-y-3 w-full">
-							<div className="h-5 w-2/3 bg-gray-300 rounded" />
-							<div className="h-4 w-1/2 bg-gray-300 rounded" />
-							<div className="w-full sm:w-xs h-10 bg-gray-300 rounded mt-2" />
-						</div>
+				{/* Right: Medicine Info */}
+				<div className="flex items-center col-span-5">
+					<div className="space-y-3 w-full">
+						<div className="h-5 w-3/4 bg-gray-300 rounded" />
+						<div className="h-4 w-1/2 bg-gray-300 rounded" />
+						<div className="w-full sm:w-xs h-10 bg-gray-300 rounded mt-2" />
 					</div>
 				</div>
+			</div>
 
-				{/* Divider */}
-				<div className="border-t border-t-border-1 my-8" />
+			{/* Divider */}
+			<div className="border-t border-t-border-1 my-8" />
 
-				{/* Popular Products */}
-				<div className="space-y-3">
-					<div className="h-5 w-1/4 bg-gray-300 rounded" />
-
-					<div className="grid grid-cols-4 gap-4">
-						<MedicineCardSkeleton count={4} />
-					</div>
+			{/* Popular Products */}
+			<div className="space-y-3">
+				<div className="h-5 w-1/4 bg-gray-300 rounded" />
+				<div className="grid grid-cols-4 gap-4">
+					<MedicineCardSkeleton count={4} />
 				</div>
 			</div>
 		</div>

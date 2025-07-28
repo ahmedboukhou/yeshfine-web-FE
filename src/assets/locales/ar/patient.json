@@ -71,5 +71,9 @@
 	"estimatedTimeRemaining": "الوقت المتبقي المقدر: {{time}}",
 	"labReportAvailable": "تقرير فحصك المخبري متاح.",
 	"itemsLeftInStock": "تبقى {{count}} عناصر في المخزون",
+	"myCart": "سلة التسوق الخاصة بي",
+	"paymentDetail": "تفاصيل الدفع",
+	"subtotal": "المجموع الفرعي",
+"total": "الإجمالي",
 	"labReportPaymentRequired": "لعرض أو تنزيل تقرير فحصك المخبري، يرجى إتمام الدفع."
 }

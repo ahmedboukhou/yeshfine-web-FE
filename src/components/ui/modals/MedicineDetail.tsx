@@ -2,7 +2,6 @@ import { memo, useEffect, useState, type FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useGetPharmacyMedicineDetailQuery } from '../../../apis/patient/pharmacies';
 import { MedicineCard } from '../MedicineCard';
-import { MedicineDetailsSkeleton } from '../skeletons/MedicineDetailsSkeleton';
 
 type MedicineDetailModalProps = {
 	id: string;
@@ -46,7 +45,7 @@ const MedicineDetailModal: FC<MedicineDetailModalProps> = ({ id, open }) => {
 		>
 			<div className="sm:max-w-4xl sm:w-full m-3 sm:mx-auto">
 				{isLoading ? (
-					<MedicineDetailsSkeleton />
+					<></>
 				) : (
 					<div className=" bg-primary-light py-5 px-4 rounded-2xl pointer-events-auto">
 						<div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

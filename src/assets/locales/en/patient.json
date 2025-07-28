@@ -71,5 +71,9 @@
 	"estimatedTimeRemaining": "Estimated time remaining: {{time}}",
 	"labReportAvailable": "Your lab test report is available.",
 	"itemsLeftInStock": "{{count}} items left in stock",
+	"myCart": "My Cart",
+	"paymentDetail": "Payment Detail",
+	"subtotal": "Subtotal",
+	"total": "Total",
 	"labReportPaymentRequired": "To view or download your lab report, please complete the payment."
 }

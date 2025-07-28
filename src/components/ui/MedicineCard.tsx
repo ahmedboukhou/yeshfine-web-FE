@@ -1,5 +1,6 @@
-import { Fragment, useState, type FC } from 'react';
-import MedicineDetailModal from './modals/MedicineDetail';
+import { type FC } from 'react';
+import { Link } from 'react-router';
+import { PHARMACIES_MEDICINE_DETAIL_ROUTE } from '../../routes';
 
 type MedicineCardProps = {
 	id: number | string;
@@ -17,19 +18,9 @@ export const MedicineCard: FC<MedicineCardProps> = ({
 	dosage,
 	price,
 }) => {
-	const [open, setOpen] = useState(false);
-
 	return (
-		<Fragment>
-			<div
-				key={`${id}`}
-				aria-haspopup="dialog"
-				aria-expanded="false"
-				aria-controls={`hs-${id}`}
-				data-hs-overlay={`#hs-${id}`}
-				onClick={() => setOpen(true)}
-				className="border border-border-1 rounded-xl h-55 overflow-hidden bg-white cursor-pointer"
-			>
+		<Link to={PHARMACIES_MEDICINE_DETAIL_ROUTE.replace(':id', String(id))}>
+			<div className="border border-border-1 rounded-xl h-55 overflow-hidden bg-white cursor-pointer">
 				<img src={image} alt={name} className="rounded-t-xl h-30 w-full object-cover object-top" />
 
 				<div className="p-2 flex flex-col gap-1">
@@ -40,7 +31,6 @@ export const MedicineCard: FC<MedicineCardProps> = ({
 					<span className="text-typography-700 line-clamp-2">{name}</span>
 				</div>
 			</div>
-			<MedicineDetailModal id={`${id}`} open={open} onClose={() => setOpen(false)} />
-		</Fragment>
+		</Link>
 	);
 };
