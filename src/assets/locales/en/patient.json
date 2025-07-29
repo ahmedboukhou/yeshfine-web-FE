@@ -74,6 +74,11 @@
 	"myCart": "My Cart",
 	"paymentDetail": "Payment Detail",
 	"subtotal": "Subtotal",
+	"itemsInStock": "Items in stock: {{availableStock}}",
 	"total": "Total",
+	"cartEmpty": "Your Cart is Empty",
+	"cartEmptyMessage": "Looks like you haven’t added any medicines yet.",
+	"cartExplorePrompt": "Start exploring pharmacies to add what you need.",
+	"browse": "Browse",
 	"labReportPaymentRequired": "To view or download your lab report, please complete the payment."
 }

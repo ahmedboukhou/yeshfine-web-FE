@@ -74,6 +74,11 @@
 	"myCart": "سلة التسوق الخاصة بي",
 	"paymentDetail": "تفاصيل الدفع",
 	"subtotal": "المجموع الفرعي",
-"total": "الإجمالي",
+	"total": "الإجمالي",
+	"itemsInStock": "العناصر المتوفرة في المخزون: {{availableStock}}",
+	"cartEmpty": "سلة التسوق فارغة",
+	"cartEmptyMessage": "يبدو أنك لم تضف أي أدوية بعد.",
+	"cartExplorePrompt": "ابدأ في استكشاف الصيدليات لإضافة ما تحتاجه.",
+	"browse": "تصفح",
 	"labReportPaymentRequired": "لعرض أو تنزيل تقرير فحصك المخبري، يرجى إتمام الدفع."
 }

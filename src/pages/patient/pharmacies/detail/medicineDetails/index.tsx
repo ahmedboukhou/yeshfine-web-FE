@@ -48,8 +48,8 @@ export const PatientMedicineDetails = () => {
 					<img src={medicine_image} alt={name} className=" bg-contain rounded-lg" />
 				</div>
 
-				<div className="flex-items-center col-span-12 sm:col-span-5">
-					<div className="space-y-2 w-full">
+				<div className="flex-items-center md:justify-center col-span-12 sm:col-span-5 space-y-2">
+					<div className="space-y-2">
 						<h3 className="font-bold text-typography-700">
 							{name} - {strength} {dosage_form}
 						</h3>
@@ -59,17 +59,14 @@ export const PatientMedicineDetails = () => {
 							{showCounter ? (
 								<div className="space-y-2 w-full md:max-w-xs">
 									<div className="flex-between-center gap-2 border-2 border-primary py-2 px-3 rounded-lg">
-										<div
-											className="cursor-pointer"
-											onClick={() => setQuantity((prev) => Math.max(1, prev - 1))}
-										>
+										<button onClick={() => setQuantity((prev) => Math.max(1, prev - 1))}>
 											<BinIcon />
-										</div>
+										</button>
 										<span className="font-bold text-primary">{quantity}</span>
 
-										<div className="cursor-pointer" onClick={() => setQuantity((prev) => prev + 1)}>
+										<button onClick={() => setQuantity((prev) => prev + 1)}>
 											<PlusIcon />
-										</div>
+										</button>
 									</div>
 									<button
 										className="primary-btn w-full"
@@ -80,7 +77,10 @@ export const PatientMedicineDetails = () => {
 									</button>
 								</div>
 							) : (
-								<button className="primary-btn w-full" onClick={() => setShowCounter(true)}>
+								<button
+									className="primary-btn w-full md:max-w-xs"
+									onClick={() => setShowCounter(true)}
+								>
 									{t('buyNow')}
 								</button>
 							)}
@@ -93,7 +93,7 @@ export const PatientMedicineDetails = () => {
 			<div className="space-y-3">
 				<h4 className="font-semibold text-typography-700">{t('popularProducts')}</h4>
 
-				<div className="grid grid-cols-4 gap-4">
+				<div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-4">
 					{!!popularProducts?.length ? (
 						popularProducts
 							?.slice(0, 4)

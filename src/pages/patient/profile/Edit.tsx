@@ -24,6 +24,7 @@ export const PatientEditProfile = () => {
 	const { currentUser, setCurrentUser } = useCurrentUserStore((state) => state);
 	const { image } = currentUser || {};
 	const [uploadedFiles, setUploadedFiles] = useState<FileWithPath[]>([]);
+	console.log('🚀 ~ PatientEditProfile ~ uploadedFiles:', uploadedFiles);
 	const [previewImage, setPreviewImage] = useState<string | null>(null);
 	console.log('🚀 ~ PatientEditProfile ~ previewImage:', previewImage);
 
@@ -63,7 +64,7 @@ export const PatientEditProfile = () => {
 						name,
 						gender,
 						dob,
-						// ...(uploadedFiles.length > 0 && {image: uploadedFiles[0]}),
+						...(uploadedFiles.length > 0 && { image: previewImage }),
 					});
 					toast.success(message);
 					navigate(HOME_ROUTE);
@@ -92,9 +93,9 @@ export const PatientEditProfile = () => {
 						src={previewImage ?? image ?? PLACEHOLDER_IMAGE}
 						className="h-30 w-30 rounded-full object-cover border-4 border-white"
 					/>
-					<div className="absolute bg-white p-1 rounded-full cursor-pointer bottom-0 right-0">
-						<div {...getRootProps()}>
-							<input {...getInputProps()} />
+					<div {...getRootProps()}>
+						<input {...getInputProps()} />
+						<div className="absolute bg-white p-1 rounded-full cursor-pointer bottom-0 right-0">
 							<CameraIcon />
 						</div>
 					</div>
