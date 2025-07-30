@@ -1,6 +1,7 @@
 import dayjs from 'dayjs';
 import { useTranslation } from 'react-i18next';
-import { useLocation, useParams } from 'react-router';
+import { useParams } from 'react-router';
+import { toast } from 'react-toastify';
 import {
 	useGetPatientAppointmentDetailQuery,
 	useMarkAsCompleteAppointmentMutation,
@@ -10,21 +11,16 @@ import calendarIcon from '../../../../assets/icons/menu-board.svg';
 import { Badge } from '../../../../components/ui/Badge';
 import { Breadcrumb } from '../../../../components/ui/Breadcrumb';
 import { DoctorInfoCard } from '../../../../components/ui/cards/DoctorInfoCard';
-// import { LocationInfo } from '../../../../components/ui/LocationInfo';
-import { APPOINTMENTS_ROUTE } from '../../../../routes';
-import { toast } from 'react-toastify';
-import { AppointmentTypeEnum } from '../../../../interfaces/enums';
-// import { GoogleMap } from '../../../../components/ui/GoogleMap';
-import { AppointmentDetailsSkeleton } from '../../../../components/ui/skeletons/AppointmentDetailSkeleton';
-import { LocationInfo } from '../../../../components/ui/LocationInfo';
 import { GoogleMap } from '../../../../components/ui/GoogleMap';
+import { LocationInfo } from '../../../../components/ui/LocationInfo';
+import { AppointmentDetailsSkeleton } from '../../../../components/ui/skeletons/AppointmentDetailSkeleton';
+import { AppointmentTypeEnum } from '../../../../interfaces/enums';
+import { APPOINTMENTS_ROUTE } from '../../../../routes';
 
 export const PatientAppointmentDetails = () => {
 	const { t } = useTranslation(['patient', 'common']);
 	const { id } = useParams<{ id: string }>();
-	const { state } = useLocation();
 
-	const { name, image, specialty, latitude, longitude, rating, clinicName } = state;
 	const { data, isLoading } = useGetPatientAppointmentDetailQuery({ id });
 	const {
 		appointment_date,
@@ -35,7 +31,12 @@ export const PatientAppointmentDetails = () => {
 		show_mark_complete,
 		ticket_number,
 		time_range,
+		doctor,
+		doctorDetail,
 	} = data?.data || {};
+
+	const { name, image, latitude, longitude } = doctor || {};
+	const { average_rating, clinicName, speciality } = doctorDetail || {};
 	const { mutateAsync: markAsComplete, isPending } = useMarkAsCompleteAppointmentMutation();
 
 	const breadcrumbItems = [
@@ -61,7 +62,12 @@ export const PatientAppointmentDetails = () => {
 				<AppointmentDetailsSkeleton />
 			) : (
 				<div className="space-y-8 card">
-					<DoctorInfoCard averageRating={rating} name={name} image={image} specialty={specialty} />
+					<DoctorInfoCard
+						averageRating={average_rating || 0}
+						name={name}
+						image={image}
+						specialty={speciality}
+					/>
 					{appointment_type === AppointmentTypeEnum.Onsite && (
 						<>
 							<LocationInfo address={clinicName} />

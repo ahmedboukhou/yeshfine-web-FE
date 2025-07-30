@@ -20,6 +20,7 @@ import {
 	DOCTORS_ROUTE,
 	HOME_ROUTE,
 	LABS_ROUTE,
+	NOTIFICATIONS_ROUTE,
 	PHARMACIES_ROUTE,
 	PROFILE_ROUTE,
 } from '../../../routes';
@@ -96,9 +97,9 @@ export const Navbar = () => {
 					<Link to={CART_ROUTE}>
 						<CartIcon />
 					</Link>
-					<button>
+					<Link to={NOTIFICATIONS_ROUTE}>
 						<NotificationIcon />
-					</button>
+					</Link>
 
 					<Dropdown
 						button={

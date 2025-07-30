@@ -10,9 +10,6 @@ type AppointmentCardProps = {
 	image: string;
 	id: number;
 	name: string;
-	rating: string;
-	latitude: number;
-	longitude: number;
 	distance: number | null;
 	meeting_link: string | null;
 	specialty: string;
@@ -35,18 +32,13 @@ export const AppointmentCard: FC<AppointmentCardProps> = ({
 	meeting_link,
 	id,
 	meetingButtonDisabled,
-	latitude,
-	longitude,
-	rating,
+
 }) => {
 	const { t } = useTranslation();
 	const isInPerson = label === 'In Person';
 
 	return (
-		<Link
-			to={APPOINTMENTS_DETAIL_ROUTE.replace(':id', `${id}`)}
-			state={{ clinicName, name, image, specialty, latitude, longitude, rating }}
-		>
+		<Link to={APPOINTMENTS_DETAIL_ROUTE.replace(':id', `${id}`)}>
 			<div className={`p-4 bg-white rounded-2xl border border-black/10 h-45 space-y-1`}>
 				<div className="flex gap-2.5 ">
 					<img className="inline-block size-15 rounded-full" src={image} alt={name} />
