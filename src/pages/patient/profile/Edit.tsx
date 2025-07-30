@@ -16,6 +16,7 @@ import type { PatientProfileInput } from '../../../interfaces/formInputTypes';
 import { HOME_ROUTE } from '../../../routes';
 import { useCurrentUserStore } from '../../../store/user';
 import { patientProfileSchema } from '../../../validations';
+import AddressModal from '../../../components/ui/modals/AddressModal';
 
 export const PatientEditProfile = () => {
 	const { t } = useTranslation(['common', 'auth', 'validations']);
@@ -25,7 +26,9 @@ export const PatientEditProfile = () => {
 	const { image } = currentUser || {};
 	const [uploadedFiles, setUploadedFiles] = useState<FileWithPath[]>([]);
 	const [previewImage, setPreviewImage] = useState<string | null>(null);
-	console.log('🚀 ~ PatientEditProfile ~ previewImage:', previewImage);
+	const [open, setOpen] = useState(false);
+	const id = 'asd';
+	console.log('🚀 ~ PatientEditProfile ~ open:', open);
 
 	const { mutateAsync: updateProfile, isPending } = usePatientUpdateProfileMutation();
 
@@ -33,6 +36,7 @@ export const PatientEditProfile = () => {
 		name: currentUser?.name || '',
 		dob: currentUser?.dob || '',
 		gender: currentUser?.gender || '',
+		address: currentUser?.address || '',
 	};
 
 	const {
@@ -124,6 +128,25 @@ export const PatientEditProfile = () => {
 						register={register('dob')}
 						error={errors.dob}
 					/>
+					<div
+						className="sm:col-span-2 cursor-pointer"
+						onClick={() => setOpen(true)}
+						aria-haspopup="dialog"
+						aria-expanded="false"
+						aria-controls={`hs-${id}`}
+						data-hs-overlay={`#hs-${id}`}
+					>
+						<InputField
+							label={t('address', { ns: 'common' })}
+							id="address"
+							inputProps={{
+								readOnly: true,
+								className: 'cursor-pointer bg-white', // add bg-white if needed to fix style
+							}}
+							register={register('address')}
+							error={errors.address}
+						/>
+					</div>
 				</div>
 
 				<div className="flex-end gap-5 mt-12">
@@ -135,6 +158,8 @@ export const PatientEditProfile = () => {
 					</button>
 				</div>
 			</form>
+
+			<AddressModal id={id} />
 		</div>
 	);
 };
