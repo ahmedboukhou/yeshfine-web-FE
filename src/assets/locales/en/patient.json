@@ -75,5 +75,6 @@
 	"paymentDetail": "Payment Detail",
 	"subtotal": "Subtotal",
 	"total": "Total",
+	"enterAddressPrompt": "Enter the address to explore Doctors, Labs & Pharmacies around you",
 	"labReportPaymentRequired": "To view or download your lab report, please complete the payment."
 }

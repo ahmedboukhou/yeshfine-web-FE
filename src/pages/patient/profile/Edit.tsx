@@ -1,34 +1,31 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useCallback, useState } from 'react';
+import { useCallback, useState, type Dispatch, type FC, type SetStateAction } from 'react';
 import { useDropzone, type FileWithPath } from 'react-dropzone';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { Link, useNavigate } from 'react-router';
-import { toast } from 'react-toastify';
+import { Link } from 'react-router';
 import { usePatientUpdateProfileMutation } from '../../../apis/patient/profile';
 import { CameraIcon } from '../../../assets/icons';
 import { InputField } from '../../../components/ui/inputs/InputField';
 import { PhoneNumberInput } from '../../../components/ui/inputs/PhoneInput';
 import { SelectField } from '../../../components/ui/inputs/SelectField';
+import AddressModal from '../../../components/ui/modals/AddressModal';
 import { genderOptions, PLACEHOLDER_IMAGE } from '../../../constants';
-import { responseStatus } from '../../../interfaces/enums';
 import type { PatientProfileInput } from '../../../interfaces/formInputTypes';
 import { HOME_ROUTE } from '../../../routes';
 import { useCurrentUserStore } from '../../../store/user';
 import { patientProfileSchema } from '../../../validations';
-import AddressModal from '../../../components/ui/modals/AddressModal';
 
-export const PatientEditProfile = () => {
+export const PatientEditProfile: FC<{ setShowEditProfile: Dispatch<SetStateAction<boolean>> }> = ({
+	setShowEditProfile,
+}) => {
 	const { t } = useTranslation(['common', 'auth', 'validations']);
-	const navigate = useNavigate();
 
 	const { currentUser, setCurrentUser } = useCurrentUserStore((state) => state);
 	const { image } = currentUser || {};
 	const [uploadedFiles, setUploadedFiles] = useState<FileWithPath[]>([]);
 	const [previewImage, setPreviewImage] = useState<string | null>(null);
-	const [open, setOpen] = useState(false);
 	const id = 'asd';
-	console.log('🚀 ~ PatientEditProfile ~ open:', open);
 
 	const { mutateAsync: updateProfile, isPending } = usePatientUpdateProfileMutation();
 
@@ -42,7 +39,7 @@ export const PatientEditProfile = () => {
 	const {
 		register,
 		handleSubmit,
-		formState: { errors },
+		formState: { errors, isDirty },
 	} = useForm<PatientProfileInput>({
 		resolver: yupResolver(patientProfileSchema(t)),
 		mode: 'all',
@@ -59,21 +56,14 @@ export const PatientEditProfile = () => {
 			formData.append('file', uploadedFiles[0]);
 		}
 
-		updateProfile(formData, {
-			onSuccess: ({ message, status }) => {
-				if (status === responseStatus.Success) {
-					setCurrentUser({
-						...currentUser,
-						name,
-						gender,
-						dob,
-						// ...(uploadedFiles.length > 0 && {image: uploadedFiles[0]}),
-					});
-					toast.success(message);
-					navigate(HOME_ROUTE);
-				} else toast.error(message);
-			},
+		setShowEditProfile(false);
+		setCurrentUser({
+			...currentUser,
+			name,
+			gender,
+			dob,
 		});
+		updateProfile(formData);
 	};
 
 	const onDrop = useCallback((acceptedFiles: File[]) => {
@@ -130,7 +120,6 @@ export const PatientEditProfile = () => {
 					/>
 					<div
 						className="sm:col-span-2 cursor-pointer"
-						onClick={() => setOpen(true)}
 						aria-haspopup="dialog"
 						aria-expanded="false"
 						aria-controls={`hs-${id}`}
@@ -141,7 +130,7 @@ export const PatientEditProfile = () => {
 							id="address"
 							inputProps={{
 								readOnly: true,
-								className: 'cursor-pointer bg-white', // add bg-white if needed to fix style
+								className: 'cursor-pointer',
 							}}
 							register={register('address')}
 							error={errors.address}
@@ -153,13 +142,13 @@ export const PatientEditProfile = () => {
 					<Link to={HOME_ROUTE} className="outlined-btn">
 						{t('cancel')}
 					</Link>
-					<button className="primary-btn" disabled={isPending}>
+					<button className="primary-btn" disabled={isPending || !isDirty}>
 						{t('save')}
 					</button>
 				</div>
 			</form>
 
-			<AddressModal id={id} />
+			<AddressModal id={id} setShowEditProfile={setShowEditProfile} />
 		</div>
 	);
 };
