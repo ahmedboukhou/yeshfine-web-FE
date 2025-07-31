@@ -71,7 +71,7 @@ export const apiClient = {
 		return fetchWithRefresh<T>(fullUrl, { method: 'GET' });
 	},
 
-	post: <T>(url: string, data: unknown): Promise<T> => {
+	post: <T>(url: string, data?: unknown): Promise<T> => {
 		const isFormData = data instanceof FormData;
 		return fetchWithRefresh<T>(url, {
 			method: 'POST',
@@ -79,10 +79,18 @@ export const apiClient = {
 		});
 	},
 
-	put: <T>(url: string, data: unknown): Promise<T> => {
+	put: <T>(url: string, data?: unknown): Promise<T> => {
 		const isFormData = data instanceof FormData;
 		return fetchWithRefresh<T>(url, {
 			method: 'PUT',
+			body: isFormData ? data : JSON.stringify(data),
+		});
+	},
+
+	patch: <T>(url: string, data?: unknown): Promise<T> => {
+		const isFormData = data instanceof FormData;
+		return fetchWithRefresh<T>(url, {
+			method: 'PATCH',
 			body: isFormData ? data : JSON.stringify(data),
 		});
 	},

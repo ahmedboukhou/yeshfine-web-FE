@@ -75,15 +75,7 @@ export const PatientAppointments = () => {
 					items?.map(
 						(
 							{
-								doctor: {
-									image,
-									name,
-									speciality,
-									clinicName,
-									average_rating,
-									latitude,
-									longitude,
-								},
+								doctor: { image, name, speciality, clinicName },
 								appointment_date_formatted,
 								time_range,
 								appointment_type_label,
@@ -98,9 +90,6 @@ export const PatientAppointments = () => {
 									key={index}
 									id={appointment_id}
 									distance={distance}
-									latitude={latitude}
-									longitude={longitude}
-									rating={average_rating}
 									meeting_link={meeting_link}
 									image={image}
 									label={appointment_type_label}
