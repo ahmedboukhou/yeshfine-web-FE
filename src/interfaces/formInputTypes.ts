@@ -43,6 +43,7 @@ export type BookAppointmentInput = {
 
 export type PatientProfileInput = {
 	name:string
+	address?:string
 	dob:string
 	gender:string
 }
