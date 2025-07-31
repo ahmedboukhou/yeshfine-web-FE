@@ -7,8 +7,16 @@ type InputFieldProps = {
 	type?: string;
 	error: any;
 	register: any;
+	inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
 };
-export const InputField: FC<InputFieldProps> = ({ label, id, type = 'text', error, register }) => {
+export const InputField: FC<InputFieldProps> = ({
+	label,
+	id,
+	type = 'text',
+	error,
+	register,
+	inputProps,
+}) => {
 	const { t } = useTranslation();
 
 	return (
@@ -20,6 +28,7 @@ export const InputField: FC<InputFieldProps> = ({ label, id, type = 'text', erro
 				id={id}
 				type={type}
 				{...register}
+				{...inputProps}
 				className={`input input-box-shadow ${error ? '!outline-red-600' : ''}`}
 				placeholder={t('enter')}
 			/>

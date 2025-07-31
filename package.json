@@ -30,6 +30,7 @@
     "react-day-picker": "^9.8.0",
     "react-dom": "^19.1.0",
     "react-dropzone": "^14.3.8",
+    "react-google-autocomplete": "^2.7.5",
     "react-hook-form": "^7.58.1",
     "react-i18next": "^15.5.3",
     "react-phone-input-2": "^2.15.1",

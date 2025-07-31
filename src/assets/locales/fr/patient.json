@@ -73,5 +73,6 @@
 	"paymentDetail": "Détail du paiement",
 	"subtotal": "Sous-total",
 	"total": "Total",
+	"enterAddressPrompt": "Entrez l'adresse pour explorer les médecins, laboratoires et pharmacies autour de vous",
 	"labReportPaymentRequired": "Pour consulter ou télécharger votre rapport d'analyse, veuillez effectuer le paiement."
 }

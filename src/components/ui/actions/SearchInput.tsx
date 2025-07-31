@@ -3,14 +3,15 @@ import { useTranslation } from 'react-i18next';
 import { SearchIcon } from '../../../assets/icons';
 
 export const SearchInput: FC<{
+	fullWidth?: boolean;
 	onChange: ChangeEventHandler<HTMLInputElement>;
-}> = ({ onChange }) => {
+}> = ({ onChange, fullWidth }) => {
 	const { t } = useTranslation();
 	return (
-		<div className="relative xs:w-40 sm:w-xs">
+		<div className={`relative ${fullWidth ? 'w-full' : 'xs:w-40 sm:w-xs'}`}>
 			<input
 				type="text"
-				className="py-3 px-4 ps-11 block w-full border-gray-200 rounded-xl text-sm focus:z-10 focus:border-primary focus:ring-primary"
+				className="py-3 px-4 ps-11 block w-full border-border-1 rounded-xl text-sm focus:z-10 focus:border-primary focus:ring-primary"
 				placeholder={`${t('search')}...`}
 				onChange={onChange}
 			/>
