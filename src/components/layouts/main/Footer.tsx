@@ -2,13 +2,15 @@ import { Link } from 'react-router';
 import { FacebookIcon, InstagramIcon, LinkedInIcon, XIcon } from '../../../assets/icons';
 import logo from '../../../assets/logo.svg';
 import { HOME_ROUTE } from '../../../routes';
+import { useTranslation } from 'react-i18next';
 
 export const Footer = () => {
+	const { t } = useTranslation();
 	const footerOptions = [
-		{ title: 'Home', href: '/about' },
-		{ title: 'About Us', href: '/contact' },
-		{ title: 'Services', href: '/privacy' },
-		{ title: 'Contact Us', href: '/terms' },
+		{ title: 'home', href: '/about' },
+		{ title: 'aboutUs', href: '/contact' },
+		{ title: 'services', href: '/privacy' },
+		{ title: 'contactUs', href: '/terms' },
 	];
 	const socialLinks = [
 		{ href: '#', icon: <XIcon /> },
@@ -31,7 +33,7 @@ export const Footer = () => {
 								href={href}
 								className="text-typography-700 font-medium hover:text-black transition-colors duration-200"
 							>
-								{title}
+								{t(title)}
 							</a>
 						))}
 					</div>
@@ -48,11 +50,11 @@ export const Footer = () => {
 			<div className="bg-black text-white text-sm py-5">
 				<div className="flex-between flex-col md:flex-row wrapper-container">
 					<p className="cursor-pointer">
-						© {new Date().getFullYear()} Yeshfine. All rights reserved.
+						© {new Date().getFullYear()} {t('copyrightNotice')}
 					</p>
 					<div className="flex gap-4">
-						<a>Terms & Conditions</a>
-						<a>Privacy Policies</a>
+						<a>{t('termsConditions')}</a>
+						<a>{t('privacyPolicies')}</a>
 					</div>
 				</div>
 			</div>
