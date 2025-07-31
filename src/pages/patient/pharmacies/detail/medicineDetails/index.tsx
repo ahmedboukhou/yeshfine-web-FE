@@ -44,8 +44,8 @@ export const PatientMedicineDetails = () => {
 	) : (
 		<div className="py-5 px-4 rounded-2xl pointer-events-auto card">
 			<div className="grid grid-cols-12 gap-4">
-				<div className="rounded-lg flex-center h-120 px-10 bg-gray-200 col-span-12 sm:col-span-7">
-					<img src={medicine_image} alt={name} className=" bg-contain rounded-lg" />
+				<div className="rounded-lg flex-center h-120 p-5 sm:p-10 bg-gray-200 col-span-12 sm:col-span-7">
+					<img src={medicine_image} alt={name} className=" bg-contain rounded-lg h-full" />
 				</div>
 
 				<div className="flex-items-center md:justify-center col-span-12 sm:col-span-5 space-y-2">

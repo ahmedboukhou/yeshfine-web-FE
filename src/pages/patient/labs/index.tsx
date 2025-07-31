@@ -14,7 +14,7 @@ export const PatientLabs = () => {
 	return (
 		<section>
 			<div className="mb-6">
-				<h3 className="font-semibold text-typography-700">{t('labs')}</h3>
+				<h3 className="font-semibold text-typography-700">{t('labs', { ns: 'common' })}</h3>
 			</div>
 
 			<Tabs

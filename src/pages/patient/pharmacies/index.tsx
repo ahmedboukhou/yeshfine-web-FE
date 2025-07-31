@@ -134,7 +134,7 @@ export const PatientPharmacies = () => {
 					</Fragment>
 				) : (
 					<div className="col-span-12 my-4 flex-center">
-						<p>{t('notFound', { ns: 'patient', text: t('labs', { ns: 'common' }) })}</p>
+						<p>{t('notFound', { ns: 'patient', text: t('pharmacies', { ns: 'common' }) })}</p>
 					</div>
 				)}
 			</div>

@@ -24,7 +24,6 @@ export const PatientEditProfile: FC<{ setShowEditProfile: Dispatch<SetStateActio
 	const { currentUser, setCurrentUser } = useCurrentUserStore((state) => state);
 	const { image } = currentUser || {};
 	const [uploadedFiles, setUploadedFiles] = useState<FileWithPath[]>([]);
-	console.log('🚀 ~ PatientEditProfile ~ uploadedFiles:', uploadedFiles);
 	const [previewImage, setPreviewImage] = useState<string | null>(null);
 	const id = 'asd';
 
