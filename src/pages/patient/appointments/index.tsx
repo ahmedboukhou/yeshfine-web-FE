@@ -105,7 +105,7 @@ export const PatientAppointments = () => {
 					)
 				) : (
 					<div className="col-span-6 my-4 flex-center">
-						<p>{t('notFound', { ns: 'patient', text: t('pharmacies', { ns: 'common' }) })}</p>
+						<p>{t('notFound', { ns: 'patient', text: t('appointments', { ns: 'common' }) })}</p>
 					</div>
 				)}
 			</div>

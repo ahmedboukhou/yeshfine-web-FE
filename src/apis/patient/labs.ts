@@ -36,7 +36,7 @@ export function useGetLabsQuery({
 			apiClient.get(`patients/labs`, {
 				page,
 				limit,
-				only_show_open: showOpen,
+				...(showOpen && { only_show_open: showOpen }),
 				...(labTestList?.length && { test: labTestList }),
 				...(location && { location }),
 				...(resultTime && { result_time: resultTime }),

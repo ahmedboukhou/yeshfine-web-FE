@@ -47,8 +47,8 @@ export const PatientPharmacies = () => {
 	const medicineTypes = medicineCategoriesResponse?.data?.medicineCategories || [];
 
 	useEffect(() => {
-		gotCategories && !medicineCategories?.length && setMedicineCategories(medicineTypes);
-	}, [medicineTypes, gotCategories]);
+		gotCategories && setMedicineCategories(medicineTypes);
+	}, [ gotCategories]);
 
 	useEffect(() => {
 		if (shouldRefetch) {

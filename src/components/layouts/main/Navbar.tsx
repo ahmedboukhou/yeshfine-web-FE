@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useLocation, useNavigate } from 'react-router';
 import { useChangeLanguageMutation } from '../../../apis/auth';
@@ -14,6 +14,7 @@ import {
 import logo from '../../../assets/logo.svg';
 import { supportedLanguages } from '../../../constants';
 import i18n from '../../../i18n';
+import { Role } from '../../../interfaces/enums';
 import {
 	APPOINTMENTS_ROUTE,
 	CART_ROUTE,
@@ -23,10 +24,11 @@ import {
 	NOTIFICATIONS_ROUTE,
 	PHARMACIES_ROUTE,
 	PROFILE_ROUTE,
+	REVENUE_ROUTE,
 } from '../../../routes';
 import useAuthStore from '../../../store/auth';
-import { Dropdown } from '../../ui/actions/Dropdown';
 import { useCurrentUserStore } from '../../../store/user';
+import { Dropdown } from '../../ui/actions/Dropdown';
 
 export const Navbar = () => {
 	const location = useLocation();
@@ -44,6 +46,23 @@ export const Navbar = () => {
 		{ title: 'pharmacies', to: PHARMACIES_ROUTE },
 		{ title: 'appointments', to: APPOINTMENTS_ROUTE },
 	];
+
+	const doctorHeaderOptions = [
+		{ title: 'home', to: HOME_ROUTE },
+		{ title: 'appointments', to: APPOINTMENTS_ROUTE },
+		{ title: 'revenue', to: REVENUE_ROUTE },
+	];
+
+	const headerOptions = useMemo(() => {
+		switch (currentUser?.role) {
+			case Role.Patient:
+				return patientHeaderOptions;
+			case Role.Doctor:
+				return doctorHeaderOptions;
+			default:
+				return patientHeaderOptions;
+		}
+	}, [currentUser?.role]);
 
 	const profileOptions = [
 		{ label: t('profile'), icon: <ProfileIcon />, onClick: () => navigate(PROFILE_ROUTE) },
@@ -94,9 +113,11 @@ export const Navbar = () => {
 							</div>
 						}
 					/>
-					<Link to={CART_ROUTE}>
-						<CartIcon />
-					</Link>
+					{currentUser?.role === Role.Patient && (
+						<Link to={CART_ROUTE}>
+							<CartIcon />
+						</Link>
+					)}
 					<Link to={NOTIFICATIONS_ROUTE}>
 						<NotificationIcon />
 					</Link>
@@ -158,7 +179,7 @@ export const Navbar = () => {
 				{/* Desktop Nav Links */}
 				<div className="hidden md:block md:order-2">
 					<div className="flex flex-col gap-5 mt-5 md:flex-row md:items-center md:mt-0 md:ps-5">
-						{patientHeaderOptions.map(({ title, to }) => {
+						{headerOptions.map(({ title, to }) => {
 							const isActive = location.pathname.startsWith(to);
 							return (
 								<Link
@@ -187,7 +208,7 @@ export const Navbar = () => {
 					</button>
 
 					<div className="flex flex-col gap-6 text-lg">
-						{patientHeaderOptions.map(({ title, to }) => {
+						{headerOptions.map(({ title, to }) => {
 							const isActive = location.pathname.startsWith(to);
 							return (
 								<Link

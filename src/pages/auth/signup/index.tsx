@@ -48,7 +48,7 @@ export const Signup = () => {
 	const phone = watch('phone');
 	const { mutateAsync: signup, isPending } = useSignupMutation();
 
-	const onSubmit: SubmitHandler<SignupInput> = ({ dob, name, password, phone, role, gender }) => {
+	const onSubmit: SubmitHandler<SignupInput> = ({ dob, name, password, phone, gender }) => {
 		signup(
 			{ dob, name, password, phone, role, gender, language: i18n.language },
 			{
