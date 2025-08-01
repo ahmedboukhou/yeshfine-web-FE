@@ -6,6 +6,10 @@ import { ForgotPassword } from './pages/auth/forgotPassword';
 import { Login } from './pages/auth/Login';
 import { SelectLanguage } from './pages/auth/SelectLanguage';
 import { Signup } from './pages/auth/signup';
+import { DoctorAppointments } from './pages/doctor/appointments';
+import { DoctorHome } from './pages/doctor/home';
+import { DoctorProfile } from './pages/doctor/profile';
+import { DoctorRevenue } from './pages/doctor/revenue';
 import { PatientAppointments } from './pages/patient/appointments';
 import { PatientAppointmentDetails } from './pages/patient/appointments/details';
 import { PatientCart } from './pages/patient/cart';
@@ -51,6 +55,7 @@ export const APPOINTMENTS_ROUTE = '/appointments';
 export const CART_ROUTE = '/cart';
 export const APPOINTMENTS_DETAIL_ROUTE = `${APPOINTMENTS_ROUTE}/:id`;
 export const PROFILE_ROUTE = `profile`;
+export const REVENUE_ROUTE = `revenue`;
 export const NOTIFICATIONS_ROUTE = `notifications`;
 
 export const AppRoutes = () => {
@@ -61,7 +66,7 @@ export const AppRoutes = () => {
 		<BrowserRouter>
 			{isAuthenticated && currentUser ? (
 				<Routes>
-					{currentUser.role === Role.Patient ? (
+					{currentUser.role === Role.Patient && (
 						<Route element={<MainLayout />}>
 							{/* home */}
 							<Route element={<PatientHome />} path={HOME_ROUTE} />
@@ -88,8 +93,8 @@ export const AppRoutes = () => {
 								path={PHARMACIES_MEDICINE_CATEGORY_ROUTE}
 							/>
 							<Route element={<PatientCart />} path={CART_ROUTE} />
-
 							<Route element={<PatientMedicineDetails />} path={PHARMACIES_MEDICINE_DETAIL_ROUTE} />
+
 							{/* appointments */}
 							<Route element={<PatientAppointments />} path={APPOINTMENTS_ROUTE} />
 							<Route element={<PatientAppointmentDetails />} path={APPOINTMENTS_DETAIL_ROUTE} />
@@ -100,14 +105,30 @@ export const AppRoutes = () => {
 
 							<Route element={<Navigate to={HOME_ROUTE} />} path="*" />
 						</Route>
-					) : (
+					)}
+
+					{currentUser.role === Role.Doctor && (
+						<Route element={<MainLayout />}>
+							{/* home */}
+							<Route element={<DoctorHome />} path={HOME_ROUTE} />
+							<Route element={<DoctorAppointments />} path={APPOINTMENTS_ROUTE} />
+							<Route element={<DoctorRevenue />} path={REVENUE_ROUTE} />
+							<Route element={<DoctorProfile />} path={PROFILE_ROUTE} />
+
+							<Route element={<PatientNotifications />} path={NOTIFICATIONS_ROUTE} />
+
+							<Route element={<Navigate to={HOME_ROUTE} />} path="*" />
+						</Route>
+					)}
+
+					{currentUser.role !== Role.Patient && currentUser.role !== Role.Doctor && (
 						<Route>
 							<Route
 								path={HOME_ROUTE}
 								element={
 									<main className="flex-center h-screen">
 										<div className="text-center">
-											<p>Development in progress, Please login with patient role</p>
+											<p>Development in progress, Please login with patient or doctor role</p>
 											<button onClick={logout} className="primary-btn mt-3">
 												Logout
 											</button>
