@@ -80,5 +80,9 @@
 	"notifications": "Notifications",
 	"readAll": "Read All",
 	"revenue": "Revenue",
+	"myOrders": "My Orders",
+	"viewProfile": "View profile",
+	"faqs": "FAQ’s",
+	"privacyPolicy": "Privacy Policy",
 	"reports": "Reports"
 }

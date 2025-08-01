@@ -54,9 +54,9 @@ export const PHARMACIES_MEDICINE_DETAIL_ROUTE = `/medicines/:id`;
 export const APPOINTMENTS_ROUTE = '/appointments';
 export const CART_ROUTE = '/cart';
 export const APPOINTMENTS_DETAIL_ROUTE = `${APPOINTMENTS_ROUTE}/:id`;
-export const PROFILE_ROUTE = `profile`;
-export const REVENUE_ROUTE = `revenue`;
-export const NOTIFICATIONS_ROUTE = `notifications`;
+export const PROFILE_ROUTE = `/profile`;
+export const REVENUE_ROUTE = `/revenue`;
+export const NOTIFICATIONS_ROUTE = `/notifications`;
 
 export const AppRoutes = () => {
 	const { isAuthenticated, logout } = useAuthStore((state) => state);

@@ -15,6 +15,7 @@ import type { PatientProfileInput } from '../../../interfaces/formInputTypes';
 import { HOME_ROUTE } from '../../../routes';
 import { useCurrentUserStore } from '../../../store/user';
 import { patientProfileSchema } from '../../../validations';
+import { toast } from 'react-toastify';
 
 export const PatientEditProfile: FC<{ setShowEditProfile: Dispatch<SetStateAction<boolean>> }> = ({
 	setShowEditProfile,
@@ -56,14 +57,19 @@ export const PatientEditProfile: FC<{ setShowEditProfile: Dispatch<SetStateActio
 			formData.append('file', uploadedFiles[0]);
 		}
 
-		setShowEditProfile(false);
-		setCurrentUser({
-			...currentUser,
-			name,
-			gender,
-			dob,
+		updateProfile(formData, {
+			onSuccess: ({ message, data }) => {
+				toast.success(message);
+				setShowEditProfile(false);
+				setCurrentUser({
+					...currentUser,
+					name,
+					gender,
+					dob,
+					image: data.image,
+				});
+			},
 		});
-		updateProfile(formData);
 	};
 
 	const onDrop = useCallback((acceptedFiles: File[]) => {
