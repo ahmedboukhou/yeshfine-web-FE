@@ -3,11 +3,12 @@ import { AddressIcon, BirthdayIcon, GenderIcon } from '../../../assets/icons';
 import { useCurrentUserStore } from '../../../store/user';
 import { ProfileInfoCard } from '../../../components/ui/cards/ProfileInfoCard';
 import { PLACEHOLDER_IMAGE } from '../../../constants';
+import { Badge } from '../../../components/ui/Badge';
 
 export const PatientViewProfile = () => {
 	const { t } = useTranslation();
 	const { currentUser } = useCurrentUserStore((state) => state);
-	const { dob, gender, image, name, phone, address } = currentUser || {};
+	const { dob, gender, image, name, phone, address, role } = currentUser || {};
 	return (
 		<div>
 			<div className="flex-center space-y-2 flex-col -mt-15 mb-20">
@@ -17,6 +18,7 @@ export const PatientViewProfile = () => {
 				/>
 				<h3 className="font-semibold text-typography-800">{name}</h3>
 				<p className="text-typography-700">{phone}</p>
+				<Badge specialty={role} variant="primary" />
 			</div>
 
 			<div className="grid grid-cols-2 gap-6 mb-6">

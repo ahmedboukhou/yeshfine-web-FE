@@ -4,10 +4,10 @@ import { ReviewRating } from '../ReviewRating';
 import type { FC } from 'react';
 
 type DoctorInfoCardProps = {
-	name: string;
-	averageRating: number;
-	image: string;
-	specialty: string;
+	name?: string;
+	averageRating: number | string;
+	image?: string;
+	specialty?: string;
 };
 
 export const DoctorInfoCard: FC<DoctorInfoCardProps> = ({
@@ -25,7 +25,7 @@ export const DoctorInfoCard: FC<DoctorInfoCardProps> = ({
 				<div className="flex-1 flex-col gap-3">
 					<div className="flex-items-center gap-2 flex-wrap">
 						<span className="text-typography-500">{t('rating')}</span>
-						<ReviewRating rating={averageRating} />
+						<ReviewRating rating={+averageRating || 0} />
 						<span className="text-typography-500">{averageRating}</span>
 					</div>
 					<p className="font-bold text-typography-900">{name}</p>

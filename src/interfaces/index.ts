@@ -345,3 +345,34 @@ export type Cart = {
 	total_items: number;
 	items: CartItem[];
 };
+
+export type NotificationData = {
+	appointment_id: number;
+	doctor_name: string;
+	time: string; // "HH:mm"
+	appointment_date: string; // "YYYY-MM-DD"
+	appointment_type: string; // e.g., "onsite"
+	entity_type: 'doctor' | 'lab' | 'pharmacy';
+	entity_id: number;
+};
+
+export type NotificationSender = {
+	id: number;
+	name: string;
+	image: string;
+	role: string;
+};
+
+export type NotificationType = {
+	id: number;
+	type: string; // e.g., "appointment_reminder"
+	title: string;
+	message: string;
+	data: NotificationData;
+	action_url: string;
+	is_read: boolean;
+	priority: 'low' | 'medium' | 'high';
+	created_at: string; // ISO timestamp
+	read_at: string | null;
+	sender: NotificationSender;
+};

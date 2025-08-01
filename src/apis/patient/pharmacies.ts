@@ -115,12 +115,26 @@ export function useGetPharmacyMedicineDetailQuery({ id }: { id?: string }) {
 }
 
 type UpdateCartItemQuantityInput = {
-	cart_item_id: string;
+	cart_item_id: number;
 	quantity: number;
+};
+type UpdateCartItemQuantityResponse = CommonApiResponse & {
+	data: {
+		cart_id: number;
+		total_items: number;
+		cart_total: number;
+		item_subtotal: number;
+		item_removed: boolean;
+		cart_deleted: boolean;
+	};
 };
 
 export function useUpdateCartItemQuantityMutation() {
-	return useMutation<CommonApiResponse, CommonApiResponse, UpdateCartItemQuantityInput>({
+	return useMutation<
+		UpdateCartItemQuantityResponse,
+		CommonApiResponse,
+		UpdateCartItemQuantityInput
+	>({
 		mutationFn: (values) => apiClient.put(`patients/update-cart-item-quantity`, values),
 	});
 }

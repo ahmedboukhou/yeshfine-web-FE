@@ -1,6 +1,11 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
-import type { AppointmentType, UpcomingAppointmentType } from '../../interfaces';
+import type {
+	AppointmentType,
+	Doctor,
+	DoctorDetail,
+	UpcomingAppointmentType,
+} from '../../interfaces';
 import type { AppointmentFilterTypeEnum } from '../../interfaces/enums';
 import type { BookAppointmentInput } from '../../interfaces/formInputTypes';
 import type {
@@ -60,16 +65,27 @@ export function useBookAppointmentMutation() {
 
 export function useMarkAsCompleteAppointmentMutation() {
 	return useMutation<CommonApiResponse, CommonApiResponse, { id?: string }>({
-		mutationFn: (values) =>
-			apiClient.put(`patients/doctor/mark/appointment/${values?.id}`, values),
+		mutationFn: (values) => apiClient.put(`patients/doctor/mark/appointment/${values?.id}`, values),
 		onError: ({ message }) => toast.error(message || 'Something went wrong'),
 	});
 }
 
-type PatientAppointmentDetailResponseType = CommonApiResponse & {
-	data: Omit<AppointmentType, 'doctor' | 'appointment_id' | 'distance'> & {
-		id: number; // replaces appointment_id
+type PatientAppointmentDetailResponseType = {
+	data: {
+		id: number;
+		appointment_date: string;
+		start_time: string;
+		end_time: string;
+		appointment_type: string;
 		reason: string;
+		ticket_number: number;
+		status: string;
+		meeting_link: string | null;
+		doctor: Doctor;
+		doctorDetail: Pick<DoctorDetail, 'speciality' | 'clinicName' | 'average_rating'>;
+		appointment_date_formatted: string;
+		time_range: string;
+		appointment_type_label: string;
 		show_mark_complete: boolean;
 	};
 };

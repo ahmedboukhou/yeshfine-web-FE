@@ -86,9 +86,9 @@ export const PatientEditProfile: FC<{ setShowEditProfile: Dispatch<SetStateActio
 						src={previewImage ?? image ?? PLACEHOLDER_IMAGE}
 						className="h-30 w-30 rounded-full object-cover border-4 border-white"
 					/>
-					<div className="absolute bg-white p-1 rounded-full cursor-pointer bottom-0 right-0">
-						<div {...getRootProps()}>
-							<input {...getInputProps()} />
+					<div {...getRootProps()}>
+						<input {...getInputProps()} />
+						<div className="absolute bg-white p-1 rounded-full cursor-pointer bottom-0 right-0">
 							<CameraIcon />
 						</div>
 					</div>

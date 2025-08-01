@@ -7,6 +7,8 @@ import { Login } from './pages/auth/Login';
 import { SelectLanguage } from './pages/auth/SelectLanguage';
 import { Signup } from './pages/auth/signup';
 import { PatientAppointments } from './pages/patient/appointments';
+import { PatientAppointmentDetails } from './pages/patient/appointments/details';
+import { PatientCart } from './pages/patient/cart';
 import { PatientDoctors } from './pages/patient/doctors';
 import { PatientDoctorDetail } from './pages/patient/doctors/detail';
 import { PatientDoctorBookAppointment } from './pages/patient/doctors/detail/bookAppointment';
@@ -14,16 +16,15 @@ import { PatientHome } from './pages/patient/home';
 import { PatientLabs } from './pages/patient/labs';
 import { PatientLabDetail } from './pages/patient/labs/detail';
 import { PatientLabBookAppointment } from './pages/patient/labs/detail/BookAppointment';
+import { PatientLabReportDetail } from './pages/patient/labs/reports/details';
+import { PatientNotifications } from './pages/patient/notifications';
 import { PatientPharmacies } from './pages/patient/pharmacies';
 import { PatientPharmaciesDetail } from './pages/patient/pharmacies/detail';
 import { PatientMedicineCategories } from './pages/patient/pharmacies/detail/MedicineCategories';
+import { PatientMedicineDetails } from './pages/patient/pharmacies/detail/medicineDetails';
+import { PatientProfile } from './pages/patient/profile';
 import useAuthStore from './store/auth';
 import { useCurrentUserStore } from './store/user';
-import { PatientAppointmentDetails } from './pages/patient/appointments/details';
-import { PatientLabReportDetail } from './pages/patient/labs/reports/details';
-import { PatientProfile } from './pages/patient/profile';
-import { PatientMedicineDetails } from './pages/patient/pharmacies/detail/medicineDetails';
-import { PatientCart } from './pages/patient/cart';
 
 // App Routes
 export const ROOT_ROUTE = '/';
@@ -50,6 +51,7 @@ export const APPOINTMENTS_ROUTE = '/appointments';
 export const CART_ROUTE = '/cart';
 export const APPOINTMENTS_DETAIL_ROUTE = `${APPOINTMENTS_ROUTE}/:id`;
 export const PROFILE_ROUTE = `profile`;
+export const NOTIFICATIONS_ROUTE = `notifications`;
 
 export const AppRoutes = () => {
 	const { isAuthenticated, logout } = useAuthStore((state) => state);
@@ -94,6 +96,7 @@ export const AppRoutes = () => {
 
 							{/* profile */}
 							<Route element={<PatientProfile />} path={PROFILE_ROUTE} />
+							<Route element={<PatientNotifications />} path={NOTIFICATIONS_ROUTE} />
 
 							<Route element={<Navigate to={HOME_ROUTE} />} path="*" />
 						</Route>

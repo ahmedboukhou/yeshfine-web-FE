@@ -73,6 +73,11 @@
 	"paymentDetail": "Détail du paiement",
 	"subtotal": "Sous-total",
 	"total": "Total",
+	"itemsInStock": "Articles en stock : {{availableStock}}",
+	"cartEmpty": "Votre panier est vide",
+	"cartEmptyMessage": "Il semble que vous n'ayez encore ajouté aucun médicament.",
+	"cartExplorePrompt": "Commencez à explorer les pharmacies pour ajouter ce dont vous avez besoin.",
+	"browse": "Parcourir",
 	"enterAddressPrompt": "Entrez l'adresse pour explorer les médecins, laboratoires et pharmacies autour de vous",
 	"labReportPaymentRequired": "Pour consulter ou télécharger votre rapport d'analyse, veuillez effectuer le paiement."
 }
