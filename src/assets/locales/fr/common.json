@@ -83,5 +83,6 @@
 	"viewProfile": "Voir le profil",
 	"faqs": "FAQ",
 	"privacyPolicy": "Politique de confidentialité",
+	"welcomeDoctor": "Bienvenue {{name}} 👋",
 	"reports": "Rapports"
 }

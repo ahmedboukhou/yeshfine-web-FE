@@ -72,7 +72,7 @@ export const Navbar = () => {
 		{ label: t('viewProfile'), icon: <NavProfileIcon />, onClick: () => navigate(PROFILE_ROUTE) },
 		{ label: t('myOrders'), icon: <OrderIcon />, onClick: () => {} },
 		{ label: t('faqs'), icon: <FAQIcon />, onClick: () => {} },
-		{ label: t('privacyPolicy'), icon: <PrivacyIcon />, onClick: () => navigate(PROFILE_ROUTE) },
+		{ label: t('privacyPolicy'), icon: <PrivacyIcon />, onClick: () => {} },
 	];
 
 	const { mutateAsync: updateLanguage } = useChangeLanguageMutation();
@@ -134,10 +134,7 @@ export const Navbar = () => {
 							<div className="flex-items-center gap-x-2 cursor-pointer">
 								<img
 									className="inline-block size-10 rounded-full cursor-pointer"
-									src={
-										image ??
-										'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhtMRbtowke9ZnnGtyYJmIuJaB2Q1y5I-3IA&s'
-									}
+									src={image ?? PLACEHOLDER_IMAGE}
 									alt={name}
 								/>
 								<svg

@@ -84,5 +84,6 @@
 	"viewProfile": "View profile",
 	"faqs": "FAQ’s",
 	"privacyPolicy": "Privacy Policy",
+	"welcomeDoctor": "Welcome {{name}} 👋",
 	"reports": "Reports"
 }
