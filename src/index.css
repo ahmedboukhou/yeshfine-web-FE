@@ -118,6 +118,9 @@ button {
 .card-box-shadow-3 {
 	box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.06), 0 0 5px 0 rgba(0, 0, 0, 0.10);
 }
+.card-box-shadow-4 {
+	box-shadow: 0 0 10px 0 rgba(76, 175, 80, 0.07);
+}
 .card-gradient {
 	background: linear-gradient(180deg, #fff 0%, #ebffec 100%);
 }

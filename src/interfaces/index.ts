@@ -5,6 +5,8 @@ export type CurrentUserType = {
 	phone?: string;
 	role?: string;
 	address?: string;
+	latitude?: number;
+	longitude?: number;
 	gender?: string;
 	image?: string | null;
 	dob?: string;

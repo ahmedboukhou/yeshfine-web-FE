@@ -80,5 +80,14 @@
 	"notifications": "Notifications",
 	"readAll": "Read All",
 	"revenue": "Revenue",
+	"myOrders": "My Orders",
+	"viewProfile": "View profile",
+	"faqs": "FAQ’s",
+	"privacyPolicy": "Privacy Policy",
+	"welcomeDoctor": "Welcome {{name}} 👋",
+	"changePassword": "Change Password",
+	"changePasswordInfo": "Change your password anytime to protect your information",
+	"enterCurrentNewPassword": "Enter your current and new password to update.",
+	"editProfile": "Edit Profile",
 	"reports": "Reports"
 }

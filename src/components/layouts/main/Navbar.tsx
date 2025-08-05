@@ -5,14 +5,17 @@ import { useChangeLanguageMutation } from '../../../apis/auth';
 import {
 	CartIcon,
 	CloseIcon,
+	FAQIcon,
 	LanguageIcon,
+	NavProfileIcon,
 	NavToggleIcon,
 	NotificationIcon,
-	ProfileIcon,
+	OrderIcon,
+	PrivacyIcon,
 	SignOutIcon,
 } from '../../../assets/icons';
 import logo from '../../../assets/logo.svg';
-import { supportedLanguages } from '../../../constants';
+import { PLACEHOLDER_IMAGE, supportedLanguages } from '../../../constants';
 import i18n from '../../../i18n';
 import { Role } from '../../../interfaces/enums';
 import {
@@ -22,6 +25,7 @@ import {
 	HOME_ROUTE,
 	LABS_ROUTE,
 	NOTIFICATIONS_ROUTE,
+	ORDERS_ROUTE,
 	PHARMACIES_ROUTE,
 	PROFILE_ROUTE,
 	REVENUE_ROUTE,
@@ -29,6 +33,7 @@ import {
 import useAuthStore from '../../../store/auth';
 import { useCurrentUserStore } from '../../../store/user';
 import { Dropdown } from '../../ui/actions/Dropdown';
+import { Badge } from '../../ui/Badge';
 
 export const Navbar = () => {
 	const location = useLocation();
@@ -65,9 +70,14 @@ export const Navbar = () => {
 	}, [currentUser?.role]);
 
 	const profileOptions = [
-		{ label: t('profile'), icon: <ProfileIcon />, onClick: () => navigate(PROFILE_ROUTE) },
-		{ label: t('signOut'), icon: <SignOutIcon />, onClick: () => logout() },
+		{ label: t('viewProfile'), icon: <NavProfileIcon />, onClick: () => navigate(PROFILE_ROUTE) },
+		...(currentUser?.role === Role.Patient
+			? [{ label: t('myOrders'), icon: <OrderIcon />, onClick: () => navigate(ORDERS_ROUTE) }]
+			: []),
+		{ label: t('faqs'), icon: <FAQIcon />, onClick: () => {} },
+		{ label: t('privacyPolicy'), icon: <PrivacyIcon />, onClick: () => {} },
 	];
+	
 	const { mutateAsync: updateLanguage } = useChangeLanguageMutation();
 	const handleNavLinkClick = () => {
 		setIsMobileMenuOpen(false); // close on link click
@@ -124,13 +134,10 @@ export const Navbar = () => {
 
 					<Dropdown
 						button={
-							<div className=" flex-items-center gap-x-2 cursor-pointer">
+							<div className="flex-items-center gap-x-2 cursor-pointer">
 								<img
 									className="inline-block size-10 rounded-full cursor-pointer"
-									src={
-										image ??
-										'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhtMRbtowke9ZnnGtyYJmIuJaB2Q1y5I-3IA&s'
-									}
+									src={image ?? PLACEHOLDER_IMAGE}
 									alt={name}
 								/>
 								<svg
@@ -150,17 +157,37 @@ export const Navbar = () => {
 							</div>
 						}
 						menu={
-							<div className="space-y-0.5 p-1">
+							<div className="space-y-0.5 p-1 w-xs">
+								<div className="py-6 flex-center flex-col gap-0.5">
+									<img
+										src={currentUser?.image ?? PLACEHOLDER_IMAGE}
+										alt={currentUser?.name}
+										className="rounded-full w-32 p-1 shadow-lg mb-2"
+									/>
+									<h4 className="text-typography-800">{currentUser?.name}</h4>
+									<span className="text-typography-700">{currentUser?.phone}</span>
+									<Badge specialty={currentUser?.role} variant="primary" />
+								</div>
+								<div className="border-t border-border-1 my-2" />
 								{profileOptions.map(({ label, onClick, icon }) => (
 									<div
 										onClick={onClick}
 										key={label}
-										className="py-2 px-3 flex-items-center rounded-lg gap-1 hover:bg-primary-light-hover focus:outline-hidden cursor-pointer"
+										className="py-2 px-6 flex-items-center rounded-lg gap-3 hover:bg-primary-light-hover focus:outline-hidden cursor-pointer text-typography-700 font-medium"
 									>
 										{icon}
 										<p className=" text-sm text-typography-700">{label}</p>
 									</div>
 								))}
+
+								<div className="border-t border-border-1 my-2" />
+								<div
+									onClick={() => logout()}
+									className="py-2 px-6 flex-items-center rounded-lg gap-1 hover:bg-primary-light-hover focus:outline-hidden cursor-pointer"
+								>
+									<SignOutIcon />
+									<p className=" text-sm text-typography-700">{t('signOut')}</p>
+								</div>
 							</div>
 						}
 					/>

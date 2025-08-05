@@ -20,7 +20,7 @@ export const PatientAppointments = () => {
 		isFetching: loadingAppointments,
 		refetch,
 	} = useGetAppointmentsQuery({ page, limit: 6, search, type });
-	const { items, meta } = getAppointmentsResponse?.data || {};
+	const { items, pagination } = getAppointmentsResponse?.data || {};
 
 	const tabData = [
 		{ label: t('upcoming'), value: AppointmentFilterTypeEnum.Upcoming },
@@ -112,7 +112,7 @@ export const PatientAppointments = () => {
 
 			<Pagination
 				currentPage={page}
-				totalPages={meta?.totalPages || 1}
+				totalPages={pagination?.totalPages || 1}
 				onPageChange={handlePageChange}
 				isLoading={loadingAppointments}
 			/>

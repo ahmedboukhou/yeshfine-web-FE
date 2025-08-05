@@ -4,6 +4,7 @@ import { useDropzone, type FileWithPath } from 'react-dropzone';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
+import { toast } from 'react-toastify';
 import { usePatientUpdateProfileMutation } from '../../../apis/patient/profile';
 import { CameraIcon } from '../../../assets/icons';
 import { InputField } from '../../../components/ui/inputs/InputField';
@@ -56,14 +57,19 @@ export const PatientEditProfile: FC<{ setShowEditProfile: Dispatch<SetStateActio
 			formData.append('file', uploadedFiles[0]);
 		}
 
-		setShowEditProfile(false);
-		setCurrentUser({
-			...currentUser,
-			name,
-			gender,
-			dob,
+		updateProfile(formData, {
+			onSuccess: ({ message, data }) => {
+				toast.success(message);
+				setShowEditProfile(false);
+				setCurrentUser({
+					...currentUser,
+					name,
+					gender,
+					dob,
+					image: data.image,
+				});
+			},
 		});
-		updateProfile(formData);
 	};
 
 	const onDrop = useCallback((acceptedFiles: File[]) => {
@@ -142,7 +148,10 @@ export const PatientEditProfile: FC<{ setShowEditProfile: Dispatch<SetStateActio
 					<Link to={HOME_ROUTE} className="outlined-btn">
 						{t('cancel')}
 					</Link>
-					<button className="primary-btn" disabled={isPending || !isDirty}>
+					<button
+						className="primary-btn"
+						disabled={isPending || (!isDirty && previewImage === null)}
+					>
 						{t('save')}
 					</button>
 				</div>
