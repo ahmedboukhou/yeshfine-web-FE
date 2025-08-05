@@ -6,6 +6,7 @@ import type {
 	OTPInput,
 	ResetPasswordInput,
 	SignupInput,
+	UpdatePasswordInput,
 } from '../../interfaces/formInputTypes';
 import type {
 	CommonApiResponse,
@@ -61,6 +62,12 @@ export function useForgotPasswordMutation() {
 export function useResetPasswordMutation() {
 	return useMutation<ForgotPasswordResponse, CommonApiResponse, ResetPasswordInput>({
 		mutationFn: (values) => apiClient.post(`auth/reset-password`, values),
+		onError: ({ message }) => toast.error(message || 'Something went wrong'),
+	});
+}
+export function useChangePasswordMutation() {
+	return useMutation<ForgotPasswordResponse, CommonApiResponse, UpdatePasswordInput>({
+		mutationFn: (values) => apiClient.post(`users/change-password`, values),
 		onError: ({ message }) => toast.error(message || 'Something went wrong'),
 	});
 }

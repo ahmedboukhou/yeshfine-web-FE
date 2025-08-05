@@ -149,10 +149,5 @@ export const patientProfileSchema = (t: TFunction) =>
 export const resetPasswordSchema = (t: TFunction) =>
 	yup.object({
 		newPassword: passwordValidation(t),
-		confirm_password: yup
-			.string()
-			.required(
-				t('requiredField', { field: t('confirmPassword', { ns: 'auth' }), ns: 'validations' })
-			)
-			.oneOf([yup.ref('newPassword')], t('passwordsMustMatch', { ns: 'validations' })),
+		currentPassword: requiredString(t, 'currentPassword', 'common'),
 	});

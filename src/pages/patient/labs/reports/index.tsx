@@ -5,7 +5,7 @@ import { LabReportCard } from '../../../../components/ui/cards/LabReportCard';
 import { LabStatusEnum } from '../../../../interfaces/enums';
 import { Pagination } from '../../../../components/ui/Pagination';
 import { LabReportCardSkeleton } from '../../../../components/ui/skeletons/LabReportCardSkeleton';
-import { Select } from 'react-day-picker';
+import { Select } from '../../../../components/ui/actions/Select';
 
 export const PatientLabReports = () => {
 	const { t } = useTranslation();
@@ -18,32 +18,27 @@ export const PatientLabReports = () => {
 	const handlePageChange = (newPage: number) => {
 		setPage(newPage);
 	};
+	const enumMap = {
+		[LabStatusEnum.Paid]: 'paid',
+		[LabStatusEnum.Pending]: 'pending',
+		[LabStatusEnum.Uploaded]: 'uploaded',
+	};
+
 	return (
 		<section>
 			<div className="flex-end mb-6">
-				{/* TODO: make it separate */}
 				<Select
 					id="lab-filter"
 					name="lab-filter"
-					onChange={(e) => {
-						setFilter(e.target.value as LabStatusEnum);
+					value={filter}
+					disabled={isFetching}
+					options={Object.values(LabStatusEnum)}
+					enumMap={enumMap}
+					onChange={(val) => {
+						setFilter(val);
 						setPage(1);
 					}}
-					className="cursor-pointer text-typography-700 focus:ring-0 hover:border-primary focus:border-primary-active rounded-xl border-none"
-				>
-					<option className="option" value="">
-						{t('all')}
-					</option>
-					<option className="option" value={LabStatusEnum.Paid}>
-						{t('paid')}
-					</option>
-					<option className="option" value={LabStatusEnum.Pending}>
-						{t('pending')}
-					</option>
-					<option className="option" value={LabStatusEnum.Uploaded}>
-						{t('uploaded')}
-					</option>
-				</Select>
+				/>
 			</div>
 			<div className="grid grid-cols-12 gap-5 mb-10">
 				{isFetching ? (

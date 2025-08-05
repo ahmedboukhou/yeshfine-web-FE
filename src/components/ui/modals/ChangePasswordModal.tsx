@@ -1,28 +1,35 @@
-import { memo, useEffect, type FC } from 'react';
-import lockImg from '../../../assets/images/lock.png';
-import { useTranslation } from 'react-i18next';
-import { InputField } from '../inputs/InputField';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { memo, useEffect, type FC } from 'react';
 import { useForm, type SubmitHandler } from 'react-hook-form';
-import type { ResetPasswordInput } from '../../../interfaces/formInputTypes';
+import { useTranslation } from 'react-i18next';
+import { useChangePasswordMutation } from '../../../apis/auth';
+import lockImg from '../../../assets/images/lock.png';
+import type { UpdatePasswordInput } from '../../../interfaces/formInputTypes';
 import { resetPasswordSchema } from '../../../validations';
-import { useResetPasswordMutation } from '../../../apis/auth';
-import { useCurrentUserStore } from '../../../store/user';
+import { InputField } from '../inputs/InputField';
+import { toast } from 'react-toastify';
+
 type AddressModalProps = {
 	id: string;
 };
 
-const defaultValues: ResetPasswordInput = {
-	phone: '',
+declare global {
+	interface Window {
+		HSOverlay?: {
+			close: (element: Element) => void;
+		};
+	}
+}
+
+const defaultValues: UpdatePasswordInput = {
+	currentPassword: '',
 	newPassword: '',
-	confirm_password: '',
 };
 
 const ChangePasswordModal: FC<AddressModalProps> = ({ id }) => {
 	const { t } = useTranslation(['common', 'auth', 'validations']);
 
-	const { mutateAsync: resetPassword, isPending } = useResetPasswordMutation();
-	const { currentUser } = useCurrentUserStore((state) => state);
+	const { mutateAsync: updatePassword, isPending } = useChangePasswordMutation();
 	useEffect(() => {
 		if (window.HSStaticMethods?.autoInit) {
 			window.HSStaticMethods.autoInit();
@@ -32,15 +39,28 @@ const ChangePasswordModal: FC<AddressModalProps> = ({ id }) => {
 	const {
 		register,
 		handleSubmit,
+		reset,
 		formState: { errors },
-	} = useForm<ResetPasswordInput>({
+	} = useForm<UpdatePasswordInput>({
 		resolver: yupResolver(resetPasswordSchema(t)),
 		mode: 'all',
 		defaultValues,
 	});
 
-	const onSubmit: SubmitHandler<ResetPasswordInput> = async (values) => {
-		resetPassword({ ...values, phone: currentUser?.phone }, {});
+	const onSubmit: SubmitHandler<UpdatePasswordInput> = async ({ currentPassword, newPassword }) => {
+		updatePassword(
+			{ currentPassword, newPassword },
+			{
+				onSuccess: ({ message }) => {
+					toast.success(message);
+					reset();
+					const modalEl = document.querySelector(`#hs-${id}`);
+					if (modalEl && window.HSOverlay?.close) {
+						window.HSOverlay.close(modalEl);
+					}
+				},
+			}
+		);
 	};
 
 	return (
@@ -67,18 +87,18 @@ const ChangePasswordModal: FC<AddressModalProps> = ({ id }) => {
 					<form onSubmit={handleSubmit(onSubmit)}>
 						<div className="flex flex-col gap-5">
 							<InputField
+								label={t('currentPassword')}
+								id="currentPassword"
+								type="password"
+								error={errors.currentPassword}
+								register={register('currentPassword')}
+							/>
+							<InputField
 								label={t('newPassword', { ns: 'auth' })}
-								id="password"
+								id="newPassword"
 								type="password"
 								error={errors.newPassword}
 								register={register('newPassword')}
-							/>
-							<InputField
-								label={t('confirmPassword', { ns: 'auth' })}
-								id="confirm_password"
-								type="password"
-								error={errors.confirm_password}
-								register={register('confirm_password')}
 							/>
 							<div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
 								<button

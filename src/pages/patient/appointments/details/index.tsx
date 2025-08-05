@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import { useTranslation } from 'react-i18next';
-import { useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import { toast } from 'react-toastify';
 import {
 	useGetPatientAppointmentDetailQuery,
@@ -20,6 +20,7 @@ import { APPOINTMENTS_ROUTE } from '../../../../routes';
 export const PatientAppointmentDetails = () => {
 	const { t } = useTranslation(['patient', 'common']);
 	const { id } = useParams<{ id: string }>();
+	const navigate = useNavigate();
 
 	const { data, isLoading } = useGetPatientAppointmentDetailQuery({ id });
 	const {
@@ -50,6 +51,7 @@ export const PatientAppointmentDetails = () => {
 			{
 				onSuccess: ({ message }) => {
 					toast.success(message);
+					navigate(APPOINTMENTS_ROUTE);
 				},
 			}
 		);

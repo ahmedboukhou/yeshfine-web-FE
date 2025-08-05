@@ -162,7 +162,7 @@ export const Navbar = () => {
 									<img
 										src={currentUser?.image ?? PLACEHOLDER_IMAGE}
 										alt={currentUser?.name}
-										className="rounded-full w-32 p-1 shadow-lg mb-2"
+										className="rounded-full w-32 h-32 object-cover object-top p-1 shadow-lg mb-2"
 									/>
 									<h4 className="text-typography-800">{currentUser?.name}</h4>
 									<span className="text-typography-700">{currentUser?.phone}</span>

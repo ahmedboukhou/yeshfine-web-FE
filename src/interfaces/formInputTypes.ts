@@ -30,6 +30,11 @@ export type ResetPasswordInput = {
 	confirm_password: string;
 };
 
+export type UpdatePasswordInput = {
+	currentPassword: string;
+	newPassword: string;
+};
+
 export type BookAppointmentInput = {
 	doctor_id: number;
 	appointment_date: string;

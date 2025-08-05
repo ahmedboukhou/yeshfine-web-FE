@@ -86,6 +86,7 @@
 	"privacyPolicy": "Privacy Policy",
 	"welcomeDoctor": "Welcome {{name}} 👋",
 	"changePassword": "Change Password",
+	"currentPassword": "Current Password",
 	"changePasswordInfo": "Change your password anytime to protect your information",
 	"enterCurrentNewPassword": "Enter your current and new password to update.",
 	"editProfile": "Edit Profile",

@@ -4,11 +4,26 @@ import type { PayloadPaginationType, ResponsePagination } from '../../interfaces
 
 type OrdersQueryParams = PayloadPaginationType & {
 	search?: string;
-	order_status: 'pending' | 'completed';
+	order_status: string;
 	payment_status: 'paid' | 'not_paid' | '';
 };
 type OrdersResponse = {
-	data: { orders: any; meta: ResponsePagination };
+	data: {
+		orders: {
+			order_id: number;
+			distance: number;
+			is_open: boolean;
+			time_range: string; // e.g. "08:00 - 20:00"
+			pharmacy_image: string;
+			pharmacy_name: string;
+			pharmacy_address: string;
+			order_date: string; // e.g. "1 Aug"
+			total_amount: number;
+			payment_status: 'paid' | 'not_paid';
+			order_status: 'pending' | 'completed';
+		}[];
+		meta: ResponsePagination;
+	};
 };
 export function useGetOrdersQuery({
 	page,
