@@ -4,11 +4,12 @@ import { useCurrentUserStore } from '../../../store/user';
 import { ProfileInfoCard } from '../../../components/ui/cards/ProfileInfoCard';
 import { PLACEHOLDER_IMAGE } from '../../../constants';
 import { Badge } from '../../../components/ui/Badge';
+import { ChangePassword } from '../../../components/ui/ChangePassword';
 
 export const PatientViewProfile = () => {
 	const { t } = useTranslation();
 	const { currentUser } = useCurrentUserStore((state) => state);
-	const { dob, gender, image, name, phone, address, role } = currentUser || {};
+	const { dob, gender, image, name, phone, address, role, latitude, longitude } = currentUser || {};
 	return (
 		<div>
 			<div className="flex-center space-y-2 flex-col -mt-15 mb-20">
@@ -29,7 +30,17 @@ export const PatientViewProfile = () => {
 					<ProfileInfoCard icon={<GenderIcon />} text={gender} title={t('gender')} />
 				</div>
 				<div className="col-span-2">
-					<ProfileInfoCard icon={<AddressIcon />} text={address} title={t('address')} />
+					<ProfileInfoCard
+						icon={<AddressIcon />}
+						text={address}
+						title={t('address')}
+						latitude={latitude}
+						longitude={longitude}
+					/>
+				</div>
+
+				<div className="col-span-2">
+					<ChangePassword />
 				</div>
 			</div>
 		</div>

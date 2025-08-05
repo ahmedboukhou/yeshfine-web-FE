@@ -84,5 +84,9 @@
 	"faqs": "FAQ",
 	"privacyPolicy": "Politique de confidentialité",
 	"welcomeDoctor": "Bienvenue {{name}} 👋",
+	"changePassword": "Changer le mot de passe",
+	"changePasswordInfo": "Changez votre mot de passe à tout moment pour protéger vos informations",
+	"enterCurrentNewPassword": "Entrez votre mot de passe actuel et le nouveau pour mettre à jour.",
+	"editProfile": "Modifier le profil",
 	"reports": "Rapports"
 }

@@ -25,6 +25,7 @@ import {
 	HOME_ROUTE,
 	LABS_ROUTE,
 	NOTIFICATIONS_ROUTE,
+	ORDERS_ROUTE,
 	PHARMACIES_ROUTE,
 	PROFILE_ROUTE,
 	REVENUE_ROUTE,
@@ -70,11 +71,13 @@ export const Navbar = () => {
 
 	const profileOptions = [
 		{ label: t('viewProfile'), icon: <NavProfileIcon />, onClick: () => navigate(PROFILE_ROUTE) },
-		{ label: t('myOrders'), icon: <OrderIcon />, onClick: () => {} },
+		...(currentUser?.role === Role.Patient
+			? [{ label: t('myOrders'), icon: <OrderIcon />, onClick: () => navigate(ORDERS_ROUTE) }]
+			: []),
 		{ label: t('faqs'), icon: <FAQIcon />, onClick: () => {} },
 		{ label: t('privacyPolicy'), icon: <PrivacyIcon />, onClick: () => {} },
 	];
-
+	
 	const { mutateAsync: updateLanguage } = useChangeLanguageMutation();
 	const handleNavLinkClick = () => {
 		setIsMobileMenuOpen(false); // close on link click

@@ -29,6 +29,8 @@ import { PatientMedicineDetails } from './pages/patient/pharmacies/detail/medici
 import { PatientProfile } from './pages/patient/profile';
 import useAuthStore from './store/auth';
 import { useCurrentUserStore } from './store/user';
+import { PatientOrders } from './pages/patient/orders';
+import { DoctorAppointmentDetails } from './pages/doctor/appointments/detail';
 
 // App Routes
 export const ROOT_ROUTE = '/';
@@ -56,6 +58,7 @@ export const CART_ROUTE = '/cart';
 export const APPOINTMENTS_DETAIL_ROUTE = `${APPOINTMENTS_ROUTE}/:id`;
 export const PROFILE_ROUTE = `/profile`;
 export const REVENUE_ROUTE = `/revenue`;
+export const ORDERS_ROUTE = `/orders`;
 export const NOTIFICATIONS_ROUTE = `/notifications`;
 
 export const AppRoutes = () => {
@@ -101,8 +104,11 @@ export const AppRoutes = () => {
 
 							{/* profile */}
 							<Route element={<PatientProfile />} path={PROFILE_ROUTE} />
-							<Route element={<PatientNotifications />} path={NOTIFICATIONS_ROUTE} />
 
+							{/* orders */}
+							<Route element={<PatientOrders />} path={ORDERS_ROUTE} />
+
+							<Route element={<PatientNotifications />} path={NOTIFICATIONS_ROUTE} />
 							<Route element={<Navigate to={HOME_ROUTE} />} path="*" />
 						</Route>
 					)}
@@ -111,8 +117,14 @@ export const AppRoutes = () => {
 						<Route element={<MainLayout />}>
 							{/* home */}
 							<Route element={<DoctorHome />} path={HOME_ROUTE} />
+
+							{/* appointments */}
 							<Route element={<DoctorAppointments />} path={APPOINTMENTS_ROUTE} />
+							<Route element={<DoctorAppointmentDetails />} path={APPOINTMENTS_DETAIL_ROUTE} />
+
 							<Route element={<DoctorRevenue />} path={REVENUE_ROUTE} />
+
+							{/* profile */}
 							<Route element={<DoctorProfile />} path={PROFILE_ROUTE} />
 
 							<Route element={<PatientNotifications />} path={NOTIFICATIONS_ROUTE} />

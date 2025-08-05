@@ -13,7 +13,7 @@ export const PatientProfile = () => {
 				<h3 className="font-bold text-typography-700">{t('profile')}</h3>
 				{!showEditProfile && (
 					<button className="primary-btn" onClick={() => setShowEditProfile(true)}>
-						Edit Profile
+						{t('editProfile')}
 					</button>
 				)}
 			</div>
@@ -21,7 +21,11 @@ export const PatientProfile = () => {
 			<div className="rounded-2xl bg-white border border-border-1 flex flex-col min-h-[calc(100vh-20rem)]">
 				<div className="bg-[linear-gradient(111deg,#1298BC_-37.21%,#88D702_115.79%)] h-30 rounded-t-2xl" />
 				<div className="flex-1 px-4 sm:px-8 pb-3">
-					{showEditProfile ? <PatientEditProfile setShowEditProfile={setShowEditProfile}/> : <PatientViewProfile />}
+					{showEditProfile ? (
+						<PatientEditProfile setShowEditProfile={setShowEditProfile} />
+					) : (
+						<PatientViewProfile />
+					)}
 				</div>
 			</div>
 		</section>

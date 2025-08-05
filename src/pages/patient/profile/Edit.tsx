@@ -4,6 +4,7 @@ import { useDropzone, type FileWithPath } from 'react-dropzone';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router';
+import { toast } from 'react-toastify';
 import { usePatientUpdateProfileMutation } from '../../../apis/patient/profile';
 import { CameraIcon } from '../../../assets/icons';
 import { InputField } from '../../../components/ui/inputs/InputField';
@@ -15,7 +16,6 @@ import type { PatientProfileInput } from '../../../interfaces/formInputTypes';
 import { HOME_ROUTE } from '../../../routes';
 import { useCurrentUserStore } from '../../../store/user';
 import { patientProfileSchema } from '../../../validations';
-import { toast } from 'react-toastify';
 
 export const PatientEditProfile: FC<{ setShowEditProfile: Dispatch<SetStateAction<boolean>> }> = ({
 	setShowEditProfile,
@@ -148,7 +148,10 @@ export const PatientEditProfile: FC<{ setShowEditProfile: Dispatch<SetStateActio
 					<Link to={HOME_ROUTE} className="outlined-btn">
 						{t('cancel')}
 					</Link>
-					<button className="primary-btn" disabled={isPending || !isDirty}>
+					<button
+						className="primary-btn"
+						disabled={isPending || (!isDirty && previewImage === null)}
+					>
 						{t('save')}
 					</button>
 				</div>

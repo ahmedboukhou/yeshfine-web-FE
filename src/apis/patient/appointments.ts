@@ -32,11 +32,11 @@ type GetAppointmentsQueryParams = PayloadPaginationType & {
 	search: string;
 };
 type AppointmentsResponse = CommonApiResponse & {
-	data: { items: AppointmentType[]; meta: ResponsePagination };
+	data: { items: AppointmentType[]; pagination: ResponsePagination };
 };
 export function useGetAppointmentsQuery({ page, limit, type, search }: GetAppointmentsQueryParams) {
 	return useQuery({
-		queryKey: ['get-patient-appointments', type],
+		queryKey: ['get-patient-appointments'],
 		queryFn: (): Promise<AppointmentsResponse> =>
 			apiClient.get(`patients/appointments`, { page, limit, type, ...(search && { search }) }),
 	});

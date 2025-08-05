@@ -59,7 +59,6 @@ const AddressModal: FC<AddressModalProps> = ({ id, setShowEditProfile }) => {
 										fields: ['address_components', 'geometry', 'formatted_address'],
 									}}
 									onPlaceSelected={(place) => {
-										console.log('🚀 ~ place:', place);
 										const addressComponents = place?.address_components || [];
 
 										const getComponent = (type: string) =>

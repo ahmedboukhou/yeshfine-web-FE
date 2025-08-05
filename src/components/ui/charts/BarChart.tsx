@@ -10,12 +10,25 @@ import {
 	Legend,
 } from 'chart.js';
 import { DownGradeIcon } from '../../../assets/icons';
+import type { FC } from 'react';
 
 ChartJS.register(Title, Tooltip, Legend, CategoryScale, LinearScale, BarElement, BarController);
 
-export const BarChart = () => {
+type BarChartPropsType = {
+	summary?: {
+		Sun: number;
+		Mon: number;
+		Tue: number;
+		Wed: number;
+		Thu: number;
+		Fri: number;
+		Sat: number;
+	};
+	weekOverWeekChange?: string;
+};
+export const BarChart: FC<BarChartPropsType> = ({ summary, weekOverWeekChange }) => {
 	const data = {
-		labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+		labels: summary ? Object.keys(summary) : [],
 		datasets: [
 			{
 				label: 'Visits',
@@ -27,7 +40,7 @@ export const BarChart = () => {
 					bottomRight: 0,
 				},
 				borderSkipped: false,
-				data: [15, 9, 6, 8, 13, 20, 13],
+				data: summary ? Object.values(summary) : [],
 				barPercentage: 0.5,
 				categoryPercentage: 0.5,
 			},
@@ -82,10 +95,10 @@ export const BarChart = () => {
 			<div style={{ height: '250px' }}>
 				<Bar data={data} options={options} />
 			</div>
-			<div className="flex-center gap-1">
+			<div className="flex-center gap-1 mt-2">
 				<DownGradeIcon />
-				<span className="text-red-500 font-bold">-12%</span>
-				<span className='text-typography-700'>vs last week</span>
+				<span className="text-red-500 font-bold">{weekOverWeekChange}</span>
+				<span className="text-typography-700">vs last week</span>
 			</div>
 		</div>
 	);
