@@ -11,17 +11,11 @@ export function usePatientUpdateProfileMutation() {
 	});
 }
 export type PatientUpdateAddressInput = {
-	address: string;
+	address?: string;
 	city: string;
 	state: string;
 	country: string;
 	zipCode?: string;
-	latitude: string; // Note: as string, although elsewhere it's number
-	longitude: string; // same here
+	latitude?: number; // Note: as string, although elsewhere it's number
+	longitude?: number; // same here
 };
-export function usePatientUpdateAddressMutation() {
-	return useMutation<CommonApiResponse, CommonApiResponse, PatientUpdateAddressInput>({
-		mutationFn: (values) => apiClient.put(`patients/update-address`, values),
-		onError: ({ message }) => toast.error(message || 'Something went wrong'),
-	});
-}

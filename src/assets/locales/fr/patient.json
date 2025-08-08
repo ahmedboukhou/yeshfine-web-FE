@@ -79,5 +79,7 @@
 	"cartExplorePrompt": "Commencez à explorer les pharmacies pour ajouter ce dont vous avez besoin.",
 	"browse": "Parcourir",
 	"enterAddressPrompt": "Entrez l'adresse pour explorer les médecins, laboratoires et pharmacies autour de vous",
+	"prescriptionRequiredInfo": "Le médicament nécessite une ordonnance médicale. Vous pouvez prendre une photo ou télécharger un fichier numérisé.",
+	"prescriptionSkipNote": "Vous pouvez ignorer le téléchargement de votre ordonnance pour l’instant, mais assurez-vous de l’apporter lors du retrait de vos médicaments à la pharmacie.",
 	"labReportPaymentRequired": "Pour consulter ou télécharger votre rapport d'analyse, veuillez effectuer le paiement."
 }

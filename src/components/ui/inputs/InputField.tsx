@@ -5,6 +5,7 @@ type InputFieldProps = {
 	label: string;
 	id: string;
 	type?: string;
+	placeholder?: string;
 	error: any;
 	register: any;
 	inputProps?: React.InputHTMLAttributes<HTMLInputElement>;
@@ -16,6 +17,7 @@ export const InputField: FC<InputFieldProps> = ({
 	error,
 	register,
 	inputProps,
+	placeholder,
 }) => {
 	const { t } = useTranslation();
 
@@ -30,7 +32,7 @@ export const InputField: FC<InputFieldProps> = ({
 				{...register}
 				{...inputProps}
 				className={`input input-box-shadow ${error ? '!outline-red-600' : ''}`}
-				placeholder={t('enter')}
+				placeholder={placeholder || t('enter')}
 			/>
 			<div className="mt-0.5">
 				{error && <span className="text-red-600 text-sm">{error.message}</span>}

@@ -1,22 +1,46 @@
 import { useTranslation } from 'react-i18next';
-import { useGetCartItemsQuery } from '../../../apis/patient/pharmacies';
+import { useCreateOrderMutation, useGetCartItemsQuery } from '../../../apis/patient/pharmacies';
 import { CartCard } from '../../../components/ui/cards/CartCard';
 import { CartSkeleton } from '../../../components/ui/skeletons/CartSkeleton';
 import { useEffect, useState } from 'react';
 import { CartEmpty } from './Empty';
+import { DropZone } from '../../../components/ui/dropzone';
+import type { FileWithPath } from 'react-dropzone';
+import infoIcon from '../../../assets/icons/info-circle.svg';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router';
+import { ORDERS_ROUTE } from '../../../routes';
 
 export const PatientCart = () => {
 	const { t } = useTranslation(['patient', 'common']);
-
+	const navigate = useNavigate();
 	const [cartDeleted, setCartDeleted] = useState(false);
 	const { data, isFetching } = useGetCartItemsQuery();
 	const { carts, total_amount } = data?.data || {};
 	const [totalAmount, setTotalAmount] = useState(total_amount);
+	const [uploadedFiles, setUploadedFiles] = useState<FileWithPath[]>([]);
+
+	const { mutateAsync: createOrder, isPending } = useCreateOrderMutation();
+
+	const handleCreateOrder = () => {
+		const formData = new FormData();
+
+		if (uploadedFiles.length > 0) {
+			formData.append('file', uploadedFiles[0]);
+		}
+
+		createOrder(formData, {
+			onSuccess: ({ message }) => {
+				toast.success(message);
+				navigate(ORDERS_ROUTE);
+			},
+		});
+	};
 
 	useEffect(() => {
 		total_amount && setTotalAmount(total_amount);
 	}, [total_amount]);
-	
+
 	return (
 		<section>
 			<div className="mb-6">
@@ -55,6 +79,25 @@ export const PatientCart = () => {
 										)
 									)}
 								</div>
+								<div>
+									<h4 className="font-bold text-typography-800">{t('uploadPrescription')}</h4>
+									<span className="font-medium text-typography-600">
+										{t('prescriptionRequiredInfo')}
+									</span>
+									<div className="flex gap-1 mb-4 space-y-3">
+										<div className="shrink-0">
+											<img
+												src={infoIcon}
+												alt="info-icon"
+												className="bg-primary-light-hover rounded-full p-2"
+											/>
+										</div>
+										<span className="text-primary">
+											{t('prescriptionSkipNote')} {t('prescriptionSkipNote')}
+										</span>
+									</div>
+									<DropZone files={uploadedFiles} setFiles={setUploadedFiles} />
+								</div>
 
 								<div className="card flex-between-center">
 									<div>
@@ -62,7 +105,11 @@ export const PatientCart = () => {
 										<p className="font-semibold">MRU {totalAmount}</p>
 									</div>
 									<div>
-										<button disabled className="primary-btn">
+										<button
+											onClick={handleCreateOrder}
+											className="primary-btn"
+											disabled={isPending}
+										>
 											{t('payNow', { ns: 'common' })}
 										</button>
 									</div>

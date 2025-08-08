@@ -1,15 +1,45 @@
-import type { LabStatusEnum, LocationEnum } from './enums';
+import type { LabStatusEnum, LocationEnum, Role } from './enums';
+
+export type Profile = {
+	speciality: string;
+	speciality_id: number;
+	experience: number;
+	liscenceNumber: string;
+	license_number?: string;
+	clinicName: string | null;
+	fee: string;
+	biography: string | null;
+	availability: WeeklyAvailability;
+};
+export type AvailabilitySlott = {
+	startTime: string;
+	endTime: string;
+	ticketNumber: string;
+};
+
+export type AvailabilityDay = {
+	day: string;
+	isAvailable: boolean;
+	slots: AvailabilitySlott[];
+};
 
 export type CurrentUserType = {
 	name?: string;
 	phone?: string;
-	role?: string;
+	role?: Role;
 	address?: string;
 	latitude?: number;
 	longitude?: number;
 	gender?: string;
 	image?: string | null;
 	dob?: string;
+	id?: number;
+	city?: string;
+	state?: string;
+	country?: string;
+	zipCode?: string;
+	availability?: any;
+	profile?: Profile | null;
 };
 
 export interface AvailabilitySlot {
@@ -97,6 +127,15 @@ export type AppointmentType = {
 	distance: number | null;
 	meeting_link: string | null;
 };
+export type WeeklyAvailability = {
+	sun: AvailabilitySlot[];
+	mon: AvailabilitySlot[];
+	tue: AvailabilitySlot[];
+	wed: AvailabilitySlot[];
+	thu: AvailabilitySlot[];
+	fri: AvailabilitySlot[];
+	sat: AvailabilitySlot[];
+};
 
 export type TopDoctor = {
 	id: number;
@@ -160,17 +199,7 @@ export type TimeSlot = {
 	start: string; // format: "HH:mm"
 	end: string; // format: "HH:mm"
 	tickets: Ticket[];
-	selectedTicketNumber?: number; // add this
-};
-
-export type WeeklyAvailability = {
-	mon?: TimeSlot[];
-	tue?: TimeSlot[];
-	wed?: TimeSlot[];
-	thu?: TimeSlot[];
-	fri?: TimeSlot[];
-	sat?: TimeSlot[];
-	sun?: TimeSlot[];
+	selectedTicketNumber?: number;
 };
 
 export type DoctorReviewType = {

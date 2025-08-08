@@ -1,39 +1,49 @@
-import { useTranslation } from 'react-i18next';
-import { Badge } from '../Badge';
-import { ReviewRating } from '../ReviewRating';
 import type { FC } from 'react';
+import { useTranslation } from 'react-i18next';
+import { BirthdayIcon, GenderIcon } from '../../../assets/icons';
 
 type PatientInfoCardProps = {
-  name?: string;
-  averageRating: number | string;
-  image?: string;
-  specialty?: string;
+	name?: string;
+	phone?: string;
+	image?: string;
+	gender?: string;
+	dob?: string;
 };
 
-export const PatientInfoCard: FC<PatientInfoCardProps> = ({
-  name,
-  averageRating,
-  image,
-  specialty,
-}) => {
-  const { t } = useTranslation(['patient', 'common']);
+export const PatientInfoCard: FC<PatientInfoCardProps> = ({ name, phone, dob, gender, image }) => {
+	const { t } = useTranslation();
 
-  return (
-    <div className="border border-border-1 card-gradient-2 rounded-lg">
-      <div className="p-4 flex gap-5">
-        <img className="inline-block size-22 rounded-full" src={image} alt={name} />
-        <div className="flex-1 flex-col gap-3">
-          <div className="flex-items-center gap-2 flex-wrap">
-            <span className="text-typography-500">{t('rating')}</span>
-            <ReviewRating rating={+averageRating || 0} />
-            <span className="text-typography-500">{averageRating}</span>
-          </div>
-          <p className="font-bold text-typography-900">{name}</p>
-          <div className="mt-2">
-            <Badge specialty={specialty} />
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+	return (
+		<div className="border border-border-1 card-gradient-2 rounded-lg">
+			<div className="p-4 grid grid-cols-1 sm:grid-cols-3 gap-5 items-center">
+				<div className="flex-items-center gap-2">
+					<img className="inline-block size-18 rounded-full object-cover object-top" src={image} alt={name} />
+					<div>
+						<p className="font-bold text-typography-900 line-clamp-1">{name}</p>
+						<span className="text-typography-700">{phone}</span>
+					</div>
+				</div>
+
+				<div className="flex-items-center gap-2">
+					<div className="bg-primary-light rounded-full size-10 flex-center ">
+						<BirthdayIcon />
+					</div>
+					<div className="flex flex-col gap-1">
+						<span className="font-medium text-typography-500">{t('dob')}</span>
+						<span className="font-medium text-typography-800">{dob}</span>
+					</div>
+				</div>
+
+				<div className="flex-items-center gap-2">
+					<div className="bg-primary-light rounded-full size-10 flex-center ">
+						<GenderIcon />
+					</div>
+					<div className="flex flex-col gap-1">
+						<span className="font-medium text-typography-500">{t('gender')}</span>
+						<span className="font-medium text-typography-800 capitalize">{gender}</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	);
 };

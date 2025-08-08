@@ -133,7 +133,7 @@ export const signupSchema = (t: TFunction) =>
 		}),
 	});
 
-export const patientProfileSchema = (t: TFunction) =>
+export const profileSchema = (t: TFunction) =>
 	yup.object({
 		gender: requiredString(t, 'gender', 'common'),
 		name: requiredString(t, 'name', 'common', {
@@ -151,8 +151,12 @@ export const resetPasswordSchema = (t: TFunction) =>
 		newPassword: passwordValidation(t),
 		confirm_password: yup
 			.string()
-			.required(
-				t('requiredField', { field: t('confirmPassword', { ns: 'auth' }), ns: 'validations' })
-			)
-			.oneOf([yup.ref('newPassword')], t('passwordsMustMatch', { ns: 'validations' })),
+			.oneOf([yup.ref('newPassword')], t('passwordsMustMatch', { ns: 'validations' }))
+			.required(t('fieldIsRequired', { ns: 'validations' })),
+	});
+
+export const changePasswordSchema = (t: TFunction) =>
+	yup.object({
+		currentPassword: requiredString(t, 'currentPassword', 'auth'),
+		newPassword: passwordValidation(t),
 	});

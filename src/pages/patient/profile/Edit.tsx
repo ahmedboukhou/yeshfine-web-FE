@@ -15,7 +15,7 @@ import { genderOptions, PLACEHOLDER_IMAGE } from '../../../constants';
 import type { PatientProfileInput } from '../../../interfaces/formInputTypes';
 import { HOME_ROUTE } from '../../../routes';
 import { useCurrentUserStore } from '../../../store/user';
-import { patientProfileSchema } from '../../../validations';
+import { profileSchema } from '../../../validations';
 
 export const PatientEditProfile: FC<{ setShowEditProfile: Dispatch<SetStateAction<boolean>> }> = ({
 	setShowEditProfile,
@@ -40,9 +40,10 @@ export const PatientEditProfile: FC<{ setShowEditProfile: Dispatch<SetStateActio
 	const {
 		register,
 		handleSubmit,
+		setValue,
 		formState: { errors, isDirty },
 	} = useForm<PatientProfileInput>({
-		resolver: yupResolver(patientProfileSchema(t)),
+		resolver: yupResolver(profileSchema(t)),
 		mode: 'all',
 		defaultValues,
 	});
@@ -157,7 +158,13 @@ export const PatientEditProfile: FC<{ setShowEditProfile: Dispatch<SetStateActio
 				</div>
 			</form>
 
-			<AddressModal id={id} setShowEditProfile={setShowEditProfile} />
+			<AddressModal
+				id={id}
+				onUpdate={(address) => {
+					setCurrentUser({ ...currentUser, address: address.address });
+					setValue('address', address.address, { shouldDirty: true });
+				}}
+			/>
 		</div>
 	);
 };

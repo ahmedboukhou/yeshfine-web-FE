@@ -28,7 +28,9 @@ import {
 	ORDERS_ROUTE,
 	PHARMACIES_ROUTE,
 	PROFILE_ROUTE,
+	REPORTS_ROUTE,
 	REVENUE_ROUTE,
+	TESTS_ROUTE,
 } from '../../../routes';
 import useAuthStore from '../../../store/auth';
 import { useCurrentUserStore } from '../../../store/user';
@@ -57,6 +59,12 @@ export const Navbar = () => {
 		{ title: 'appointments', to: APPOINTMENTS_ROUTE },
 		{ title: 'revenue', to: REVENUE_ROUTE },
 	];
+	const labHeaderOptions = [
+		{ title: 'home', to: HOME_ROUTE },
+		{ title: 'appointments', to: APPOINTMENTS_ROUTE },
+		{ title: 'reports', to: REPORTS_ROUTE },
+		{ title: 'tests', to: TESTS_ROUTE },
+	];
 
 	const headerOptions = useMemo(() => {
 		switch (currentUser?.role) {
@@ -64,6 +72,8 @@ export const Navbar = () => {
 				return patientHeaderOptions;
 			case Role.Doctor:
 				return doctorHeaderOptions;
+			case Role.Lab:
+				return labHeaderOptions;
 			default:
 				return patientHeaderOptions;
 		}
@@ -77,7 +87,7 @@ export const Navbar = () => {
 		{ label: t('faqs'), icon: <FAQIcon />, onClick: () => {} },
 		{ label: t('privacyPolicy'), icon: <PrivacyIcon />, onClick: () => {} },
 	];
-	
+
 	const { mutateAsync: updateLanguage } = useChangeLanguageMutation();
 	const handleNavLinkClick = () => {
 		setIsMobileMenuOpen(false); // close on link click
@@ -162,7 +172,7 @@ export const Navbar = () => {
 									<img
 										src={currentUser?.image ?? PLACEHOLDER_IMAGE}
 										alt={currentUser?.name}
-										className="rounded-full w-32 p-1 shadow-lg mb-2"
+										className="rounded-full w-32 h-32 object-cover object-top p-1 shadow-lg mb-2"
 									/>
 									<h4 className="text-typography-800">{currentUser?.name}</h4>
 									<span className="text-typography-700">{currentUser?.phone}</span>

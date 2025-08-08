@@ -20,3 +20,14 @@ export function getFileSize(bytes: number) {
 	const formattedSize = size % 1 === 0 ? size.toFixed(0) : size.toFixed(1);
 	return `${formattedSize}${units[unitIndex]}`;
 }
+
+export function toCapitalCase(str: string) {
+	return str
+		.toLowerCase()
+		.split(' ')
+		.map((word) => {
+			if (word.length === 0) return '';
+			return word[0].toUpperCase() + word.slice(1);
+		})
+		.join(' ');
+}

@@ -1,23 +1,23 @@
-import { memo, useEffect, useState, type Dispatch, type FC, type SetStateAction } from 'react';
+import { memo, useEffect, useState, type FC } from 'react';
 import Autocomplete from 'react-google-autocomplete';
 import { useTranslation } from 'react-i18next';
-import {
-	usePatientUpdateAddressMutation,
-	type PatientUpdateAddressInput,
-} from '../../../apis/patient/profile';
+
+import { useUpdateAddressMutation } from '../../../apis/common';
+import type { PatientUpdateAddressInput } from '../../../apis/patient/profile';
 import { BackIcon, BigLocationIcon, SearchIcon, WhiteRightArrowIcon } from '../../../assets/icons';
 import { useCurrentUserStore } from '../../../store/user';
+import { toast } from 'react-toastify';
 
 type AddressModalProps = {
 	id: string;
-	setShowEditProfile: Dispatch<SetStateAction<boolean>>;
+	onUpdate: (address: PatientUpdateAddressInput) => void;
 };
 
-const AddressModal: FC<AddressModalProps> = ({ id, setShowEditProfile }) => {
+const AddressModal: FC<AddressModalProps> = ({ id, onUpdate }) => {
 	const { t } = useTranslation('patient');
-	const { mutateAsync: updateAddress, isPending } = usePatientUpdateAddressMutation();
+	const { mutateAsync: updateAddress, isPending } = useUpdateAddressMutation();
 	const [address, setAddress] = useState<PatientUpdateAddressInput>();
-	const { currentUser, setCurrentUser } = useCurrentUserStore((state) => state);
+	const { currentUser } = useCurrentUserStore((state) => state);
 
 	useEffect(() => {
 		if (window.HSStaticMethods?.autoInit) {
@@ -27,9 +27,16 @@ const AddressModal: FC<AddressModalProps> = ({ id, setShowEditProfile }) => {
 
 	const handleUpdateAddress = () => {
 		if (address) {
-			setCurrentUser({ ...currentUser, address: address.address });
-			setShowEditProfile(false);
-			updateAddress(address);
+			updateAddress(address, {
+				onSuccess: ({ message }) => {
+					onUpdate(address);
+					toast.success(message);
+					const modalEl = document.querySelector(`#hs-${id}`);
+					if (modalEl && window.HSOverlay?.close) {
+						window.HSOverlay.close(modalEl);
+					}
+				},
+			});
 		}
 	};
 
@@ -91,7 +98,6 @@ const AddressModal: FC<AddressModalProps> = ({ id, setShowEditProfile }) => {
 								className="primary-btn !px-2"
 								onClick={handleUpdateAddress}
 								disabled={isPending || !address}
-								data-hs-overlay={`#hs-${id}`}
 							>
 								<WhiteRightArrowIcon />
 							</button>

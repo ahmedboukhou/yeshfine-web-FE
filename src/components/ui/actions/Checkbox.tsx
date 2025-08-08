@@ -11,7 +11,7 @@ export const Checkbox: FC<CheckboxProps> = ({ id, isChecked, name, handleCheckbo
 		<div className="flex items-center cursor-pointer">
 			<input
 				type="checkbox"
-				className="shrink-0 mt-0.5 border-gray-200 rounded-md text-primary focus:ring-0"
+				className="primary-checkbox"
 				id={`spec-${id}`}
 				checked={isChecked}
 				onChange={() => handleCheckbox(id)}

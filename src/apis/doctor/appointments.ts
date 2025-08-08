@@ -52,6 +52,7 @@ type PatientAppointmentDetailResponseType = {
 			end_time: string; // e.g. "04:00 PM"
 			appointment_type: string; // e.g. "In Person"
 			meeting_link: string | null;
+			show_mark_complete: boolean;
 			reason: string;
 
 			patient: {
@@ -59,6 +60,7 @@ type PatientAppointmentDetailResponseType = {
 				name: string;
 				image: string | null;
 				address: string;
+				phone: string;
 				dob: string; // e.g. "9 June, 2025"
 				gender: 'male' | 'female' | string; // you can restrict values if needed
 			};
@@ -67,6 +69,8 @@ type PatientAppointmentDetailResponseType = {
 				id: number;
 				name: string;
 				image: string;
+				latitude: number;
+				longitude: number;
 				address: string;
 			};
 		};

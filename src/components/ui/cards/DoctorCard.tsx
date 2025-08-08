@@ -6,6 +6,7 @@ import { DOCTOR_BOOK_APPOINTMENT_ROUTE, DOCTORS_DETAIL_ROUTE } from '../../../ro
 import { Badge } from '../Badge';
 import { Distance } from '../Distance';
 import { Rating } from '../Rating';
+import { PLACEHOLDER_IMAGE } from '../../../constants';
 
 type DoctorCardProps = {
 	id: number;
@@ -52,7 +53,7 @@ export const DoctorCard: FC<DoctorCardProps> = ({
 				<div className="md:p-6 p-3">
 					<Link to={DOCTORS_DETAIL_ROUTE.replace(':id', `${id}`)} className="flex gap-3">
 						<div className="block sm:hidden shrink-0">
-							<img src={image} width={80} className="w-20 h-20 rounded-xl" />
+							<img src={image??PLACEHOLDER_IMAGE} width={80} className="w-20 h-20 rounded-xl" />
 						</div>
 						<div className="flex flex-col gap-3 flex-1">
 							<div className="grid grid-cols-3">

@@ -18,6 +18,7 @@ import type {
 import type { MedicinesByCategory } from '../../interfaces';
 import { apiClient } from '../../lib/api';
 import { useMedicineCategoriesStore } from '../../store/medicineCategories';
+import { toast } from 'react-toastify';
 
 type GetPharmaciesQueryParams = PayloadPaginationType &
 	PharmacyFilterType & {
@@ -146,6 +147,7 @@ type AddToCartInput = {
 export function useAddToCartMutation() {
 	return useMutation<CommonApiResponse, CommonApiResponse, AddToCartInput>({
 		mutationFn: (values) => apiClient.post(`patients/add-to-cart`, values),
+		onError: ({ message }) => toast.error(message || 'Something went wrong'),
 	});
 }
 
@@ -161,5 +163,12 @@ export function useGetCartItemsQuery() {
 	return useQuery({
 		queryKey: ['get-patient-cart'],
 		queryFn: (): Promise<CartResponse> => apiClient.get(`patients/cart`),
+	});
+}
+
+export function useCreateOrderMutation() {
+	return useMutation<CommonApiResponse, CommonApiResponse, FormData>({
+		mutationFn: (values) => apiClient.post(`patients/create-order`, values),
+		onError: ({ message }) => toast.error(message || 'Something went wrong'),
 	});
 }

@@ -32,7 +32,7 @@ export const PatientAppointments = () => {
 			refetch();
 			setShouldRefetch(false);
 		}
-	}, [page, shouldRefetch]);
+	}, [shouldRefetch]);
 
 	const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setPage(1);
