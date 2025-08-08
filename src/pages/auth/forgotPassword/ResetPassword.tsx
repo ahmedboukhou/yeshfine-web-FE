@@ -11,7 +11,6 @@ import { resetPasswordSchema } from '../../../validations';
 import { AuthCardHeading } from '../../../components/ui/cards/AuthCard';
 
 const defaultValues: ResetPasswordInput = {
-	phone: '',
 	newPassword: '',
 	confirm_password: '',
 };

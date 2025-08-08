@@ -25,7 +25,6 @@ export type ForgotPasswordInput = {
 };
 
 export type ResetPasswordInput = {
-	phone?: string;
 	newPassword: string;
 	confirm_password: string;
 };
@@ -47,8 +46,16 @@ export type BookAppointmentInput = {
 };
 
 export type PatientProfileInput = {
-	name:string
-	address?:string
-	dob:string
-	gender:string
-}
+	name: string;
+	address?: string;
+	dob: string;
+	gender: string;
+};
+export type DoctorProfileProfessionalInput = {
+	speciality?: string;
+	experience?: number;
+	liscenceNumber?: string;
+	biography?: string;
+	fee?: string;
+	clinicName?: string;
+};

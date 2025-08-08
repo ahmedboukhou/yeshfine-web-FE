@@ -5,7 +5,6 @@ import { ClockIcon, LocationIcon } from '../../../assets/icons';
 import type { Medicine } from '../../../interfaces';
 import { Badge } from '../Badge';
 import { Distance } from '../Distance';
-import { MedicineCard } from '../MedicineCard';
 
 type PharmacyCardProps = {
   name: string;
@@ -25,7 +24,6 @@ export const PharmacyCard: FC<PharmacyCardProps> = ({
   open,
   timeRange,
   link,
-  medicines,
 }) => {
   const { t } = useTranslation(['patient', 'common']);
 

@@ -2,12 +2,12 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { memo, useEffect, type FC } from 'react';
 import { useForm, type SubmitHandler } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import { toast } from 'react-toastify';
 import { useChangePasswordMutation } from '../../../apis/auth';
 import lockImg from '../../../assets/images/lock.png';
 import type { UpdatePasswordInput } from '../../../interfaces/formInputTypes';
-import { resetPasswordSchema } from '../../../validations';
+import { changePasswordSchema } from '../../../validations';
 import { InputField } from '../inputs/InputField';
-import { toast } from 'react-toastify';
 
 type AddressModalProps = {
 	id: string;
@@ -42,7 +42,7 @@ const ChangePasswordModal: FC<AddressModalProps> = ({ id }) => {
 		reset,
 		formState: { errors },
 	} = useForm<UpdatePasswordInput>({
-		resolver: yupResolver(resetPasswordSchema(t)),
+		resolver: yupResolver(changePasswordSchema(t)),
 		mode: 'all',
 		defaultValues,
 	});

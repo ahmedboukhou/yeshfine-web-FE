@@ -23,9 +23,13 @@ export function useLoginMutation() {
 	});
 }
 export function useSignupMutation() {
-	return useMutation<LoginResponse, CommonApiResponse, Omit<SignupInput, 'confirm_password'> & {
-  language: string;
-}>({
+	return useMutation<
+		LoginResponse,
+		CommonApiResponse,
+		Omit<SignupInput, 'confirm_password'> & {
+			language: string;
+		}
+	>({
 		mutationFn: (values) => apiClient.post(`auth/signup`, values),
 		onError: ({ message }) => toast.error(message || 'Something went wrong'),
 	});
@@ -60,7 +64,11 @@ export function useForgotPasswordMutation() {
 }
 
 export function useResetPasswordMutation() {
-	return useMutation<ForgotPasswordResponse, CommonApiResponse, ResetPasswordInput>({
+	return useMutation<
+		ForgotPasswordResponse,
+		CommonApiResponse,
+		ResetPasswordInput & { phone: string }
+	>({
 		mutationFn: (values) => apiClient.post(`auth/reset-password`, values),
 		onError: ({ message }) => toast.error(message || 'Something went wrong'),
 	});

@@ -11,7 +11,7 @@ export const PatientOrders = () => {
 	const [page, setPage] = useState(1);
 	const [search, setSearch] = useState('');
 	const [orderStatus, setOrderStatus] = useState<string>('pending');
-	const [paymentStatus, setPaymentStatus] = useState<'paid' | 'not_paid' | ''>('');
+	const [paymentStatus] = useState<'paid' | 'not_paid' | ''>('');
 	const [shouldRefetch, setShouldRefetch] = useState(false);
 
 	const { data, refetch, isFetching } = useGetOrdersQuery({
@@ -21,7 +21,8 @@ export const PatientOrders = () => {
 		order_status: orderStatus,
 		payment_status: paymentStatus,
 	});
-	const { meta, orders } = data?.data || {};
+	const { meta } = data?.data || {};
+	
 	useEffect(() => {
 		if (shouldRefetch) {
 			refetch();

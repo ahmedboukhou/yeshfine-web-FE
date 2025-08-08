@@ -12,3 +12,5 @@ export const genderOptions = ['male', 'female', 'other'];
 
 export const PLACEHOLDER_IMAGE =
 	'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhtMRbtowke9ZnnGtyYJmIuJaB2Q1y5I-3IA&s';
+
+export const daysOfWeek = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
