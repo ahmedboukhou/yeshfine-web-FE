@@ -1,21 +1,21 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { toast } from 'react-toastify';
 import type { CurrentUserType } from '../../interfaces';
-import type { CommonApiResponse } from '../../interfaces/responseTypes';
 import { apiClient } from '../../lib/api';
+import type { CommonApiResponse } from '../../interfaces/responseTypes';
+import { toast } from 'react-toastify';
 
-export function useGetDoctorProfileQuery() {
+export function useGetLabProfileQuery() {
 	return useQuery({
 		queryKey: ['get-doctor-profile'],
 		queryFn: (): Promise<{
-			data: { doctor: CurrentUserType & { is_profile_complete: boolean } };
-		}> => apiClient.get(`doctors/profile`),
+			data: { lab: CurrentUserType & { is_profile_complete: boolean } };
+		}> => apiClient.get(`labs/profile`),
 	});
 }
 
-export function useDoctorUpdateProfileMutation() {
+export function useLabUpdateProfileMutation() {
 	return useMutation<CommonApiResponse & { data: CurrentUserType }, CommonApiResponse, FormData>({
-		mutationFn: (values) => apiClient.put(`doctors/edit-profile`, values),
+		mutationFn: (values) => apiClient.put(`labs/edit-profile`, values),
 		onError: ({ message }) => toast.error(message || 'Something went wrong'),
 	});
 }

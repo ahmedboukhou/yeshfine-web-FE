@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
-import { useGetOrdersQuery } from '../../../apis/patient/orders';
-import { Tabs } from '../../../components/ui/actions/Tabs';
-import { SearchInput } from '../../../components/ui/actions/SearchInput';
 import { useTranslation } from 'react-i18next';
+import { useGetOrdersQuery } from '../../../apis/patient/orders';
 import { Pagination } from '../../../components/ui/Pagination';
+import { SearchInput } from '../../../components/ui/actions/SearchInput';
+import { Tabs } from '../../../components/ui/actions/Tabs';
+import { OrdersCard } from '../../../components/ui/cards/OrdersCard';
+import { OrdersCardSkeleton } from '../../../components/ui/skeletons/OrdersCardSkeleton';
 
 export const PatientOrders = () => {
 	const { t } = useTranslation(['common', 'patient']);
@@ -21,8 +23,8 @@ export const PatientOrders = () => {
 		order_status: orderStatus,
 		payment_status: paymentStatus,
 	});
-	const { meta } = data?.data || {};
-	
+	const { meta, orders } = data?.data || {};
+
 	useEffect(() => {
 		if (shouldRefetch) {
 			refetch();
@@ -70,45 +72,44 @@ export const PatientOrders = () => {
 				/>
 			</div>
 			<div className="grid grid-cols-6 gap-5 mb-10">
-				{/* {isFetching ? (
-					<AppointmentCardSkeleton count={6} />
+				{isFetching ? (
+					<OrdersCardSkeleton count={6} />
 				) : !!orders?.length ? (
 					orders?.map(
-						(
-							{
-								doctor: { image, name, speciality, clinicName },
-								appointment_date_formatted,
-								time_range,
-								appointment_type_label,
-								distance,
-								appointment_id,
-								meeting_link,
-							},
-							index
-						) => (
-							<div key={index} className="col-span-6 md:col-span-3 xl:col-span-2">
-								<AppointmentCard
-									key={index}
-									id={appointment_id}
+						({
+							distance,
+							pharmacy_name,
+							pharmacy_image,
+							pharmacy_address,
+							payment_status,
+							total_amount,
+							order_id,
+							is_open,
+							order_date,
+							time_range,
+						}) => (
+							<div key={order_id} className="col-span-6 md:col-span-3 xl:col-span-2">
+								<OrdersCard
+									key={order_id}
 									distance={distance}
-									meeting_link={meeting_link}
-									image={image}
-									label={appointment_type_label}
-									name={name}
-									meetingButtonDisabled={type === AppointmentFilterTypeEnum.Past}
-									specialty={speciality}
-									clinicName={clinicName}
-									appointmentDate={appointment_date_formatted}
+									pharmacyName={pharmacy_name}
+									pharmacyImage={pharmacy_image}
+									pharmacyAddress={pharmacy_address}
+									paymentStatus={payment_status}
+									totalAmount={total_amount}
+									orderId={order_id}
+									isOpen={is_open}
 									timeRange={time_range}
+									orderDate={order_date}
 								/>
 							</div>
 						)
 					)
 				) : (
 					<div className="col-span-6 my-4 flex-center">
-						<p>{t('notFound', { ns: 'patient', text: t('appointments', { ns: 'common' }) })}</p>
+						<p>{t('notFound', { ns: 'patient', text: t('orders', { ns: 'common' }) })}</p>
 					</div>
-				)} */}
+				)}
 			</div>
 
 			<Pagination

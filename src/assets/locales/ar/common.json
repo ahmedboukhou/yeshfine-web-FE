@@ -114,5 +114,8 @@
 	"timeSlot": "الفترة الزمنية",
 	"noSlotsAvailable": "لا توجد فترات زمنية متاحة",
 	"completeProfileToView": "أكمل ملفك الشخصي لعرض المعلومات",
+	"totalAppointments": "إجمالي المواعيد",
+	"reportsUploaded": "التقارير التي تم رفعها",
+	"upcomingAppointmentsToday": "المواعيد القادمة اليوم",
 	"reports": "التقارير"
 }

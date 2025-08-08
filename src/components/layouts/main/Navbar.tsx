@@ -28,7 +28,9 @@ import {
 	ORDERS_ROUTE,
 	PHARMACIES_ROUTE,
 	PROFILE_ROUTE,
+	REPORTS_ROUTE,
 	REVENUE_ROUTE,
+	TESTS_ROUTE,
 } from '../../../routes';
 import useAuthStore from '../../../store/auth';
 import { useCurrentUserStore } from '../../../store/user';
@@ -57,6 +59,12 @@ export const Navbar = () => {
 		{ title: 'appointments', to: APPOINTMENTS_ROUTE },
 		{ title: 'revenue', to: REVENUE_ROUTE },
 	];
+	const labHeaderOptions = [
+		{ title: 'home', to: HOME_ROUTE },
+		{ title: 'appointments', to: APPOINTMENTS_ROUTE },
+		{ title: 'reports', to: REPORTS_ROUTE },
+		{ title: 'tests', to: TESTS_ROUTE },
+	];
 
 	const headerOptions = useMemo(() => {
 		switch (currentUser?.role) {
@@ -64,6 +72,8 @@ export const Navbar = () => {
 				return patientHeaderOptions;
 			case Role.Doctor:
 				return doctorHeaderOptions;
+			case Role.Lab:
+				return labHeaderOptions;
 			default:
 				return patientHeaderOptions;
 		}
@@ -77,7 +87,7 @@ export const Navbar = () => {
 		{ label: t('faqs'), icon: <FAQIcon />, onClick: () => {} },
 		{ label: t('privacyPolicy'), icon: <PrivacyIcon />, onClick: () => {} },
 	];
-	
+
 	const { mutateAsync: updateLanguage } = useChangeLanguageMutation();
 	const handleNavLinkClick = () => {
 		setIsMobileMenuOpen(false); // close on link click

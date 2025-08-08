@@ -31,3 +31,14 @@ export enum LocationEnum {
 	City = 'my_city',
 	NearMe = 'near_me',
 }
+
+export enum PaymentStatusEnum {
+	Paid = 'paid',
+	NotPaid = 'not_paid',
+}
+
+export enum OrderStatusEnum {
+  Pending = 'pending',
+  Completed = 'completed',
+  Cancelled = 'cancelled',
+}

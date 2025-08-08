@@ -81,5 +81,7 @@
 	"cartExplorePrompt": "Start exploring pharmacies to add what you need.",
 	"browse": "Browse",
 	"enterAddressPrompt": "Enter the address to explore Doctors, Labs & Pharmacies around you",
+	"prescriptionRequiredInfo": "Medicine requires a doctor’s prescription. You can take a photo or upload a scanned file.",
+	"prescriptionSkipNote": "You can skip uploading your prescription now, but please make sure to bring it when picking up your medicine from the pharmacy.",
 	"labReportPaymentRequired": "To view or download your lab report, please complete the payment."
 }

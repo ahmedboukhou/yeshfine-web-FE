@@ -1,10 +1,11 @@
 import type { LabStatusEnum, LocationEnum, Role } from './enums';
 
-export type DoctorProfile = {
+export type Profile = {
 	speciality: string;
 	speciality_id: number;
 	experience: number;
 	liscenceNumber: string;
+	license_number?: string;
 	clinicName: string | null;
 	fee: string;
 	biography: string | null;
@@ -38,7 +39,7 @@ export type CurrentUserType = {
 	country?: string;
 	zipCode?: string;
 	availability?: any;
-	profile?: DoctorProfile | null;
+	profile?: Profile | null;
 };
 
 export interface AvailabilitySlot {

@@ -115,5 +115,8 @@
 	"timeSlot": "Time Slot",
 	"noSlotsAvailable": "No slots available",
 	"completeProfileToView": "Complete your profile to view",
+	"totalAppointments": "Total Appointments",
+	"reportsUploaded": "Reports Uploaded",
+	"upcomingAppointmentsToday": "Upcoming Appointments Today",
 	"reports": "Reports"
 }

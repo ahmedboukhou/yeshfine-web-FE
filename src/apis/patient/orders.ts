@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { apiClient } from '../../lib/api';
 import type { PayloadPaginationType, ResponsePagination } from '../../interfaces/responseTypes';
+import type { OrderStatusEnum, PaymentStatusEnum } from '../../interfaces/enums';
 
 type OrdersQueryParams = PayloadPaginationType & {
 	search?: string;
@@ -11,16 +12,16 @@ type OrdersResponse = {
 	data: {
 		orders: {
 			order_id: number;
-			distance: number;
+			distance: number | null;
 			is_open: boolean;
-			time_range: string; // e.g. "08:00 - 20:00"
+			time_range: string;
 			pharmacy_image: string;
 			pharmacy_name: string;
 			pharmacy_address: string;
-			order_date: string; // e.g. "1 Aug"
+			order_date: string;
 			total_amount: number;
-			payment_status: 'paid' | 'not_paid';
-			order_status: 'pending' | 'completed';
+			payment_status: PaymentStatusEnum;
+			order_status: OrderStatusEnum;
 		}[];
 		meta: ResponsePagination;
 	};

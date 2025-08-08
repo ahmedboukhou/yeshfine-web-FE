@@ -114,5 +114,8 @@
 	"timeSlot": "Plage horaire",
 	"noSlotsAvailable": "Aucun créneau disponible",
 	"completeProfileToView": "Complétez votre profil pour voir",
+	"totalAppointments": "Total des rendez-vous",
+	"reportsUploaded": "Rapports téléversés",
+	"upcomingAppointmentsToday": "Rendez-vous à venir aujourd'hui",
 	"reports": "Rapports"
 }
